@@ -1,41 +1,29 @@
-
 rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    // Helper function to check if a user is the owner of a document
-    function isOwner(resource) {
-      return request.auth.uid == resource.data.userId;
-    }
-
-    // --- Users Collection ---
-    // Anyone can create a user profile (on sign up)
-    // Only the owner can update their own profile
-    // Profiles are publicly readable
+    
+    // Users can read any user profile, but can only write to their own.
     match /users/{userId} {
       allow read: if true;
-      allow create: if request.auth.uid == userId;
-      allow update: if request.auth.uid == userId;
-      allow delete: if false; // Generally, don't allow users to delete their own profiles
+      allow write: if request.auth.uid == userId;
     }
 
-    // --- Polls Collection ---
-    // Anyone can read polls
-    // Only authenticated users can create polls
-    // Only the poll creator can update or delete their poll
+    // Anyone can read polls.
+    // Only authenticated users can create polls.
+    // Only the creator of a poll can update or delete it.
     match /polls/{pollId} {
       allow read: if true;
       allow create: if request.auth != null;
-      allow update, delete: if request.auth != null && isOwner(get(path));
+      allow update, delete: if request.auth.uid == resource.data.creatorId;
     }
 
-    // --- Votes Subcollection (example) ---
-    // A user can only create a vote for themselves
+    // This rule is a placeholder for votes. You would likely have a subcollection
+    // under each poll for votes. Users should only be able to vote once per poll.
     match /polls/{pollId}/votes/{userId} {
-       allow read: if true;
-       allow create: if request.auth.uid == userId;
-       allow update, delete: if false; // Don't allow changing votes
+      allow read: if true;
+      allow create: if request.auth.uid == userId;
+      allow update, delete: if false; // Prevent changing votes
     }
   }
 }

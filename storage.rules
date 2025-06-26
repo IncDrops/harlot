@@ -1,29 +1,17 @@
-
 rules_version = '2';
 
 service firebase.storage {
   match /b/{bucket}/o {
-
-    // --- User Avatars ---
-    // Anyone can read user avatars
-    // Only the authenticated user can upload/update their own avatar
-    // Ensure the file is an image and reasonably sized (e.g., < 2MB)
-    match /avatars/{userId}/{fileName} {
+    // Allow public read access to poll images
+    match /poll-images/{allPaths=**} {
       allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == userId
-                   && request.resource.size < 2 * 1024 * 1024
-                   && request.resource.contentType.matches('image/.*');
+      allow write: if request.auth != null; // Only authenticated users can upload
     }
 
-    // --- Poll Media ---
-    // Anyone can read poll images/videos
-    // Only authenticated users can upload media for polls
-    // Ensure files are reasonably sized
-    match /polls/{pollId}/{fileName} {
+    // Allow users to read and write to their own avatar folder
+    match /avatars/{userId}/{allPaths=**} {
       allow read: if true;
-      allow write: if request.auth != null
-                    && request.resource.size < 10 * 1024 * 1024 // 10 MB limit for poll media
-                   && (request.resource.contentType.matches('image/.*') || request.resource.contentType.matches('video/.*'));
+      allow write: if request.auth.uid == userId;
     }
   }
 }

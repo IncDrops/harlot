@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNowStrict } from 'date-fns';
 import { Separator } from "./ui/separator";
+import { TipDialog } from './tip-dialog';
 
 interface PollCardProps {
   poll: Poll;
@@ -51,6 +52,7 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }:
   const totalVotes = useMemo(() => poll.options.reduce((acc, opt) => acc + opt.votes, 0), [poll.options]);
   const [timeLeft, setTimeLeft] = useState("");
   const { toast } = useToast();
+  const [isTipDialogOpen, setIsTipDialogOpen] = useState(false);
 
   const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
   
@@ -109,10 +111,7 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }:
   
   const handleTipClick = (e: React.MouseEvent) => {
       e.stopPropagation();
-      toast({
-          title: "Tipping coming soon!",
-          description: "Stripe integration for tipping is on the way."
-      })
+      setIsTipDialogOpen(true);
   }
 
   const renderOption = (option: any) => {
@@ -267,16 +266,19 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }:
   } : {};
 
   return (
-    <motion.div
-      {...dragProps}
-      variants={cardVariants}
-      initial={custom ? "visible" : "hidden"}
-      animate="visible"
-      exit="exit"
-      custom={custom}
-      className="relative"
-    >
-      {cardContent}
-    </motion.div>
+    <>
+      <motion.div
+        {...dragProps}
+        variants={cardVariants}
+        initial={custom ? "visible" : "hidden"}
+        animate="visible"
+        exit="exit"
+        custom={custom}
+        className="relative"
+      >
+        {cardContent}
+      </motion.div>
+      <TipDialog poll={poll} creator={creator} isOpen={isTipDialogOpen} onOpenChange={setIsTipDialogOpen} />
+    </>
   )
 }
