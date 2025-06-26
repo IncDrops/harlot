@@ -5,6 +5,7 @@ export interface User {
   avatar: string;
   birthDate: string; // ISO string
   gender: 'male' | 'female' | 'non-binary' | 'prefer-not-to-say';
+  pollitPoints: number;
 }
 
 export interface PollOption {
@@ -26,6 +27,7 @@ export interface Poll {
   createdAt: string;
   durationMs: number;
   pledged: boolean;
+  pledgeAmount?: number;
   tipCount: number;
   isNSFW: boolean;
 }

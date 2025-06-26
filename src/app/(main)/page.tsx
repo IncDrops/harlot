@@ -6,6 +6,17 @@ import { PollCard } from "@/components/poll-card";
 import { dummyPolls } from "@/lib/dummy-data";
 import { Tagline } from "@/components/logo";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+
 import type { Poll } from "@/lib/types";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -22,19 +33,18 @@ export default function HomePage() {
   
   const [isAnimating, setIsAnimating] = useState(false);
   const observer = useRef<IntersectionObserver>();
-  const isMobile = useIsMobile();
 
-  const allSwipeablePolls = dummyPolls.filter(p => p.options.length === 2);
+  const [monetizationLockAlert, setMonetizationLockAlert] = useState<{ poll: Poll; optionId: number; onConfirm: () => void; } | null>(null);
 
   const loadMorePolls = useCallback(() => {
     if (!hasMore) return;
-    const newPolls = allSwipeablePolls.slice(0, (page + 1) * POLLS_PER_PAGE);
-    if (newPolls.length >= allSwipeablePolls.length) {
+    const newPolls = dummyPolls.slice(0, (page + 1) * POLLS_PER_PAGE);
+    if (newPolls.length >= dummyPolls.length) {
       setHasMore(false);
     }
     setPolls(newPolls);
     setPage(prev => prev + 1);
-  }, [page, hasMore, allSwipeablePolls]);
+  }, [page, hasMore]);
   
   useEffect(() => {
     loadMorePolls();
@@ -63,33 +73,62 @@ export default function HomePage() {
     };
   }, [isAnimating]);
 
-  const handleVote = (pollId: number, optionIndex: number) => {
-    setPolls(currentPolls =>
-      currentPolls.map(p => {
-        if (p.id === pollId) {
-          const newOptions = [...p.options];
-          newOptions[optionIndex] = {
-            ...newOptions[optionIndex],
-            votes: newOptions[optionIndex].votes + 1,
-          };
-          return { ...p, options: newOptions };
-        }
-        return p;
-      })
-    );
+  const performVote = (pollId: number, optionId: number) => {
+     const optionIndex = polls.find(p => p.id === pollId)?.options.findIndex(o => o.id === optionId);
+     if(optionIndex === undefined || optionIndex === -1) return;
+
+      setPolls(currentPolls =>
+        currentPolls.map(p => {
+          if (p.id === pollId) {
+            const newOptions = [...p.options];
+            const optIndex = newOptions.findIndex(o => o.id === optionId);
+            if(optIndex !== -1) {
+               newOptions[optIndex] = {
+                ...newOptions[optIndex],
+                votes: newOptions[optIndex].votes + 1,
+              };
+            }
+            return { ...p, options: newOptions };
+          }
+          return p;
+        })
+      );
+  }
+
+  const handleVote = (pollId: number, optionId: number) => {
+    const poll = polls.find(p => p.id === pollId);
+    if (!poll || votedStates[pollId]) return;
+
+    const majorityVotes = Math.max(...poll.options.map(o => o.votes), 0);
+    const isLocked = poll.pledged && poll.pledgeAmount && (poll.pledgeAmount * 0.5) / (majorityVotes + 1) < 0.10;
+
+    const voteAction = () => {
+      if (poll.options.length === 2) {
+        const direction = poll.options.findIndex(o => o.id === optionId) === 0 ? 'left' : 'right';
+        handleSwipeVote(pollId, optionId, direction);
+      } else {
+        performVote(pollId, optionId);
+        setVotedStates(prev => ({ ...prev, [pollId]: true }));
+      }
+    };
+    
+    if (isLocked) {
+      setMonetizationLockAlert({ poll, optionId, onConfirm: voteAction });
+    } else {
+      voteAction();
+    }
   };
 
-  const handleSwipe = (pollId: number, direction: "left" | "right") => {
+
+  const handleSwipeVote = (pollId: number, optionId: number, direction: "left" | "right") => {
     if (isAnimating || votedStates[pollId]) return;
 
     setIsAnimating(true);
     setSwipeDirections(prev => ({ ...prev, [pollId]: direction }));
 
     setTimeout(() => {
-      const optionIndex = direction === "right" ? 1 : 0;
-      handleVote(pollId, optionIndex);
+      performVote(pollId, optionId);
       setVotedStates(prev => ({ ...prev, [pollId]: true }));
-      // We don't change the key here anymore, so the card stays and updates
     }, 700);
 
     setTimeout(() => {
@@ -99,11 +138,11 @@ export default function HomePage() {
   };
 
   const handleNextPoll = (pollId: number) => {
-     // This function will be used to dismiss the card after viewing results
      setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
   }
 
   return (
+    <>
     <div className="container mx-auto py-8 px-2 sm:px-4">
       <Tagline className="mb-4" />
       <div className="w-full max-w-xl mx-auto space-y-4">
@@ -115,8 +154,15 @@ export default function HomePage() {
               <AnimatePresence initial={false} custom={swipeDirections[poll.id]}>
                 <PollCard
                   poll={poll}
-                  onSwipe={(direction) => hasVoted ? handleNextPoll(poll.id) : handleSwipe(poll.id, direction)}
-                  isTwoOptionPoll={true}
+                  onVote={handleVote}
+                  onSwipe={(direction) => {
+                    if (hasVoted) {
+                      handleNextPoll(poll.id);
+                      return;
+                    }
+                    const optionId = poll.options[direction === 'left' ? 0 : 1].id;
+                    handleVote(poll.id, optionId);
+                  }}
                   showResults={hasVoted}
                   custom={swipeDirections[poll.id]}
                 />
@@ -140,5 +186,23 @@ export default function HomePage() {
         )}
       </div>
     </div>
+    <AlertDialog open={!!monetizationLockAlert} onOpenChange={() => setMonetizationLockAlert(null)}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Vote Monetization Locked</AlertDialogTitle>
+          <AlertDialogDescription>
+            The potential payout for this vote is less than $0.10. Your vote will still be counted, but it won't be eligible for a monetary reward.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick={() => setMonetizationLockAlert(null)}>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={() => {
+            monetizationLockAlert?.onConfirm();
+            setMonetizationLockAlert(null);
+          }}>Vote Anyway</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+    </>
   );
 }

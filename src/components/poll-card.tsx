@@ -4,17 +4,19 @@ import type { Poll, User } from "@/lib/types";
 import { dummyUsers } from "@/lib/dummy-data";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { motion, PanInfo } from "framer-motion";
-import { Timer, Users, GripVertical, Gift, ShieldCheck, Flame } from "lucide-react";
+import { Timer, Users, GripVertical, Gift, ShieldCheck, Flame, Lock } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 interface PollCardProps {
   poll: Poll;
   onSwipe: (direction: "left" | "right") => void;
-  isTwoOptionPoll: boolean;
+  onVote: (pollId: number, optionId: number) => void;
   showResults?: boolean;
   custom?: "left" | "right" | null;
 }
@@ -42,10 +44,16 @@ const cardVariants = {
   })
 };
 
-export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, custom }: PollCardProps) {
+export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }: PollCardProps) {
   const creator = useMemo(() => dummyUsers.find(u => u.id === poll.creatorId) as User, [poll.creatorId]);
   const totalVotes = useMemo(() => poll.options.reduce((acc, opt) => acc + opt.votes, 0), [poll.options]);
   const [timeLeft, setTimeLeft] = useState("");
+  const { toast } = useToast();
+
+  const isTwoOptionPoll = poll.options.length === 2;
+  
+  const majorityVotes = useMemo(() => Math.max(...poll.options.map(o => o.votes), 0), [poll.options]);
+  const isMonetizationLocked = poll.pledged && poll.pledgeAmount && ((poll.pledgeAmount * 0.5) / (majorityVotes + 1)) < 0.10 && totalVotes > 0;
 
   useEffect(() => {
     const getTimeLeft = () => {
@@ -61,25 +69,29 @@ export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
       
       let timeString = "";
       if (days > 0) timeString += `${days}d `;
       if (hours > 0 || days > 0) timeString += `${hours}h `;
-      if (minutes > 0 || hours > 0 || days > 0) timeString += `${minutes}m `;
-      timeString += `${seconds}s left`;
+      if (minutes > 0 || hours > 0 || days > 0) timeString += `${minutes}m left`;
+      
+      if(timeString === "") {
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        timeString = `${seconds}s left`;
+      }
 
       setTimeLeft(timeString.trim());
     };
 
-    getTimeLeft(); // Initial call
-    const interval = setInterval(getTimeLeft, 1000); // Update every second
+    const intervalId = setInterval(getTimeLeft, 1000);
+    getTimeLeft();
 
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalId);
   }, [poll.createdAt, poll.durationMs]);
 
 
   const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    if (!isTwoOptionPoll) return;
     const swipeThreshold = 100;
     if (info.offset.x > swipeThreshold) {
       onSwipe("right");
@@ -87,6 +99,14 @@ export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, 
       onSwipe("left");
     }
   };
+  
+  const handleTipClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      toast({
+          title: "Tipping coming soon!",
+          description: "Stripe integration for tipping is on the way."
+      })
+  }
 
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
@@ -128,9 +148,15 @@ export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, 
                       <Progress value={percentage} className="h-2 rounded-full" />
                     </div>
                   ) : (
-                    <div className="border p-3 rounded-lg text-center font-medium bg-background hover:bg-muted transition-colors">
-                        {option.text}
-                    </div>
+                    isTwoOptionPoll ? (
+                        <div className="border p-3 rounded-lg text-center font-medium bg-background hover:bg-muted transition-colors">
+                            {option.text}
+                        </div>
+                    ) : (
+                        <Button variant="outline" className="w-full justify-start p-3 h-auto" onClick={() => onVote(poll.id, option.id)}>
+                            {option.text}
+                        </Button>
+                    )
                   )}
                 </div>
               );
@@ -149,25 +175,26 @@ export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, 
             </div>
         </div>
         <div className="flex items-center gap-4">
+             {isMonetizationLocked && (
+                <div className="flex items-center gap-1" title="Vote monetization is locked">
+                    <Lock className="h-4 w-4 text-gray-400" />
+                </div>
+            )}
              {poll.pledged && (
                 <div className="flex items-center gap-1" title="Creator is pledged to this vote">
                     <ShieldCheck className="h-4 w-4 text-sky-500" />
                 </div>
             )}
              {poll.tipCount > 0 && (
-                <div className="flex items-center gap-1" title={`${poll.tipCount} tips`}>
+                <Button variant="ghost" size="icon" className="h-auto p-0 flex items-center gap-1 text-xs text-muted-foreground" onClick={handleTipClick} title={`${poll.tipCount} tips`}>
                     <Gift className="h-4 w-4 text-yellow-500" />
                     <span>{poll.tipCount}</span>
-                </div>
+                </Button>
             )}
         </div>
       </CardFooter>
-      {isTwoOptionPoll && (
-          <div className={cn(
-              "absolute inset-y-0 left-1/2 -translate-x-1/2 flex items-center opacity-10 pointer-events-none",
-              showResults && "cursor-pointer pointer-events-auto"
-            )}
-          >
+      {isTwoOptionPoll && !showResults && (
+          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 flex items-center opacity-10 pointer-events-none">
               <GripVertical className="w-8 h-8"/>
           </div>
       )}
