@@ -28,13 +28,12 @@ export default function HomePage() {
 
   const loadMorePolls = useCallback(() => {
     if (!hasMore) return;
-    const nextPage = page + 1;
-    const newPolls = allSwipeablePolls.slice(0, nextPage * POLLS_PER_PAGE);
+    const newPolls = allSwipeablePolls.slice(0, (page + 1) * POLLS_PER_PAGE);
     if (newPolls.length >= allSwipeablePolls.length) {
       setHasMore(false);
     }
     setPolls(newPolls);
-    setPage(nextPage);
+    setPage(prev => prev + 1);
   }, [page, hasMore, allSwipeablePolls]);
   
   useEffect(() => {
@@ -90,7 +89,7 @@ export default function HomePage() {
       const optionIndex = direction === "right" ? 1 : 0;
       handleVote(pollId, optionIndex);
       setVotedStates(prev => ({ ...prev, [pollId]: true }));
-      setCardKeys(prev => ({ ...prev, [pollId]: (prev[pollId] || 0) + 1 }));
+      // We don't change the key here anymore, so the card stays and updates
     }, 700);
 
     setTimeout(() => {
@@ -99,21 +98,26 @@ export default function HomePage() {
     }, 800);
   };
 
+  const handleNextPoll = (pollId: number) => {
+     // This function will be used to dismiss the card after viewing results
+     setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
+  }
+
   return (
     <div className="container mx-auto py-8 px-2 sm:px-4">
       <Tagline className="mb-4" />
-      <div className="w-full max-w-md mx-auto space-y-6">
+      <div className="w-full max-w-xl mx-auto space-y-4">
         {polls.map((poll, index) => {
            const isLastElement = polls.length === index + 1;
+           const hasVoted = votedStates[poll.id] || false;
            return (
-            <div ref={isLastElement ? lastPollElementRef : null} key={poll.id}>
+            <div ref={isLastElement ? lastPollElementRef : null} key={`${poll.id}-${cardKeys[poll.id] || 0}`}>
               <AnimatePresence initial={false} custom={swipeDirections[poll.id]}>
                 <PollCard
-                  key={cardKeys[poll.id] || 0}
                   poll={poll}
-                  onSwipe={(direction) => handleSwipe(poll.id, direction)}
+                  onSwipe={(direction) => hasVoted ? handleNextPoll(poll.id) : handleSwipe(poll.id, direction)}
                   isTwoOptionPoll={true}
-                  showResults={votedStates[poll.id] || false}
+                  showResults={hasVoted}
                   custom={swipeDirections[poll.id]}
                 />
               </AnimatePresence>

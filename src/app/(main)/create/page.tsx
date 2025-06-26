@@ -8,10 +8,13 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Image as ImageIcon, Link2, Trash2 } from 'lucide-react';
+import { Image as ImageIcon, Link2, Trash2, Flame, ShieldCheck } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { monetizeAffiliateLinks } from '@/ai/flows/monetize-affiliate-links';
 
@@ -23,7 +26,8 @@ const pollFormSchema = z.object({
     affiliateLink: z.string().url().optional().or(z.literal('')),
   })).min(2, "You must have at least 2 options.").max(4),
   timer: z.string().min(1, "Please select a timer duration."),
-  pledge: z.coerce.number().min(0).optional(),
+  pledged: z.boolean().default(false).optional(),
+  isNSFW: z.boolean().default(false).optional(),
 });
 
 type PollFormValues = z.infer<typeof pollFormSchema>;
@@ -40,6 +44,8 @@ export default function CreatePollPage() {
       description: '',
       options: [{ text: '', affiliateLink: '' }, { text: '', affiliateLink: '' }],
       timer: '1d',
+      pledged: false,
+      isNSFW: false,
     },
   });
 
@@ -64,44 +70,15 @@ export default function CreatePollPage() {
     setIsSubmitting(true);
     toast({
       title: "Creating your poll...",
-      description: "Running analysis for affiliate links.",
+      description: "This might take a moment.",
     });
 
     try {
-        const optionsWithoutLinks = data.options.filter(opt => !opt.affiliateLink);
-        const optionTexts = optionsWithoutLinks.map(opt => opt.text);
-
-        let monetizedOptions: string[] = [];
-        if (optionTexts.length > 0) {
-            const result = await monetizeAffiliateLinks({
-                pollQuestion: data.question,
-                options: optionTexts,
-            });
-            monetizedOptions = result.monetizedOptions;
-        }
-
-        let monetizedIndex = 0;
-        const finalOptions = data.options.map(opt => {
-            if (!opt.affiliateLink && monetizedIndex < monetizedOptions.length) {
-                // This is a simplified example. A real implementation would parse the monetized string to extract the link.
-                // Assuming the AI returns the original text with a link appended like "text [link]".
-                const monetizedText = monetizedOptions[monetizedIndex++];
-                const linkMatch = monetizedText.match(/\[(https?:\/\/[^\]]+)\]/);
-                if (linkMatch) {
-                    return { ...opt, text: monetizedText.replace(linkMatch[0], '').trim(), affiliateLink: linkMatch[1] };
-                }
-                return { ...opt, text: monetizedText };
-            }
-            return opt;
-        });
-
-      const finalPollData = { ...data, options: finalOptions };
-
-      console.log("Final Poll Data:", finalPollData);
+      console.log("Form Data:", data);
 
       toast({
         title: "Poll Created!",
-        description: "Your poll is now live. We've added some affiliate links to help you monetize.",
+        description: "Your poll is now live.",
         variant: "default",
       });
 
@@ -181,16 +158,66 @@ export default function CreatePollPage() {
                             </FormControl>
                             <SelectContent>
                                 <SelectItem value="5m">5 minutes</SelectItem>
+                                <SelectItem value="15m">15 minutes</SelectItem>
+                                <SelectItem value="30m">30 minutes</SelectItem>
                                 <SelectItem value="1h">1 hour</SelectItem>
+                                <SelectItem value="6h">6 hours</SelectItem>
+                                <SelectItem value="12h">12 hours</SelectItem>
                                 <SelectItem value="1d">1 day</SelectItem>
                                 <SelectItem value="3d">3 days</SelectItem>
                                 <SelectItem value="7d">7 days</SelectItem>
+                                <SelectItem value="14d">14 days</SelectItem>
+                                <SelectItem value="30d">30 days</SelectItem>
                             </SelectContent>
                         </Select>
                         <FormMessage />
                     </FormItem>
                 )}
               />
+
+              <div className="space-y-4">
+                 <FormField
+                    control={form.control}
+                    name="pledged"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                        <div className="space-y-0.5">
+                          <FormLabel className="flex items-center gap-2"><ShieldCheck className="w-4 h-4"/> Pre-Commitment Pledge</FormLabel>
+                           <CardDescription>
+                            Pledge to honor the majority vote.
+                          </CardDescription>
+                        </div>
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="isNSFW"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                        <div className="space-y-0.5">
+                          <FormLabel className="flex items-center gap-2"><Flame className="w-4 h-4 text-orange-500" /> NSFW Content</FormLabel>
+                          <CardDescription>
+                            Mark this poll as not safe for work.
+                          </CardDescription>
+                        </div>
+                        <FormControl>
+                          <Switch
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+              </div>
+
 
             </CardContent>
             <CardFooter className="flex flex-col items-stretch gap-4">
