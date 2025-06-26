@@ -11,16 +11,35 @@ import type { Poll } from "@/lib/types";
 export default function HomePage() {
   const [polls, setPolls] = useState<Poll[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [swipeDirection, setSwipeDirection] = useState<"left" | "right">("right");
+  const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [hasVoted, setHasVoted] = useState(false);
+  const [cardKey, setCardKey] = useState(0);
 
   useEffect(() => {
     // Filter for two-option swipeable polls for the main feed demo
     setPolls(dummyPolls.filter(p => p.options.length === 2 && !p.videoUrl));
   }, []);
 
-  const handleVote = (pollId: number, optionId: number) => {
-    console.log(`Voted for option ${optionId} on poll ${pollId}`);
+  useEffect(() => {
+    // Reset vote status when the poll changes
+    setHasVoted(false);
+  }, [activeIndex]);
+
+  const handleVote = (pollId: number, optionIndex: number) => {
+    setPolls(currentPolls =>
+      currentPolls.map(p => {
+        if (p.id === pollId && p.options[optionIndex]) {
+          const newOptions = [...p.options];
+          newOptions[optionIndex] = {
+            ...newOptions[optionIndex],
+            votes: newOptions[optionIndex].votes + 1,
+          };
+          return { ...p, options: newOptions };
+        }
+        return p;
+      })
+    );
   };
 
   const handleSwipe = (direction: "left" | "right") => {
@@ -29,18 +48,28 @@ export default function HomePage() {
     setIsAnimating(true);
     setSwipeDirection(direction);
 
-    const optionIndex = direction === "right" ? 1 : 0;
-    if (polls[activeIndex] && polls[activeIndex].options[optionIndex]) {
-      handleVote(polls[activeIndex].id, polls[activeIndex].options[optionIndex].id);
-    }
-    
+    // After a delay to allow the exit animation to start, update the state.
     setTimeout(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % polls.length);
-    }, 700);
+      if (hasVoted) {
+        // If already voted, swiping again moves to the next poll
+        setActiveIndex((prevIndex) => (prevIndex + 1) % (polls.length || 1));
+      } else {
+        // If it's the first swipe, it's a vote
+        const optionIndex = direction === "right" ? 1 : 0;
+        const currentPoll = polls[activeIndex];
+        if (currentPoll) {
+          handleVote(currentPoll.id, optionIndex);
+        }
+        setHasVoted(true);
+      }
+      // Update the key to trigger the enter animation of the new/updated card
+      setCardKey(prev => prev + 1);
+    }, 700); // Data update occurs at 700ms
 
     setTimeout(() => {
       setIsAnimating(false);
-    }, 800);
+      setSwipeDirection(null);
+    }, 800); // Scroll lock persists for 800ms
   };
   
   useEffect(() => {
@@ -64,11 +93,11 @@ export default function HomePage() {
           <AnimatePresence initial={false} custom={swipeDirection}>
             {currentPoll && (
               <PollCard
-                key={activeIndex}
+                key={cardKey}
                 poll={currentPoll}
-                onVote={handleVote}
                 onSwipe={handleSwipe}
                 isTwoOptionPoll={true}
+                showResults={hasVoted}
                 custom={swipeDirection}
               />
             )}
@@ -76,7 +105,7 @@ export default function HomePage() {
         ) : (
           <Card>
             <CardContent className="p-8">
-              <p>No more polls to show!</p>
+              <p>Loading polls...</p>
             </CardContent>
           </Card>
         )}

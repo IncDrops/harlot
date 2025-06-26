@@ -8,13 +8,14 @@ import { motion, PanInfo } from "framer-motion";
 import { Timer, MessageSquare, GripVertical } from "lucide-react";
 import Image from "next/image";
 import { useMemo } from "react";
+import { Progress } from "@/components/ui/progress";
 
 interface PollCardProps {
   poll: Poll;
-  onVote: (pollId: number, optionId: number) => void;
   onSwipe: (direction: "left" | "right") => void;
   isTwoOptionPoll: boolean;
-  custom?: "left" | "right";
+  showResults?: boolean;
+  custom?: "left" | "right" | null;
 }
 
 const cardVariants = {
@@ -40,8 +41,9 @@ const cardVariants = {
   })
 };
 
-export function PollCard({ poll, onVote, onSwipe, isTwoOptionPoll, custom }: PollCardProps) {
+export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, custom }: PollCardProps) {
   const creator = useMemo(() => dummyUsers.find(u => u.id === poll.creatorId) as User, [poll.creatorId]);
+  const totalVotes = useMemo(() => poll.options.reduce((acc, opt) => acc + opt.votes, 0), [poll.options]);
 
   const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const swipeThreshold = 100;
@@ -91,12 +93,27 @@ export function PollCard({ poll, onVote, onSwipe, isTwoOptionPoll, custom }: Pol
         <CardTitle className="text-lg font-headline font-bold mb-2">{poll.question}</CardTitle>
         {poll.description && <CardDescription className="text-sm font-body mb-4">{truncateText(poll.description, 125)}</CardDescription>}
         
-        <div className="space-y-2">
-            {poll.options.map(option => (
-                <div key={option.id} className="border p-3 rounded-lg text-center font-medium bg-background hover:bg-muted transition-colors">
-                    {option.text}
+        <div className="space-y-3">
+            {poll.options.map(option => {
+              const percentage = totalVotes > 0 ? Math.round((option.votes / totalVotes) * 100) : 0;
+              return (
+                <div key={option.id}>
+                  {showResults ? (
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between items-baseline text-sm">
+                        <span className="font-medium truncate pr-2">{option.text}</span>
+                        <span className="text-muted-foreground font-mono text-xs">{percentage}%</span>
+                      </div>
+                      <Progress value={percentage} className="h-2" />
+                    </div>
+                  ) : (
+                    <div className="border p-3 rounded-lg text-center font-medium bg-background hover:bg-muted transition-colors">
+                        {option.text}
+                    </div>
+                  )}
                 </div>
-            ))}
+              );
+            })}
         </div>
       </CardContent>
       <CardFooter className="p-4 flex justify-between items-center text-xs text-muted-foreground">
@@ -106,7 +123,7 @@ export function PollCard({ poll, onVote, onSwipe, isTwoOptionPoll, custom }: Pol
         </div>
         <div className="flex items-center gap-1">
           <MessageSquare className="h-4 w-4" />
-          <span>{poll.options.reduce((acc, opt) => acc + opt.votes, 0)} votes</span>
+          <span>{totalVotes} votes</span>
         </div>
       </CardFooter>
       {isTwoOptionPoll && (
@@ -117,11 +134,15 @@ export function PollCard({ poll, onVote, onSwipe, isTwoOptionPoll, custom }: Pol
     </Card>
   );
 
+  const dragProps = showResults ? {} : {
+    drag: "x" as const,
+    dragConstraints: { left: 0, right: 0 },
+    onDragEnd: handleDragEnd
+  };
+
   return isTwoOptionPoll ? (
     <motion.div
-      drag="x"
-      dragConstraints={{ left: 0, right: 0 }}
-      onDragEnd={handleDragEnd}
+      {...dragProps}
       variants={cardVariants}
       initial="hidden"
       animate="visible"
@@ -132,6 +153,7 @@ export function PollCard({ poll, onVote, onSwipe, isTwoOptionPoll, custom }: Pol
       {cardContent}
     </motion.div>
   ) : (
+    // Non-swipeable version for other pages
     <div className="w-full flex justify-center p-4">
         {cardContent}
     </div>
