@@ -1,3 +1,4 @@
+
 "use client";
 
 import type { Poll, User } from "@/lib/types";
@@ -15,12 +16,15 @@ import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNowStrict } from 'date-fns';
 import { Separator } from "./ui/separator";
 import { TipDialog } from './tip-dialog';
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "./ui/sheet";
+import { Input } from "./ui/input";
 
 interface PollCardProps {
   poll: Poll;
   onSwipe: (direction: "left" | "right") => void;
   onVote: (pollId: number, optionId: number) => void;
   showResults?: boolean;
+  isTwoOptionPoll: boolean;
   custom?: "left" | "right" | null;
 }
 
@@ -47,15 +51,14 @@ const cardVariants = {
   })
 };
 
-export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }: PollCardProps) {
+export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOptionPoll, custom }: PollCardProps) {
   const creator = useMemo(() => dummyUsers.find(u => u.id === poll.creatorId) as User, [poll.creatorId]);
   const totalVotes = useMemo(() => poll.options.reduce((acc, opt) => acc + opt.votes, 0), [poll.options]);
   const [timeLeft, setTimeLeft] = useState("");
   const { toast } = useToast();
   const [isTipDialogOpen, setIsTipDialogOpen] = useState(false);
+  const [isCommentSheetOpen, setIsCommentSheetOpen] = useState(false);
 
-  const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
-  
   const majorityVotes = useMemo(() => Math.max(...poll.options.map(o => o.votes), 0), [poll.options]);
   const isMonetizationLocked = poll.pledged && poll.pledgeAmount && ((poll.pledgeAmount * 0.5) / (majorityVotes + 1)) < 0.10 && totalVotes > 0;
 
@@ -113,14 +116,20 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }:
       e.stopPropagation();
       setIsTipDialogOpen(true);
   }
+  
+  const handleCommentClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setIsCommentSheetOpen(true);
+  }
 
   const renderOption = (option: any) => {
     const percentage = totalVotes > 0 ? Math.round((option.votes / totalVotes) * 100) : 0;
     const isWinner = showResults && option.votes > 0 && option.votes === Math.max(...poll.options.map(o => o.votes));
     
     return (
-      <div key={option.id}
-           className={cn("relative border rounded-lg p-3 transition-colors",
+      <Button key={option.id}
+           variant="outline"
+           className={cn("h-auto whitespace-normal justify-start p-3 transition-colors relative text-left",
              !showResults && "cursor-pointer hover:bg-muted/50",
              showResults && isWinner && "border-primary/50"
            )}
@@ -128,17 +137,17 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }:
       >
         {showResults && (
            <motion.div
-              className="absolute inset-0 bg-primary/20 rounded-lg"
+              className="absolute inset-0 bg-primary/20 rounded-lg -z-10"
               initial={{ width: 0 }}
               animate={{ width: `${percentage}%` }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             />
         )}
-        <div className="relative z-10 flex justify-between items-center">
-            <span className="font-medium text-sm">{option.text}</span>
+        <div className="relative z-10 flex justify-between items-center w-full">
+            <span className="font-medium text-sm flex-1 pr-4">{option.text}</span>
             {showResults && <span className="font-semibold text-sm">{percentage}%</span>}
         </div>
-      </div>
+      </Button>
     );
   }
 
@@ -195,10 +204,13 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }:
 
       <CardContent className="p-4 pt-0">
         <p className="mb-3 font-body text-base">{poll.description || poll.question}</p>
-        <div className={cn("relative aspect-video rounded-lg my-4 flex items-center justify-center bg-muted", poll.type === '2nd_opinion' && 'hidden')}>
+        
+        {poll.type !== '2nd_opinion' && (
+          <div className="relative aspect-video rounded-lg my-4 flex items-center justify-center bg-muted">
             <Image src={`https://placehold.co/600x400.png`} alt={poll.category} layout="fill" className="object-cover rounded-lg opacity-20" data-ai-hint={poll.category} />
             <h2 className="text-4xl font-bold text-foreground/50 font-headline">{poll.category}</h2>
         </div>
+        )}
 
         {poll.type === '2nd_opinion' ? (
             <div className="grid grid-cols-2 gap-3 my-4">
@@ -237,7 +249,7 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }:
               <Heart className="h-5 w-5" />
               <span className="ml-2 text-xs">{poll.likes.toLocaleString()}</span>
           </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
+          <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={handleCommentClick}>
               <MessageCircle className="h-5 w-5" />
               <span className="ml-2 text-xs">{poll.comments.toLocaleString()}</span>
           </Button>
@@ -279,6 +291,29 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, custom }:
         {cardContent}
       </motion.div>
       <TipDialog poll={poll} creator={creator} isOpen={isTipDialogOpen} onOpenChange={setIsTipDialogOpen} />
+      <Sheet open={isCommentSheetOpen} onOpenChange={setIsCommentSheetOpen}>
+        <SheetContent side="bottom" className="rounded-t-2xl">
+          <SheetHeader>
+            <SheetTitle>Comments</SheetTitle>
+            <SheetDescription className="truncate">
+              On: "{poll.question}"
+            </SheetDescription>
+          </SheetHeader>
+          <div className="py-4">
+            <div className="flex flex-col items-center justify-center h-48 text-muted-foreground border rounded-lg bg-muted/50">
+              <MessageCircle className="h-12 w-12 mb-4" />
+              <p className="text-lg font-semibold">Comments Coming Soon!</p>
+              <p className="text-sm">Soon you'll be able to see what others are saying.</p>
+            </div>
+          </div>
+          <SheetFooter>
+              <div className="flex w-full gap-2">
+                  <Input placeholder="Add a comment..." disabled />
+                  <Button disabled>Post</Button>
+              </div>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </>
   )
 }
