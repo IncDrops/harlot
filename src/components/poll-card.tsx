@@ -14,6 +14,7 @@ interface PollCardProps {
   onVote: (pollId: number, optionId: number) => void;
   onSwipe: (direction: "left" | "right") => void;
   isTwoOptionPoll: boolean;
+  custom?: "left" | "right";
 }
 
 const cardVariants = {
@@ -28,18 +29,18 @@ const cardVariants = {
     opacity: 1,
     scale: 1,
     rotate: 0,
-    transition: { duration: 0.4, ease: "easeOut" }
+    transition: { duration: 0.8, ease: "easeOut" }
   },
   exit: (direction: "left" | "right") => ({
     x: direction === "left" ? "-150%" : "150%",
     opacity: 0,
     scale: 0.8,
     rotate: direction === 'left' ? -20 : 20,
-    transition: { duration: 0.4, ease: "easeIn" }
+    transition: { duration: 0.8, ease: "easeIn" }
   })
 };
 
-export function PollCard({ poll, onVote, onSwipe, isTwoOptionPoll }: PollCardProps) {
+export function PollCard({ poll, onVote, onSwipe, isTwoOptionPoll, custom }: PollCardProps) {
   const creator = useMemo(() => dummyUsers.find(u => u.id === poll.creatorId) as User, [poll.creatorId]);
 
   const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -125,7 +126,7 @@ export function PollCard({ poll, onVote, onSwipe, isTwoOptionPoll }: PollCardPro
       initial="hidden"
       animate="visible"
       exit="exit"
-      custom={info => (info.offset.x > 0 ? "right" : "left")}
+      custom={custom}
       className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center p-4"
     >
       {cardContent}

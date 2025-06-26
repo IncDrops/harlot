@@ -36,12 +36,11 @@ export default function HomePage() {
     
     setTimeout(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % polls.length);
-      
-      // End animation lock after full transition
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, 400); 
-    }, 400);
+    }, 700);
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 800);
   };
   
   useEffect(() => {
@@ -70,6 +69,7 @@ export default function HomePage() {
                 onVote={handleVote}
                 onSwipe={handleSwipe}
                 isTwoOptionPoll={true}
+                custom={swipeDirection}
               />
             )}
           </AnimatePresence>
