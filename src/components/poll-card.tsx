@@ -5,7 +5,7 @@ import { dummyUsers } from "@/lib/dummy-data";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { motion, PanInfo } from "framer-motion";
-import { Timer, MessageSquare, GripVertical } from "lucide-react";
+import { Timer, Users, GripVertical } from "lucide-react";
 import Image from "next/image";
 import { useMemo } from "react";
 import { Progress } from "@/components/ui/progress";
@@ -122,7 +122,7 @@ export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, 
           <span>{getTimeLeft()}</span>
         </div>
         <div className="flex items-center gap-1">
-          <MessageSquare className="h-4 w-4" />
+          <Users className="h-4 w-4" />
           <span>{totalVotes} votes</span>
         </div>
       </CardFooter>

@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Search, PlusSquare, ThumbsUp, Bell } from "lucide-react";
+import { Home, Search, PlusSquare, MessageSquare, ThumbsUp, Bell } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/search", label: "Search", icon: Search },
   { href: "/create", label: "New Poll", icon: PlusSquare },
+  { href: "/messages", label: "Messages", icon: MessageSquare },
   { href: "/second-opinion", label: "2nd Opinion", icon: ThumbsUp, customIcon: true },
   { href: "/notifications", label: "Notifications", icon: Bell },
 ];
