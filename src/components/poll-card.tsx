@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { motion, PanInfo } from "framer-motion";
 import { Timer, Users, GripVertical } from "lucide-react";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
 
 interface PollCardProps {
@@ -44,6 +44,30 @@ const cardVariants = {
 export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, custom }: PollCardProps) {
   const creator = useMemo(() => dummyUsers.find(u => u.id === poll.creatorId) as User, [poll.creatorId]);
   const totalVotes = useMemo(() => poll.options.reduce((acc, opt) => acc + opt.votes, 0), [poll.options]);
+  const [timeLeft, setTimeLeft] = useState("");
+
+  useEffect(() => {
+    const getTimeLeft = () => {
+      const now = new Date().getTime();
+      const endTime = new Date(poll.createdAt).getTime() + poll.durationMs;
+      const diff = endTime - now;
+
+      if (diff <= 0) return "Poll ended";
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      
+      if (days > 0) return `${days}d left`;
+      if (hours > 0) return `${hours}h left`;
+      return `${minutes}m left`;
+    };
+
+    setTimeLeft(getTimeLeft());
+    const interval = setInterval(() => setTimeLeft(getTimeLeft()), 60000); // Update every minute
+    return () => clearInterval(interval);
+  }, [poll.createdAt, poll.durationMs]);
+
 
   const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const swipeThreshold = 100;
@@ -59,24 +83,8 @@ export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, 
     return text.substring(0, maxLength) + '...';
   }
 
-  const getTimeLeft = () => {
-    const now = new Date().getTime();
-    const endTime = new Date(poll.createdAt).getTime() + poll.durationMs;
-    const diff = endTime - now;
-
-    if (diff <= 0) return "Poll ended";
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    
-    if (days > 0) return `${days}d left`;
-    if (hours > 0) return `${hours}h left`;
-    return `${minutes}m left`;
-  };
-
   const cardContent = (
-    <Card className="w-full max-w-sm mx-auto shadow-lg rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing">
+    <Card className="w-full mx-auto shadow-lg rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing relative">
       <CardHeader className="p-4">
         <div className="flex items-center gap-3">
           <Avatar>
@@ -104,7 +112,7 @@ export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, 
                         <span className="font-medium truncate pr-2">{option.text}</span>
                         <span className="text-muted-foreground font-mono text-xs">{percentage}%</span>
                       </div>
-                      <Progress value={percentage} className="h-2" />
+                      <Progress value={percentage} className="h-2 rounded-full" />
                     </div>
                   ) : (
                     <div className="border p-3 rounded-lg text-center font-medium bg-background hover:bg-muted transition-colors">
@@ -119,26 +127,26 @@ export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, 
       <CardFooter className="p-4 flex justify-between items-center text-xs text-muted-foreground">
         <div className="flex items-center gap-1">
           <Timer className="h-4 w-4" />
-          <span>{getTimeLeft()}</span>
+          <span>{timeLeft}</span>
         </div>
         <div className="flex items-center gap-1">
           <Users className="h-4 w-4" />
           <span>{totalVotes} votes</span>
         </div>
       </CardFooter>
-      {isTwoOptionPoll && (
-          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 flex items-center opacity-10">
+      {isTwoOptionPoll && !showResults && (
+          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 flex items-center opacity-10 pointer-events-none">
               <GripVertical className="w-8 h-8"/>
           </div>
       )}
     </Card>
   );
 
-  const dragProps = showResults ? {} : {
+  const dragProps = isTwoOptionPoll && !showResults ? {
     drag: "x" as const,
     dragConstraints: { left: 0, right: 0 },
     onDragEnd: handleDragEnd
-  };
+  } : {};
 
   return isTwoOptionPoll ? (
     <motion.div
@@ -148,13 +156,13 @@ export function PollCard({ poll, onSwipe, isTwoOptionPoll, showResults = false, 
       animate="visible"
       exit="exit"
       custom={custom}
-      className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center p-4"
+      className="relative"
     >
       {cardContent}
     </motion.div>
   ) : (
     // Non-swipeable version for other pages
-    <div className="w-full flex justify-center p-4">
+    <div className="w-full flex justify-center">
         {cardContent}
     </div>
   );

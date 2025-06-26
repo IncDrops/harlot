@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -193,9 +194,11 @@ export default function CreatePollPage() {
 
             </CardContent>
             <CardFooter className="flex flex-col items-stretch gap-4">
-              <Button type="submit" size="lg" disabled={isSubmitting}>
-                {isSubmitting ? 'Submitting...' : 'Poll it & Go'}
-              </Button>
+               <motion.div whileTap={{ scale: 0.98 }}>
+                    <Button type="submit" size="lg" disabled={isSubmitting} className="w-full">
+                        {isSubmitting ? 'Submitting...' : 'Poll it & Go'}
+                    </Button>
+               </motion.div>
               <p className="text-xs text-center text-muted-foreground">
                 Poll responsibly, the ultimate choice still belongs to you.
               </p>
