@@ -16,7 +16,7 @@ export default function SignInPage() {
         <Card className="shadow-2xl">
           <CardHeader>
             <CardTitle>Welcome Back</CardTitle>
-            <CardDescription>Sign in to continue to PollitAgo</CardDescription>
+            <CardDescription>Sign in to continue to PollitAGo</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">

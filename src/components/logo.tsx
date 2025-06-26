@@ -6,7 +6,7 @@ export function Logo({ className }: { className?: string }) {
       <span style={{ color: '#5271ff' }}>Poll</span>
       <span style={{ color: '#f6bc18' }}>it</span>
       <span style={{ color: '#5271ff' }}>A</span>
-      <span style={{ color: '#00bf63' }}>go</span>
+      <span style={{ color: '#00bf63' }}>Go</span>
     </h1>
   );
 }

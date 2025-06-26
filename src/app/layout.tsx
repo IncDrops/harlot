@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'PollitAgo: THE 2nd OPINION APP',
+  title: 'PollitAGo: THE 2nd OPINION APP',
   description: 'The ultimate app for getting a second opinion on anything.',
 };
 
