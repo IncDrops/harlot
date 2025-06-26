@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut as firebaseSignOut, Auth, UserCredential } from "firebase/auth";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, Storage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,12 +14,14 @@ const firebaseConfig = {
 
 let app: FirebaseApp | null = null;
 let auth: Auth | null = null;
+let storage: Storage | null = null;
 
 // Initialize Firebase only if the API key is provided
 if (firebaseConfig.apiKey) {
   try {
     app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
     auth = getAuth(app);
+    storage = getStorage(app);
   } catch (error) {
     console.error("Firebase initialization error:", error);
   }
@@ -51,6 +54,16 @@ export const signOut = (): Promise<void> => {
   return firebaseSignOut(auth);
 };
 
-export { auth };
+export const uploadFile = async (file: File, path: string): Promise<string> => {
+    if (!storage) {
+        throw new Error("Firebase Storage is not configured.");
+    }
+    const fileRef = storageRef(storage, path);
+    await uploadBytes(fileRef, file);
+    const downloadURL = await getDownloadURL(fileRef);
+    return downloadURL;
+};
+
+export { auth, storage };
 
 export default app;
