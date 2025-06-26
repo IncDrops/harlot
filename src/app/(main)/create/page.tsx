@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef } from 'react';
@@ -198,11 +199,13 @@ export default function CreatePollPage() {
                <FormItem>
                     <FormLabel>Add a video to your poll (optional, max 60s)</FormLabel>
                     <FormControl>
-                      <Input type="file" ref={videoInputRef} onChange={handleVideoChange} accept="video/*" className="hidden" />
+                      <div>
+                        <Input type="file" ref={videoInputRef} onChange={handleVideoChange} accept="video/*" className="hidden" />
                         <Button type="button" variant="outline" className="w-full h-24 flex-col" onClick={() => videoInputRef.current?.click()}>
                             <Video className="h-8 w-8 mb-2 text-muted-foreground"/>
                             <span>Upload Video</span>
                         </Button>
+                      </div>
                     </FormControl>
                     {videoPreview && <video src={videoPreview} controls className="w-full rounded-md mt-2 aspect-video" />}
                 </FormItem>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef } from 'react';
@@ -160,10 +161,12 @@ export default function CreateSecondOpinionPage() {
                     <FormItem>
                         <FormLabel>Option A</FormLabel>
                         <FormControl>
-                             <Input type="file" ref={image1InputRef} onChange={(e) => handleFileChange(e, 'image1')} accept="image/*" className="hidden" />
-                             <button type="button" className="w-full h-32 border-2 border-dashed rounded-lg flex flex-col items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-colors" onClick={() => image1InputRef.current?.click()}>
-                                {image1Preview ? <Image src={image1Preview} alt="Option A preview" layout="fill" className="object-cover rounded-lg" /> : <><ImageIcon className="h-8 w-8 mb-2"/><span>Upload Image</span></>}
-                             </button>
+                             <div>
+                                 <Input type="file" ref={image1InputRef} onChange={(e) => handleFileChange(e, 'image1')} accept="image/*" className="hidden" />
+                                 <Button type="button" variant="outline" className="w-full h-32 border-2 border-dashed flex-col relative" onClick={() => image1InputRef.current?.click()}>
+                                    {image1Preview ? <Image src={image1Preview} alt="Option A preview" fill className="object-cover rounded-lg" /> : <><ImageIcon className="h-8 w-8 mb-2"/><span>Upload Image</span></>}
+                                 </Button>
+                             </div>
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -172,10 +175,12 @@ export default function CreateSecondOpinionPage() {
                     <FormItem>
                         <FormLabel>Option B</FormLabel>
                         <FormControl>
-                           <Input type="file" ref={image2InputRef} onChange={(e) => handleFileChange(e, 'image2')} accept="image/*" className="hidden" />
-                           <button type="button" className="w-full h-32 border-2 border-dashed rounded-lg flex flex-col items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-colors" onClick={() => image2InputRef.current?.click()}>
-                                {image2Preview ? <Image src={image2Preview} alt="Option B preview" layout="fill" className="object-cover rounded-lg" /> : <><ImageIcon className="h-8 w-8 mb-2"/><span>Upload Image</span></>}
-                            </button>
+                           <div>
+                               <Input type="file" ref={image2InputRef} onChange={(e) => handleFileChange(e, 'image2')} accept="image/*" className="hidden" />
+                               <Button type="button" variant="outline" className="w-full h-32 border-2 border-dashed flex-col relative" onClick={() => image2InputRef.current?.click()}>
+                                    {image2Preview ? <Image src={image2Preview} alt="Option B preview" fill className="object-cover rounded-lg" /> : <><ImageIcon className="h-8 w-8 mb-2"/><span>Upload Image</span></>}
+                                </Button>
+                           </div>
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -185,11 +190,13 @@ export default function CreateSecondOpinionPage() {
                <FormItem>
                     <FormLabel>Or upload a video (optional, max 60s)</FormLabel>
                     <FormControl>
-                        <Input type="file" ref={videoInputRef} onChange={(e) => handleFileChange(e, 'video')} accept="video/*" className="hidden" />
-                        <Button type="button" variant="outline" className="w-full h-24 flex-col" onClick={() => videoInputRef.current?.click()}>
-                            <Video className="h-8 w-8 mb-2 text-muted-foreground"/>
-                            <span>Upload Video</span>
-                        </Button>
+                        <div>
+                            <Input type="file" ref={videoInputRef} onChange={(e) => handleFileChange(e, 'video')} accept="video/*" className="hidden" />
+                            <Button type="button" variant="outline" className="w-full h-24 flex-col" onClick={() => videoInputRef.current?.click()}>
+                                <Video className="h-8 w-8 mb-2 text-muted-foreground"/>
+                                <span>Upload Video</span>
+                            </Button>
+                        </div>
                     </FormControl>
                     {videoPreview && <video src={videoPreview} controls className="w-full rounded-md mt-2 aspect-video" />}
                 </FormItem>
