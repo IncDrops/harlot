@@ -21,10 +21,6 @@ const getStripePromise = () => {
 export function StripeProvider({ children }: { children: React.ReactNode }) {
     const stripe = getStripePromise();
 
-    if(!stripe) {
-        return <>{children}</>;
-    }
-
     return (
         <Elements stripe={stripe}>
             {children}
