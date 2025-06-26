@@ -16,6 +16,15 @@ export interface PollOption {
   affiliateLink?: string;
 }
 
+export interface Comment {
+  id: string;
+  userId: string;
+  username: string;
+  avatar: string;
+  text: string;
+  createdAt: string; // ISO String
+}
+
 export interface Poll {
   id: number;
   creatorId: number;
@@ -32,5 +41,5 @@ export interface Poll {
   isNSFW: boolean;
   category: string;
   likes: number;
-  comments: number;
+  comments: number; // This is now the source of truth for the count
 }

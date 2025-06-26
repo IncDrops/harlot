@@ -1,13 +1,13 @@
 
 "use client";
 
-import type { Poll, User } from "@/lib/types";
+import type { Poll, User, Comment } from "@/lib/types";
 import { dummyUsers } from "@/lib/dummy-data";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion, PanInfo } from "framer-motion";
-import { Timer, Users, GripVertical, Gift, ShieldCheck, Flame, Lock, Heart, MessageCircle, Share2 } from "lucide-react";
+import { Timer, Users, GripVertical, Gift, ShieldCheck, Flame, Lock, Heart, MessageCircle, Share2, Send } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState, useEffect, useCallback } from "react";
 import { Progress } from "@/components/ui/progress";
@@ -18,6 +18,10 @@ import { Separator } from "./ui/separator";
 import { TipDialog } from './tip-dialog';
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "./ui/sheet";
 import { Input } from "./ui/input";
+import { useAuth } from "@/contexts/auth-context";
+import { addCommentToPoll, getCommentsForPoll } from "@/lib/firebase";
+import { CommentListItem } from "./comment-list-item";
+import { ScrollArea } from "./ui/scroll-area";
 
 interface PollCardProps {
   poll: Poll;
@@ -57,7 +61,13 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
   const [timeLeft, setTimeLeft] = useState("");
   const { toast } = useToast();
   const [isTipDialogOpen, setIsTipDialogOpen] = useState(false);
+
+  // Comment Sheet State
+  const { user } = useAuth();
   const [isCommentSheetOpen, setIsCommentSheetOpen] = useState(false);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [isLoadingComments, setIsLoadingComments] = useState(false);
+  const [newComment, setNewComment] = useState("");
 
   const majorityVotes = useMemo(() => Math.max(...poll.options.map(o => o.votes), 0), [poll.options]);
   const isMonetizationLocked = poll.pledged && poll.pledgeAmount && ((poll.pledgeAmount * 0.5) / (majorityVotes + 1)) < 0.10 && totalVotes > 0;
@@ -101,6 +111,26 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
     return () => clearInterval(interval);
   }, [getTimeLeft]);
 
+  // Fetch comments when sheet opens
+  useEffect(() => {
+    if (isCommentSheetOpen) {
+      const fetchComments = async () => {
+        setIsLoadingComments(true);
+        try {
+          // In a real app, poll.id would be a string from Firestore.
+          const fetchedComments = await getCommentsForPoll(poll.id.toString());
+          setComments(fetchedComments);
+        } catch (error) {
+          console.error("Failed to fetch comments:", error);
+          toast({ variant: 'destructive', title: "Could not load comments." });
+        } finally {
+          setIsLoadingComments(false);
+        }
+      };
+      fetchComments();
+    }
+  }, [isCommentSheetOpen, poll.id, toast]);
+
 
   const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (!isTwoOptionPoll) return;
@@ -121,6 +151,36 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
       e.stopPropagation();
       setIsCommentSheetOpen(true);
   }
+
+  const handlePostComment = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user || newComment.trim() === "") return;
+
+    // A real app should have a robust user profile system. 
+    // Here we'll use a placeholder from dummy data or the email.
+    const dummyUserProfile = dummyUsers.find(u => u.username === user.email?.split('@')[0]);
+    const username = dummyUserProfile?.name || user.email || 'Anonymous';
+    const avatar = dummyUserProfile?.avatar || `https://i.pravatar.cc/150?u=${user.uid}`;
+
+    const commentToPost = {
+      userId: user.uid,
+      username,
+      avatar,
+      text: newComment,
+    };
+
+    try {
+      // In a real app, poll.id would be a string from Firestore.
+      await addCommentToPoll(poll.id.toString(), commentToPost);
+      setNewComment("");
+      // Optimistically add the comment to the UI
+      setComments(prev => [{...commentToPost, id: new Date().toISOString(), createdAt: new Date().toISOString()}, ...prev]);
+    } catch (error) {
+      console.error("Failed to post comment:", error);
+      toast({ variant: 'destructive', title: "Could not post comment." });
+    }
+  };
+
 
   const renderOption = (option: any) => {
     const percentage = totalVotes > 0 ? Math.round((option.votes / totalVotes) * 100) : 0;
@@ -292,25 +352,43 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
       </motion.div>
       <TipDialog poll={poll} creator={creator} isOpen={isTipDialogOpen} onOpenChange={setIsTipDialogOpen} />
       <Sheet open={isCommentSheetOpen} onOpenChange={setIsCommentSheetOpen}>
-        <SheetContent side="bottom" className="rounded-t-2xl">
+        <SheetContent side="bottom" className="rounded-t-2xl flex flex-col h-full md:h-4/5">
           <SheetHeader>
-            <SheetTitle>Comments</SheetTitle>
+            <SheetTitle>Comments ({comments.length})</SheetTitle>
             <SheetDescription className="truncate">
               On: "{poll.question}"
             </SheetDescription>
           </SheetHeader>
-          <div className="py-4">
-            <div className="flex flex-col items-center justify-center h-48 text-muted-foreground border rounded-lg bg-muted/50">
-              <MessageCircle className="h-12 w-12 mb-4" />
-              <p className="text-lg font-semibold">Comments Coming Soon!</p>
-              <p className="text-sm">Soon you'll be able to see what others are saying.</p>
+          <ScrollArea className="flex-1 -mx-6">
+            <div className="px-6">
+              {isLoadingComments ? (
+                <div className="flex items-center justify-center h-48">
+                  <p>Loading comments...</p>
+                </div>
+              ) : comments.length > 0 ? (
+                comments.map(comment => <CommentListItem key={comment.id} comment={comment} />)
+              ) : (
+                <div className="flex flex-col items-center justify-center h-48 text-muted-foreground rounded-lg bg-muted/50">
+                  <MessageCircle className="h-12 w-12 mb-4" />
+                  <p className="text-lg font-semibold">No comments yet</p>
+                  <p className="text-sm">Be the first to share your thoughts.</p>
+                </div>
+              )}
             </div>
-          </div>
+          </ScrollArea>
           <SheetFooter>
-              <div className="flex w-full gap-2">
-                  <Input placeholder="Add a comment..." disabled />
-                  <Button disabled>Post</Button>
-              </div>
+              <form onSubmit={handlePostComment} className="flex w-full gap-2">
+                  <Input 
+                    placeholder={user ? "Add a comment..." : "Sign in to comment"} 
+                    disabled={!user} 
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                  />
+                  <Button type="submit" disabled={!user || newComment.trim() === ""}>
+                    <Send className="h-4 w-4" />
+                    <span className="sr-only">Post Comment</span>
+                  </Button>
+              </form>
           </SheetFooter>
         </SheetContent>
       </Sheet>
