@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/auth-context";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { DollarSign, Coins } from "lucide-react";
+import { DollarSign, Coins, Gift } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { dummyUsers } from "@/lib/dummy-data";
 
@@ -37,6 +37,8 @@ export default function ProfilePage() {
             description: "Stripe integration for tips is not yet implemented.",
         });
     };
+    
+    const canRedeem = (displayUser.pollitPoints || 0) >= 500;
 
     if (loading) {
         return (
@@ -69,10 +71,18 @@ export default function ProfilePage() {
                          <p className="text-3xl font-bold mt-2">$0.00</p>
                     </Card>
                 </div>
-                 <div className="space-y-2">
-                    <Label>My Polls</Label>
-                    <p className="text-sm text-muted-foreground">A list of your created polls will appear here.</p>
-                </div>
+                 <Card className="bg-muted/50">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2"><Gift className="w-5 h-5 text-primary" /> Redeem PollitPoints</CardTitle>
+                        <CardDescription>You can redeem your points for cash or gift cards once you reach 500 points. (10 points = $0.10)</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <Button className="w-full" disabled={!canRedeem}>
+                            {canRedeem ? `Redeem ${displayUser.pollitPoints?.toLocaleString()} Points` : 'Reach 500 Points to Redeem'}
+                        </Button>
+                    </CardContent>
+                 </Card>
+
                  <Card className="bg-muted/50">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">Connect Tip Jar</CardTitle>
