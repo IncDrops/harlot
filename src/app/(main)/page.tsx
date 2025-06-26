@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import type { Poll } from "@/lib/types";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const POLLS_PER_PAGE = 10;
 
@@ -74,10 +73,7 @@ export default function HomePage() {
   }, [isAnimating]);
 
   const performVote = (pollId: number, optionId: number) => {
-     const optionIndex = polls.find(p => p.id === pollId)?.options.findIndex(o => o.id === optionId);
-     if(optionIndex === undefined || optionIndex === -1) return;
-
-      setPolls(currentPolls =>
+     setPolls(currentPolls =>
         currentPolls.map(p => {
           if (p.id === pollId) {
             const newOptions = [...p.options];
@@ -87,8 +83,10 @@ export default function HomePage() {
                 ...newOptions[optIndex],
                 votes: newOptions[optIndex].votes + 1,
               };
+               // Also update likes for engagement
+               const newLikes = p.likes + 1;
+               return { ...p, options: newOptions, likes: newLikes };
             }
-            return { ...p, options: newOptions };
           }
           return p;
         })
@@ -103,7 +101,8 @@ export default function HomePage() {
     const isLocked = poll.pledged && poll.pledgeAmount && (poll.pledgeAmount * 0.5) / (majorityVotes + 1) < 0.10;
 
     const voteAction = () => {
-      if (poll.options.length === 2) {
+      const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
+      if (isTwoOptionPoll) {
         const direction = poll.options.findIndex(o => o.id === optionId) === 0 ? 'left' : 'right';
         handleSwipeVote(pollId, optionId, direction);
       } else {
@@ -125,16 +124,17 @@ export default function HomePage() {
 
     setIsAnimating(true);
     setSwipeDirections(prev => ({ ...prev, [pollId]: direction }));
-
+    
+    // Perform vote and show results immediately
+    performVote(pollId, optionId);
+    setVotedStates(prev => ({ ...prev, [pollId]: true }));
+    
+    // Animate back
     setTimeout(() => {
-      performVote(pollId, optionId);
-      setVotedStates(prev => ({ ...prev, [pollId]: true }));
-    }, 700);
-
-    setTimeout(() => {
-      setIsAnimating(false);
-      setSwipeDirections(prev => ({ ...prev, [pollId]: null }));
-    }, 800);
+        setSwipeDirections(prev => ({ ...prev, [pollId]: null }));
+        setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
+        setIsAnimating(false);
+    }, 500);
   };
 
   const handleNextPoll = (pollId: number) => {
@@ -144,20 +144,22 @@ export default function HomePage() {
   return (
     <>
     <div className="container mx-auto py-8 px-2 sm:px-4">
-      <Tagline className="mb-4" />
-      <div className="w-full max-w-xl mx-auto space-y-4">
+      <div className="w-full max-w-2xl mx-auto space-y-6">
         {polls.map((poll, index) => {
            const isLastElement = polls.length === index + 1;
            const hasVoted = votedStates[poll.id] || false;
            return (
             <div ref={isLastElement ? lastPollElementRef : null} key={`${poll.id}-${cardKeys[poll.id] || 0}`}>
-              <AnimatePresence initial={false} custom={swipeDirections[poll.id]}>
                 <PollCard
                   poll={poll}
                   onVote={handleVote}
                   onSwipe={(direction) => {
+                    const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
+                    if (!isTwoOptionPoll) return;
+                    
                     if (hasVoted) {
-                      handleNextPoll(poll.id);
+                      // This logic can be removed if swiping on a voted card does nothing
+                      // or if it should swipe to next poll. For now, let's make it do nothing.
                       return;
                     }
                     const optionId = poll.options[direction === 'left' ? 0 : 1].id;
@@ -166,7 +168,6 @@ export default function HomePage() {
                   showResults={hasVoted}
                   custom={swipeDirections[poll.id]}
                 />
-              </AnimatePresence>
             </div>
            )
         })}

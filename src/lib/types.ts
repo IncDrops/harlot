@@ -30,4 +30,7 @@ export interface Poll {
   pledgeAmount?: number;
   tipCount: number;
   isNSFW: boolean;
+  category: string;
+  likes: number;
+  comments: number;
 }
