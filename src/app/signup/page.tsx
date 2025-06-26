@@ -11,26 +11,40 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Logo, Tagline } from "@/components/logo";
 import { useToast } from "@/hooks/use-toast";
 
-export default function SignInPage() {
+export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signUp } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
 
-  const handleSignIn = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast({
+        variant: "destructive",
+        title: "Sign Up Failed",
+        description: "Passwords do not match.",
+      });
+      return;
+    }
     setIsLoading(true);
     try {
-      await signIn(email, password);
-      router.push("/");
+      await signUp(email, password);
+      toast({
+        title: "Account Created",
+        description: "You have successfully signed up! Please sign in.",
+      });
+      router.push("/signin");
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Sign In Failed",
+        title: "Sign Up Failed",
         description: error.message,
       });
+    } finally {
       setIsLoading(false);
     }
   };
@@ -39,16 +53,16 @@ export default function SignInPage() {
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
-            <Logo className="mx-auto" />
-            <Tagline className="mt-2" />
+          <Logo className="mx-auto" />
+          <Tagline className="mt-2" />
         </div>
         <Card className="shadow-2xl">
           <CardHeader>
-            <CardTitle>Welcome Back</CardTitle>
-            <CardDescription>Sign in to continue to PollitAGo</CardDescription>
+            <CardTitle>Create an Account</CardTitle>
+            <CardDescription>Get started with PollitAGo today.</CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSignIn} className="space-y-4">
+            <form onSubmit={handleSignUp} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -57,17 +71,20 @@ export default function SignInPage() {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
               </div>
+              <div className="space-y-2">
+                <Label htmlFor="confirm-password">Confirm Password</Label>
+                <Input id="confirm-password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+              </div>
               <Button className="w-full" type="submit" disabled={isLoading}>
-                {isLoading ? "Signing In..." : "Sign In"}
+                {isLoading ? "Creating Account..." : "Sign Up"}
               </Button>
-              <Button variant="outline" className="w-full" onClick={() => router.push('/')}>Continue as Anonymous</Button>
             </form>
           </CardContent>
         </Card>
         <p className="text-center text-sm text-muted-foreground">
-          Don't have an account?{" "}
-          <Link href="/signup" className="font-semibold text-primary hover:underline">
-            Sign Up
+          Already have an account?{" "}
+          <Link href="/signin" className="font-semibold text-primary hover:underline">
+            Sign In
           </Link>
         </p>
       </div>
