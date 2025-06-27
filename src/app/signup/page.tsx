@@ -16,7 +16,7 @@ export default function SignUpPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { signUp } = useAuth();
+  const { signUp, signInAnonymously, signInWithGoogle } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
 
@@ -77,6 +77,12 @@ export default function SignUpPage() {
               </div>
               <Button className="w-full" type="submit" disabled={isLoading}>
                 {isLoading ? "Creating Account..." : "Sign Up"}
+              </Button>
+              <Button variant="outline" className="w-full" onClick={signInAnonymously}>
+                Continue as Anonymous
+              </Button>
+              <Button variant="secondary" className="w-full" onClick={signInWithGoogle}>
+                Sign Up with Google
               </Button>
             </form>
           </CardContent>

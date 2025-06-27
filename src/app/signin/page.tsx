@@ -15,7 +15,7 @@ export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn, signInAnonymously, signInWithGoogle } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
 
@@ -35,12 +35,42 @@ export default function SignInPage() {
     }
   };
 
+  const handleAnonymous = async () => {
+    setIsLoading(true);
+    try {
+      await signInAnonymously();
+      router.push("/");
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Anonymous Sign-In Failed",
+        description: error.message,
+      });
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    try {
+      await signInWithGoogle();
+      router.push("/");
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Google Sign-In Failed",
+        description: error.message,
+      });
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
-            <Logo className="mx-auto" />
-            <Tagline className="mt-2" />
+          <Logo className="mx-auto" />
+          <Tagline className="mt-2" />
         </div>
         <Card className="shadow-2xl">
           <CardHeader>
@@ -60,12 +90,17 @@ export default function SignInPage() {
               <Button className="w-full" type="submit" disabled={isLoading}>
                 {isLoading ? "Signing In..." : "Sign In"}
               </Button>
-              <Button variant="outline" className="w-full" onClick={() => router.push('/')}>Continue as Anonymous</Button>
+              <Button variant="outline" className="w-full" onClick={handleAnonymous} disabled={isLoading}>
+                Continue as Guest
+              </Button>
+              <Button variant="ghost" className="w-full" onClick={handleGoogleSignIn} disabled={isLoading}>
+                Sign In with Google
+              </Button>
             </form>
           </CardContent>
         </Card>
         <p className="text-center text-sm text-muted-foreground">
-          Don't have an account?{" "}
+          Don't have an account? {" "}
           <Link href="/signup" className="font-semibold text-primary hover:underline">
             Sign Up
           </Link>
