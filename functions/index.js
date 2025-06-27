@@ -1,31 +1,41 @@
 require('dotenv').config();
-const { setGlobalOptions } = require("firebase-functions");
-setGlobalOptions({ maxInstances: 10 });
-
 const functions = require('firebase-functions');
+const { onSchedule } = require('firebase-functions/v2/scheduler');
 const admin = require('firebase-admin');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const express = require('express');
+const bodyParser = require('body-parser');
+const { setGlobalOptions } = require('firebase-functions');
+setGlobalOptions({ maxInstances: 10 });
 
+// Initialize Firebase Admin
 admin.initializeApp();
 const db = admin.firestore();
 
-// ⏱ Scheduled Poll Processor for PollitPoints
-exports.processPledgedPolls = functions.pubsub
-  .schedule('every 60 minutes')
-  .onRun(async () => {
-    const now = admin.firestore.Timestamp.now();
+// Setup raw express app for Stripe webhook
+const app = express();
 
-    const query = db.collection('polls')
-      .where('pledged', '==', true)
-      .where('isProcessed', '==', false) // Add this field to your poll documents
-      .where('endsAt', '<=', now); // Add 'endsAt' timestamp to your poll documents
+// Middleware for JSON parsing EXCEPT Stripe webhooks
+app.use(
+  (req, res, next) => {
+    if (req.originalUrl === '/stripeWebhook') {
+      bodyParser.raw({ type: 'application/json' })(req, res, next);
+    } else {
+      bodyParser.json()(req, res, next);
+    }
+  }
+);
+
+// ⏱ Scheduled Poll Processor for PollitPoints
+exports.processPledgedPolls = onSchedule('every 60 minutes', async (event) => {
+  const now = admin.firestore.Timestamp.now();
+  const query = db.collection('polls')
+    .where('pledged', '==', true)
+    .where('isProcessed', '==', false)
+    .where('endsAt', '<=', now);
 
     const pollsToProcess = await query.get();
-    if (pollsToProcess.empty) {
-      console.log("No polls to process.");
-      return null;
-    }
+    if (pollsToProcess.empty) return null;
 
     const promises = pollsToProcess.docs.map(async (pollDoc) => {
       const poll = pollDoc.data();
@@ -35,26 +45,20 @@ exports.processPledgedPolls = functions.pubsub
         (prev.votes > current.votes ? prev : current)
       );
 
-      // In a real app, votes would be stored in a subcollection to get individual user IDs
-      // For this implementation, we'll simulate finding winning voters.
-      // This is a placeholder for a more complex query on a 'votes' collection.
       const votesQuery = db.collectionGroup('votes')
         .where('pollId', '==', pollId)
         .where('optionId', '==', winningOption.id);
 
       const winningVotes = await votesQuery.get();
       if (winningVotes.empty) {
-        console.log(`Poll ${pollId} has no winning votes.`);
         await pollDoc.ref.update({ isProcessed: true });
         return;
-      };
+      }
 
-      // $0.01 = 1 point. 50% of pledge goes to voters.
       const totalPoints = (poll.pledgeAmount * 0.5) * 100;
       const pointsPerWinner = Math.floor(totalPoints / winningVotes.size);
-      
+
       if (pointsPerWinner <= 0) {
-        console.log(`Payout too small for poll ${pollId}.`);
         await pollDoc.ref.update({ isProcessed: true });
         return;
       }
@@ -70,14 +74,13 @@ exports.processPledgedPolls = functions.pubsub
 
       batch.update(pollDoc.ref, { isProcessed: true });
       await batch.commit();
-      console.log(`Processed poll ${pollId}, awarded ${pointsPerWinner} points to ${winningVotes.size} users.`);
     });
 
     await Promise.all(promises);
     return null;
   });
 
-// 💸 Stripe Tip Function (Example, requires more setup for production)
+// 💸 Stripe Tip Checkout
 exports.createTipSession = functions.https.onCall(async (data, context) => {
   const { amount, userId, pollId } = data;
 
@@ -85,7 +88,6 @@ exports.createTipSession = functions.https.onCall(async (data, context) => {
     throw new functions.https.HttpsError('invalid-argument', 'Missing required fields.');
   }
 
-  // In a production app, you would use Stripe Connect to pay out to the creator
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: [
@@ -94,18 +96,17 @@ exports.createTipSession = functions.https.onCall(async (data, context) => {
           currency: 'usd',
           product_data: {
             name: `Tip for poll by user ${userId}`,
-            metadata: { pollId }
           },
-          unit_amount: Math.round(amount * 100), // amount in cents
+          unit_amount: Math.round(amount * 100),
         },
         quantity: 1,
       },
     ],
     mode: 'payment',
-    success_url: `https://your-app-domain.com/poll/${pollId}?tip_success=true`,
-    cancel_url: `https://your-app-domain.com/poll/${pollId}`,
+    success_url: `https://pollitago.com/poll/${pollId}?tip_success=true`,
+    cancel_url: `https://pollitago.com/poll/${pollId}`,
     metadata: {
-      tipperId: context.auth.uid,
+      tipperId: context.auth?.uid || "anonymous",
       creatorId: userId,
       pollId,
     },
@@ -114,55 +115,58 @@ exports.createTipSession = functions.https.onCall(async (data, context) => {
   return { sessionUrl: session.url };
 });
 
-//  webhook to listen for successful payments and award points/notify creators
-exports.stripeWebhook = functions.https.onRequest(async (req, res) => {
-    const sig = req.headers['stripe-signature'];
+// 🔔 Stripe Webhook
+app.post('/stripeWebhook', async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  let event;
 
-    let event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      sig,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+  } catch (err) {
+    console.error('❌ Stripe Webhook Signature Verification Failed:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
 
-    try {
-        // Use rawBody for signature verification as Firebase parses JSON automatically
-        event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
-    } catch (err) {
-        console.error(`Webhook signature verification failed.`, err.message);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
-    
-    // Handle the event
-    switch (event.type) {
-        case 'checkout.session.completed':
-            const session = event.data.object;
-            const { creatorId, pollId, tipperId } = session.metadata;
+  switch (event.type) {
+    case 'checkout.session.completed': {
+      const session = event.data.object;
+      const { creatorId, pollId, tipperId } = session.metadata;
 
-             if (!creatorId || !pollId || !tipperId) {
-                console.error('Webhook received checkout.session.completed with missing metadata.', session.metadata);
-                return res.status(400).send('Webhook Error: Missing required metadata.');
-            }
+      if (!creatorId || !pollId || !tipperId) {
+        console.error('❌ Missing metadata in session:', session.metadata);
+        return res.status(400).send('Missing metadata.');
+      }
 
-            // 1. Give creator PollitPoints (e.g., 10 points per dollar tipped)
-            const pointsFromTip = Math.floor(session.amount_total / 100) * 10;
-            const userRef = db.collection('users').doc(creatorId);
-            await userRef.update({
-                pollitPoints: admin.firestore.FieldValue.increment(pointsFromTip)
-            });
+      const points = Math.floor(session.amount_total / 100) * 10;
+      const userRef = db.collection('users').doc(creatorId);
+      await userRef.update({
+        pollitPoints: admin.firestore.FieldValue.increment(points),
+      });
 
-            // 2. Create a notification for the creator
-            const notificationRef = db.collection('users').doc(creatorId).collection('notifications');
-            await notificationRef.add({
-                type: 'tip_received',
-                fromId: tipperId,
-                pollId: pollId,
-                amount: session.amount_total / 100,
-                createdAt: admin.firestore.FieldValue.serverTimestamp(),
-                read: false,
-            });
+      const notificationRef = userRef.collection('notifications');
+      await notificationRef.add({
+        type: 'tip_received',
+        fromId: tipperId,
+        pollId,
+        amount: session.amount_total / 100,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        read: false,
+      });
 
-            console.log(`Successfully processed tip for creator ${creatorId} from poll ${pollId}`);
-            break;
-        // ... handle other event types
-        default:
-            console.log(`Unhandled event type ${event.type}`);
+      console.log(`✅ Tip processed: ${points} points to ${creatorId}`);
+      break;
     }
 
-    res.json({ received: true });
+    default:
+      console.log(`Unhandled event type: ${event.type}`);
+  }
+
+  res.json({ received: true });
 });
+
+// ✅ Export webhook as Firebase HTTPS function
+exports.stripeWebhook = functions.https.onRequest(app);
