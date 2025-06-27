@@ -99,12 +99,10 @@ export default function SignInPage() {
             </form>
           </CardContent>
         </Card>
-        <p className="text-center text-sm text-muted-foreground">
-          Don't have an account? {" "}
-          <Link href="/signup" className="font-semibold text-primary hover:underline">
-            Sign Up
-          </Link>
-        </p>
+        <p className="text-center text-xs text-muted-foreground mt-2">
+  <Link href="/privacy-policy" className="underline hover:text-primary">Privacy Policy</Link> ·{" "}
+  <Link href="/terms" className="underline hover:text-primary">Terms of Service</Link>
+</p>
       </div>
     </div>
   );
