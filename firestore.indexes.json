@@ -1,4 +1,24 @@
+
 {
-  "indexes": [],
+  "indexes": [
+    {
+      "collectionGroup": "polls",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "pledged",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "isProcessed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "endsAt",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
   "fieldOverrides": []
 }
