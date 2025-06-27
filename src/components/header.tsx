@@ -14,14 +14,23 @@ import {
 import { useAuth } from "@/contexts/auth-context";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { useToast } from "@/hooks/use-toast";
 
 export function Header() {
   const { user, signOut } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
 
   const handleSignOut = async () => {
     await signOut();
     router.push('/signin');
+  };
+
+  const handleAppSettingsClick = () => {
+    toast({
+      title: "Coming Soon!",
+      description: "App settings are not yet implemented.",
+    });
   };
 
   return (
@@ -48,7 +57,7 @@ export function Header() {
                 <DropdownMenuItem onClick={() => router.push('/profile')}>
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem>App Settings</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleAppSettingsClick}>App Settings</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
                   <LogOut className="mr-2 h-4 w-4" />

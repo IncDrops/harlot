@@ -148,24 +148,21 @@ export default function HomePage() {
         {polls.map((poll, index) => {
            const isLastElement = polls.length === index + 1;
            const hasVoted = votedStates[poll.id] || false;
+           const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
            return (
             <div ref={isLastElement ? lastPollElementRef : null} key={`${poll.id}-${cardKeys[poll.id] || 0}`}>
                 <PollCard
                   poll={poll}
                   onVote={handleVote}
                   onSwipe={(direction) => {
-                    const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
-                    if (!isTwoOptionPoll) return;
-                    
-                    if (hasVoted) {
-                      // This logic can be removed if swiping on a voted card does nothing
-                      // or if it should swipe to next poll. For now, let's make it do nothing.
+                    if (!isTwoOptionPoll || hasVoted) {
                       return;
                     }
                     const optionId = poll.options[direction === 'left' ? 0 : 1].id;
                     handleVote(poll.id, optionId);
                   }}
                   showResults={hasVoted}
+                  isTwoOptionPoll={isTwoOptionPoll}
                   custom={swipeDirections[poll.id]}
                 />
             </div>

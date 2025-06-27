@@ -46,14 +46,19 @@ export default function SearchPage() {
         <CardContent>
           {results.length > 0 ? (
             <div className="space-y-6">
-              {results.map(poll => (
-                <PollCard 
-                  key={poll.id} 
-                  poll={poll} 
-                  onSwipe={() => {}} 
-                  isTwoOptionPoll={false} 
-                />
-              ))}
+              {results.map(poll => {
+                const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
+                return (
+                  <PollCard 
+                    key={poll.id} 
+                    poll={poll} 
+                    onSwipe={() => {}} 
+                    onVote={() => {}}
+                    isTwoOptionPoll={isTwoOptionPoll} 
+                    showResults={true}
+                  />
+                )
+              })}
             </div>
           ) : (
             <div className="flex items-center justify-center h-48 text-muted-foreground">
