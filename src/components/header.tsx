@@ -26,13 +26,6 @@ export function Header() {
     router.push('/signin');
   };
 
-  const handleAppSettingsClick = () => {
-    toast({
-      title: "Coming Soon!",
-      description: "App settings are not yet implemented.",
-    });
-  };
-
   return (
     <header className="sticky top-0 z-10 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center justify-between">
@@ -57,7 +50,7 @@ export function Header() {
                 <DropdownMenuItem onClick={() => router.push('/profile')}>
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleAppSettingsClick}>App Settings</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push('/settings')}>App Settings</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
                   <LogOut className="mr-2 h-4 w-4" />
