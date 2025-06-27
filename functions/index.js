@@ -1,9 +1,11 @@
+require('dotenv').config();
 const { setGlobalOptions } = require("firebase-functions");
 setGlobalOptions({ maxInstances: 10 });
 
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -114,13 +116,28 @@ exports.createTipSession = functions.https.onCall(async (data, context) => {
 
 //  webhook to listen for successful payments and award points/notify creators
 exports.stripeWebhook = functions.https.onRequest(async (req, res) => {
-    // This is a simplified example. See Stripe docs for full implementation.
-    const event = req.body;
+    const sig = req.headers['stripe-signature'];
+
+    let event;
+
+    try {
+        // Use rawBody for signature verification as Firebase parses JSON automatically
+        event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
+    } catch (err) {
+        console.error(`Webhook signature verification failed.`, err.message);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
     
+    // Handle the event
     switch (event.type) {
         case 'checkout.session.completed':
             const session = event.data.object;
             const { creatorId, pollId, tipperId } = session.metadata;
+
+             if (!creatorId || !pollId || !tipperId) {
+                console.error('Webhook received checkout.session.completed with missing metadata.', session.metadata);
+                return res.status(400).send('Webhook Error: Missing required metadata.');
+            }
 
             // 1. Give creator PollitPoints (e.g., 10 points per dollar tipped)
             const pointsFromTip = Math.floor(session.amount_total / 100) * 10;
@@ -139,6 +156,8 @@ exports.stripeWebhook = functions.https.onRequest(async (req, res) => {
                 createdAt: admin.firestore.FieldValue.serverTimestamp(),
                 read: false,
             });
+
+            console.log(`Successfully processed tip for creator ${creatorId} from poll ${pollId}`);
             break;
         // ... handle other event types
         default:
