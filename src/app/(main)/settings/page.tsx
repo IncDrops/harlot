@@ -1,13 +1,18 @@
+
 "use client"
 
 import { useTheme } from "next-themes"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Sun, Moon, Laptop } from "lucide-react"
+import { Sun, Moon, Laptop, EyeOff, Eye } from "lucide-react"
+import { Switch } from "@/components/ui/switch"
+import { useSettings } from "@/hooks/use-settings"
+import { Separator } from "@/components/ui/separator"
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme()
+  const { showNsfw, toggleNsfw } = useSettings();
 
   return (
     <div className="container mx-auto py-8">
@@ -44,6 +49,29 @@ export default function SettingsPage() {
               </Label>
             </RadioGroup>
           </div>
+          
+          <Separator />
+          
+          <div className="space-y-4">
+             <h3 className="text-lg font-medium">Content Filtering</h3>
+             <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                <div className="space-y-0.5">
+                  <Label className="flex items-center gap-2">
+                    {showNsfw ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                     Show NSFW Content
+                  </Label>
+                   <CardDescription>
+                    Enable to see content marked as Not Safe For Work.
+                  </CardDescription>
+                </div>
+                <Switch
+                    checked={showNsfw}
+                    onCheckedChange={toggleNsfw}
+                    aria-label="Toggle NSFW content visibility"
+                />
+              </div>
+          </div>
+
         </CardContent>
       </Card>
     </div>

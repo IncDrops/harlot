@@ -1,3 +1,4 @@
+
 export interface User {
   id: number;
   name: string;
@@ -25,6 +26,17 @@ export interface Comment {
   createdAt: string; // ISO String
 }
 
+export interface Notification {
+    id: string;
+    type: 'new_follower' | 'new_vote' | 'poll_ending' | 'tip_received' | 'new_comment';
+    fromUsername: string;
+    fromId: string;
+    pollId?: string;
+    amount?: number;
+    createdAt: string; // ISO String
+    read: boolean;
+}
+
 export interface Poll {
   id: number;
   creatorId: number;
@@ -41,5 +53,5 @@ export interface Poll {
   isNSFW: boolean;
   category: string;
   likes: number;
-  comments: number; // This is now the source of truth for the count
+  comments: number;
 }

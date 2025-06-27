@@ -1,15 +1,39 @@
-import { Bell, MessageSquare, ThumbsUp, UserPlus } from "lucide-react";
+
+"use client";
+
+import { useEffect, useState } from "react";
+import { Bell, Gift, ThumbsUp, UserPlus, MessageSquare } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuth } from "@/contexts/auth-context";
+import { getNotificationsForUser } from "@/lib/firebase";
+import type { Notification } from "@/lib/types";
+import { formatDistanceToNowStrict } from 'date-fns';
 
-const notifications = [
-    { icon: ThumbsUp, text: "Yuki Tanaka and 28 others voted on your poll 'Should I get bangs?'.", time: "15m ago" },
-    { icon: MessageSquare, text: "You received a $5 tip from akira_dev.", time: "1h ago" },
-    { icon: UserPlus, text: "sakura_blossom started following you.", time: "3h ago" },
-    { icon: Bell, text: "Your poll 'Pizza for lunch?' is ending in 1 hour.", time: "4h ago" },
-];
+const notificationDetails = {
+    'new_follower': { icon: UserPlus, text: (n: Notification) => `${n.fromUsername} started following you.` },
+    'new_vote': { icon: ThumbsUp, text: (n: Notification) => `${n.fromUsername} and others voted on your poll.` },
+    'poll_ending': { icon: Bell, text: (n: Notification) => `Your poll is ending soon.` },
+    'tip_received': { icon: Gift, text: (n: Notification) => `You received a $${n.amount} tip from ${n.fromUsername}.`},
+    'new_comment': { icon: MessageSquare, text: (n: Notification) => `${n.fromUsername} commented on your poll.`},
+};
 
 export default function NotificationsPage() {
+    const { user } = useAuth();
+    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (user) {
+            setLoading(true);
+            getNotificationsForUser(user.uid)
+                .then(setNotifications)
+                .finally(() => setLoading(false));
+        } else {
+            setLoading(false);
+        }
+    }, [user]);
+
   return (
     <div className="container mx-auto py-8">
       <Card>
@@ -18,25 +42,37 @@ export default function NotificationsPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {notifications.map((notification, index) => (
-              <div key={index} className="flex items-start gap-4 p-4 rounded-lg hover:bg-muted/50 transition-colors">
-                <Avatar className="h-8 w-8 border">
-                   <div className="flex h-full w-full items-center justify-center rounded-full bg-background">
-                       <notification.icon className="h-4 w-4 text-muted-foreground" />
-                   </div>
-                </Avatar>
-                <div className="flex-1">
-                  <p className="text-sm">{notification.text}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{notification.time}</p>
+            {loading ? (
+                <div className="flex items-center justify-center h-48 text-muted-foreground">
+                    <p>Loading notifications...</p>
                 </div>
-              </div>
-            ))}
-             <div className="flex items-center justify-center h-48 text-muted-foreground border-t mt-4 pt-4">
-                <p>No older notifications.</p>
-            </div>
+            ) : notifications.length > 0 ? (
+                notifications.map((notification) => {
+                    const details = notificationDetails[notification.type as keyof typeof notificationDetails] || { icon: Bell, text: () => 'New notification' };
+                    return (
+                        <div key={notification.id} className="flex items-start gap-4 p-4 rounded-lg hover:bg-muted/50 transition-colors">
+                            <Avatar className="h-8 w-8 border">
+                                <div className="flex h-full w-full items-center justify-center rounded-full bg-background">
+                                   <details.icon className="h-4 w-4 text-muted-foreground" />
+                                </div>
+                            </Avatar>
+                            <div className="flex-1">
+                                <p className="text-sm">{details.text(notification)}</p>
+                                <p className="text-xs text-muted-foreground mt-1">{formatDistanceToNowStrict(new Date(notification.createdAt), { addSuffix: true })}</p>
+                            </div>
+                        </div>
+                    );
+                })
+            ) : (
+                <div className="flex flex-col items-center justify-center h-48 text-muted-foreground border rounded-lg">
+                    <Bell className="h-12 w-12 mb-4" />
+                    <p className="text-lg">You have no new notifications.</p>
+                </div>
+            )}
           </div>
         </CardContent>
       </Card>
     </div>
   );
 }
+

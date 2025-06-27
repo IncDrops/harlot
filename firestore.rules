@@ -1,58 +1,48 @@
+
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // === User Profiles ===
+    // Users: Can read anyone's public profile, but only write to their own.
     match /users/{userId} {
       allow read: if true;
-      allow write: if request.auth != null &&
-        request.auth.uid == userId &&
-        request.auth.token.email_verified == true;
+      allow write: if request.auth != null && request.auth.uid == userId;
     }
 
-    // === Polls ===
+    // Polls: Anyone can read, but only authenticated users can create.
+    // Only the creator of a poll can update or delete it.
     match /polls/{pollId} {
       allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && resource.data.creatorId == request.auth.uid;
 
-      // Only moderators/admins can delete polls
-      allow delete: if isAdmin() || isModerator();
-
-      // === Comments on Polls ===
-      match /comments/{userId} {
+      // Comments: Authenticated users can create comments.
+      // Users can only update or delete their own comments.
+      match /comments/{commentId} {
         allow read: if true;
-
-        // One comment per user per poll
-        allow create: if request.auth != null &&
-          request.auth.uid == userId &&
-          !exists(/databases/$(database)/documents/polls/$(pollId)/comments/$(request.auth.uid));
-
-        allow update, delete: if request.auth != null &&
-          request.auth.uid == userId;
+        allow create: if request.auth != null;
+        allow update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
       }
 
-      // === Likes on Polls ===
+      // Likes: Authenticated users can like/unlike (create/delete their own like doc).
       match /likes/{userId} {
         allow read: if true;
-        allow write: if request.auth != null && request.auth.uid == userId;
-        // This prevents duplicate likes by using uid as document ID
+        allow create, delete: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Votes: Authenticated users can create a vote.
+      // A user cannot change their vote once cast.
+      match /votes/{voteId} {
+        allow read: if request.auth != null; // Or make public if needed
+        allow create: if request.auth != null;
+        allow update, delete: if false; // Votes are immutable
       }
     }
 
-    // === Tip Logs ===
-    match /tips/{tipId} {
-      allow read: if request.auth != null;
-      allow create: if request.auth != null &&
-        request.auth.token.email_verified == true;
-      allow update, delete: if false; // only system/webhook
-    }
-
-    // === Utility: Role Check ===
-    function isAdmin() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
-    }
-
-    function isModerator() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "moderator";
+    // Notifications: Users can only read, write, and delete their own notifications.
+    match /users/{userId}/notifications/{notificationId} {
+        allow read, write, delete: if request.auth != null && request.auth.uid == userId;
     }
   }
 }

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { motion, PanInfo } from "framer-motion";
 import { Timer, Users, GripVertical, Gift, ShieldCheck, Flame, Lock, Heart, MessageCircle, Share2, Send } from "lucide-react";
 import Image from "next/image";
+import Link from 'next/link';
 import { useMemo, useState, useEffect, useCallback } from "react";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
@@ -19,9 +20,10 @@ import { TipDialog } from './tip-dialog';
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "./ui/sheet";
 import { Input } from "./ui/input";
 import { useAuth } from "@/contexts/auth-context";
-import { addCommentToPoll, getCommentsForPoll } from "@/lib/firebase";
+import { addCommentToPoll, getCommentsForPoll, toggleLikeOnPoll } from "@/lib/firebase";
 import { CommentListItem } from "./comment-list-item";
 import { ScrollArea } from "./ui/scroll-area";
+import { useSettings } from "@/hooks/use-settings";
 
 interface PollCardProps {
   poll: Poll;
@@ -61,13 +63,18 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
   const [timeLeft, setTimeLeft] = useState("");
   const { toast } = useToast();
   const [isTipDialogOpen, setIsTipDialogOpen] = useState(false);
-
-  // Comment Sheet State
+  
   const { user } = useAuth();
   const [isCommentSheetOpen, setIsCommentSheetOpen] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoadingComments, setIsLoadingComments] = useState(false);
   const [newComment, setNewComment] = useState("");
+
+  const [isLiked, setIsLiked] = useState(false); // Add local like state
+  const [likeCount, setLikeCount] = useState(poll.likes);
+
+  const { showNsfw } = useSettings();
+  const shouldBlur = poll.isNSFW && !showNsfw;
 
   const majorityVotes = useMemo(() => Math.max(...poll.options.map(o => o.votes), 0), [poll.options]);
   const isMonetizationLocked = poll.pledged && poll.pledgeAmount && ((poll.pledgeAmount * 0.5) / (majorityVotes + 1)) < 0.10 && totalVotes > 0;
@@ -111,13 +118,11 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
     return () => clearInterval(interval);
   }, [getTimeLeft]);
 
-  // Fetch comments when sheet opens
   useEffect(() => {
     if (isCommentSheetOpen) {
       const fetchComments = async () => {
         setIsLoadingComments(true);
         try {
-          // In a real app, poll.id would be a string from Firestore.
           const fetchedComments = await getCommentsForPoll(poll.id.toString());
           setComments(fetchedComments);
         } catch (error) {
@@ -131,7 +136,6 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
     }
   }, [isCommentSheetOpen, poll.id, toast]);
 
-
   const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (!isTwoOptionPoll) return;
     const swipeThreshold = 100;
@@ -144,6 +148,10 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
   
   const handleTipClick = (e: React.MouseEvent) => {
       e.stopPropagation();
+      if (!user) {
+          toast({ variant: 'destructive', title: 'Please sign in to tip.' });
+          return;
+      }
       setIsTipDialogOpen(true);
   }
   
@@ -156,8 +164,6 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
     e.preventDefault();
     if (!user || newComment.trim() === "") return;
 
-    // A real app should have a robust user profile system. 
-    // Here we'll use a placeholder from dummy data or the email.
     const dummyUserProfile = dummyUsers.find(u => u.username === user.email?.split('@')[0]);
     const username = dummyUserProfile?.name || user.email || 'Anonymous';
     const avatar = dummyUserProfile?.avatar || `https://i.pravatar.cc/150?u=${user.uid}`;
@@ -170,7 +176,6 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
     };
 
     try {
-      // In a real app, poll.id would be a string from Firestore.
       await addCommentToPoll(poll.id.toString(), commentToPost);
       setNewComment("");
       // Optimistically add the comment to the UI
@@ -178,6 +183,44 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
     } catch (error) {
       console.error("Failed to post comment:", error);
       toast({ variant: 'destructive', title: "Could not post comment." });
+    }
+  };
+
+  const handleLikeClick = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!user) {
+        toast({ variant: 'destructive', title: 'Please sign in to like polls.' });
+        return;
+    }
+    const newLikedState = !isLiked;
+    setIsLiked(newLikedState);
+    setLikeCount(prev => newLikedState ? prev + 1 : prev - 1);
+    try {
+        await toggleLikeOnPoll(poll.id.toString(), user.uid);
+    } catch (error) {
+        console.error("Failed to update like:", error);
+        // Revert optimistic update on error
+        setIsLiked(!newLikedState);
+        setLikeCount(prev => !newLikedState ? prev + 1 : prev - 1);
+        toast({ variant: 'destructive', title: 'Could not save like.' });
+    }
+  };
+
+  const handleShareClick = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Check out this poll on PollitAGo',
+                text: poll.question,
+                url: window.location.href, // Or a direct link to the poll
+            });
+        } catch (error) {
+            console.error('Error sharing:', error);
+            toast({ variant: 'destructive', title: 'Could not share poll.' });
+        }
+    } else {
+        toast({ title: 'Sharing not supported on this browser.' });
     }
   };
 
@@ -242,18 +285,20 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
   }
   
   const cardContent = (
-    <Card className="w-full mx-auto shadow-lg rounded-2xl overflow-hidden relative cursor-grab active:cursor-grabbing">
+    <Card className={cn("w-full mx-auto shadow-lg rounded-2xl overflow-hidden relative cursor-grab active:cursor-grabbing", shouldBlur && "backdrop-blur-xl")}>
       <CardHeader className="p-4">
         <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <Avatar>
-                <AvatarImage src={creator.avatar} alt={creator.name} data-ai-hint="anime avatar" />
-                <AvatarFallback>{creator.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="font-semibold text-sm">{creator.name}</p>
-                <p className="text-xs text-muted-foreground">@{creator.username} · {formattedDate}</p>
-              </div>
+              <Link href={`/profile/${creator.username}`} className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarImage src={creator.avatar} alt={creator.name} data-ai-hint="anime avatar" />
+                  <AvatarFallback>{creator.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-semibold text-sm hover:underline">{creator.name}</p>
+                  <p className="text-xs text-muted-foreground">@{creator.username} · {formattedDate}</p>
+                </div>
+              </Link>
             </div>
             <div className="flex items-center gap-2">
                 {poll.isNSFW && <Flame className="h-5 w-5 text-orange-500" title="NSFW Content" />}
@@ -265,22 +310,34 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
       <CardContent className="p-4 pt-0">
         <p className="mb-3 font-body text-base">{poll.description || poll.question}</p>
         
-        {poll.type !== '2nd_opinion' && (
-          <div className="relative aspect-video rounded-lg my-4 flex items-center justify-center bg-muted">
-            <Image src={`https://placehold.co/600x400.png`} alt={poll.category} layout="fill" className="object-cover rounded-lg opacity-20" data-ai-hint={poll.category} />
-            <h2 className="text-4xl font-bold text-foreground/50 font-headline">{poll.category}</h2>
-        </div>
-        )}
+         <div className={cn("relative", shouldBlur && "blur-lg")}>
+            {poll.type !== '2nd_opinion' && (
+            <div className="relative aspect-video rounded-lg my-4 flex items-center justify-center bg-muted">
+                <Image src={`https://placehold.co/600x400.png`} alt={poll.category} layout="fill" className="object-cover rounded-lg opacity-20" data-ai-hint={poll.category} />
+                <h2 className="text-4xl font-bold text-foreground/50 font-headline">{poll.category}</h2>
+            </div>
+            )}
 
-        {poll.type === '2nd_opinion' ? (
-            <div className="grid grid-cols-2 gap-3 my-4">
-                {poll.options.map((opt, index) => render2ndOpinionOption(opt, index === 0 ? 'left' : 'right'))}
+            {poll.type === '2nd_opinion' ? (
+                <div className="grid grid-cols-2 gap-3 my-4">
+                    {poll.options.map((opt, index) => render2ndOpinionOption(opt, index === 0 ? 'left' : 'right'))}
+                </div>
+            ) : (
+                <div className="space-y-2 my-4">
+                    {poll.options.map(renderOption)}
+                </div>
+            )}
+         </div>
+
+         {shouldBlur && (
+            <div className="absolute inset-0 flex items-center justify-center">
+               <div className="text-center bg-background/80 p-4 rounded-lg">
+                  <p className="font-bold">NSFW Content</p>
+                  <Button size="sm" variant="link" onClick={() => (window.location.href = '/settings')}>Adjust Settings</Button>
+               </div>
             </div>
-        ) : (
-            <div className="space-y-2 my-4">
-                {poll.options.map(renderOption)}
-            </div>
-        )}
+         )}
+
       </CardContent>
 
       <div className="px-4 pb-2">
@@ -305,9 +362,9 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
       <Separator className="my-2" />
 
       <CardFooter className="p-2 flex justify-around">
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
-              <Heart className="h-5 w-5" />
-              <span className="ml-2 text-xs">{poll.likes.toLocaleString()}</span>
+          <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={handleLikeClick}>
+              <Heart className={cn("h-5 w-5", isLiked && "fill-red-500 text-red-500")} />
+              <span className="ml-2 text-xs">{likeCount.toLocaleString()}</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={handleCommentClick}>
               <MessageCircle className="h-5 w-5" />
@@ -317,7 +374,7 @@ export function PollCard({ poll, onSwipe, onVote, showResults = false, isTwoOpti
               <Gift className="h-5 w-5" />
               <span className="ml-2 text-xs">{poll.tipCount.toLocaleString()}</span>
           </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
+          <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={handleShareClick}>
               <Share2 className="h-5 w-5" />
           </Button>
       </CardFooter>
