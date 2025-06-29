@@ -1,4 +1,3 @@
-
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import {
   getAuth,
@@ -97,7 +96,6 @@ export const uploadFile = async (file: File, path: string): Promise<string> => {
 // ──────────── COMMENTS ────────────
 
 export const getCommentsForPoll = async (pollId: string): Promise<Comment[]> => {
-  if (!db) throw new Error("Firestore is not configured.");
   const commentsCol = collection(db, `polls/${pollId}/comments`);
   const q = query(commentsCol, orderBy("createdAt", "desc"));
   const snapshot = await getDocs(q);
@@ -112,95 +110,71 @@ export const getCommentsForPoll = async (pollId: string): Promise<Comment[]> => 
 };
 
 export const addCommentToPoll = async (pollId: string, commentData: Omit<Comment, "id" | "createdAt">): Promise<void> => {
-  if (!db) throw new Error("Firestore is not configured.");
   const pollRef = doc(db, "polls", pollId);
-  const commentRef = doc(collection(pollRef, "comments")); // Auto-generate ID
+  const commentRef = doc(collection(pollRef, "comments"));
 
-  try {
-    await runTransaction(db, async (transaction) => {
-      transaction.set(commentRef, {
-        ...commentData,
-        createdAt: serverTimestamp(),
-      });
-      transaction.update(pollRef, { comments: increment(1) });
+  await runTransaction(db, async (transaction) => {
+    transaction.set(commentRef, {
+      ...commentData,
+      createdAt: serverTimestamp(),
     });
-  } catch (e) {
-    console.error("Transaction failed: ", e);
-    throw e;
-  }
+    transaction.update(pollRef, { comments: increment(1) });
+  });
 };
 
 // ──────────── LIKES ────────────
 
 export const toggleLikeOnPoll = async (pollId: string, userId: string): Promise<void> => {
-  if (!db) throw new Error("Firestore is not configured.");
   const pollRef = doc(db, "polls", pollId);
   const likeRef = doc(pollRef, "likes", userId);
 
-  try {
-    await runTransaction(db, async (transaction) => {
-      const likeDoc = await transaction.get(likeRef);
-      if (likeDoc.exists()) {
-        transaction.delete(likeRef);
-        transaction.update(pollRef, { likes: increment(-1) });
-      } else {
-        transaction.set(likeRef, { userId, createdAt: serverTimestamp() });
-        transaction.update(pollRef, { likes: increment(1) });
-      }
-    });
-  } catch (e) {
-    console.error("Like transaction failed: ", e);
-    throw e;
-  }
+  await runTransaction(db, async (transaction) => {
+    const likeDoc = await transaction.get(likeRef);
+    if (likeDoc.exists()) {
+      transaction.delete(likeRef);
+      transaction.update(pollRef, { likes: increment(-1) });
+    } else {
+      transaction.set(likeRef, { userId, createdAt: serverTimestamp() });
+      transaction.update(pollRef, { likes: increment(1) });
+    }
+  });
 };
 
 // ──────────── USERS ────────────
 
 export const getUserByUsername = async (username: string) => {
-    // This is a mock function. In a real app, you would query Firestore.
-    // Make sure to create an index on the 'username' field in Firestore.
-    const user = dummyUsers.find(u => u.username === username);
-    return Promise.resolve(user || null);
+  const user = dummyUsers.find(u => u.username === username);
+  return Promise.resolve(user || null);
 };
 
 // ──────────── POLLS ────────────
 
 export const getPollsByUser = async (userId: number) => {
-    // This is a mock function. In a real app, you would query Firestore.
-    const polls = dummyPolls.filter(p => p.creatorId === userId);
-    return Promise.resolve(polls);
-}
+  const polls = dummyPolls.filter(p => p.creatorId === userId);
+  return Promise.resolve(polls);
+};
 
 // ──────────── SEARCH ────────────
+
 export const searchPolls = async (searchTerm: string): Promise<Poll[]> => {
-    // This is a mock function using dummy data.
-    // For a live app, you'd replace this with a Firestore query.
-    // Note: Firestore does not support native full-text search. For that, you'd
-    // typically use a third-party service like Algolia or Typesense.
-    // This implementation simulates a simple case-insensitive search on the question.
-    console.log(`Searching for: ${searchTerm}`);
-    const lowercasedTerm = searchTerm.toLowerCase();
-    const results = dummyPolls.filter(poll => 
-        poll.question.toLowerCase().includes(lowercasedTerm)
-    );
-    return Promise.resolve(results);
+  const lowercasedTerm = searchTerm.toLowerCase();
+  const results = dummyPolls.filter(poll => 
+    poll.question.toLowerCase().includes(lowercasedTerm)
+  );
+  return Promise.resolve(results);
 };
 
 // ──────────── NOTIFICATIONS ────────────
 
 export const getNotificationsForUser = async (userId: string): Promise<Notification[]> => {
-    // This is a mock function. In a real app, you would query a 'notifications' subcollection for the user.
-    const mockNotifications: Notification[] = [
-        { id: '1', type: 'tip_received', fromUsername: 'akira_dev', fromId: '2', amount: 5, createdAt: new Date(Date.now() - 3600000).toISOString(), read: false },
-        { id: '2', type: 'new_vote', fromUsername: 'yuki_motion', fromId: '1', pollId: '1', createdAt: new Date(Date.now() - 7200000).toISOString(), read: false },
-        { id: '3', type: 'new_follower', fromUsername: 'sakura_blossom', fromId: '5', createdAt: new Date(Date.now() - 10800000).toISOString(), read: true },
-        { id: '4', type: 'new_comment', fromUsername: 'hana_chan', fromId: '3', pollId: '2', createdAt: new Date(Date.now() - 86400000).toISOString(), read: true },
-    ];
-    return Promise.resolve(mockNotifications);
+  const mockNotifications: Notification[] = [
+    { id: '1', type: 'tip_received', fromUsername: 'akira_dev', fromId: '2', amount: 5, createdAt: new Date(Date.now() - 3600000).toISOString(), read: false },
+    { id: '2', type: 'new_vote', fromUsername: 'yuki_motion', fromId: '1', pollId: '1', createdAt: new Date(Date.now() - 7200000).toISOString(), read: false },
+    { id: '3', type: 'new_follower', fromUsername: 'sakura_blossom', fromId: '5', createdAt: new Date(Date.now() - 10800000).toISOString(), read: true },
+    { id: '4', type: 'new_comment', fromUsername: 'hana_chan', fromId: '3', pollId: '2', createdAt: new Date(Date.now() - 86400000).toISOString(), read: true },
+  ];
+  return Promise.resolve(mockNotifications);
 };
-
-
-// ──────────── EXPORTS ────────────
 
 export { auth, storage, db };
 export default app;

@@ -1,0 +1,2774 @@
+[
+  {
+    "pollId": "poll_001",
+    "userId": "user_021",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-24T14:09:08.302756Z",
+    "id": "349c1c60-6a78-4e90-b6f1-4fe2e321d276"
+  },
+  {
+    "pollId": "poll_001",
+    "userId": "user_021",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-20T10:55:59.548540Z",
+    "id": "180765d5-913e-4579-b142-b7ef8e49c272"
+  },
+  {
+    "pollId": "poll_001",
+    "userId": "user_008",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-26T09:08:59.223406Z",
+    "id": "1c812258-8e72-4a58-bb31-c6ecc9dc4804"
+  },
+  {
+    "pollId": "poll_002",
+    "userId": "user_017",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-29T21:26:34.038162Z",
+    "id": "5b0184c1-46bd-44cf-94cc-24ae7b8f3c87"
+  },
+  {
+    "pollId": "poll_002",
+    "userId": "user_012",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-27T08:27:18.006503Z",
+    "id": "bae2267d-1129-49af-a08a-5bfdfa671ebb"
+  },
+  {
+    "pollId": "poll_002",
+    "userId": "user_002",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-23T21:57:56.701951Z",
+    "id": "25650a73-8b70-4b82-a7ed-d08764289085"
+  },
+  {
+    "pollId": "poll_002",
+    "userId": "user_019",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-21T10:16:04.294014Z",
+    "id": "6da693b5-d22c-41be-8d46-9703167af81c"
+  },
+  {
+    "pollId": "poll_002",
+    "userId": "user_002",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-23T10:29:02.327340Z",
+    "id": "07d61d74-232d-493c-b268-a4c67e94023f"
+  },
+  {
+    "pollId": "poll_003",
+    "userId": "user_021",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-20T15:43:19.732674Z",
+    "id": "6d4b9c3c-690c-4e6b-bfb5-bca42c593f06"
+  },
+  {
+    "pollId": "poll_003",
+    "userId": "user_001",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-29T20:50:25.743914Z",
+    "id": "d5ba294b-96d1-4b2f-b1db-9ca404ce1b5d"
+  },
+  {
+    "pollId": "poll_003",
+    "userId": "user_002",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-29T01:35:33.506935Z",
+    "id": "0ddcb088-9f51-4153-b123-97d056e57703"
+  },
+  {
+    "pollId": "poll_003",
+    "userId": "user_004",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-24T04:15:20.033934Z",
+    "id": "7a6edd6c-b4c4-42db-aad5-d2f497b58428"
+  },
+  {
+    "pollId": "poll_003",
+    "userId": "user_018",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-29T14:31:21.580716Z",
+    "id": "7a9b2796-e45a-4a03-975d-35bb8c3268a4"
+  },
+  {
+    "pollId": "poll_004",
+    "userId": "user_018",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-26T04:23:31.911875Z",
+    "id": "56c140e2-04f9-41a1-9efc-24fa70b75e59"
+  },
+  {
+    "pollId": "poll_004",
+    "userId": "user_013",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-20T15:13:37.975955Z",
+    "id": "700df983-8d32-4930-be4b-47a01af2bfc8"
+  },
+  {
+    "pollId": "poll_004",
+    "userId": "user_006",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-25T09:10:41.517465Z",
+    "id": "0f1339f2-a7ba-4b66-abfc-725072990a48"
+  },
+  {
+    "pollId": "poll_004",
+    "userId": "user_003",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-23T16:08:53.232869Z",
+    "id": "f1b6d27a-601a-46ca-bb60-db34aec25775"
+  },
+  {
+    "pollId": "poll_004",
+    "userId": "user_012",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-20T15:15:34.093500Z",
+    "id": "877265f8-0c5e-4abd-9958-2e5b74935f7a"
+  },
+  {
+    "pollId": "poll_005",
+    "userId": "user_022",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-27T15:25:15.045127Z",
+    "id": "dea6069e-8caa-41fb-8bff-2d1099413038"
+  },
+  {
+    "pollId": "poll_005",
+    "userId": "user_010",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-22T12:17:31.336658Z",
+    "id": "13fb3d98-68bb-4fe8-b6ab-d5b964be0527"
+  },
+  {
+    "pollId": "poll_005",
+    "userId": "user_018",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-29T02:53:18.154684Z",
+    "id": "da894085-c11c-48c2-9ae4-7c8dc6632e3b"
+  },
+  {
+    "pollId": "poll_005",
+    "userId": "user_022",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-23T18:04:37.351440Z",
+    "id": "9b239b5f-f007-4a59-af6a-e430b60df71e"
+  },
+  {
+    "pollId": "poll_006",
+    "userId": "user_012",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-21T15:56:40.924140Z",
+    "id": "ebde75c1-bfac-4c81-846b-49e3f4df64a5"
+  },
+  {
+    "pollId": "poll_006",
+    "userId": "user_010",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-22T13:15:47.935782Z",
+    "id": "5e55be2e-a34d-4950-98a4-7070bc99b66a"
+  },
+  {
+    "pollId": "poll_006",
+    "userId": "user_014",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-21T11:39:03.183689Z",
+    "id": "c7196c18-a791-48bc-99ee-1af49ecdf88f"
+  },
+  {
+    "pollId": "poll_006",
+    "userId": "user_008",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-23T13:56:54.940064Z",
+    "id": "5a947e8a-1642-4827-82e1-5db601c3e686"
+  },
+  {
+    "pollId": "poll_006",
+    "userId": "user_006",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-25T14:33:35.608511Z",
+    "id": "95bd8bef-fa79-47dc-a899-431421c4d156"
+  },
+  {
+    "pollId": "poll_007",
+    "userId": "user_006",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-21T07:14:03.195857Z",
+    "id": "bf80a20a-559a-480a-a603-147ea2d1efdb"
+  },
+  {
+    "pollId": "poll_007",
+    "userId": "user_012",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-28T03:49:07.801366Z",
+    "id": "d1f8ba06-38ca-4d6c-9712-f1f2f6ded4fa"
+  },
+  {
+    "pollId": "poll_007",
+    "userId": "user_002",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-23T18:35:45.482602Z",
+    "id": "5d5c1d35-e7eb-4bb0-8d50-8983e178f377"
+  },
+  {
+    "pollId": "poll_007",
+    "userId": "user_016",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-28T05:27:43.452689Z",
+    "id": "8bdeb9ec-277c-4b0d-86df-c2689257e8ea"
+  },
+  {
+    "pollId": "poll_008",
+    "userId": "user_009",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-21T20:53:37.964399Z",
+    "id": "7b1c4856-d011-4bee-abed-0a88b91bcd5a"
+  },
+  {
+    "pollId": "poll_008",
+    "userId": "user_020",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-24T23:47:02.663209Z",
+    "id": "c45ccece-a881-4de2-b14a-a275d767740d"
+  },
+  {
+    "pollId": "poll_008",
+    "userId": "user_016",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-23T03:46:52.450190Z",
+    "id": "28423734-6977-4091-8646-e13d2d2a5ab0"
+  },
+  {
+    "pollId": "poll_009",
+    "userId": "user_021",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-24T22:28:17.350486Z",
+    "id": "a0430b61-d442-4036-bfbf-ad6289419696"
+  },
+  {
+    "pollId": "poll_009",
+    "userId": "user_017",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-24T20:45:15.328941Z",
+    "id": "161f85c5-5fbd-424f-9aef-dd1d0f6306cd"
+  },
+  {
+    "pollId": "poll_009",
+    "userId": "user_001",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-28T20:15:02.569086Z",
+    "id": "3d2a19cb-9946-4154-9bd2-a828d4312f22"
+  },
+  {
+    "pollId": "poll_009",
+    "userId": "user_020",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-25T10:12:11.792656Z",
+    "id": "f2e29aaa-0a73-4cf5-a43c-be9d88c6750a"
+  },
+  {
+    "pollId": "poll_009",
+    "userId": "user_012",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-23T11:47:54.199034Z",
+    "id": "98518b45-1b90-4110-877a-7447b163d199"
+  },
+  {
+    "pollId": "poll_010",
+    "userId": "user_015",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-25T10:18:37.178265Z",
+    "id": "40305fea-13ed-45c0-9333-e979d0794d38"
+  },
+  {
+    "pollId": "poll_010",
+    "userId": "user_018",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-25T08:53:45.506415Z",
+    "id": "e84b0a7e-c2d8-425e-8083-465eeb16334a"
+  },
+  {
+    "pollId": "poll_010",
+    "userId": "user_021",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-27T06:56:18.413719Z",
+    "id": "6b7d94a3-3ed7-4dd9-8022-935c007bacb2"
+  },
+  {
+    "pollId": "poll_010",
+    "userId": "user_005",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-20T05:25:34.902025Z",
+    "id": "d1626ef2-b5d5-4521-8c55-c9c60df29ddc"
+  },
+  {
+    "pollId": "poll_011",
+    "userId": "user_007",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-21T01:28:38.521027Z",
+    "id": "8ac07617-0cdd-49c5-84b8-af0a94fb6d9b"
+  },
+  {
+    "pollId": "poll_011",
+    "userId": "user_008",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-28T12:56:15.259563Z",
+    "id": "8424709f-cae0-4a19-9dd5-b06e4c480695"
+  },
+  {
+    "pollId": "poll_011",
+    "userId": "user_017",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-29T04:30:05.354502Z",
+    "id": "511cb742-099d-410f-987c-1da21012bd7b"
+  },
+  {
+    "pollId": "poll_012",
+    "userId": "user_011",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-21T00:26:27.363950Z",
+    "id": "50682db8-b0a4-43c0-b8a8-b1debc3ded6c"
+  },
+  {
+    "pollId": "poll_012",
+    "userId": "user_017",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-28T23:37:17.691948Z",
+    "id": "156ff119-db15-44af-bb07-e54f77f31cf9"
+  },
+  {
+    "pollId": "poll_012",
+    "userId": "user_007",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-23T05:57:21.583967Z",
+    "id": "5179d0cc-b1cc-4fe9-aa67-07a462441fce"
+  },
+  {
+    "pollId": "poll_013",
+    "userId": "user_004",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-29T09:14:11.924818Z",
+    "id": "e241e322-2a89-4432-a0e5-cbc081775b68"
+  },
+  {
+    "pollId": "poll_013",
+    "userId": "user_011",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-23T05:05:45.809981Z",
+    "id": "27703deb-ed8b-4b94-9858-5d841b2f757a"
+  },
+  {
+    "pollId": "poll_013",
+    "userId": "user_003",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-22T05:33:57.099132Z",
+    "id": "06bdeb85-f172-4a35-94ea-db20898d8064"
+  },
+  {
+    "pollId": "poll_013",
+    "userId": "user_005",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-23T00:28:41.542668Z",
+    "id": "da2e1260-4e2a-4fba-bf87-d8551020cf3e"
+  },
+  {
+    "pollId": "poll_013",
+    "userId": "user_022",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-25T04:23:51.439080Z",
+    "id": "bcd246f6-a1c3-4c5f-b3fd-e01c46e98cf7"
+  },
+  {
+    "pollId": "poll_014",
+    "userId": "user_007",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-29T04:14:36.271894Z",
+    "id": "202f06e4-c56d-453a-8f11-cd73ef9258b2"
+  },
+  {
+    "pollId": "poll_014",
+    "userId": "user_015",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-20T12:59:33.436303Z",
+    "id": "ed3ec546-35d9-483e-ab1d-94079f765127"
+  },
+  {
+    "pollId": "poll_014",
+    "userId": "user_016",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-26T19:10:16.178618Z",
+    "id": "72a79825-1092-44ab-984a-c2f01f7d9962"
+  },
+  {
+    "pollId": "poll_014",
+    "userId": "user_010",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-23T14:32:53.370807Z",
+    "id": "a0678fa3-dc68-4c2b-86bd-29a7fe45d6fc"
+  },
+  {
+    "pollId": "poll_014",
+    "userId": "user_012",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-21T23:49:18.447647Z",
+    "id": "bd6f9e7a-d62b-4b8b-a135-8f2cb2f0b2ff"
+  },
+  {
+    "pollId": "poll_015",
+    "userId": "user_018",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-23T23:43:49.895690Z",
+    "id": "f26e5b6d-90a3-4c03-93ed-b34485d831e9"
+  },
+  {
+    "pollId": "poll_015",
+    "userId": "user_019",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-28T03:44:36.330610Z",
+    "id": "33c54ee8-17f4-4538-a060-45ce5c4f7dcb"
+  },
+  {
+    "pollId": "poll_015",
+    "userId": "user_011",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-20T17:25:43.262392Z",
+    "id": "1432a82d-470f-4a7c-9329-e4e33429da29"
+  },
+  {
+    "pollId": "poll_016",
+    "userId": "user_007",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-24T17:13:09.232638Z",
+    "id": "2ca5459a-e3b2-4bdf-be7e-2e373b057dc5"
+  },
+  {
+    "pollId": "poll_016",
+    "userId": "user_006",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-29T01:46:34.568001Z",
+    "id": "e7b99918-bebe-4e1e-aa6f-bc3db1fe9ec9"
+  },
+  {
+    "pollId": "poll_016",
+    "userId": "user_012",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-20T13:30:50.573964Z",
+    "id": "40690d3d-87dd-4449-a91a-aaaa87e44417"
+  },
+  {
+    "pollId": "poll_016",
+    "userId": "user_008",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-23T21:45:22.370928Z",
+    "id": "127d1b24-bc40-4356-a24c-fb0086f59b2e"
+  },
+  {
+    "pollId": "poll_016",
+    "userId": "user_020",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-26T02:49:10.204676Z",
+    "id": "b9f5b76c-467c-4e62-9afc-f9e023c8382f"
+  },
+  {
+    "pollId": "poll_017",
+    "userId": "user_002",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-28T17:18:55.250575Z",
+    "id": "2c5b5c41-35cd-44d1-84c3-bbd6f5fee9a3"
+  },
+  {
+    "pollId": "poll_017",
+    "userId": "user_021",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-25T15:02:05.108711Z",
+    "id": "3e6976b2-8b07-44eb-9ae8-b0452ddcf0c2"
+  },
+  {
+    "pollId": "poll_017",
+    "userId": "user_018",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-28T14:27:05.991093Z",
+    "id": "d5dbae0e-762f-42cc-b7f2-b25c02379a6d"
+  },
+  {
+    "pollId": "poll_017",
+    "userId": "user_014",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-20T21:10:53.003843Z",
+    "id": "faf2243d-59f6-4fb0-ac14-2cc5354edd09"
+  },
+  {
+    "pollId": "poll_018",
+    "userId": "user_019",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-20T12:55:11.311542Z",
+    "id": "fca60ed6-be9e-4912-ba8e-b39a02e01b01"
+  },
+  {
+    "pollId": "poll_018",
+    "userId": "user_021",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-21T08:26:02.885765Z",
+    "id": "886fea7d-0115-4603-b2bc-963404836580"
+  },
+  {
+    "pollId": "poll_018",
+    "userId": "user_019",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-27T09:04:43.941891Z",
+    "id": "f3d633ac-ba74-43ca-b101-d6067b213b6c"
+  },
+  {
+    "pollId": "poll_018",
+    "userId": "user_019",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-20T23:52:14.655787Z",
+    "id": "bbb89996-636a-43b7-a647-e6bb6478353c"
+  },
+  {
+    "pollId": "poll_019",
+    "userId": "user_022",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-23T19:58:21.534277Z",
+    "id": "22e6e60e-f33f-42b1-a98a-321536189449"
+  },
+  {
+    "pollId": "poll_019",
+    "userId": "user_013",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-27T19:50:43.780602Z",
+    "id": "ab1911aa-4a21-4e2b-9741-ac98b58ab2db"
+  },
+  {
+    "pollId": "poll_019",
+    "userId": "user_017",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-26T10:06:36.429082Z",
+    "id": "3937c830-4aad-4b2b-af58-5e1319898d45"
+  },
+  {
+    "pollId": "poll_020",
+    "userId": "user_008",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-29T13:15:02.898853Z",
+    "id": "c453883d-b869-4836-b00a-32fc546a2fce"
+  },
+  {
+    "pollId": "poll_020",
+    "userId": "user_021",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-21T06:22:08.400036Z",
+    "id": "477bddc7-f669-4616-a702-48a02aaaaf95"
+  },
+  {
+    "pollId": "poll_020",
+    "userId": "user_015",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-29T20:09:20.482206Z",
+    "id": "0ee92350-8549-494f-bbcf-bde1d7fd95d5"
+  },
+  {
+    "pollId": "poll_021",
+    "userId": "user_012",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-27T01:47:05.495027Z",
+    "id": "644d0df4-42a0-4ce3-907e-8c06c8d7b1eb"
+  },
+  {
+    "pollId": "poll_021",
+    "userId": "user_003",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-23T01:39:58.951658Z",
+    "id": "8447c41c-4f09-4580-b5ce-bc70391841b0"
+  },
+  {
+    "pollId": "poll_021",
+    "userId": "user_022",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-24T10:41:25.655775Z",
+    "id": "7614a9ef-785d-44a8-85ab-a789c6090cf4"
+  },
+  {
+    "pollId": "poll_021",
+    "userId": "user_022",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-28T13:36:46.016835Z",
+    "id": "c6777520-b3d3-4c1f-a30c-544ce1b1feda"
+  },
+  {
+    "pollId": "poll_022",
+    "userId": "user_019",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-29T15:08:45.020979Z",
+    "id": "67e8baeb-df67-4efd-8575-58976d333fc6"
+  },
+  {
+    "pollId": "poll_022",
+    "userId": "user_006",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-23T12:57:24.876116Z",
+    "id": "7660ce11-28ba-4464-b009-7e05866d4818"
+  },
+  {
+    "pollId": "poll_022",
+    "userId": "user_003",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-20T14:39:31.068799Z",
+    "id": "da2f7b21-9e42-4fa6-ba5e-11d381351f81"
+  },
+  {
+    "pollId": "poll_022",
+    "userId": "user_012",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-28T20:49:59.762432Z",
+    "id": "0389a1a8-5268-4055-937a-4285dbd12882"
+  },
+  {
+    "pollId": "poll_023",
+    "userId": "user_006",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-24T12:17:08.930179Z",
+    "id": "6852ff43-4a37-490a-ba5c-95497045086c"
+  },
+  {
+    "pollId": "poll_023",
+    "userId": "user_007",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-26T07:11:06.255009Z",
+    "id": "f05fd976-d01f-49c5-92e9-41d3fc113fb8"
+  },
+  {
+    "pollId": "poll_023",
+    "userId": "user_005",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-21T20:36:38.298927Z",
+    "id": "b01dd9b1-b1a0-42af-9952-0fbcd8833d1c"
+  },
+  {
+    "pollId": "poll_024",
+    "userId": "user_017",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-22T02:16:22.077220Z",
+    "id": "edadb309-bd1f-4118-b7ac-ad191b2ab216"
+  },
+  {
+    "pollId": "poll_024",
+    "userId": "user_003",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-27T02:37:14.709154Z",
+    "id": "816e1045-a8d6-4d84-b4fb-b211cf49c03a"
+  },
+  {
+    "pollId": "poll_024",
+    "userId": "user_020",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-28T07:05:08.463725Z",
+    "id": "df766bcc-a215-40ac-a24f-ec6237e22a29"
+  },
+  {
+    "pollId": "poll_025",
+    "userId": "user_020",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-28T08:51:54.039167Z",
+    "id": "cc93c80a-de39-43aa-bc9a-e463499f0d66"
+  },
+  {
+    "pollId": "poll_025",
+    "userId": "user_019",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-26T02:01:39.067536Z",
+    "id": "abff8c0f-8df8-481b-a1d8-9158c8561bae"
+  },
+  {
+    "pollId": "poll_025",
+    "userId": "user_006",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-21T10:20:49.297066Z",
+    "id": "bb57ddf6-3a47-40e0-90ae-49fe2c4468b4"
+  },
+  {
+    "pollId": "poll_025",
+    "userId": "user_004",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-27T06:31:04.673889Z",
+    "id": "58e126ae-81b5-4ed2-bf94-a630602ba471"
+  },
+  {
+    "pollId": "poll_026",
+    "userId": "user_004",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-21T06:44:21.912891Z",
+    "id": "394d2143-c744-4686-b3e1-dd4ec7f6dab3"
+  },
+  {
+    "pollId": "poll_026",
+    "userId": "user_008",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-29T02:32:04.732521Z",
+    "id": "5f0a3105-e004-405e-8f11-fee325ece866"
+  },
+  {
+    "pollId": "poll_026",
+    "userId": "user_017",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-21T05:26:29.586294Z",
+    "id": "54595853-fa1d-4f5d-b102-ac218d929923"
+  },
+  {
+    "pollId": "poll_027",
+    "userId": "user_006",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-24T15:28:01.539021Z",
+    "id": "e2593a8d-6f02-4a13-bb26-db297eb8cc4a"
+  },
+  {
+    "pollId": "poll_027",
+    "userId": "user_020",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-20T01:31:05.485964Z",
+    "id": "e1eb966f-4283-40bd-bd7c-543d80b78bce"
+  },
+  {
+    "pollId": "poll_027",
+    "userId": "user_009",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-24T20:20:34.228854Z",
+    "id": "03b94634-b841-453c-9627-6573c308a4c8"
+  },
+  {
+    "pollId": "poll_027",
+    "userId": "user_003",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-26T22:02:25.780723Z",
+    "id": "53dda40a-35ae-43b9-8da2-ea7a58974e8d"
+  },
+  {
+    "pollId": "poll_028",
+    "userId": "user_007",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-26T03:20:43.951479Z",
+    "id": "f27d19d1-4427-4d16-99c5-fd369112fced"
+  },
+  {
+    "pollId": "poll_028",
+    "userId": "user_004",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-29T18:57:27.589303Z",
+    "id": "9ef66581-8904-4533-b933-3d923075b119"
+  },
+  {
+    "pollId": "poll_028",
+    "userId": "user_011",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-20T23:32:44.400423Z",
+    "id": "453e8a1d-ea8c-4d74-af6e-4b8bc4d28785"
+  },
+  {
+    "pollId": "poll_029",
+    "userId": "user_013",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-24T17:13:26.476273Z",
+    "id": "d5d231b1-9edf-413b-a8a9-17c9a0f84446"
+  },
+  {
+    "pollId": "poll_029",
+    "userId": "user_005",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-28T21:00:31.631290Z",
+    "id": "1b1b112a-df95-4204-b9cb-7d0ed841635e"
+  },
+  {
+    "pollId": "poll_029",
+    "userId": "user_018",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-27T10:43:09.276929Z",
+    "id": "4e15b71b-a1e1-41e4-844b-017f3d57e5d9"
+  },
+  {
+    "pollId": "poll_030",
+    "userId": "user_019",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-20T18:32:21.343830Z",
+    "id": "a4cfe028-805f-47a3-afb8-5c3aa3b40ec4"
+  },
+  {
+    "pollId": "poll_030",
+    "userId": "user_011",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-27T17:21:32.531941Z",
+    "id": "d8c712b5-6628-4dc8-8104-0114a536e1fc"
+  },
+  {
+    "pollId": "poll_030",
+    "userId": "user_019",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-23T19:47:08.186366Z",
+    "id": "beecda50-359b-4cc7-915f-61f65f81b93f"
+  },
+  {
+    "pollId": "poll_030",
+    "userId": "user_009",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-27T01:12:41.295095Z",
+    "id": "15c37740-a6d2-4fd0-9307-04930ee3172f"
+  },
+  {
+    "pollId": "poll_030",
+    "userId": "user_009",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-24T00:56:52.436784Z",
+    "id": "86fc707e-024e-40d8-bf82-858fd4f779a7"
+  },
+  {
+    "pollId": "poll_031",
+    "userId": "user_003",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-22T23:41:11.933362Z",
+    "id": "e633e999-52ab-4b98-b3af-52ee3665a57b"
+  },
+  {
+    "pollId": "poll_031",
+    "userId": "user_008",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-24T01:30:48.129832Z",
+    "id": "1df67517-ffe9-4851-ac80-c4fdf44a40d5"
+  },
+  {
+    "pollId": "poll_031",
+    "userId": "user_010",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-23T16:46:18.722891Z",
+    "id": "87aa348c-9957-48c8-b53e-776c5d70b725"
+  },
+  {
+    "pollId": "poll_031",
+    "userId": "user_015",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-29T18:33:07.748725Z",
+    "id": "522fd335-47ac-430f-a1da-f2467cb9fabe"
+  },
+  {
+    "pollId": "poll_031",
+    "userId": "user_015",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-28T14:23:16.302184Z",
+    "id": "1cad8bc7-9c44-4b00-a303-02c9397f3069"
+  },
+  {
+    "pollId": "poll_032",
+    "userId": "user_015",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-25T05:32:26.784353Z",
+    "id": "93f58c52-eed5-49ad-b8f9-d7e3839cc3f3"
+  },
+  {
+    "pollId": "poll_032",
+    "userId": "user_013",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-27T19:25:01.218177Z",
+    "id": "5139362c-8ffe-4511-bb82-3fd4d90173a9"
+  },
+  {
+    "pollId": "poll_032",
+    "userId": "user_014",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-25T14:59:47.562218Z",
+    "id": "003affd4-7a9e-470d-adcf-eec0e1808861"
+  },
+  {
+    "pollId": "poll_033",
+    "userId": "user_002",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-27T16:41:56.198178Z",
+    "id": "530fa2e4-a3b9-46e0-9410-b2b7c6d22e9d"
+  },
+  {
+    "pollId": "poll_033",
+    "userId": "user_017",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-28T21:47:33.411284Z",
+    "id": "92835e54-f14a-4e31-8d83-00f6a11f88c1"
+  },
+  {
+    "pollId": "poll_033",
+    "userId": "user_008",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-24T10:18:44.825391Z",
+    "id": "17c85a69-5678-47a0-8400-104066d52720"
+  },
+  {
+    "pollId": "poll_033",
+    "userId": "user_019",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-20T12:03:53.521989Z",
+    "id": "3141b23d-b653-4ebc-aabb-2309f2891d70"
+  },
+  {
+    "pollId": "poll_033",
+    "userId": "user_010",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-21T04:30:26.738951Z",
+    "id": "4a6fb7af-d4a7-4be2-aa39-5eba96d38d32"
+  },
+  {
+    "pollId": "poll_034",
+    "userId": "user_007",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-24T15:44:49.509408Z",
+    "id": "9a4cde07-9ea5-41c4-8291-610f17a818fd"
+  },
+  {
+    "pollId": "poll_034",
+    "userId": "user_013",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-27T01:39:26.432843Z",
+    "id": "d20b648a-f4b3-4709-8d2b-81f1094e75ae"
+  },
+  {
+    "pollId": "poll_034",
+    "userId": "user_019",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-20T03:03:05.856554Z",
+    "id": "62a40102-284a-49c5-888e-2e1137032bf3"
+  },
+  {
+    "pollId": "poll_034",
+    "userId": "user_006",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-23T10:35:51.942576Z",
+    "id": "ef07d7f6-3f38-497a-ac11-b58427a6c029"
+  },
+  {
+    "pollId": "poll_034",
+    "userId": "user_001",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-26T12:06:55.113531Z",
+    "id": "994c9b32-c843-483f-9828-e834c34a6886"
+  },
+  {
+    "pollId": "poll_035",
+    "userId": "user_003",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-25T03:19:44.787572Z",
+    "id": "aee6674c-a656-425e-8fbd-f038507df33d"
+  },
+  {
+    "pollId": "poll_035",
+    "userId": "user_004",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-24T13:39:34.795410Z",
+    "id": "58e5dff3-ee02-47ac-b4cf-3a66da4f0193"
+  },
+  {
+    "pollId": "poll_035",
+    "userId": "user_005",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-20T02:32:08.682032Z",
+    "id": "b1510d54-7d84-450c-b754-270fde97bee7"
+  },
+  {
+    "pollId": "poll_036",
+    "userId": "user_004",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-21T16:36:00.626783Z",
+    "id": "59d015af-7e81-49ba-b8d2-07dde8c61eeb"
+  },
+  {
+    "pollId": "poll_036",
+    "userId": "user_017",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-23T02:03:41.823620Z",
+    "id": "b94c66bb-b9dc-4cf9-9d06-1e0dc7b3a87b"
+  },
+  {
+    "pollId": "poll_036",
+    "userId": "user_017",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-22T19:42:44.254817Z",
+    "id": "176f2db0-46b1-4d63-b071-595af3ea07ba"
+  },
+  {
+    "pollId": "poll_037",
+    "userId": "user_013",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-26T00:27:26.003242Z",
+    "id": "0d91b98e-3234-4fd7-9a76-89c116e70e46"
+  },
+  {
+    "pollId": "poll_037",
+    "userId": "user_013",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-24T22:02:07.506035Z",
+    "id": "85ae5640-834a-4113-8e21-30fd67fa675e"
+  },
+  {
+    "pollId": "poll_037",
+    "userId": "user_022",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-28T00:55:43.380616Z",
+    "id": "12413ad5-39bf-422a-9572-98b68da53038"
+  },
+  {
+    "pollId": "poll_037",
+    "userId": "user_006",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-26T22:02:00.550985Z",
+    "id": "2ad677fc-956f-4d89-a5fe-690111e3d1a9"
+  },
+  {
+    "pollId": "poll_037",
+    "userId": "user_014",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-29T22:16:27.962797Z",
+    "id": "a92101cc-eb1b-483f-965c-f97b4d792f5c"
+  },
+  {
+    "pollId": "poll_038",
+    "userId": "user_007",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-26T16:15:09.770088Z",
+    "id": "f499e743-5f19-4fae-a619-4278f969e30c"
+  },
+  {
+    "pollId": "poll_038",
+    "userId": "user_018",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-28T09:05:36.359410Z",
+    "id": "6e6496a6-9ce0-4c54-b8c0-f0e2777c1be4"
+  },
+  {
+    "pollId": "poll_038",
+    "userId": "user_003",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-28T06:41:43.942226Z",
+    "id": "b30b92af-351d-449f-bca0-229dc6f9e54a"
+  },
+  {
+    "pollId": "poll_038",
+    "userId": "user_016",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-20T11:27:19.875017Z",
+    "id": "2ec1a592-93c7-4063-acf4-45ce6bd29908"
+  },
+  {
+    "pollId": "poll_039",
+    "userId": "user_012",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-20T16:52:06.082898Z",
+    "id": "5624d1ad-4cd5-4345-8e6c-33bc38c9d14f"
+  },
+  {
+    "pollId": "poll_039",
+    "userId": "user_012",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-24T01:23:09.824594Z",
+    "id": "82ad8c87-0af6-48fc-ad90-9643b08acab7"
+  },
+  {
+    "pollId": "poll_039",
+    "userId": "user_010",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-22T00:56:19.633205Z",
+    "id": "96a98fd3-cb6b-4550-aeb9-d22aeb4d94cf"
+  },
+  {
+    "pollId": "poll_039",
+    "userId": "user_018",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-29T10:19:33.556312Z",
+    "id": "8279114b-b67b-4ca2-a9fe-bab0f07aa90e"
+  },
+  {
+    "pollId": "poll_040",
+    "userId": "user_011",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-25T22:51:52.036691Z",
+    "id": "c951f7cf-1449-4e74-a209-ada3e0654ea5"
+  },
+  {
+    "pollId": "poll_040",
+    "userId": "user_020",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-22T10:49:04.825037Z",
+    "id": "9711f46f-69ce-49e2-8b06-291611e5dea4"
+  },
+  {
+    "pollId": "poll_040",
+    "userId": "user_015",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-26T04:34:31.841570Z",
+    "id": "ed352ad1-ec9d-4495-ad89-459e2acc7f3e"
+  },
+  {
+    "pollId": "poll_040",
+    "userId": "user_015",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-21T21:29:57.906819Z",
+    "id": "36f19c5b-6c09-424c-8806-85d4f24025ac"
+  },
+  {
+    "pollId": "poll_041",
+    "userId": "user_022",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-26T11:08:59.227518Z",
+    "id": "6905f921-57a7-4fc1-91d6-4996d9bb53b1"
+  },
+  {
+    "pollId": "poll_041",
+    "userId": "user_005",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-28T00:25:24.359434Z",
+    "id": "21b7bf7e-5b5b-4e82-8fba-979bc6b78a47"
+  },
+  {
+    "pollId": "poll_041",
+    "userId": "user_006",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-27T03:17:54.257968Z",
+    "id": "99b2d0f7-1529-4b1b-9306-5b78f3b4a2d2"
+  },
+  {
+    "pollId": "poll_041",
+    "userId": "user_014",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-24T22:48:39.108254Z",
+    "id": "c6d9ebb0-e150-484c-8a67-f19d9f6a9bf7"
+  },
+  {
+    "pollId": "poll_042",
+    "userId": "user_001",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-20T17:16:14.416647Z",
+    "id": "b449969e-6c63-4efc-9ade-2eb92786092f"
+  },
+  {
+    "pollId": "poll_042",
+    "userId": "user_002",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-23T01:21:06.290042Z",
+    "id": "c9ea2313-75a3-4c6b-be85-0cbc89820fa3"
+  },
+  {
+    "pollId": "poll_042",
+    "userId": "user_009",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-26T20:29:45.726069Z",
+    "id": "28ec07c6-5c25-407c-a8cf-c81066a561e6"
+  },
+  {
+    "pollId": "poll_042",
+    "userId": "user_005",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-20T23:44:37.510101Z",
+    "id": "06fd075a-3bf5-4cf2-9138-8a348200787b"
+  },
+  {
+    "pollId": "poll_043",
+    "userId": "user_015",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-25T15:30:11.017654Z",
+    "id": "b50c30ac-1dd6-4c27-933e-6e4df20497b1"
+  },
+  {
+    "pollId": "poll_043",
+    "userId": "user_009",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-27T01:03:38.292749Z",
+    "id": "fe23209e-a86e-48c9-a382-c433ba1d929c"
+  },
+  {
+    "pollId": "poll_043",
+    "userId": "user_022",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-28T17:02:48.532933Z",
+    "id": "29fed577-43d4-41ff-a3a8-a2d39d01ef6c"
+  },
+  {
+    "pollId": "poll_043",
+    "userId": "user_005",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-23T10:32:20.657030Z",
+    "id": "dba79b0b-37ac-47e3-a8d8-138907013baf"
+  },
+  {
+    "pollId": "poll_043",
+    "userId": "user_002",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-23T07:14:05.889975Z",
+    "id": "8ae5712c-57b3-418a-a80b-979367982f51"
+  },
+  {
+    "pollId": "poll_044",
+    "userId": "user_002",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-26T17:18:45.913932Z",
+    "id": "fd6aa7e8-cf3b-43d0-861d-e2928939e722"
+  },
+  {
+    "pollId": "poll_044",
+    "userId": "user_005",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-27T13:43:24.431549Z",
+    "id": "ae72b275-e495-4162-a586-31f7536b2958"
+  },
+  {
+    "pollId": "poll_044",
+    "userId": "user_015",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-26T21:40:49.676211Z",
+    "id": "b8eefe98-9b14-4089-ab37-6b7b2888afbc"
+  },
+  {
+    "pollId": "poll_044",
+    "userId": "user_012",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-21T06:43:03.043950Z",
+    "id": "f2c8cb3d-bb70-4617-ba87-753c05bd8640"
+  },
+  {
+    "pollId": "poll_045",
+    "userId": "user_003",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-20T11:44:27.760770Z",
+    "id": "250b1f16-5240-4e70-b8c9-4ee19412c09d"
+  },
+  {
+    "pollId": "poll_045",
+    "userId": "user_002",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-25T17:13:12.047968Z",
+    "id": "3ac40bcb-2754-40d4-ba1f-9619e9005374"
+  },
+  {
+    "pollId": "poll_045",
+    "userId": "user_004",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-22T01:52:42.214060Z",
+    "id": "3fe50c11-a849-4200-93b0-d65b53ffc228"
+  },
+  {
+    "pollId": "poll_046",
+    "userId": "user_009",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-24T17:31:16.321123Z",
+    "id": "d4283af5-8e0f-4cea-a5a4-164104024731"
+  },
+  {
+    "pollId": "poll_046",
+    "userId": "user_016",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-20T06:29:36.257799Z",
+    "id": "e6c8abc2-4b47-424c-9f6b-2d9e3eaca78e"
+  },
+  {
+    "pollId": "poll_046",
+    "userId": "user_007",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-22T15:14:33.626862Z",
+    "id": "b394b30f-1356-424a-a36d-acc567bc926d"
+  },
+  {
+    "pollId": "poll_046",
+    "userId": "user_004",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-26T14:40:12.042764Z",
+    "id": "6a799ca8-2290-4bda-ab37-b92d2bf4b474"
+  },
+  {
+    "pollId": "poll_046",
+    "userId": "user_012",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-23T21:19:32.451657Z",
+    "id": "dfd37cb7-42f6-4af1-84e7-e50cf917f4b8"
+  },
+  {
+    "pollId": "poll_047",
+    "userId": "user_001",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-24T07:07:44.614096Z",
+    "id": "f681ddf2-4b84-4ec4-98a3-da20f2ac1829"
+  },
+  {
+    "pollId": "poll_047",
+    "userId": "user_003",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-21T10:02:02.583154Z",
+    "id": "4172efb2-1c69-41b5-8b39-059aca6a859a"
+  },
+  {
+    "pollId": "poll_047",
+    "userId": "user_021",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-27T04:46:36.258886Z",
+    "id": "9bc88947-416e-4a1a-ae23-fa58692886cf"
+  },
+  {
+    "pollId": "poll_047",
+    "userId": "user_011",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-29T07:02:24.070902Z",
+    "id": "b9388f3c-32ee-4a4b-8e38-745405e93e91"
+  },
+  {
+    "pollId": "poll_048",
+    "userId": "user_009",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-27T09:20:52.061496Z",
+    "id": "1e64715f-7766-430e-ab60-ff44429a70b4"
+  },
+  {
+    "pollId": "poll_048",
+    "userId": "user_017",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-28T13:43:56.116204Z",
+    "id": "36e3035e-bd12-4685-900d-cb34330b4fc9"
+  },
+  {
+    "pollId": "poll_048",
+    "userId": "user_020",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-26T04:05:53.197419Z",
+    "id": "38d9276e-d42a-48e9-923b-149616fb663d"
+  },
+  {
+    "pollId": "poll_048",
+    "userId": "user_015",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-29T14:28:35.352031Z",
+    "id": "209df247-85da-4961-80f5-06dadae11b03"
+  },
+  {
+    "pollId": "poll_049",
+    "userId": "user_006",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-26T00:27:09.848685Z",
+    "id": "94382955-9af9-4011-8750-af5ad8bff4df"
+  },
+  {
+    "pollId": "poll_049",
+    "userId": "user_010",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-27T14:16:32.210460Z",
+    "id": "0bfc3652-ed3b-42c4-ae93-b1a14ea6d421"
+  },
+  {
+    "pollId": "poll_049",
+    "userId": "user_007",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-23T07:04:16.607109Z",
+    "id": "4ca50ea6-acd7-474b-b37d-6bcc1fe92073"
+  },
+  {
+    "pollId": "poll_050",
+    "userId": "user_002",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-20T18:25:24.333554Z",
+    "id": "fda6f561-bab7-45a9-89b6-832ded5acc92"
+  },
+  {
+    "pollId": "poll_050",
+    "userId": "user_006",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-21T17:47:23.142972Z",
+    "id": "5f89c549-7a7b-4ae9-a05f-7011357332fb"
+  },
+  {
+    "pollId": "poll_050",
+    "userId": "user_020",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-23T21:41:33.877173Z",
+    "id": "250f9243-5843-41cd-b419-15d7636cbd37"
+  },
+  {
+    "pollId": "poll_051",
+    "userId": "user_010",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-24T15:58:18.017827Z",
+    "id": "90807f8e-7074-4c3e-80b0-1335c22a5d5d"
+  },
+  {
+    "pollId": "poll_051",
+    "userId": "user_010",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-27T01:01:28.918266Z",
+    "id": "df7fc2d4-0db8-4eb3-ad39-f14f7182bf38"
+  },
+  {
+    "pollId": "poll_051",
+    "userId": "user_020",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-27T07:35:18.279135Z",
+    "id": "f6b5a355-4475-4076-9110-40627e9856c1"
+  },
+  {
+    "pollId": "poll_052",
+    "userId": "user_021",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-22T00:36:25.317676Z",
+    "id": "c81a2339-038a-4da3-a7f8-e7a61a53b051"
+  },
+  {
+    "pollId": "poll_052",
+    "userId": "user_012",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-26T12:40:57.878728Z",
+    "id": "9cc6356f-2901-48e2-a723-be2f44c806ec"
+  },
+  {
+    "pollId": "poll_052",
+    "userId": "user_002",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-26T05:22:44.078807Z",
+    "id": "49d53450-b863-48b6-b1d9-843049fc685d"
+  },
+  {
+    "pollId": "poll_052",
+    "userId": "user_013",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-26T22:19:56.330122Z",
+    "id": "9f28dd4f-288a-4400-9c9e-79dd7a364fd0"
+  },
+  {
+    "pollId": "poll_052",
+    "userId": "user_013",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-22T01:42:57.700473Z",
+    "id": "d590a3db-1dc3-4968-82cb-09287fdcc079"
+  },
+  {
+    "pollId": "poll_053",
+    "userId": "user_020",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-28T19:27:46.797667Z",
+    "id": "56ae6625-44d8-471b-84c7-374c016d98fb"
+  },
+  {
+    "pollId": "poll_053",
+    "userId": "user_022",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-22T00:38:40.781530Z",
+    "id": "28f57187-2f41-4879-b03f-51df6252abd6"
+  },
+  {
+    "pollId": "poll_053",
+    "userId": "user_020",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-27T07:55:33.911375Z",
+    "id": "4fe3f596-35bc-4471-81ca-b40339d30842"
+  },
+  {
+    "pollId": "poll_054",
+    "userId": "user_004",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-20T19:55:26.808055Z",
+    "id": "a274465e-0d6f-465c-ab3a-03365aa9efce"
+  },
+  {
+    "pollId": "poll_054",
+    "userId": "user_013",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-21T21:58:33.386892Z",
+    "id": "1611fade-2f48-4ae7-9482-a8d7515776d5"
+  },
+  {
+    "pollId": "poll_054",
+    "userId": "user_015",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-24T13:29:13.431020Z",
+    "id": "9c9ec5e3-6c2e-4645-a8b2-e057b20d4fed"
+  },
+  {
+    "pollId": "poll_055",
+    "userId": "user_011",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-23T11:42:09.106928Z",
+    "id": "cbce05aa-0974-4d4a-8493-4ad339edbe10"
+  },
+  {
+    "pollId": "poll_055",
+    "userId": "user_006",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-28T00:24:35.188275Z",
+    "id": "fcbf6c75-2ae3-4f79-9134-d097e711fd31"
+  },
+  {
+    "pollId": "poll_055",
+    "userId": "user_019",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-29T11:16:51.133549Z",
+    "id": "00bd7a52-402b-4036-b50d-3ff35073c84e"
+  },
+  {
+    "pollId": "poll_055",
+    "userId": "user_004",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-21T15:20:41.055653Z",
+    "id": "818b011b-a948-4465-9b43-9969335cfa0d"
+  },
+  {
+    "pollId": "poll_055",
+    "userId": "user_006",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-24T23:58:00.115090Z",
+    "id": "39e76c1a-4842-4cd6-a464-51de74ce7e4d"
+  },
+  {
+    "pollId": "poll_056",
+    "userId": "user_019",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-20T07:55:38.097674Z",
+    "id": "13ddd66c-f5ce-426f-856e-a2a8b32bbcba"
+  },
+  {
+    "pollId": "poll_056",
+    "userId": "user_002",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-27T11:34:07.681024Z",
+    "id": "1248b6a2-4158-4d50-8b39-e11cb9c3501a"
+  },
+  {
+    "pollId": "poll_056",
+    "userId": "user_021",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-27T22:07:22.382104Z",
+    "id": "88fb7acb-fe04-47af-8940-aa47c60b1c15"
+  },
+  {
+    "pollId": "poll_057",
+    "userId": "user_015",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-28T19:10:05.546147Z",
+    "id": "fef0d50f-2732-4a0f-bd49-a8d8670e128d"
+  },
+  {
+    "pollId": "poll_057",
+    "userId": "user_012",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-21T01:42:41.188232Z",
+    "id": "722831c2-a395-4e41-9eb1-914be8cc6a95"
+  },
+  {
+    "pollId": "poll_057",
+    "userId": "user_012",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-22T05:34:02.967789Z",
+    "id": "6f6b63a7-6dbb-4da7-b7a3-106aad588238"
+  },
+  {
+    "pollId": "poll_057",
+    "userId": "user_005",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-20T22:37:08.012440Z",
+    "id": "f3137c67-5bed-4121-bb4a-bbad91623bca"
+  },
+  {
+    "pollId": "poll_057",
+    "userId": "user_021",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-22T20:32:56.809629Z",
+    "id": "17dc7311-172e-416a-ab9b-55e38a094f86"
+  },
+  {
+    "pollId": "poll_058",
+    "userId": "user_012",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-25T17:51:02.450672Z",
+    "id": "8146dd0c-98cb-4308-aa82-8dbd7387609b"
+  },
+  {
+    "pollId": "poll_058",
+    "userId": "user_013",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-26T18:32:23.612413Z",
+    "id": "b2c08660-a631-44d2-9eb4-5578aa66bd17"
+  },
+  {
+    "pollId": "poll_058",
+    "userId": "user_019",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-29T17:23:49.098440Z",
+    "id": "e7248554-a07c-4e86-be17-7dad8f7687f1"
+  },
+  {
+    "pollId": "poll_058",
+    "userId": "user_009",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-23T16:53:52.351392Z",
+    "id": "879c6fba-807c-4bf3-89cf-4ec8157e3f9b"
+  },
+  {
+    "pollId": "poll_058",
+    "userId": "user_010",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-21T10:52:22.796827Z",
+    "id": "09a42176-602e-4c4f-aa21-649ed129224c"
+  },
+  {
+    "pollId": "poll_059",
+    "userId": "user_005",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-21T04:53:26.104865Z",
+    "id": "3e8e76dc-fed7-48d6-ab48-039356224a95"
+  },
+  {
+    "pollId": "poll_059",
+    "userId": "user_021",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-21T03:25:30.806855Z",
+    "id": "afefa8ab-81d4-4447-bcb0-dc9ac9597dba"
+  },
+  {
+    "pollId": "poll_059",
+    "userId": "user_020",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-27T18:01:48.588936Z",
+    "id": "5e8ea98c-a2a0-4d07-bad7-14b8da12d764"
+  },
+  {
+    "pollId": "poll_059",
+    "userId": "user_014",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-21T07:25:35.054358Z",
+    "id": "1ce07d08-8af4-40c1-9a88-d702e5c03373"
+  },
+  {
+    "pollId": "poll_059",
+    "userId": "user_020",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-22T07:21:08.363296Z",
+    "id": "429abc02-62cd-4202-9c48-c577f6ac2d7d"
+  },
+  {
+    "pollId": "poll_060",
+    "userId": "user_018",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-24T00:44:08.787102Z",
+    "id": "9a6fdd75-4742-43ab-9f1f-672288d9f85d"
+  },
+  {
+    "pollId": "poll_060",
+    "userId": "user_021",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-29T15:32:31.467317Z",
+    "id": "ef0d69d2-977f-41e6-8722-05c8e83f3b3c"
+  },
+  {
+    "pollId": "poll_060",
+    "userId": "user_021",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-27T16:58:43.699123Z",
+    "id": "aa7aee13-85ad-4f4f-af77-c74967a53d80"
+  },
+  {
+    "pollId": "poll_060",
+    "userId": "user_005",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-23T20:30:28.303387Z",
+    "id": "edb3edb6-0974-4456-810c-61d301417340"
+  },
+  {
+    "pollId": "poll_061",
+    "userId": "user_022",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-20T09:46:50.495612Z",
+    "id": "76181af4-b8a9-4300-b945-7da55d539d84"
+  },
+  {
+    "pollId": "poll_061",
+    "userId": "user_010",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-22T00:42:19.353698Z",
+    "id": "591b2df0-eeba-4983-b3dd-1f85bf5b7325"
+  },
+  {
+    "pollId": "poll_061",
+    "userId": "user_012",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-26T14:04:16.106013Z",
+    "id": "b540efc4-007f-40dd-ab5b-015865076a08"
+  },
+  {
+    "pollId": "poll_061",
+    "userId": "user_002",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-25T08:02:49.403124Z",
+    "id": "1abe019a-2458-4150-abca-269c8c083fa0"
+  },
+  {
+    "pollId": "poll_061",
+    "userId": "user_001",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-28T03:52:15.345976Z",
+    "id": "42c986c1-8bcb-4daa-87c9-eea6b36baa1b"
+  },
+  {
+    "pollId": "poll_062",
+    "userId": "user_002",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-21T23:57:12.484134Z",
+    "id": "e1756608-13b7-471b-96e1-c0fb0d93654c"
+  },
+  {
+    "pollId": "poll_062",
+    "userId": "user_006",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-28T08:56:25.781577Z",
+    "id": "108e4a9d-b091-4fb0-8590-d40cb88a9fbb"
+  },
+  {
+    "pollId": "poll_062",
+    "userId": "user_008",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-22T02:22:02.276032Z",
+    "id": "68c5bfba-8381-46a1-ba4a-9fd6aca97835"
+  },
+  {
+    "pollId": "poll_062",
+    "userId": "user_013",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-20T01:23:34.377795Z",
+    "id": "1f5dd4ef-d36b-4f23-a83f-c63e3a4b760e"
+  },
+  {
+    "pollId": "poll_063",
+    "userId": "user_019",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-27T18:21:10.600135Z",
+    "id": "2b2e25bc-8f66-499d-b4e9-19462977de6b"
+  },
+  {
+    "pollId": "poll_063",
+    "userId": "user_012",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-20T17:39:44.102155Z",
+    "id": "74427fcb-76ce-4872-ac7f-6738a464c00a"
+  },
+  {
+    "pollId": "poll_063",
+    "userId": "user_006",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-27T08:42:48.253899Z",
+    "id": "1227aa85-9ec3-41e6-9e9f-3e4d49a1a200"
+  },
+  {
+    "pollId": "poll_064",
+    "userId": "user_017",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-28T10:01:03.276808Z",
+    "id": "d035c82d-611a-49ab-9959-561fad38f522"
+  },
+  {
+    "pollId": "poll_064",
+    "userId": "user_018",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-28T00:02:39.016747Z",
+    "id": "6afee444-deb1-4225-b186-57f22b4c22ea"
+  },
+  {
+    "pollId": "poll_064",
+    "userId": "user_015",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-23T15:01:08.805098Z",
+    "id": "1977d320-69a4-4b16-b0cc-73e625f26ecc"
+  },
+  {
+    "pollId": "poll_065",
+    "userId": "user_017",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-24T19:55:28.196310Z",
+    "id": "abe72117-d66b-436b-9688-75511bb8d07e"
+  },
+  {
+    "pollId": "poll_065",
+    "userId": "user_003",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-23T03:39:00.153420Z",
+    "id": "10300ac0-268c-400a-b43d-c65fe5ac79b5"
+  },
+  {
+    "pollId": "poll_065",
+    "userId": "user_005",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-24T21:57:26.083313Z",
+    "id": "e141032d-ce7d-4a85-a52e-398a5cc748fe"
+  },
+  {
+    "pollId": "poll_065",
+    "userId": "user_016",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-26T11:18:48.419099Z",
+    "id": "9113f3af-e67d-4e30-8021-329d4dc9f9f2"
+  },
+  {
+    "pollId": "poll_065",
+    "userId": "user_015",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-20T01:11:09.800333Z",
+    "id": "2a8299e8-e8c4-490b-a27c-22688c9e1a62"
+  },
+  {
+    "pollId": "poll_066",
+    "userId": "user_019",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-21T14:06:32.440935Z",
+    "id": "ebea47d5-3e54-42a3-b858-7932478c552f"
+  },
+  {
+    "pollId": "poll_066",
+    "userId": "user_006",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-25T07:52:03.763669Z",
+    "id": "65f185bc-8f12-4df8-8f26-16796130dc89"
+  },
+  {
+    "pollId": "poll_066",
+    "userId": "user_011",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-27T07:18:42.668921Z",
+    "id": "74e84264-1634-4452-a52e-2a462f5cc0b0"
+  },
+  {
+    "pollId": "poll_066",
+    "userId": "user_006",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-20T04:29:30.877273Z",
+    "id": "d21cb554-66c6-4e48-9ff3-eb158a4957d4"
+  },
+  {
+    "pollId": "poll_066",
+    "userId": "user_001",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-20T03:22:53.756865Z",
+    "id": "524d53cd-fd77-4270-b4f7-70b1ea7c8f3c"
+  },
+  {
+    "pollId": "poll_067",
+    "userId": "user_003",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-28T09:23:59.383444Z",
+    "id": "578613f8-d194-4ff7-ba00-3774030007b1"
+  },
+  {
+    "pollId": "poll_067",
+    "userId": "user_002",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-20T01:14:34.138691Z",
+    "id": "a8b47dcc-1f32-417d-97b3-c9ccd4830ac7"
+  },
+  {
+    "pollId": "poll_067",
+    "userId": "user_015",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-22T03:31:05.835993Z",
+    "id": "690500d1-0b89-41e7-b48d-5d0f43296927"
+  },
+  {
+    "pollId": "poll_067",
+    "userId": "user_006",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-27T22:01:52.563040Z",
+    "id": "e88749a2-55be-4a94-934a-cfe0267b9298"
+  },
+  {
+    "pollId": "poll_067",
+    "userId": "user_016",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-29T04:27:54.499327Z",
+    "id": "6ecbe6e2-cc46-4ec4-8876-fd8efd2704c8"
+  },
+  {
+    "pollId": "poll_068",
+    "userId": "user_010",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-24T09:10:36.540244Z",
+    "id": "f6816b33-09b6-42be-ab8d-e4333fab45c3"
+  },
+  {
+    "pollId": "poll_068",
+    "userId": "user_001",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-23T11:55:19.109426Z",
+    "id": "314db6ef-29d4-491d-ae98-d276f2c5f270"
+  },
+  {
+    "pollId": "poll_068",
+    "userId": "user_010",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-27T13:19:07.013916Z",
+    "id": "a5668e87-eac1-4e6b-b65c-00f726d0d75e"
+  },
+  {
+    "pollId": "poll_068",
+    "userId": "user_008",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-22T15:59:30.598354Z",
+    "id": "f7c83e7c-b876-44ba-ba17-08043141bc15"
+  },
+  {
+    "pollId": "poll_068",
+    "userId": "user_006",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-20T06:31:53.641912Z",
+    "id": "b5f8d1a6-1b17-45fe-8a3a-c261968455f2"
+  },
+  {
+    "pollId": "poll_069",
+    "userId": "user_002",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-20T20:11:18.031628Z",
+    "id": "fafcfda7-b92d-491c-871d-92ec879ba4b6"
+  },
+  {
+    "pollId": "poll_069",
+    "userId": "user_011",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-27T21:29:22.616759Z",
+    "id": "2438fedf-e020-4def-9b28-cac8b3334cae"
+  },
+  {
+    "pollId": "poll_069",
+    "userId": "user_010",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-24T10:10:54.656422Z",
+    "id": "90f54779-a8cc-4f35-8d11-63e49fb9c50d"
+  },
+  {
+    "pollId": "poll_070",
+    "userId": "user_010",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-24T22:06:24.699180Z",
+    "id": "993230ae-9543-4940-ad92-da1684bc6964"
+  },
+  {
+    "pollId": "poll_070",
+    "userId": "user_002",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-21T03:22:45.790533Z",
+    "id": "885d96a7-1228-4c03-a28c-34915ad724ab"
+  },
+  {
+    "pollId": "poll_070",
+    "userId": "user_001",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-29T19:05:39.054602Z",
+    "id": "fcaa0aae-becb-4a57-91f6-fda9bc5aff8f"
+  },
+  {
+    "pollId": "poll_070",
+    "userId": "user_010",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-22T21:44:32.971325Z",
+    "id": "ff88c42a-0a5e-4b33-bbe5-e74aa73d57ac"
+  },
+  {
+    "pollId": "poll_071",
+    "userId": "user_016",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-29T03:46:02.706975Z",
+    "id": "584d8c5d-393c-4263-b67d-894e71471fc8"
+  },
+  {
+    "pollId": "poll_071",
+    "userId": "user_005",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-29T18:06:54.490131Z",
+    "id": "4288fb5d-e546-4ea3-ab61-e294e590b117"
+  },
+  {
+    "pollId": "poll_071",
+    "userId": "user_020",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-24T05:21:15.535588Z",
+    "id": "4c7f1c2f-e664-46b0-8ad5-db9772d2c6aa"
+  },
+  {
+    "pollId": "poll_072",
+    "userId": "user_010",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-24T21:51:12.404041Z",
+    "id": "2b9c6486-7860-4d1d-8393-3ab1c2245c65"
+  },
+  {
+    "pollId": "poll_072",
+    "userId": "user_022",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-20T07:24:49.747756Z",
+    "id": "d83d4ca6-4f64-4f9b-9398-a7c74f24eed2"
+  },
+  {
+    "pollId": "poll_072",
+    "userId": "user_001",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-29T16:39:39.043868Z",
+    "id": "5c0e7691-bf06-4f95-986f-900cbe74665f"
+  },
+  {
+    "pollId": "poll_072",
+    "userId": "user_015",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-25T17:27:20.700863Z",
+    "id": "9ab5acf1-a65b-4cab-869c-0d1cb9adc35b"
+  },
+  {
+    "pollId": "poll_073",
+    "userId": "user_011",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-23T04:32:34.514892Z",
+    "id": "e1b3c0d3-4bb2-42c8-abd1-b1f7cdab2a59"
+  },
+  {
+    "pollId": "poll_073",
+    "userId": "user_021",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-28T18:12:31.049901Z",
+    "id": "e6c3d3a5-ad65-4d22-8e59-d42f5300e473"
+  },
+  {
+    "pollId": "poll_073",
+    "userId": "user_019",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-22T11:37:18.704732Z",
+    "id": "6be2042e-604a-45d4-9af4-46299819f4a4"
+  },
+  {
+    "pollId": "poll_074",
+    "userId": "user_021",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-25T08:12:06.432521Z",
+    "id": "3789f8e7-c602-47a7-a9a7-3bf7a0fee99c"
+  },
+  {
+    "pollId": "poll_074",
+    "userId": "user_018",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-29T06:11:22.678585Z",
+    "id": "f8c4cccd-857c-492e-9a42-877afcd5077d"
+  },
+  {
+    "pollId": "poll_074",
+    "userId": "user_013",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-27T08:30:36.592062Z",
+    "id": "540ea814-fc09-4fc8-ac5f-d7f7b16dcc96"
+  },
+  {
+    "pollId": "poll_075",
+    "userId": "user_016",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-23T05:22:11.106152Z",
+    "id": "f5ac5e32-9c65-4a00-b71c-a0e9354cf94a"
+  },
+  {
+    "pollId": "poll_075",
+    "userId": "user_009",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-24T05:34:36.618369Z",
+    "id": "5fd0fd62-3592-4ac6-a0b0-f4e0f82bb325"
+  },
+  {
+    "pollId": "poll_075",
+    "userId": "user_019",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-21T16:05:24.461607Z",
+    "id": "3728dcef-fa34-4a4b-b414-a71dfde6f5e3"
+  },
+  {
+    "pollId": "poll_075",
+    "userId": "user_021",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-20T10:01:58.565110Z",
+    "id": "edd1388b-854c-4dfe-87fa-f6f462a73ff6"
+  },
+  {
+    "pollId": "poll_076",
+    "userId": "user_013",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-27T01:27:54.359656Z",
+    "id": "461c1e01-7e80-4a7f-973a-fcf86a2a145b"
+  },
+  {
+    "pollId": "poll_076",
+    "userId": "user_002",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-21T16:12:53.760035Z",
+    "id": "8ab6ebd1-ff9e-441c-ba23-325b376f83f7"
+  },
+  {
+    "pollId": "poll_076",
+    "userId": "user_001",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-27T18:05:42.413139Z",
+    "id": "4cb0e27e-3334-485d-bdcb-0f9bebbf5cde"
+  },
+  {
+    "pollId": "poll_077",
+    "userId": "user_005",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-23T09:50:25.920886Z",
+    "id": "b61bacb9-e26e-45f4-9a67-9030da95f143"
+  },
+  {
+    "pollId": "poll_077",
+    "userId": "user_008",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-28T18:38:39.019122Z",
+    "id": "1049dd0d-0438-454f-b7b2-8172839a6cf0"
+  },
+  {
+    "pollId": "poll_077",
+    "userId": "user_016",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-28T13:22:18.837575Z",
+    "id": "cf69ce6f-7f6b-496e-aa7e-88fa7ed57269"
+  },
+  {
+    "pollId": "poll_077",
+    "userId": "user_020",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-20T21:08:10.137736Z",
+    "id": "d0bd9310-0347-4764-8794-98e4f3a34d5e"
+  },
+  {
+    "pollId": "poll_077",
+    "userId": "user_019",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-20T20:14:48.514830Z",
+    "id": "cdbd8c76-2f5a-42bd-9d34-1e77793e1284"
+  },
+  {
+    "pollId": "poll_078",
+    "userId": "user_020",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-22T21:54:11.705254Z",
+    "id": "1b0fbf1b-dd35-4118-959e-127823dc7900"
+  },
+  {
+    "pollId": "poll_078",
+    "userId": "user_008",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-28T17:50:08.812068Z",
+    "id": "6ed21a69-59e0-4cdb-b160-df5265b299f3"
+  },
+  {
+    "pollId": "poll_078",
+    "userId": "user_005",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-24T17:46:39.514264Z",
+    "id": "13ff0678-4eaf-4c7f-870d-e14e86ddf431"
+  },
+  {
+    "pollId": "poll_078",
+    "userId": "user_005",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-20T13:55:11.328555Z",
+    "id": "97d35683-73d9-41a1-93bc-645f599aa875"
+  },
+  {
+    "pollId": "poll_079",
+    "userId": "user_017",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-29T10:29:42.766682Z",
+    "id": "6432896c-39a1-4722-a6ae-a3dbf516d073"
+  },
+  {
+    "pollId": "poll_079",
+    "userId": "user_010",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-27T16:04:15.083564Z",
+    "id": "117a0401-1a44-42f0-b1d5-91022371d64c"
+  },
+  {
+    "pollId": "poll_079",
+    "userId": "user_014",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-23T09:14:20.643041Z",
+    "id": "02291d93-8f5d-4b40-8ab2-bff67aad3d19"
+  },
+  {
+    "pollId": "poll_079",
+    "userId": "user_022",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-20T07:46:05.752975Z",
+    "id": "4aede24c-f0f1-445e-bb96-95d837b97642"
+  },
+  {
+    "pollId": "poll_080",
+    "userId": "user_019",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-22T18:27:26.715563Z",
+    "id": "5318191f-f4ce-4b4a-aecc-7e2584fae21b"
+  },
+  {
+    "pollId": "poll_080",
+    "userId": "user_001",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-22T20:27:52.921708Z",
+    "id": "1f4ef46a-382c-4c07-a838-26b8ab4dd870"
+  },
+  {
+    "pollId": "poll_080",
+    "userId": "user_022",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-23T09:20:38.187761Z",
+    "id": "f484631a-3ae1-4716-afca-9a194d11362a"
+  },
+  {
+    "pollId": "poll_081",
+    "userId": "user_015",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-20T05:04:20.919993Z",
+    "id": "40c74c04-3ffc-4288-92ae-a5921b9df25c"
+  },
+  {
+    "pollId": "poll_081",
+    "userId": "user_001",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-28T09:26:18.715998Z",
+    "id": "f2950083-ff9e-4d3b-8a53-16b6510e658e"
+  },
+  {
+    "pollId": "poll_081",
+    "userId": "user_019",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-23T07:49:37.723008Z",
+    "id": "a873acf8-0514-45c0-80a3-ea1491ef4a31"
+  },
+  {
+    "pollId": "poll_081",
+    "userId": "user_004",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-19T23:47:08.632543Z",
+    "id": "2cd2edd1-867a-4403-84a8-0632183acee5"
+  },
+  {
+    "pollId": "poll_082",
+    "userId": "user_018",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-22T18:55:22.139691Z",
+    "id": "d33b5ab8-126d-4a98-8e61-fc1bf587a985"
+  },
+  {
+    "pollId": "poll_082",
+    "userId": "user_018",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-25T18:40:45.065079Z",
+    "id": "e3fb1838-b192-4eba-8bd7-b65c2d531fee"
+  },
+  {
+    "pollId": "poll_082",
+    "userId": "user_015",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-21T05:43:17.594098Z",
+    "id": "7b3fec67-f4a3-4e43-a22d-a5ddcf072ea3"
+  },
+  {
+    "pollId": "poll_082",
+    "userId": "user_017",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-23T04:18:06.053674Z",
+    "id": "55d4368a-4569-4c37-877c-5f264e6035c4"
+  },
+  {
+    "pollId": "poll_082",
+    "userId": "user_019",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-25T02:51:15.752554Z",
+    "id": "14ab2dda-a5bb-4da1-965c-0a5e93b39c59"
+  },
+  {
+    "pollId": "poll_083",
+    "userId": "user_022",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-26T22:56:15.165508Z",
+    "id": "9e28649f-d663-44fd-a34c-4d66d48c740e"
+  },
+  {
+    "pollId": "poll_083",
+    "userId": "user_012",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-22T03:57:21.479886Z",
+    "id": "c869ec28-a138-44de-8d7e-22bf98437311"
+  },
+  {
+    "pollId": "poll_083",
+    "userId": "user_014",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-23T23:20:39.137980Z",
+    "id": "5b87200d-cbbc-4b80-8e62-9bb9542e196b"
+  },
+  {
+    "pollId": "poll_084",
+    "userId": "user_006",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-20T04:24:40.851667Z",
+    "id": "f78f1679-cff8-4339-82a3-30920fc19a30"
+  },
+  {
+    "pollId": "poll_084",
+    "userId": "user_016",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-26T05:31:25.877763Z",
+    "id": "4eaa2f17-42da-4ec6-bafc-9212d33676ed"
+  },
+  {
+    "pollId": "poll_084",
+    "userId": "user_019",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-21T16:51:27.460172Z",
+    "id": "3fa7a116-c245-441f-878b-194ae901882a"
+  },
+  {
+    "pollId": "poll_084",
+    "userId": "user_013",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-20T17:16:35.532168Z",
+    "id": "de248307-a02d-4d1a-84c6-4f9000a1ac0e"
+  },
+  {
+    "pollId": "poll_084",
+    "userId": "user_011",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-23T17:23:12.921249Z",
+    "id": "95c08f87-2a12-48a9-b5cf-2b33c53742fc"
+  },
+  {
+    "pollId": "poll_085",
+    "userId": "user_019",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-21T17:55:13.632901Z",
+    "id": "53ebedad-5b02-46de-9b78-6598192e3ff2"
+  },
+  {
+    "pollId": "poll_085",
+    "userId": "user_012",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-20T11:51:18.590739Z",
+    "id": "1f6b0f1f-57e8-4aec-912b-7b410622c0da"
+  },
+  {
+    "pollId": "poll_085",
+    "userId": "user_013",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-28T01:52:59.182622Z",
+    "id": "3839bfb9-8bc9-499c-be86-28ec1a6dbe00"
+  },
+  {
+    "pollId": "poll_086",
+    "userId": "user_010",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-27T11:26:30.150233Z",
+    "id": "44de3e48-ba75-4e86-9267-ad4a9846d8c3"
+  },
+  {
+    "pollId": "poll_086",
+    "userId": "user_014",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-24T03:58:37.323040Z",
+    "id": "5766c91a-79a5-4652-9f60-ede8becfe23e"
+  },
+  {
+    "pollId": "poll_086",
+    "userId": "user_011",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-24T08:40:08.183553Z",
+    "id": "0c736e9c-34e1-443e-9036-f2353a3b8818"
+  },
+  {
+    "pollId": "poll_087",
+    "userId": "user_013",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-20T13:47:05.626056Z",
+    "id": "cf864f47-d15e-4b3a-b199-28614593a59e"
+  },
+  {
+    "pollId": "poll_087",
+    "userId": "user_009",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-23T04:12:08.670244Z",
+    "id": "0262f00d-111b-43b5-9e50-a7d1aa75b426"
+  },
+  {
+    "pollId": "poll_087",
+    "userId": "user_002",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-28T22:14:09.637572Z",
+    "id": "9b33dd24-9e25-4cd0-a551-df7fb947299a"
+  },
+  {
+    "pollId": "poll_088",
+    "userId": "user_013",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-29T16:14:55.787022Z",
+    "id": "92f6cc5d-d3dd-4b64-8673-40f79b39a99d"
+  },
+  {
+    "pollId": "poll_088",
+    "userId": "user_018",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-20T20:12:07.316040Z",
+    "id": "85908329-527f-442d-91fe-18ee411454b4"
+  },
+  {
+    "pollId": "poll_088",
+    "userId": "user_006",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-24T05:19:47.095517Z",
+    "id": "7b43fe47-59fb-4fa9-8865-1e270f4687be"
+  },
+  {
+    "pollId": "poll_088",
+    "userId": "user_005",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-20T18:37:57.896291Z",
+    "id": "7d669497-5bd4-4713-8ceb-b12235a1da52"
+  },
+  {
+    "pollId": "poll_089",
+    "userId": "user_011",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-22T22:55:50.790656Z",
+    "id": "ffcdc06a-a762-48e7-a93c-b3387ba8e061"
+  },
+  {
+    "pollId": "poll_089",
+    "userId": "user_009",
+    "text": "The caption sold me fr.",
+    "createdAt": "2025-06-24T10:56:46.027953Z",
+    "id": "88f152e6-feef-4a3f-a6a1-9b242b2f9fe2"
+  },
+  {
+    "pollId": "poll_089",
+    "userId": "user_005",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-27T21:30:26.144658Z",
+    "id": "b812d91f-3007-4d37-bd90-71fe514413ff"
+  },
+  {
+    "pollId": "poll_090",
+    "userId": "user_014",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-27T08:49:43.925227Z",
+    "id": "0a96b97a-da7f-4359-8df1-608730267bf8"
+  },
+  {
+    "pollId": "poll_090",
+    "userId": "user_022",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-26T19:57:50.165089Z",
+    "id": "ca173453-a589-446e-b507-f086cea44536"
+  },
+  {
+    "pollId": "poll_090",
+    "userId": "user_007",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-29T05:58:13.112888Z",
+    "id": "ccbe51ae-ff6a-4613-9300-ac7a6230c2ab"
+  },
+  {
+    "pollId": "poll_090",
+    "userId": "user_009",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-28T01:12:25.831515Z",
+    "id": "ce87b304-b3d2-4472-a0bc-075a698ed229"
+  },
+  {
+    "pollId": "poll_090",
+    "userId": "user_017",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-28T00:12:02.861359Z",
+    "id": "ae02d57b-4c5a-456b-80b2-8963e8de2d11"
+  },
+  {
+    "pollId": "poll_091",
+    "userId": "user_015",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-27T17:55:05.142415Z",
+    "id": "4216e6b3-4fd9-4f72-9a8b-4b051b066589"
+  },
+  {
+    "pollId": "poll_091",
+    "userId": "user_014",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-24T23:29:38.441520Z",
+    "id": "fcdb94fe-3f63-4da4-8a13-f378aa6e3d6b"
+  },
+  {
+    "pollId": "poll_091",
+    "userId": "user_019",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-21T16:55:21.219459Z",
+    "id": "838684c1-ba97-4920-9b67-36d0dd7a3390"
+  },
+  {
+    "pollId": "poll_092",
+    "userId": "user_014",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-29T18:07:16.980559Z",
+    "id": "afd128cd-235c-402e-9da9-05666852c851"
+  },
+  {
+    "pollId": "poll_092",
+    "userId": "user_021",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-23T05:56:47.639654Z",
+    "id": "0898bb0e-3564-44fa-aee1-c66d3edbe29a"
+  },
+  {
+    "pollId": "poll_092",
+    "userId": "user_019",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-22T16:55:58.529911Z",
+    "id": "b0d50cd1-f783-4dea-8964-f8947d5daa91"
+  },
+  {
+    "pollId": "poll_092",
+    "userId": "user_006",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-23T15:57:45.291752Z",
+    "id": "34db6e1b-436a-4c25-bc9d-f5d121ce8079"
+  },
+  {
+    "pollId": "poll_093",
+    "userId": "user_016",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-29T17:16:10.814085Z",
+    "id": "37b564e0-625c-4ea1-8b25-b7c9f6765896"
+  },
+  {
+    "pollId": "poll_093",
+    "userId": "user_019",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-20T12:55:53.080827Z",
+    "id": "078d227f-593d-477a-869f-d8803c92006d"
+  },
+  {
+    "pollId": "poll_093",
+    "userId": "user_005",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-25T20:36:02.215921Z",
+    "id": "8d6d7e54-3e5f-4860-90c9-d6b89a2b112f"
+  },
+  {
+    "pollId": "poll_093",
+    "userId": "user_004",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-20T23:36:17.447165Z",
+    "id": "979f3ded-e1d8-4011-b950-c432064b7cdb"
+  },
+  {
+    "pollId": "poll_094",
+    "userId": "user_002",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-25T00:03:19.665561Z",
+    "id": "ac43d39c-9d33-4df0-b386-3cc9b76f1542"
+  },
+  {
+    "pollId": "poll_094",
+    "userId": "user_013",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-25T11:14:59.512445Z",
+    "id": "10eb76d6-9d76-480a-a939-8e06455161b0"
+  },
+  {
+    "pollId": "poll_094",
+    "userId": "user_004",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-26T23:44:00.065145Z",
+    "id": "97769c7d-0efb-4bdf-aa50-40d446c13ef1"
+  },
+  {
+    "pollId": "poll_094",
+    "userId": "user_010",
+    "text": "Barely looked and I knew. Voted.",
+    "createdAt": "2025-06-20T05:25:08.116436Z",
+    "id": "6a25a768-4794-4649-bb2d-fe4b952afb3e"
+  },
+  {
+    "pollId": "poll_094",
+    "userId": "user_015",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-26T10:41:50.597645Z",
+    "id": "fca8014f-ad0b-40c9-a0df-684f7c68329c"
+  },
+  {
+    "pollId": "poll_095",
+    "userId": "user_005",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-25T04:43:05.858824Z",
+    "id": "9a46a9b2-69f9-4b90-8edb-f1a61f56e9a6"
+  },
+  {
+    "pollId": "poll_095",
+    "userId": "user_004",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-20T21:48:27.749446Z",
+    "id": "c6c911dd-3d36-4b78-8cbe-b87551a0a3ab"
+  },
+  {
+    "pollId": "poll_095",
+    "userId": "user_013",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-29T00:05:49.560573Z",
+    "id": "cb3ce82c-c68e-42c9-aabc-0811ac888b73"
+  },
+  {
+    "pollId": "poll_096",
+    "userId": "user_001",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-20T15:50:30.068748Z",
+    "id": "a64ef4d6-233d-4a98-b722-b06d3dc7f295"
+  },
+  {
+    "pollId": "poll_096",
+    "userId": "user_020",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-28T20:34:24.612803Z",
+    "id": "0845035b-5856-4bdd-bde2-dd5ab3a30c5b"
+  },
+  {
+    "pollId": "poll_096",
+    "userId": "user_009",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-28T13:39:53.609436Z",
+    "id": "b4f4eb9f-b2eb-46eb-b3fa-4c439e1fa70c"
+  },
+  {
+    "pollId": "poll_096",
+    "userId": "user_020",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-28T11:33:59.822961Z",
+    "id": "65632e0b-3774-4f91-8506-d913a41f55d5"
+  },
+  {
+    "pollId": "poll_096",
+    "userId": "user_015",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-22T07:41:10.228671Z",
+    "id": "457df4cd-e285-44f5-98b8-fc9e16506485"
+  },
+  {
+    "pollId": "poll_097",
+    "userId": "user_016",
+    "text": "I\u2019m just here to watch the chaos \ud83d\ude08",
+    "createdAt": "2025-06-24T01:15:21.077231Z",
+    "id": "948d7107-4623-436b-b8c0-76010f2c89e7"
+  },
+  {
+    "pollId": "poll_097",
+    "userId": "user_020",
+    "text": "Wait... this one goes kinda hard.",
+    "createdAt": "2025-06-21T15:03:44.521621Z",
+    "id": "3da9d7a0-1406-48db-85d6-78ab8d54dab7"
+  },
+  {
+    "pollId": "poll_097",
+    "userId": "user_009",
+    "text": "Had to vote, too curious not to.",
+    "createdAt": "2025-06-26T15:03:02.815743Z",
+    "id": "61a015e6-3380-4f1b-9484-2659c88b1a62"
+  },
+  {
+    "pollId": "poll_097",
+    "userId": "user_010",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-23T01:16:39.700995Z",
+    "id": "8d2728f4-ad9e-4a6b-ad4a-00de18006177"
+  },
+  {
+    "pollId": "poll_098",
+    "userId": "user_010",
+    "text": "Only here because of the thumbnail \ud83d\ude02",
+    "createdAt": "2025-06-25T03:31:36.740538Z",
+    "id": "e949eb2b-3ba4-44d2-bfd2-58618c0709ec"
+  },
+  {
+    "pollId": "poll_098",
+    "userId": "user_013",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-20T02:41:17.398575Z",
+    "id": "e416ef8a-8cde-419c-a692-faa10e6e0073"
+  },
+  {
+    "pollId": "poll_098",
+    "userId": "user_016",
+    "text": "I actually really like this one.",
+    "createdAt": "2025-06-25T08:33:42.043290Z",
+    "id": "cdc5d172-4af4-4215-a404-149b1d07dbb1"
+  },
+  {
+    "pollId": "poll_098",
+    "userId": "user_008",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-25T07:07:24.551620Z",
+    "id": "f35ebca6-01bf-4713-89cc-0772c32f2f19"
+  },
+  {
+    "pollId": "poll_098",
+    "userId": "user_007",
+    "text": "Tough call... I went with my gut.",
+    "createdAt": "2025-06-29T04:29:51.572261Z",
+    "id": "9c83a7e2-b36e-4b1a-b81a-1fe8ae36021a"
+  },
+  {
+    "pollId": "poll_099",
+    "userId": "user_002",
+    "text": "This is a hard choice, both look good!",
+    "createdAt": "2025-06-25T15:36:59.793382Z",
+    "id": "1ef5f93e-8777-444c-be76-2aa470dd0454"
+  },
+  {
+    "pollId": "poll_099",
+    "userId": "user_015",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-29T00:35:13.116970Z",
+    "id": "0d27b5b4-0616-49e8-9a91-6acd2f6a14f2"
+  },
+  {
+    "pollId": "poll_099",
+    "userId": "user_012",
+    "text": "Avidlove always fits me better \ud83d\udc95",
+    "createdAt": "2025-06-26T16:42:59.195141Z",
+    "id": "db61aadc-9ab5-4d88-8ffd-82cacf865dd8"
+  },
+  {
+    "pollId": "poll_099",
+    "userId": "user_016",
+    "text": "Genuinely need help deciding.",
+    "createdAt": "2025-06-26T03:17:19.909608Z",
+    "id": "2f5daa92-6a9e-49cc-8113-4dcff451f823"
+  },
+  {
+    "pollId": "poll_100",
+    "userId": "user_001",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-22T17:21:44.180562Z",
+    "id": "d654d820-e928-48ca-9601-434627b7705e"
+  },
+  {
+    "pollId": "poll_100",
+    "userId": "user_005",
+    "text": "My bf picked this, I picked the other one.",
+    "createdAt": "2025-06-21T00:41:19.044194Z",
+    "id": "97cfbc59-a162-45e8-b54c-beed3a29b40f"
+  },
+  {
+    "pollId": "poll_100",
+    "userId": "user_008",
+    "text": "LOL why is this even a debate?",
+    "createdAt": "2025-06-20T14:33:48.063602Z",
+    "id": "dfd8f036-968d-4f36-bcb3-e0588de8693e"
+  },
+  {
+    "pollId": "poll_100",
+    "userId": "user_001",
+    "text": "Y\u2019all trippin, it's obviously option 2.",
+    "createdAt": "2025-06-25T16:40:17.571169Z",
+    "id": "d0b64df9-9d9a-4f9c-b7b6-4c819ed5713d"
+  },
+  {
+    "pollId": "poll_100",
+    "userId": "user_007",
+    "text": "I feel like I\u2019ve seen this before.",
+    "createdAt": "2025-06-25T20:24:43.443107Z",
+    "id": "85b1dada-fbaf-4831-908d-a195db6d8c69"
+  }
+]
