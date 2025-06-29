@@ -176,5 +176,57 @@ export const getNotificationsForUser = async (userId: string): Promise<Notificat
   return Promise.resolve(mockNotifications);
 };
 
+// ──────────── VOTE LOGIC ────────────
+
+export const submitVote = async ({
+  pollId,
+  userId,
+  optionId,
+}: {
+  pollId: string;
+  userId: string;
+  optionId: number;
+}): Promise<void> => {
+  if (!db) throw new Error("Firestore is not configured.");
+
+  const pollRef = doc(db, "polls", pollId);
+  const voteRef = doc(pollRef, "votes", userId); // ensures 1 vote per user per poll
+
+  try {
+    await runTransaction(db, async (transaction) => {
+      const voteDoc = await transaction.get(voteRef);
+
+      if (voteDoc.exists()) {
+        console.warn("User already voted.");
+        return;
+      }
+
+      const pollDoc = await transaction.get(pollRef);
+      if (!pollDoc.exists()) throw new Error("Poll not found.");
+
+      const pollData = pollDoc.data();
+      const updatedOptions = pollData.options.map((opt: any) => {
+        if (opt.id === optionId) {
+          return { ...opt, votes: (opt.votes || 0) + 1 };
+        }
+        return opt;
+      });
+
+      transaction.set(voteRef, {
+        userId,
+        optionId,
+        createdAt: serverTimestamp(),
+      });
+
+      transaction.update(pollRef, {
+        options: updatedOptions,
+      });
+    });
+  } catch (error) {
+    console.error("Vote transaction failed:", error);
+    throw error;
+  }
+};
+
 export { auth, storage, db };
 export default app;
