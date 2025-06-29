@@ -1,0 +1,3302 @@
+[
+  {
+    "id": 1,
+    "creatorId": 7,
+    "question": "Poll question #1",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 63,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 0,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-03T10:13:32.362182Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 8.06,
+    "tipCount": 5,
+    "isNSFW": true,
+    "category": "weddings",
+    "likes": 934,
+    "comments": 105
+  },
+  {
+    "id": 2,
+    "creatorId": 19,
+    "question": "Poll question #2",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 12,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 67,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-06T22:13:32.362235Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 75.79,
+    "tipCount": 14,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 416,
+    "comments": 109
+  },
+  {
+    "id": 3,
+    "creatorId": 4,
+    "question": "Poll question #3",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 98,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 33,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-24T02:13:32.362255Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 33.9,
+    "tipCount": 18,
+    "isNSFW": false,
+    "category": "cars",
+    "likes": 516,
+    "comments": 142
+  },
+  {
+    "id": 4,
+    "creatorId": 14,
+    "question": "Poll question #4",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 72,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 53,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-04T02:13:32.362270Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 74.06,
+    "tipCount": 19,
+    "isNSFW": true,
+    "category": "home",
+    "likes": 126,
+    "comments": 181
+  },
+  {
+    "id": 5,
+    "creatorId": 17,
+    "question": "Poll question #5",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 73,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 100,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-28T17:13:32.362285Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 93.24,
+    "tipCount": 9,
+    "isNSFW": false,
+    "category": "food",
+    "likes": 556,
+    "comments": 55
+  },
+  {
+    "id": 6,
+    "creatorId": 19,
+    "question": "Poll question #6",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 84,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 41,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-23T02:13:32.362300Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 21.72,
+    "tipCount": 18,
+    "isNSFW": true,
+    "category": "sports",
+    "likes": 964,
+    "comments": 158
+  },
+  {
+    "id": 7,
+    "creatorId": 14,
+    "question": "Poll question #7",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 87,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 6,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-17T03:13:32.362314Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 50.42,
+    "tipCount": 5,
+    "isNSFW": true,
+    "category": "weddings",
+    "likes": 935,
+    "comments": 61
+  },
+  {
+    "id": 8,
+    "creatorId": 16,
+    "question": "Poll question #8",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 85,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 97,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-26T01:13:32.362333Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 51.21,
+    "tipCount": 18,
+    "isNSFW": false,
+    "category": "food",
+    "likes": 996,
+    "comments": 159
+  },
+  {
+    "id": 9,
+    "creatorId": 10,
+    "question": "Poll question #9",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 28,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 91,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-10T03:13:32.362350Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 49.6,
+    "tipCount": 6,
+    "isNSFW": false,
+    "category": "home",
+    "likes": 353,
+    "comments": 54
+  },
+  {
+    "id": 10,
+    "creatorId": 1,
+    "question": "Poll question #10",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 93,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 26,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-25T06:13:32.362366Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 57.41,
+    "tipCount": 2,
+    "isNSFW": false,
+    "category": "fashion",
+    "likes": 256,
+    "comments": 170
+  },
+  {
+    "id": 11,
+    "creatorId": 16,
+    "question": "Poll question #11",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 38,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 29,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-15T09:13:32.362389Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 26.99,
+    "tipCount": 12,
+    "isNSFW": true,
+    "category": "tech",
+    "likes": 454,
+    "comments": 42
+  },
+  {
+    "id": 12,
+    "creatorId": 20,
+    "question": "Poll question #12",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 72,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 12,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-18T10:13:32.362411Z",
+    "durationMs": 60000,
+    "pledged": false,
+    "pledgeAmount": 54.97,
+    "tipCount": 15,
+    "isNSFW": true,
+    "category": "cars",
+    "likes": 900,
+    "comments": 160
+  },
+  {
+    "id": 13,
+    "creatorId": 1,
+    "question": "Poll question #13",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 70,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 14,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-26T10:13:32.362444Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 18.56,
+    "tipCount": 5,
+    "isNSFW": false,
+    "category": "tech",
+    "likes": 919,
+    "comments": 158
+  },
+  {
+    "id": 14,
+    "creatorId": 10,
+    "question": "Poll question #14",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 93,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 33,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-13T00:13:32.362460Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 8.37,
+    "tipCount": 19,
+    "isNSFW": false,
+    "category": "anime",
+    "likes": 289,
+    "comments": 1
+  },
+  {
+    "id": 15,
+    "creatorId": 1,
+    "question": "Poll question #15",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 99,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 92,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-05-30T20:13:32.362473Z",
+    "durationMs": 60000,
+    "pledged": false,
+    "pledgeAmount": 28.09,
+    "tipCount": 15,
+    "isNSFW": true,
+    "category": "food",
+    "likes": 966,
+    "comments": 101
+  },
+  {
+    "id": 16,
+    "creatorId": 3,
+    "question": "Poll question #16",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 4,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 34,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-06T14:13:32.362493Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 79.75,
+    "tipCount": 5,
+    "isNSFW": false,
+    "category": "food",
+    "likes": 333,
+    "comments": 189
+  },
+  {
+    "id": 17,
+    "creatorId": 15,
+    "question": "Poll question #17",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 89,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 37,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-04T12:13:32.362510Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 80.38,
+    "tipCount": 11,
+    "isNSFW": false,
+    "category": "relationships",
+    "likes": 243,
+    "comments": 141
+  },
+  {
+    "id": 18,
+    "creatorId": 20,
+    "question": "Poll question #18",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 31,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 95,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-11T07:13:32.362523Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 30.77,
+    "tipCount": 2,
+    "isNSFW": false,
+    "category": "cars",
+    "likes": 843,
+    "comments": 199
+  },
+  {
+    "id": 19,
+    "creatorId": 2,
+    "question": "Poll question #19",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 52,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 55,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-08T21:13:32.362544Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 98.04,
+    "tipCount": 13,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 289,
+    "comments": 97
+  },
+  {
+    "id": 20,
+    "creatorId": 2,
+    "question": "Poll question #20",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 61,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 36,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-24T22:13:32.362565Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 87.46,
+    "tipCount": 5,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 565,
+    "comments": 70
+  },
+  {
+    "id": 21,
+    "creatorId": 5,
+    "question": "Poll question #21",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 60,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 16,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-23T14:13:32.362578Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 40.42,
+    "tipCount": 10,
+    "isNSFW": false,
+    "category": "home",
+    "likes": 185,
+    "comments": 120
+  },
+  {
+    "id": 22,
+    "creatorId": 4,
+    "question": "Poll question #22",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 26,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 86,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-21T11:13:32.362595Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 7.69,
+    "tipCount": 15,
+    "isNSFW": false,
+    "category": "fashion",
+    "likes": 473,
+    "comments": 17
+  },
+  {
+    "id": 23,
+    "creatorId": 19,
+    "question": "Poll question #23",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 49,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 64,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-05-30T21:13:32.362608Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 32.1,
+    "tipCount": 15,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 562,
+    "comments": 62
+  },
+  {
+    "id": 24,
+    "creatorId": 3,
+    "question": "Poll question #24",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 67,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 48,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-15T18:13:32.362621Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 54.58,
+    "tipCount": 14,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 918,
+    "comments": 93
+  },
+  {
+    "id": 25,
+    "creatorId": 8,
+    "question": "Poll question #25",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 55,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 87,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-12T15:13:32.362633Z",
+    "durationMs": 60000,
+    "pledged": true,
+    "pledgeAmount": 7.33,
+    "tipCount": 16,
+    "isNSFW": false,
+    "category": "anime",
+    "likes": 710,
+    "comments": 183
+  },
+  {
+    "id": 26,
+    "creatorId": 5,
+    "question": "Poll question #26",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 81,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 94,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-19T08:13:32.362656Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 35.64,
+    "tipCount": 2,
+    "isNSFW": true,
+    "category": "weddings",
+    "likes": 498,
+    "comments": 27
+  },
+  {
+    "id": 27,
+    "creatorId": 20,
+    "question": "Poll question #27",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 9,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 34,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-16T21:13:32.362684Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 83.91,
+    "tipCount": 2,
+    "isNSFW": false,
+    "category": "food",
+    "likes": 301,
+    "comments": 0
+  },
+  {
+    "id": 28,
+    "creatorId": 15,
+    "question": "Poll question #28",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 9,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 51,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-29T00:13:32.362698Z",
+    "durationMs": 60000,
+    "pledged": false,
+    "pledgeAmount": 26.65,
+    "tipCount": 13,
+    "isNSFW": false,
+    "category": "home",
+    "likes": 982,
+    "comments": 30
+  },
+  {
+    "id": 29,
+    "creatorId": 6,
+    "question": "Poll question #29",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 4,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 68,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-27T14:13:32.362716Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 55.71,
+    "tipCount": 9,
+    "isNSFW": true,
+    "category": "fashion",
+    "likes": 71,
+    "comments": 145
+  },
+  {
+    "id": 30,
+    "creatorId": 20,
+    "question": "Poll question #30",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 77,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 60,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-18T17:13:32.362735Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 93.81,
+    "tipCount": 9,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 925,
+    "comments": 197
+  },
+  {
+    "id": 31,
+    "creatorId": 16,
+    "question": "Poll question #31",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 91,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 67,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-15T19:13:32.362763Z",
+    "durationMs": 60000,
+    "pledged": true,
+    "pledgeAmount": 35.13,
+    "tipCount": 1,
+    "isNSFW": true,
+    "category": "fashion",
+    "likes": 996,
+    "comments": 48
+  },
+  {
+    "id": 32,
+    "creatorId": 12,
+    "question": "Poll question #32",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 67,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 35,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-14T16:13:32.362785Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 42.59,
+    "tipCount": 1,
+    "isNSFW": true,
+    "category": "home",
+    "likes": 178,
+    "comments": 127
+  },
+  {
+    "id": 33,
+    "creatorId": 8,
+    "question": "Poll question #33",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 14,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 4,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-10T02:13:32.362807Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 19.88,
+    "tipCount": 20,
+    "isNSFW": true,
+    "category": "cars",
+    "likes": 599,
+    "comments": 55
+  },
+  {
+    "id": 34,
+    "creatorId": 9,
+    "question": "Poll question #34",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 21,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 36,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-07T12:13:32.362829Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 60.59,
+    "tipCount": 2,
+    "isNSFW": false,
+    "category": "anime",
+    "likes": 287,
+    "comments": 112
+  },
+  {
+    "id": 35,
+    "creatorId": 10,
+    "question": "Poll question #35",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 56,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 69,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-25T00:13:32.362850Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 19.29,
+    "tipCount": 5,
+    "isNSFW": false,
+    "category": "cars",
+    "likes": 19,
+    "comments": 34
+  },
+  {
+    "id": 36,
+    "creatorId": 16,
+    "question": "Poll question #36",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 2,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 45,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-01T15:13:32.362872Z",
+    "durationMs": 60000,
+    "pledged": false,
+    "pledgeAmount": 59.63,
+    "tipCount": 13,
+    "isNSFW": false,
+    "category": "cars",
+    "likes": 440,
+    "comments": 24
+  },
+  {
+    "id": 37,
+    "creatorId": 12,
+    "question": "Poll question #37",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 74,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 21,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-13T07:13:32.362894Z",
+    "durationMs": 60000,
+    "pledged": true,
+    "pledgeAmount": 9.4,
+    "tipCount": 6,
+    "isNSFW": false,
+    "category": "food",
+    "likes": 640,
+    "comments": 3
+  },
+  {
+    "id": 38,
+    "creatorId": 2,
+    "question": "Poll question #38",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 0,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 44,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-05-30T17:13:32.362915Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 90.15,
+    "tipCount": 11,
+    "isNSFW": false,
+    "category": "anime",
+    "likes": 307,
+    "comments": 147
+  },
+  {
+    "id": 39,
+    "creatorId": 18,
+    "question": "Poll question #39",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 58,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 49,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-10T22:13:32.362934Z",
+    "durationMs": 60000,
+    "pledged": false,
+    "pledgeAmount": 27.25,
+    "tipCount": 20,
+    "isNSFW": true,
+    "category": "cars",
+    "likes": 183,
+    "comments": 106
+  },
+  {
+    "id": 40,
+    "creatorId": 20,
+    "question": "Poll question #40",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 10,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 59,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-28T19:13:32.362947Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 99.0,
+    "tipCount": 18,
+    "isNSFW": false,
+    "category": "anime",
+    "likes": 746,
+    "comments": 18
+  },
+  {
+    "id": 41,
+    "creatorId": 2,
+    "question": "Poll question #41",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 100,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 89,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-20T21:13:32.362962Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 14.16,
+    "tipCount": 2,
+    "isNSFW": false,
+    "category": "sports",
+    "likes": 189,
+    "comments": 80
+  },
+  {
+    "id": 42,
+    "creatorId": 6,
+    "question": "Poll question #42",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 97,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 74,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-29T02:13:32.362976Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 15.53,
+    "tipCount": 15,
+    "isNSFW": false,
+    "category": "fashion",
+    "likes": 166,
+    "comments": 48
+  },
+  {
+    "id": 43,
+    "creatorId": 12,
+    "question": "Poll question #43",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 20,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 72,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-05-30T03:13:32.363118Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 64.53,
+    "tipCount": 9,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 441,
+    "comments": 130
+  },
+  {
+    "id": 44,
+    "creatorId": 18,
+    "question": "Poll question #44",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 11,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 53,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-10T07:13:32.363135Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 90.07,
+    "tipCount": 11,
+    "isNSFW": false,
+    "category": "weddings",
+    "likes": 169,
+    "comments": 74
+  },
+  {
+    "id": 45,
+    "creatorId": 16,
+    "question": "Poll question #45",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 53,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 85,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-27T20:13:32.363147Z",
+    "durationMs": 60000,
+    "pledged": true,
+    "pledgeAmount": 98.66,
+    "tipCount": 4,
+    "isNSFW": true,
+    "category": "weddings",
+    "likes": 828,
+    "comments": 57
+  },
+  {
+    "id": 46,
+    "creatorId": 12,
+    "question": "Poll question #46",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 3,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 52,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-04T22:13:32.363160Z",
+    "durationMs": 60000,
+    "pledged": true,
+    "pledgeAmount": 84.24,
+    "tipCount": 16,
+    "isNSFW": false,
+    "category": "cars",
+    "likes": 700,
+    "comments": 45
+  },
+  {
+    "id": 47,
+    "creatorId": 14,
+    "question": "Poll question #47",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 18,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 72,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-14T06:13:32.363180Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 81.0,
+    "tipCount": 20,
+    "isNSFW": false,
+    "category": "food",
+    "likes": 544,
+    "comments": 72
+  },
+  {
+    "id": 48,
+    "creatorId": 11,
+    "question": "Poll question #48",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 49,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 40,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-12T14:13:32.363203Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 29.29,
+    "tipCount": 18,
+    "isNSFW": false,
+    "category": "home",
+    "likes": 393,
+    "comments": 7
+  },
+  {
+    "id": 49,
+    "creatorId": 1,
+    "question": "Poll question #49",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 4,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 3,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-03T16:13:32.363216Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 19.86,
+    "tipCount": 1,
+    "isNSFW": true,
+    "category": "sports",
+    "likes": 883,
+    "comments": 84
+  },
+  {
+    "id": 50,
+    "creatorId": 3,
+    "question": "Poll question #50",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 63,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 83,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-07T16:13:32.363229Z",
+    "durationMs": 60000,
+    "pledged": false,
+    "pledgeAmount": 92.0,
+    "tipCount": 10,
+    "isNSFW": true,
+    "category": "relationships",
+    "likes": 513,
+    "comments": 147
+  },
+  {
+    "id": 51,
+    "creatorId": 5,
+    "question": "Poll question #51",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 85,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 20,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-13T09:13:32.363242Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 26.05,
+    "tipCount": 0,
+    "isNSFW": true,
+    "category": "sports",
+    "likes": 259,
+    "comments": 179
+  },
+  {
+    "id": 52,
+    "creatorId": 11,
+    "question": "Poll question #52",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 67,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 33,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-14T16:13:32.363254Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 81.69,
+    "tipCount": 8,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 1,
+    "comments": 19
+  },
+  {
+    "id": 53,
+    "creatorId": 5,
+    "question": "Poll question #53",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 14,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 2,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-10T23:13:32.363267Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 72.42,
+    "tipCount": 7,
+    "isNSFW": false,
+    "category": "weddings",
+    "likes": 897,
+    "comments": 127
+  },
+  {
+    "id": 54,
+    "creatorId": 14,
+    "question": "Poll question #54",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 23,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 66,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-23T04:13:32.363289Z",
+    "durationMs": 60000,
+    "pledged": false,
+    "pledgeAmount": 71.04,
+    "tipCount": 0,
+    "isNSFW": false,
+    "category": "tech",
+    "likes": 112,
+    "comments": 89
+  },
+  {
+    "id": 55,
+    "creatorId": 5,
+    "question": "Poll question #55",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 93,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 54,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-16T07:13:32.363313Z",
+    "durationMs": 60000,
+    "pledged": true,
+    "pledgeAmount": 54.38,
+    "tipCount": 12,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 124,
+    "comments": 159
+  },
+  {
+    "id": 56,
+    "creatorId": 21,
+    "question": "Poll question #56",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 17,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 52,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-08T18:13:32.363326Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 50.28,
+    "tipCount": 13,
+    "isNSFW": false,
+    "category": "tech",
+    "likes": 372,
+    "comments": 10
+  },
+  {
+    "id": 57,
+    "creatorId": 16,
+    "question": "Poll question #57",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 51,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 90,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-29T00:13:32.363338Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 63.29,
+    "tipCount": 9,
+    "isNSFW": false,
+    "category": "sports",
+    "likes": 976,
+    "comments": 126
+  },
+  {
+    "id": 58,
+    "creatorId": 13,
+    "question": "Poll question #58",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 27,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 8,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-29T21:13:32.363351Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 64.51,
+    "tipCount": 3,
+    "isNSFW": false,
+    "category": "sports",
+    "likes": 521,
+    "comments": 30
+  },
+  {
+    "id": 59,
+    "creatorId": 11,
+    "question": "Poll question #59",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 82,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 63,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-04T22:13:32.363363Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 91.83,
+    "tipCount": 1,
+    "isNSFW": false,
+    "category": "food",
+    "likes": 469,
+    "comments": 76
+  },
+  {
+    "id": 60,
+    "creatorId": 1,
+    "question": "Poll question #60",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 93,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 67,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-10T14:13:32.363376Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 33.13,
+    "tipCount": 8,
+    "isNSFW": true,
+    "category": "fashion",
+    "likes": 327,
+    "comments": 23
+  },
+  {
+    "id": 61,
+    "creatorId": 6,
+    "question": "Poll question #61",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 40,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 16,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-11T04:13:32.363388Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 89.85,
+    "tipCount": 2,
+    "isNSFW": false,
+    "category": "cars",
+    "likes": 491,
+    "comments": 148
+  },
+  {
+    "id": 62,
+    "creatorId": 21,
+    "question": "Poll question #62",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 44,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 54,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-21T21:13:32.363401Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 45.39,
+    "tipCount": 14,
+    "isNSFW": false,
+    "category": "tech",
+    "likes": 419,
+    "comments": 198
+  },
+  {
+    "id": 63,
+    "creatorId": 10,
+    "question": "Poll question #63",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 53,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 64,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-25T23:13:32.363414Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 9.07,
+    "tipCount": 9,
+    "isNSFW": true,
+    "category": "relationships",
+    "likes": 669,
+    "comments": 21
+  },
+  {
+    "id": 64,
+    "creatorId": 19,
+    "question": "Poll question #64",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 16,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 90,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-05T16:13:32.363427Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 45.38,
+    "tipCount": 19,
+    "isNSFW": true,
+    "category": "home",
+    "likes": 426,
+    "comments": 11
+  },
+  {
+    "id": 65,
+    "creatorId": 18,
+    "question": "Poll question #65",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 61,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 63,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-12T21:13:32.363439Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 6.98,
+    "tipCount": 4,
+    "isNSFW": true,
+    "category": "weddings",
+    "likes": 790,
+    "comments": 192
+  },
+  {
+    "id": 66,
+    "creatorId": 8,
+    "question": "Poll question #66",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 70,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 31,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-12T04:13:32.363452Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 95.85,
+    "tipCount": 8,
+    "isNSFW": true,
+    "category": "tech",
+    "likes": 135,
+    "comments": 197
+  },
+  {
+    "id": 67,
+    "creatorId": 7,
+    "question": "Poll question #67",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 29,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 46,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-06T13:13:32.363464Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 32.83,
+    "tipCount": 4,
+    "isNSFW": false,
+    "category": "tech",
+    "likes": 911,
+    "comments": 124
+  },
+  {
+    "id": 68,
+    "creatorId": 15,
+    "question": "Poll question #68",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 92,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 13,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-18T00:13:32.363476Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 32.91,
+    "tipCount": 9,
+    "isNSFW": true,
+    "category": "weddings",
+    "likes": 971,
+    "comments": 158
+  },
+  {
+    "id": 69,
+    "creatorId": 6,
+    "question": "Poll question #69",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 66,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 92,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-07T21:13:32.363491Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 9.57,
+    "tipCount": 6,
+    "isNSFW": true,
+    "category": "sports",
+    "likes": 322,
+    "comments": 42
+  },
+  {
+    "id": 70,
+    "creatorId": 5,
+    "question": "Poll question #70",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 3,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 83,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-22T09:13:32.363513Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 59.81,
+    "tipCount": 15,
+    "isNSFW": true,
+    "category": "fashion",
+    "likes": 188,
+    "comments": 107
+  },
+  {
+    "id": 71,
+    "creatorId": 22,
+    "question": "Poll question #71",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 75,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 56,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-22T04:13:32.363531Z",
+    "durationMs": 60000,
+    "pledged": false,
+    "pledgeAmount": 48.61,
+    "tipCount": 20,
+    "isNSFW": false,
+    "category": "home",
+    "likes": 770,
+    "comments": 74
+  },
+  {
+    "id": 72,
+    "creatorId": 10,
+    "question": "Poll question #72",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 99,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 13,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-02T00:13:32.363543Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 89.89,
+    "tipCount": 1,
+    "isNSFW": false,
+    "category": "home",
+    "likes": 980,
+    "comments": 131
+  },
+  {
+    "id": 73,
+    "creatorId": 5,
+    "question": "Poll question #73",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 89,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 18,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-23T02:13:32.363562Z",
+    "durationMs": 60000,
+    "pledged": true,
+    "pledgeAmount": 33.41,
+    "tipCount": 18,
+    "isNSFW": false,
+    "category": "tech",
+    "likes": 307,
+    "comments": 155
+  },
+  {
+    "id": 74,
+    "creatorId": 20,
+    "question": "Poll question #74",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 32,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 45,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-27T00:13:32.363579Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 0.57,
+    "tipCount": 18,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 790,
+    "comments": 187
+  },
+  {
+    "id": 75,
+    "creatorId": 13,
+    "question": "Poll question #75",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 91,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 1,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-05-31T03:13:32.363592Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 3.95,
+    "tipCount": 3,
+    "isNSFW": false,
+    "category": "fashion",
+    "likes": 245,
+    "comments": 2
+  },
+  {
+    "id": 76,
+    "creatorId": 12,
+    "question": "Poll question #76",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 11,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 29,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-03T12:13:32.363610Z",
+    "durationMs": 60000,
+    "pledged": true,
+    "pledgeAmount": 0.36,
+    "tipCount": 10,
+    "isNSFW": true,
+    "category": "food",
+    "likes": 495,
+    "comments": 73
+  },
+  {
+    "id": 77,
+    "creatorId": 1,
+    "question": "Poll question #77",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 19,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 13,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-13T15:13:32.363632Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 47.09,
+    "tipCount": 15,
+    "isNSFW": false,
+    "category": "anime",
+    "likes": 877,
+    "comments": 16
+  },
+  {
+    "id": 78,
+    "creatorId": 19,
+    "question": "Poll question #78",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 32,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 43,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-05-31T17:13:32.363656Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 2.83,
+    "tipCount": 18,
+    "isNSFW": true,
+    "category": "fashion",
+    "likes": 957,
+    "comments": 161
+  },
+  {
+    "id": 79,
+    "creatorId": 15,
+    "question": "Poll question #79",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 20,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 26,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-19T10:13:32.363669Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 28.99,
+    "tipCount": 15,
+    "isNSFW": false,
+    "category": "relationships",
+    "likes": 900,
+    "comments": 130
+  },
+  {
+    "id": 80,
+    "creatorId": 4,
+    "question": "Poll question #80",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 57,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 95,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-01T19:13:32.363681Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 59.6,
+    "tipCount": 3,
+    "isNSFW": true,
+    "category": "sports",
+    "likes": 283,
+    "comments": 184
+  },
+  {
+    "id": 81,
+    "creatorId": 17,
+    "question": "Poll question #81",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 51,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 25,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-09T22:13:32.363693Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 66.73,
+    "tipCount": 7,
+    "isNSFW": false,
+    "category": "weddings",
+    "likes": 476,
+    "comments": 9
+  },
+  {
+    "id": 82,
+    "creatorId": 4,
+    "question": "Poll question #82",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 67,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 82,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-26T17:13:32.363706Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 94.79,
+    "tipCount": 5,
+    "isNSFW": false,
+    "category": "cars",
+    "likes": 370,
+    "comments": 63
+  },
+  {
+    "id": 83,
+    "creatorId": 1,
+    "question": "Poll question #83",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 32,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 35,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-28T11:13:32.363723Z",
+    "durationMs": 60000,
+    "pledged": true,
+    "pledgeAmount": 97.93,
+    "tipCount": 17,
+    "isNSFW": true,
+    "category": "home",
+    "likes": 341,
+    "comments": 77
+  },
+  {
+    "id": 84,
+    "creatorId": 10,
+    "question": "Poll question #84",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 48,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 70,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-03T11:13:32.363744Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 53.09,
+    "tipCount": 4,
+    "isNSFW": true,
+    "category": "relationships",
+    "likes": 392,
+    "comments": 81
+  },
+  {
+    "id": 85,
+    "creatorId": 20,
+    "question": "Poll question #85",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 41,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 56,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-14T14:13:32.363757Z",
+    "durationMs": 3600000,
+    "pledged": true,
+    "pledgeAmount": 24.88,
+    "tipCount": 6,
+    "isNSFW": true,
+    "category": "sports",
+    "likes": 886,
+    "comments": 184
+  },
+  {
+    "id": 86,
+    "creatorId": 4,
+    "question": "Poll question #86",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 24,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 55,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-11T01:13:32.363776Z",
+    "durationMs": 60000,
+    "pledged": false,
+    "pledgeAmount": 96.39,
+    "tipCount": 1,
+    "isNSFW": false,
+    "category": "home",
+    "likes": 556,
+    "comments": 62
+  },
+  {
+    "id": 87,
+    "creatorId": 1,
+    "question": "Poll question #87",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 68,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 1,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-05-30T11:13:32.363788Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 99.02,
+    "tipCount": 5,
+    "isNSFW": false,
+    "category": "sports",
+    "likes": 836,
+    "comments": 110
+  },
+  {
+    "id": 88,
+    "creatorId": 7,
+    "question": "Poll question #88",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 39,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 68,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-17T23:13:32.363800Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 66.43,
+    "tipCount": 16,
+    "isNSFW": true,
+    "category": "sports",
+    "likes": 678,
+    "comments": 115
+  },
+  {
+    "id": 89,
+    "creatorId": 16,
+    "question": "Poll question #89",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 34,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 87,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-13T09:13:32.363818Z",
+    "durationMs": 3600000,
+    "pledged": false,
+    "pledgeAmount": 10.08,
+    "tipCount": 7,
+    "isNSFW": true,
+    "category": "cars",
+    "likes": 427,
+    "comments": 67
+  },
+  {
+    "id": 90,
+    "creatorId": 5,
+    "question": "Poll question #90",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 28,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 76,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-28T13:13:32.363842Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 71.71,
+    "tipCount": 14,
+    "isNSFW": true,
+    "category": "food",
+    "likes": 892,
+    "comments": 66
+  },
+  {
+    "id": 91,
+    "creatorId": 18,
+    "question": "Poll question #91",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 39,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 27,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-17T12:13:32.363855Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 79.48,
+    "tipCount": 0,
+    "isNSFW": true,
+    "category": "anime",
+    "likes": 932,
+    "comments": 21
+  },
+  {
+    "id": 92,
+    "creatorId": 16,
+    "question": "Poll question #92",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 54,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 33,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-01T19:13:32.363869Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 68.51,
+    "tipCount": 9,
+    "isNSFW": false,
+    "category": "food",
+    "likes": 369,
+    "comments": 29
+  },
+  {
+    "id": 93,
+    "creatorId": 7,
+    "question": "Poll question #93",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 79,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 49,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-15T09:13:32.363885Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 61.87,
+    "tipCount": 19,
+    "isNSFW": false,
+    "category": "home",
+    "likes": 435,
+    "comments": 19
+  },
+  {
+    "id": 94,
+    "creatorId": 8,
+    "question": "Poll question #94",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 6,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 66,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "standard",
+    "createdAt": "2025-06-25T19:13:32.363912Z",
+    "durationMs": 2592000000,
+    "pledged": true,
+    "pledgeAmount": 31.0,
+    "tipCount": 14,
+    "isNSFW": true,
+    "category": "relationships",
+    "likes": 299,
+    "comments": 35
+  },
+  {
+    "id": 95,
+    "creatorId": 1,
+    "question": "Poll question #95",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 26,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 83,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-16T06:13:32.363935Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 99.56,
+    "tipCount": 10,
+    "isNSFW": false,
+    "category": "relationships",
+    "likes": 512,
+    "comments": 121
+  },
+  {
+    "id": 96,
+    "creatorId": 10,
+    "question": "Poll question #96",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 100,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 19,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-28T08:13:32.363955Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 71.81,
+    "tipCount": 13,
+    "isNSFW": true,
+    "category": "weddings",
+    "likes": 522,
+    "comments": 109
+  },
+  {
+    "id": 97,
+    "creatorId": 10,
+    "question": "Poll question #97",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 90,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 31,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-09T21:13:32.363975Z",
+    "durationMs": 86400000,
+    "pledged": false,
+    "pledgeAmount": 9.7,
+    "tipCount": 10,
+    "isNSFW": true,
+    "category": "fashion",
+    "likes": 357,
+    "comments": 150
+  },
+  {
+    "id": 98,
+    "creatorId": 11,
+    "question": "Poll question #98",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 60,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 35,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-21T21:13:32.363988Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 61.55,
+    "tipCount": 1,
+    "isNSFW": true,
+    "category": "tech",
+    "likes": 481,
+    "comments": 72
+  },
+  {
+    "id": 99,
+    "creatorId": 20,
+    "question": "Poll question #99",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 82,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 67,
+        "imageUrl": "https://images.unsplash.com/photo-1600180758890-6e4b4c51650f",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-13T16:13:32.364000Z",
+    "durationMs": 86400000,
+    "pledged": true,
+    "pledgeAmount": 20.82,
+    "tipCount": 8,
+    "isNSFW": true,
+    "category": "tech",
+    "likes": 919,
+    "comments": 140
+  },
+  {
+    "id": 100,
+    "creatorId": 16,
+    "question": "Poll question #100",
+    "options": [
+      {
+        "id": 1,
+        "text": "Option A description up to 220 characters.",
+        "votes": 31,
+        "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828a27",
+        "affiliateLink": "https://amzn.to/xyz123"
+      },
+      {
+        "id": 2,
+        "text": "Option B description up to 220 characters.",
+        "votes": 96,
+        "imageUrl": "https://images.unsplash.com/photo-1614285974179-c2540978948a",
+        "affiliateLink": "https://amzn.to/abc456"
+      }
+    ],
+    "description": "Sample poll description up to 365 characters. Includes context or appeal to help viewers decide.",
+    "videoUrl": null,
+    "type": "2nd_opinion",
+    "createdAt": "2025-06-15T22:13:32.364012Z",
+    "durationMs": 2592000000,
+    "pledged": false,
+    "pledgeAmount": 3.25,
+    "tipCount": 18,
+    "isNSFW": false,
+    "category": "home",
+    "likes": 242,
+    "comments": 38
+  }
+]
