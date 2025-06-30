@@ -1,5 +1,5 @@
 
-import type { User, Poll } from './types';
+import type { User, Poll, PollOption } from './types';
 
 // Helper function to generate a random birth date for someone between 18 and 40
 const getRandomBirthDate = (): string => {
@@ -14,27 +14,24 @@ const getRandomBirthDate = (): string => {
 
 
 export const dummyUsers: User[] = [
-  { id: '1', numericId: 1, displayName: 'Yuki Tanaka', username: 'yuki_motion', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 1250 },
-  { id: '2', numericId: 2, displayName: 'Akira Saito', username: 'akira_dev', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 5300 },
-  { id: '3', numericId: 3, displayName: 'Hana Kimura', username: 'hana_chan', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 800 },
-  { id: '4', numericId: 4, displayName: 'Kenji Watanabe', username: 'kenji_w', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 2400 },
-  { id: '5', numericId: 5, displayName: 'Sakura Ishikawa', username: 'sakura_blossom', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 9100 },
-  { id: '6', numericId: 6, displayName: 'Ren Kato', username: 'ren_the_great', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 150 },
-  { id: '7', numericId: 7, displayName: 'Aoi Yamamoto', username: 'aoi_blue', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'non-binary', pollitPoints: 4200 },
-  { id: '8', numericId: 8, displayName: 'Daiki Mori', username: 'daiki_forest', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 3300 },
-  { id: '9', numericId: 9, displayName: 'Emma Davis', username: 'emmadavis105', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 10000 },
-  { id: '10', numericId: 10, displayName: 'Haruto Abe', username: 'haruto_sun', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 0 },
-  { id: '11', numericId: 11, displayName: 'Liam Smith', username: 'liam_s', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 200 },
-  { id: '12', numericId: 12, displayName: 'Noah Johnson', username: 'noah_j', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 1100 },
-  { id: '13', numericId: 13, displayName: 'James Brown', username: 'james_b', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 3100 },
-  { id: '14', numericId: 14, displayName: 'Ben Carter', username: 'bencarter', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 4700 },
-  { id: '15', numericId: 15, displayName: 'Sophia Miller', username: 'sophia_m', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 1200 },
-].map(user => ({...user, avatar: `https://i.pravatar.cc/150?u=${user.username}`}));
+  { id: '1', numericId: 1, displayName: 'Yuki Tanaka', username: 'yuki_motion', avatar: 'https://i.pravatar.cc/150?u=yuki_motion', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 1250 },
+  { id: '2', numericId: 2, displayName: 'Akira Saito', username: 'akira_dev', avatar: 'https://i.pravatar.cc/150?u=akira_dev', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 5300 },
+  { id: '3', numericId: 3, displayName: 'Hana Kimura', username: 'hana_chan', avatar: 'https://i.pravatar.cc/150?u=hana_chan', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 800 },
+  { id: '4', numericId: 4, displayName: 'Kenji Watanabe', username: 'kenji_w', avatar: 'https://i.pravatar.cc/150?u=kenji_w', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 2400 },
+  { id: '5', numericId: 5, displayName: 'Sakura Ishikawa', username: 'sakura_blossom', avatar: 'https://i.pravatar.cc/150?u=sakura_blossom', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 9100 },
+  { id: '6', numericId: 6, displayName: 'Ren Kato', username: 'ren_the_great', avatar: 'https://i.pravatar.cc/150?u=ren_the_great', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 150 },
+  { id: '7', numericId: 7, displayName: 'Aoi Yamamoto', username: 'aoi_blue', avatar: 'https://i.pravatar.cc/150?u=aoi_blue', birthDate: getRandomBirthDate(), gender: 'non-binary', pollitPoints: 4200 },
+  { id: '8', numericId: 8, displayName: 'Daiki Mori', username: 'daiki_forest', avatar: 'https://i.pravatar.cc/150?u=daiki_forest', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 3300 },
+  { id: '9', numericId: 9, displayName: 'Emma Davis', username: 'emmadavis105', avatar: 'https://i.pravatar.cc/150?u=emmadavis105', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 10000 },
+  { id: '10', numericId: 10, displayName: 'Haruto Abe', username: 'haruto_sun', avatar: 'https://i.pravatar.cc/150?u=haruto_sun', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 0 },
+  { id: '11', numericId: 11, displayName: 'Liam Smith', username: 'liam_s', avatar: 'https://i.pravatar.cc/150?u=liam_s', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 200 },
+  { id: '12', numericId: 12, displayName: 'Noah Johnson', username: 'noah_j', avatar: 'https://i.pravatar.cc/150?u=noah_j', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 1100 },
+  { id: '13', numericId: 13, displayName: 'James Brown', username: 'james_b', avatar: 'https://i.pravatar.cc/150?u=james_b', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 3100 },
+  { id: '14', numericId: 14, displayName: 'Ben Carter', username: 'bencarter', avatar: 'https://i.pravatar.cc/150?u=bencarter', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 4700 },
+  { id: '15', numericId: 15, displayName: 'Sophia Miller', username: 'sophia_m', avatar: 'https://i.pravatar.cc/150?u=sophia_m', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 1200 },
+];
 
-
-const generatePolls = (): Poll[] => {
-  const polls: Omit<Poll, 'id' | 'creatorId' | 'createdAt'>[] = [
-    // --- Rich, detailed polls ---
+export const richPolls: Omit<Poll, 'id' | 'creatorId' | 'createdAt'>[] = [
     {
       question: "My best friend keeps ghosting me for their new S.O. Do I confront them or just accept our friendship has changed?",
       description: "We used to be inseparable, but now I barely hear from them. I feel replaced and hurt, but I also don't want to be 'that' jealous friend. What's the play here?",
@@ -64,11 +61,11 @@ const generatePolls = (): Poll[] => {
         description: "A/B testing these two thumbnails for my next video on 'The Rise of AI Influencers'. Which one is more compelling and makes you want to watch?",
         category: "Creative",
         options: [
-          { id: 1, text: 'Option A (Dramatic)', votes: Math.floor(Math.random() * 200), imageUrl: `https://placehold.co/400x300.png` },
-          { id: 2, text: 'Option B (Minimalist)', votes: Math.floor(Math.random() * 200), imageUrl: `https://placehold.co/400x300.png` },
+          { id: 1, text: 'Option A (Dramatic)', votes: 112, imageUrl: `https://placehold.co/400x300.png` },
+          { id: 2, text: 'Option B (Minimalist)', votes: 188, imageUrl: `https://placehold.co/400x300.png` },
         ],
         type: '2nd_opinion', durationMs: 24 * 60 * 60 * 1000,
-        pledged: true, pledgeAmount: 10, tipCount: Math.floor(Math.random() * 20), likes: 180, comments: 45, isNSFW: false
+        pledged: true, pledgeAmount: 10, tipCount: 18, likes: 180, comments: 45, isNSFW: false
       },
     {
       question: "Found out my friend's partner might be cheating. Should I tell them?",
@@ -109,8 +106,8 @@ const generatePolls = (): Poll[] => {
         description: "Left is more modern and minimalist, right is more rustic and classic. The brand is called 'Morning Ritual'. Help me decide on the vibe.",
         category: "Branding",
         options: [
-          { id: 1, text: 'Logo A', votes: Math.floor(Math.random() * 200), imageUrl: `https://placehold.co/400x300.png` },
-          { id: 2, text: 'Logo B', votes: Math.floor(Math.random() * 200), imageUrl: `https://placehold.co/400x300.png` },
+          { id: 1, text: 'Logo A', votes: 98, imageUrl: `https://placehold.co/400x300.png` },
+          { id: 2, text: 'Logo B', votes: 154, imageUrl: `https://placehold.co/400x300.png` },
         ],
         type: '2nd_opinion', durationMs: 3 * 24 * 60 * 60 * 1000,
         pledged: false, tipCount: 12, likes: 210, comments: 60, isNSFW: false
@@ -144,78 +141,10 @@ const generatePolls = (): Poll[] => {
         description: "Trying to get an edge in Warzone. Is the price tag on a Scuf controller with paddles and trigger stops actually worth it, or is it just hype? Or should I just get better with the default PS5 controller?",
         category: "Gaming",
         options: [
-          { id: 1, text: 'Scuf is game-changing', votes: Math.floor(Math.random() * 200), imageUrl: `https://placehold.co/400x300.png` },
-          { id: 2, text: 'Standard is fine, just git gud', votes: Math.floor(Math.random() * 200), imageUrl: `https://placehold.co/400x300.png` },
+          { id: 1, text: 'Scuf is game-changing', votes: 199, imageUrl: `https://placehold.co/400x300.png` },
+          { id: 2, text: 'Standard is fine, just git gud', votes: 141, imageUrl: `https://placehold.co/400x300.png` },
         ],
         type: '2nd_opinion', durationMs: 5 * 24 * 60 * 60 * 1000,
         pledged: false, tipCount: 8, likes: 120, comments: 68, isNSFW: false
     },
-  ];
-
-  // Fill up to 100 polls with variety
-  const basePolls = polls;
-  const pollTemplates = [
-      // Tech
-      { q: "iPhone or Android for my next upgrade?", cat: "Tech", o: ["iPhone for the ecosystem", "Android for the customization"] },
-      { q: "Should I start a blog or a YouTube channel?", cat: "Creative", o: ["Blog for deep thoughts", "YouTube for personality"] },
-      // Life
-      { q: "Should I move to another country for a year?", cat: "Travel", o: ["Yes, experience the world!", "No, too much of a hassle"] },
-      { q: "Take the promotion that requires relocation?", cat: "Career", o: ["Yes, career growth first", "No, my roots are here"] },
-      // Fashion
-      { q: "Beard or clean shaven for my dating profile?", cat: "Style", o: ["Beard, looks rugged", "Clean shaven, looks sharp"] },
-      // Food
-      { q: "Should I try going vegetarian for a month?", cat: "Health", o: ["Do it, great for you & planet", "Nah, I need my meat"] },
-  ];
-
-  while(polls.length < 100) {
-      const template = pollTemplates[polls.length % pollTemplates.length];
-      const isPledged = polls.length % 4 === 0;
-      const optionCount = (polls.length % 5 === 0) ? 4 : ((polls.length % 3 === 0) ? 3 : 2);
-      const options = [];
-      if (optionCount === 4) {
-          options.push({id: 1, text: "Strongly Agree", votes: Math.floor(Math.random() * 100)});
-          options.push({id: 2, text: "Agree", votes: Math.floor(Math.random() * 100)});
-          options.push({id: 3, text: "Disagree", votes: Math.floor(Math.random() * 100)});
-          options.push({id: 4, text: "Strongly Disagree", votes: Math.floor(Math.random() * 100)});
-      } else if (optionCount === 3) {
-          options.push({id: 1, text: template.o[0], votes: Math.floor(Math.random() * 100)});
-          options.push({id: 2, text: template.o[1], votes: Math.floor(Math.random() * 100)});
-          options.push({id: 3, text: "I'm on the fence", votes: Math.floor(Math.random() * 50)});
-      } else {
-          options.push({id: 1, text: template.o[0], votes: Math.floor(Math.random() * 100)});
-          options.push({id: 2, text: template.o[1], votes: Math.floor(Math.random() * 100)});
-      }
-
-      const is2ndOpinion = polls.length % 6 === 0;
-
-      polls.push({
-          question: template.q + ` #${Math.floor(polls.length/6)}`,
-          category: template.cat,
-          description: "Just a random thought I had, need a quick 2nd opinion from the world.",
-          options: is2ndOpinion ? [
-            { id: 1, text: 'Option A', votes: Math.floor(Math.random() * 200), imageUrl: `https://placehold.co/400x300.png` },
-            { id: 2, text: 'Option B', votes: Math.floor(Math.random() * 200), imageUrl: `https://placehold.co/400x300.png` },
-          ] : options,
-          type: is2ndOpinion ? '2nd_opinion' : 'standard',
-          durationMs: (Math.floor(Math.random() * 7) + 1) * 24 * 60 * 60 * 1000,
-          pledged: isPledged,
-          pledgeAmount: isPledged ? Math.floor(Math.random() * 100) + 5 : undefined,
-          tipCount: Math.floor(Math.random() * 20),
-          likes: Math.floor(Math.random() * 500),
-          comments: Math.floor(Math.random() * 100),
-          isNSFW: polls.length % 15 === 0,
-      })
-  }
-
-
-  const now = new Date();
-  return polls.slice(0, 100).map((p, i) => ({
-    ...p,
-    id: String(i + 1),
-    creatorId: String((i % 15) + 1),
-    createdAt: new Date(now.getTime() - i * 60000 * 30 * (Math.random() + 0.5)).toISOString(), // Stagger creation times
-  }));
-};
-
-
-export const dummyPolls: Poll[] = generatePolls();
+];
