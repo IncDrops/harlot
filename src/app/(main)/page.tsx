@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { PollCard } from "@/components/poll-card";
+import { PollCard } from "@/components/PollCard";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   AlertDialog,

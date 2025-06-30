@@ -9,7 +9,7 @@ import { DollarSign, Coins, MessageSquare, UserPlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { User, Poll } from "@/lib/types";
 import { getUserByUsername, getPollsByUser } from "@/lib/firebase";
-import { PollCard } from "@/components/poll-card";
+import { PollCard } from "@/components/PollCard";
 
 export default function UserProfilePage({ params }: { params: { username: string } }) {
     const { toast } = useToast();

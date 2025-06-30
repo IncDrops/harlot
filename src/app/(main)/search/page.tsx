@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search as SearchIcon } from "lucide-react";
 import { searchPolls } from "@/lib/firebase";
-import { PollCard } from "@/components/poll-card";
+import { PollCard } from "@/components/PollCard";
 import type { Poll } from "@/lib/types";
 import { useToast } from "@/hooks/use-toast";
 
