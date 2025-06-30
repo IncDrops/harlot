@@ -16,11 +16,14 @@ import {
   signIn as firebaseSignIn,
   signUp as firebaseSignUp,
   signOut as firebaseSignOut,
+  getUserById,
 } from '@/lib/firebase';
+import type { User as AppUser } from '@/lib/types'; // Import custom user type
 
 // --- Auth Context Types ---
 interface AuthContextType {
   user: User | null;
+  profile: AppUser | null; // Add profile to context
   loading: boolean;
   signIn: (email: string, password: string) => Promise<UserCredential>;
   signUp: (email: string, password: string) => Promise<UserCredential>;
@@ -33,6 +36,7 @@ interface AuthContextType {
 // --- Default Context ---
 const AuthContext = createContext<AuthContextType>({
   user: null,
+  profile: null, // Add profile to default
   loading: true,
   signIn: async () => { throw new Error("Firebase not initialized"); },
   signUp: async () => { throw new Error("Firebase not initialized"); },
@@ -45,6 +49,7 @@ const AuthContext = createContext<AuthContextType>({
 // --- Provider Component ---
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<AppUser | null>(null); // Add profile state
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -53,8 +58,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return;
     }
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
+      if (user) {
+        // User is signed in, fetch their Firestore profile
+        const userProfile = await getUserById(user.uid);
+        setProfile(userProfile);
+      } else {
+        // User is signed out
+        setProfile(null);
+      }
       setLoading(false);
     });
 
@@ -65,21 +78,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
     setUser(result.user);
+    // Profile will be fetched by onAuthStateChanged
   };
 
   const signInAnonymouslyHandler = async () => {
     const result = await signInAnonymously(auth);
     setUser(result.user);
+     // Profile will be fetched by onAuthStateChanged
   };
 
   const updateUserProfile = async (displayName: string, photoURL?: string) => {
     if (!auth.currentUser) return;
     await updateProfile(auth.currentUser, { displayName, photoURL });
-    setUser(auth.currentUser); // Refresh user state
+    setUser({ ...auth.currentUser }); // Refresh user state
+     if (profile) {
+        setProfile({ ...profile, displayName: displayName, avatar: photoURL || profile.avatar });
+    }
   };
 
   const value: AuthContextType = {
     user,
+    profile, // Pass profile in value
     loading,
     signIn: firebaseSignIn,
     signUp: firebaseSignUp,

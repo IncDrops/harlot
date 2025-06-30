@@ -17,7 +17,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 
 export function Header() {
-  const { user, signOut } = useAuth();
+  const { user, profile, signOut } = useAuth(); // Get profile from useAuth
   const router = useRouter();
   const { toast } = useToast();
 
@@ -25,6 +25,12 @@ export function Header() {
     await signOut();
     router.push('/signin');
   };
+
+  const getAvatarFallback = () => {
+    if (profile?.displayName) return profile.displayName[0].toUpperCase();
+    if (user?.email) return user.email[0].toUpperCase();
+    return 'U';
+  }
 
   return (
     <header className="sticky top-0 z-10 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -41,13 +47,13 @@ export function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-8 w-8">
-                     <AvatarImage src={`https://i.pravatar.cc/150?u=${user.email}`} alt={user.email || ""} />
-                    <AvatarFallback>{user.email?.[0].toUpperCase()}</AvatarFallback>
+                     <AvatarImage src={profile?.avatar || `https://i.pravatar.cc/150?u=${user.email}`} alt={profile?.username || ""} />
+                    <AvatarFallback>{getAvatarFallback()}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => router.push('/profile')}>
+                <DropdownMenuItem onClick={() => router.push(profile ? `/profile/${profile.username}` : '/profile')}>
                   Profile
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push('/settings')}>App Settings</DropdownMenuItem>

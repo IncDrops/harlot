@@ -1,6 +1,7 @@
 
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 import type { Poll, User } from '../lib/types';
 import path from 'path';
 
@@ -30,6 +31,7 @@ initializeApp({
 });
 
 const db = getFirestore();
+const auth = getAuth();
 
 // Helper to recursively delete collections
 async function deleteCollection(collectionPath: string, batchSize: number) {
@@ -69,6 +71,21 @@ async function deleteCollection(collectionPath: string, batchSize: number) {
 // Main seeding function
 async function seedData() {
     console.log('--- Clearing existing data ---');
+     // Clear Auth users
+    try {
+        const listUsersResult = await auth.listUsers(1000);
+        if (listUsersResult.users.length > 0) {
+            const uidsToDelete = listUsersResult.users.map(u => u.uid);
+            await auth.deleteUsers(uidsToDelete);
+            console.log(`🗑️  Deleted ${uidsToDelete.length} Auth users.`);
+        } else {
+            console.log('✅ No Auth users to delete.');
+        }
+    } catch (error) {
+        console.error('⚠️ Could not clear Auth users. This might be fine on first run.');
+    }
+    
+    // Clear Firestore
     await deleteCollection('users', 100);
     console.log('🗑️  Users collection cleared.');
     await deleteCollection('polls', 100); 
@@ -76,25 +93,46 @@ async function seedData() {
     
     // --- 1. Seed Users ---
     const usersCollection = db.collection('users');
-    console.log('🌱 Seeding users...');
-    const userBatch = db.batch();
-    allUsers.forEach((user: any) => {
-      const docRef = usersCollection.doc(String(user.numericId));
-      userBatch.set(docRef, {
-         id: String(user.numericId),
+    console.log('🌱 Seeding Auth and Firestore users...');
+    const userIds: string[] = [];
+
+    for (const user of allUsers) {
+      const email = `${user.username}@pollitago.com`;
+      const password = 'password123'; // Standard password for all seeded users
+
+      // Create user in Firebase Auth
+      const userRecord = await auth.createUser({
+        email,
+        password,
+        displayName: user.displayName,
+        emailVerified: true,
+      });
+
+      const uid = userRecord.uid;
+      userIds.push(uid);
+
+      // Create Firestore doc with gender-specific avatar
+      const docRef = usersCollection.doc(uid);
+      let avatarUrl = `https://i.pravatar.cc/150?u=${user.username}`;
+      if (user.gender === 'male' || user.gender === 'female') {
+          avatarUrl += `&g=${user.gender}`;
+      }
+
+      // We need to set the user profile with a specific type to avoid `any`
+      const userProfileData = {
+         id: uid, // Use the real Auth UID
          numericId: user.numericId,
          username: user.username,
          displayName: user.displayName,
-         avatar: `https://i.pravatar.cc/150?u=${user.username}`,
+         avatar: avatarUrl,
          birthDate: new Date(user.birthday).toISOString(),
          gender: user.gender,
          pollitPoints: user.pollItPoints || 0,
          tipsReceived: user.tipsReceived || 0,
-       });
-    });
-    await userBatch.commit();
-    console.log(`✅ Seeded ${allUsers.length} users.`);
-    const userIds = allUsers.map(u => String(u.numericId));
+      };
+      await docRef.set(userProfileData);
+    }
+    console.log(`✅ Seeded ${allUsers.length} users into Auth and Firestore.`);
   
     // --- 2. Seed Polls ---
     console.log('🌱 Seeding polls...');
@@ -118,7 +156,6 @@ async function seedData() {
                 votes: Math.floor(Math.random() * 300),
                 imageUrl: opt.imageUrl || null,
                 affiliateLink: opt.affiliateLink || null,
-                'data-ai-hint': opt['data-ai-hint'] || null,
             })),
             type: poll.type || (poll.options.length > 2 ? 'standard' : '2nd_opinion'),
             creatorId: userIds[Math.floor(Math.random() * userIds.length)],
@@ -132,12 +169,13 @@ async function seedData() {
             isProcessed: false,
             category: poll.category || 'General',
             likes: poll.likes || Math.floor(Math.random() * 500),
-            comments: 0, // Will be updated
-            videoUrl: poll.videoUrl
+            comments: 0,
+            videoUrl: poll.videoUrl,
         };
         
-        // Remove undefined/null values for cleaner Firestore documents
-        if (pollData.videoUrl === null || pollData.videoUrl === undefined) delete pollData.videoUrl;
+        if (pollData.videoUrl === undefined) {
+          delete pollData.videoUrl;
+        }
 
         pollBatch.set(docRef, pollData);
     });
@@ -151,15 +189,22 @@ async function seedData() {
 
     masterComments.forEach((comment: any) => {
       const randomPollId = pollIds[Math.floor(Math.random() * pollIds.length)];
-      const randomUser = allUsers[Math.floor(Math.random() * allUsers.length)];
+      const randomUserIndex = Math.floor(Math.random() * allUsers.length);
+      const randomUser = allUsers[randomUserIndex];
+      const randomUserId = userIds[randomUserIndex];
       
       const commentRef = db.collection('polls').doc(randomPollId).collection('comments').doc();
 
+      let avatarUrl = `https://i.pravatar.cc/150?u=${randomUser.username}`;
+      if (randomUser.gender === 'male' || randomUser.gender === 'female') {
+          avatarUrl += `&g=${randomUser.gender}`;
+      }
+
       commentBatch.set(commentRef, {
         pollId: randomPollId,
-        userId: String(randomUser.numericId),
+        userId: randomUserId,
         username: randomUser.username,
-        avatar: `https://i.pravatar.cc/150?u=${randomUser.username}`,
+        avatar: avatarUrl,
         text: comment.text,
         createdAt: new Date(comment.createdAt),
       });
@@ -193,5 +238,3 @@ async function main() {
 }
 
 main();
-
-    

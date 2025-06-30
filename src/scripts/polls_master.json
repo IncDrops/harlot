@@ -1,4 +1,3 @@
-
 [
   {
     "question": "Sequin or Mesh Dresses, or one of each? I need two dresses. Top two choices are it.",
@@ -363,7 +362,837 @@
     "likes": 339,
     "nsfw": false,
     "type": "standard"
+  },
+  {
+    "question": "Which gaming headset offers the best immersion for single-player RPGs?",
+    "description": "I want to get lost in the worlds of my favorite games. Which headset will take me there?",
+    "options": [
+        { "text": "SteelSeries Arctis Nova Pro", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "gaming headset", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Razer BlackShark V2 Pro", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Razer headset", "affiliateLink": "https://amzn.to/449bHMd" }
+    ],
+    "category": "Tech",
+    "timer": 5760,
+    "pledgeAmount": 75,
+    "tipCount": 20,
+    "likes": 450,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Should I upgrade my TV to an 8K model, or is it overkill for now?",
+    "description": "I'm a movie buff and want the best picture quality, but is 8K content common enough to justify the price?",
+    "options": [
+        { "text": "Go for the 8K! Future-proof your setup.", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "Stick with a high-quality 4K TV for now.", "affiliateLink": "https://amzn.to/4epLYm6" }
+    ],
+    "category": "Tech",
+    "timer": 10080,
+    "pledgeAmount": 300,
+    "tipCount": 40,
+    "likes": 800,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Which smart home ecosystem is better for a beginner: Amazon Alexa or Google Home?",
+    "description": "I'm just starting to build my smart home. Which platform is more user-friendly and has better device compatibility?",
+    "options": [
+        { "text": "Amazon Alexa", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Amazon Echo Dot", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "Google Home", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Google Nest Hub", "affiliateLink": "https://amzn.to/4ns8RJR" }
+    ],
+    "category": "Tech",
+    "timer": 4320,
+    "pledgeAmount": 50,
+    "tipCount": 15,
+    "likes": 350,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Should I get a tattoo that my partner doesn't like?",
+    "description": "I've wanted this tattoo for years, but my partner is strongly against it. It's my body, but I also value their opinion.",
+    "options": [
+        { "text": "Your body, your choice. Get the tattoo.", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "Respect your partner's feelings and reconsider.", "affiliateLink": "https://amzn.to/40pH8iY" },
+        { "text": "Try to find a compromise or a different design.", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Get a temporary tattoo first to see how you both feel.", "affiliateLink": "https://amzn.to/4kjbN8P" }
+    ],
+    "category": "Relationships",
+    "timer": 7200,
+    "pledgeAmount": 20,
+    "tipCount": 30,
+    "likes": 600,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Is it a red flag if my date is rude to the waiter?",
+    "description": "Had a great first date, but they were a bit condescending to the restaurant staff. Should I be concerned?",
+    "options": [
+        { "text": "Yes, it shows their true character. Run!", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "Give them another chance, maybe they were having a bad day.", "affiliateLink": "https://amzn.to/4kkDk9X" },
+        { "text": "Address it on the next date and see how they react.", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "It's a yellow flag. Proceed with caution.", "affiliateLink": "https://amzn.to/3TDBO85" }
+    ],
+    "category": "Relationships",
+    "timer": 2880,
+    "pledgeAmount": 10,
+    "tipCount": 25,
+    "likes": 550,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "What's the best way to deal with a noisy neighbor?",
+    "description": "My neighbor's parties are keeping me up at night. I don't want to start a war, but I need my sleep.",
+    "options": [
+        { "text": "Talk to them directly and politely.", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "Leave an anonymous note.", "affiliateLink": "https://amzn.to/3I1BsFL" },
+        { "text": "Contact the landlord or HOA.", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Fight fire with fire: blast my own music.", "affiliateLink": "https://amzn.to/449bHMd" }
+    ],
+    "category": "Home and Vibey Stuff",
+    "timer": 4320,
+    "pledgeAmount": 5,
+    "tipCount": 15,
+    "likes": 400,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which type of plant is best for someone who always kills them?",
+    "description": "I have a black thumb but I desperately want some greenery in my apartment. What's the most foolproof plant?",
+    "options": [
+        { "text": "Snake Plant", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "snake plant", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "ZZ Plant", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "ZZ plant", "affiliateLink": "https://amzn.to/4epLYm6" },
+        { "text": "Pothos", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "pothos plant", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "Fake Plant", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "artificial plant", "affiliateLink": "https://amzn.to/4ns8RJR" }
+    ],
+    "category": "Home and Vibey Stuff",
+    "timer": 2880,
+    "pledgeAmount": 10,
+    "tipCount": 10,
+    "likes": 300,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Is it acceptable to recline your seat on a short-haul flight?",
+    "description": "It's only a two-hour flight, but I want to be comfortable. Is it rude to the person behind me?",
+    "options": [
+        { "text": "Yes, the recline button is there for a reason.", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "No, it's an invasion of personal space on a short flight.", "affiliateLink": "https://amzn.to/40pH8iY" },
+        { "text": "Only if the person behind you is not tall.", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Ask the person behind you if they mind.", "affiliateLink": "https://amzn.to/4kjbN8P" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 1440,
+    "pledgeAmount": 0,
+    "tipCount": 20,
+    "likes": 500,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which fast food chain has the best fries?",
+    "description": "The ultimate showdown. Let's settle this once and for all.",
+    "options": [
+        { "text": "McDonald's", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "Burger King", "affiliateLink": "https://amzn.to/4kkDk9X" },
+        { "text": "Wendy's", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "Chick-fil-A", "affiliateLink": "https://amzn.to/3TDBO85" }
+    ],
+    "category": "Food",
+    "timer": 10080,
+    "pledgeAmount": 5,
+    "tipCount": 50,
+    "likes": 2000,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I quit my stable job to pursue my passion project?",
+    "description": "I have a good job with a steady income, but I'm not passionate about it. My side hustle is starting to gain traction, but it's a huge risk.",
+    "options": [
+        { "text": "Yes, follow your dreams! Life's too short.", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "No, stick with the stable job and keep the passion project on the side.", "affiliateLink": "https://amzn.to/3I1BsFL" },
+        { "text": "Create a detailed business plan and financial safety net first.", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Try to negotiate a part-time schedule at your current job.", "affiliateLink": "https://amzn.to/449bHMd" }
+    ],
+    "category": "Career",
+    "timer": 7200,
+    "pledgeAmount": 100,
+    "tipCount": 35,
+    "likes": 750,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which of these classic muscle cars would you rather own?",
+    "description": "Dreaming of cruising down the highway in one of these beauties. Which one is the ultimate classic?",
+    "options": [
+        { "text": "1969 Ford Mustang Boss 429", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "1969 Mustang", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "1967 Shelby Cobra 427", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Shelby Cobra", "affiliateLink": "https://amzn.to/4epLYm6" },
+        { "text": "1970 Dodge Charger R/T", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Dodge Charger", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "1969 Chevrolet Camaro ZL1", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Chevy Camaro", "affiliateLink": "https://amzn.to/4ns8RJR" }
+    ],
+    "category": "Cars",
+    "timer": 10080,
+    "pledgeAmount": 500,
+    "tipCount": 100,
+    "likes": 3000,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Is it okay to ask for a raise after only six months at a new job?",
+    "description": "I've exceeded all my performance goals and taken on extra responsibilities. Is it too soon to ask for a pay bump?",
+    "options": [
+        { "text": "Yes, if you can prove your value, go for it.", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "No, wait until your one-year anniversary.", "affiliateLink": "https://amzn.to/40pH8iY" },
+        { "text": "Frame it as a performance review and let the conversation lead to compensation.", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Start looking for other jobs that will pay you what you're worth.", "affiliateLink": "https://amzn.to/4kjbN8P" }
+    ],
+    "category": "Career",
+    "timer": 4320,
+    "pledgeAmount": 15,
+    "tipCount": 20,
+    "likes": 450,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "What's the most annoying thing people do at the gym?",
+    "description": "Let's vent. What's your biggest gym pet peeve?",
+    "options": [
+        { "text": "Not re-racking their weights.", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "Hogging equipment while on their phone.", "affiliateLink": "https://amzn.to/4kkDk9X" },
+        { "text": "Giving unsolicited advice.", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "Grunting excessively loud.", "affiliateLink": "https://amzn.to/3TDBO85" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 2880,
+    "pledgeAmount": 0,
+    "tipCount": 30,
+    "likes": 800,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which of these would be a better first date?",
+    "description": "Trying to plan a memorable first date that's not just dinner and a movie. What's the better vibe?",
+    "options": [
+        { "text": "Axe throwing", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "A cooking class", "affiliateLink": "https://amzn.to/3I1BsFL" },
+        { "text": "A picnic in the park", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Visiting a museum", "affiliateLink": "https://amzn.to/449bHMd" }
+    ],
+    "category": "Relationships",
+    "timer": 1440,
+    "pledgeAmount": 10,
+    "tipCount": 15,
+    "likes": 350,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Is it ever okay to lie on your resume?",
+    "description": "I have most of the skills for my dream job, but I'm missing a few. Is it worth a little white lie to get my foot in the door?",
+    "options": [
+        { "text": "Absolutely not. Honesty is the best policy.", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "It's okay to embellish your skills a little.", "affiliateLink": "https://amzn.to/4epLYm6" },
+        { "text": "Only lie about skills you can learn quickly.", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "Depends on the lie and the job.", "affiliateLink": "https://amzn.to/4ns8RJR" }
+    ],
+    "category": "Career",
+    "timer": 4320,
+    "pledgeAmount": 5,
+    "tipCount": 25,
+    "likes": 600,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which is the superior breakfast food?",
+    "description": "The age-old question. What reigns supreme on the breakfast table?",
+    "options": [
+        { "text": "Pancakes", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "Waffles", "affiliateLink": "https://amzn.to/40pH8iY" },
+        { "text": "French Toast", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Bacon and Eggs", "affiliateLink": "https://amzn.to/4kjbN8P" }
+    ],
+    "category": "Food",
+    "timer": 10080,
+    "pledgeAmount": 2,
+    "tipCount": 40,
+    "likes": 1500,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I tell my friend that I don't like their new partner?",
+    "description": "My best friend is head-over-heels for someone who I think is a bad influence. Do I risk our friendship by telling them the truth?",
+    "options": [
+        { "text": "Yes, a true friend would be honest.", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "No, let them figure it out on their own.", "affiliateLink": "https://amzn.to/4kkDk9X" },
+        { "text": "Express your concerns gently and focus on specific behaviors.", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "Wait until they ask for your opinion.", "affiliateLink": "https://amzn.to/3TDBO85" }
+    ],
+    "category": "Relationships",
+    "timer": 7200,
+    "pledgeAmount": 25,
+    "tipCount": 30,
+    "likes": 700,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which is the better way to spend a rainy day?",
+    "description": "The weather is gloomy, but my spirits are high. What's the coziest way to spend the day indoors?",
+    "options": [
+        { "text": "Binge-watching a new series.", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "Reading a good book with a cup of tea.", "affiliateLink": "https://amzn.to/3I1BsFL" },
+        { "text": "Playing board games with friends or family.", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Trying out a new recipe.", "affiliateLink": "https://amzn.to/449bHMd" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 1440,
+    "pledgeAmount": 0,
+    "tipCount": 10,
+    "likes": 400,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which is more important in a car: performance or comfort?",
+    "description": "When you're choosing a new car, what's your top priority? The thrill of the drive or a smooth, relaxing ride?",
+    "options": [
+        { "text": "Performance all the way. I want speed and handling.", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "Comfort is key. Give me heated seats and a quiet cabin.", "affiliateLink": "https://amzn.to/4epLYm6" }
+    ],
+    "category": "Cars",
+    "timer": 4320,
+    "pledgeAmount": 10,
+    "tipCount": 20,
+    "likes": 500,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Which foundation provides the best full coverage for acne-prone skin?",
+    "description": "I'm looking for a foundation that will cover my breakouts without causing more. Which of these is the holy grail?",
+    "options": [
+        { "text": "Estée Lauder Double Wear Stay-in-Place Makeup", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Estee Lauder foundation", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "Fenty Beauty Pro Filt'r Soft Matte Longwear Foundation", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Fenty Beauty foundation", "affiliateLink": "https://amzn.to/4ns8RJR" },
+        { "text": "NARS Natural Radiant Longwear Foundation", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "NARS foundation", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "IT Cosmetics CC+ Cream with SPF 50+", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "IT Cosmetics CC cream", "affiliateLink": "https://amzn.to/40pH8iY" }
+    ],
+    "category": "Beauty",
+    "timer": 7200,
+    "pledgeAmount": 30,
+    "tipCount": 25,
+    "likes": 650,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I go on a solo trip?",
+    "description": "I've always wanted to travel alone, but I'm a bit nervous. Is it a life-changing experience or a lonely one?",
+    "options": [
+        { "text": "Yes, do it! It's an amazing way to discover yourself.", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "No, traveling is better with company.", "affiliateLink": "https://amzn.to/4kjbN8P" },
+        { "text": "Start with a short weekend trip to a nearby city.", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "Join a group tour for solo travelers.", "affiliateLink": "https://amzn.to/4kkDk9X" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 4320,
+    "pledgeAmount": 20,
+    "tipCount": 30,
+    "likes": 800,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "What's the best way to get over a creative block?",
+    "description": "I'm a writer and I've been staring at a blank page for days. How do I get my inspiration back?",
+    "options": [
+        { "text": "Take a break and do something completely different.", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "Force yourself to write, even if it's garbage.", "affiliateLink": "https://amzn.to/3TDBO85" },
+        { "text": "Change your environment. Work from a coffee shop or a park.", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "Read a book or watch a movie in your genre.", "affiliateLink": "https://amzn.to/3I1BsFL" }
+    ],
+    "category": "Career",
+    "timer": 2880,
+    "pledgeAmount": 5,
+    "tipCount": 15,
+    "likes": 400,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which of these is the most iconic horror movie villain?",
+    "description": "Let's debate the king of slashers. Who is the most terrifying and memorable?",
+    "options": [
+        { "text": "Michael Myers (Halloween)", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Freddy Krueger (A Nightmare on Elm Street)", "affiliateLink": "https://amzn.to/449bHMd" },
+        { "text": "Jason Voorhees (Friday the 13th)", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "Ghostface (Scream)", "affiliateLink": "https://amzn.to/4epLYm6" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 10080,
+    "pledgeAmount": 10,
+    "tipCount": 60,
+    "likes": 2500,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I adopt a cat or a dog?",
+    "description": "I'm ready to get a pet, but I can't decide between a feline friend and a canine companion. Help me choose!",
+    "options": [
+        { "text": "Get a dog! They're loyal and adventurous.", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "Get a cat! They're independent and cuddly.", "affiliateLink": "https://amzn.to/4ns8RJR" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 7200,
+    "pledgeAmount": 50,
+    "tipCount": 40,
+    "likes": 1200,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Which is the better investment: cryptocurrency or the stock market?",
+    "description": "I'm looking to grow my wealth, but I'm not sure where to put my money. What's the smarter long-term investment?",
+    "options": [
+        { "text": "Cryptocurrency. High risk, high reward.", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "The stock market. A more traditional and stable option.", "affiliateLink": "https://amzn.to/40pH8iY" }
+    ],
+    "category": "Tech",
+    "timer": 10080,
+    "pledgeAmount": 200,
+    "tipCount": 50,
+    "likes": 1000,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Which is the best type of vacation?",
+    "description": "If you could only choose one type of vacation for the rest of your life, what would it be?",
+    "options": [
+        { "text": "Relaxing on a tropical beach.", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Exploring a bustling city.", "affiliateLink": "https://amzn.to/4kjbN8P" },
+        { "text": "Hiking and camping in the mountains.", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "A road trip with no destination.", "affiliateLink": "https://amzn.to/4kkDk9X" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 4320,
+    "pledgeAmount": 15,
+    "tipCount": 25,
+    "likes": 600,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I move to a new city where I don't know anyone?",
+    "description": "I have a great job offer in a city across the country. It's an amazing opportunity, but I'd be leaving my friends and family behind.",
+    "options": [
+        { "text": "Yes, take the leap! It's a chance for a fresh start.", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "No, your support system is too important to leave.", "affiliateLink": "https://amzn.to/3TDBO85" },
+        { "text": "Visit the city for a weekend to see how it feels.", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "Try to negotiate a remote work arrangement.", "affiliateLink": "https://amzn.to/3I1BsFL" }
+    ],
+    "category": "Career",
+    "timer": 7200,
+    "pledgeAmount": 50,
+    "tipCount": 30,
+    "likes": 800,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which is the most underrated travel destination?",
+    "description": "Let's hear about the hidden gems. What's a place that deserves more hype?",
+    "options": [
+        { "text": "Portugal", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Slovenia", "affiliateLink": "https://amzn.to/449bHMd" },
+        { "text": "South Korea", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "Colombia", "affiliateLink": "https://amzn.to/4epLYm6" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 10080,
+    "pledgeAmount": 20,
+    "tipCount": 40,
+    "likes": 1000,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which is the better way to consume content?",
+    "description": "In the age of information overload, how do you prefer to learn and be entertained?",
+    "options": [
+        { "text": "Podcasts", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "YouTube videos", "affiliateLink": "https://amzn.to/4ns8RJR" },
+        { "text": "Books", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "Documentaries", "affiliateLink": "https://amzn.to/40pH8iY" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 2880,
+    "pledgeAmount": 5,
+    "tipCount": 15,
+    "likes": 500,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Is it better to rent or buy a home in the current market?",
+    "description": "I'm tired of paying rent, but the housing market is so volatile. What's the smarter financial move right now?",
+    "options": [
+        { "text": "Rent and save for a larger down payment.", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Buy now before prices and interest rates go up even more.", "affiliateLink": "https://amzn.to/4kjbN8P" }
+    ],
+    "category": "Home and Vibey Stuff",
+    "timer": 10080,
+    "pledgeAmount": 100,
+    "tipCount": 50,
+    "likes": 1500,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Which type of coffee is the best?",
+    "description": "For all the coffee lovers out there, what's your go-to brew?",
+    "options": [
+        { "text": "Espresso", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "Drip coffee", "affiliateLink": "https://amzn.to/4kkDk9X" },
+        { "text": "Cold brew", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "Pour-over", "affiliateLink": "https://amzn.to/3TDBO85" }
+    ],
+    "category": "Food",
+    "timer": 4320,
+    "pledgeAmount": 5,
+    "tipCount": 20,
+    "likes": 700,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I learn a new language?",
+    "description": "I've always wanted to be bilingual, but I'm not sure if I have the time or dedication. Is it worth the effort?",
+    "options": [
+        { "text": "Yes, it opens up new cultures and opportunities.", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "No, it's a huge time commitment with limited practical use.", "affiliateLink": "https://amzn.to/3I1BsFL" },
+        { "text": "Try a language learning app to see if you enjoy it.", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Focus on a language that would be useful for your career.", "affiliateLink": "https://amzn.to/449bHMd" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 2880,
+    "pledgeAmount": 10,
+    "tipCount": 15,
+    "likes": 500,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which of these superpowers would you rather have?",
+    "description": "If you could have any superpower, which one would you choose?",
+    "options": [
+        { "text": "Flight", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "Invisibility", "affiliateLink": "https://amzn.to/4epLYm6" },
+        { "text": "Teleportation", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "Super strength", "affiliateLink": "https://amzn.to/4ns8RJR" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 10080,
+    "pledgeAmount": 5,
+    "tipCount": 70,
+    "likes": 3000,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "What's the best way to ask someone out on a date?",
+    "description": "I have a crush on someone, but I'm too nervous to make a move. What's a smooth, non-awkward way to ask them out?",
+    "options": [
+        { "text": "Be direct and ask them in person.", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "Send a casual text message.", "affiliateLink": "https://amzn.to/40pH8iY" },
+        { "text": "Slide into their DMs.", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Have a mutual friend put in a good word.", "affiliateLink": "https://amzn.to/4kjbN8P" }
+    ],
+    "category": "Relationships",
+    "timer": 1440,
+    "pledgeAmount": 10,
+    "tipCount": 20,
+    "likes": 450,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which is the better gaming console: PlayStation 5 or Xbox Series X?",
+    "description": "The console wars continue. Which next-gen console is the superior choice for gamers?",
+    "options": [
+        { "text": "PlayStation 5", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "PlayStation 5 console", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "Xbox Series X", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Xbox Series X console", "affiliateLink": "https://amzn.to/4kkDk9X" }
+    ],
+    "category": "Tech",
+    "timer": 10080,
+    "pledgeAmount": 100,
+    "tipCount": 60,
+    "likes": 2000,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "What's the best way to start your day?",
+    "description": "Let's talk morning routines. What's the one thing you have to do to have a good day?",
+    "options": [
+        { "text": "A good workout.", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "Meditation or journaling.", "affiliateLink": "https://amzn.to/3TDBO85" },
+        { "text": "A healthy breakfast.", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "Hitting the snooze button three times.", "affiliateLink": "https://amzn.to/3I1BsFL" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 2880,
+    "pledgeAmount": 0,
+    "tipCount": 15,
+    "likes": 600,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which celebrity would you want to be your best friend?",
+    "description": "If you could have any celebrity as your bestie, who would you choose?",
+    "options": [
+        { "text": "Jennifer Lawrence", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Ryan Reynolds", "affiliateLink": "https://amzn.to/449bHMd" },
+        { "text": "Rihanna", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "Dwayne 'The Rock' Johnson", "affiliateLink": "https://amzn.to/4epLYm6" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 4320,
+    "pledgeAmount": 5,
+    "tipCount": 30,
+    "likes": 1200,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "What's the most important quality in a partner?",
+    "description": "When it comes to a long-term relationship, what's the one thing you can't live without?",
+    "options": [
+        { "text": "A sense of humor", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "Intelligence", "affiliateLink": "https://amzn.to/4ns8RJR" },
+        { "text": "Kindness", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "Ambition", "affiliateLink": "https://amzn.to/40pH8iY" }
+    ],
+    "category": "Relationships",
+    "timer": 7200,
+    "pledgeAmount": 10,
+    "tipCount": 40,
+    "likes": 1500,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which of these is the best movie of all time?",
+    "description": "Let's settle the ultimate debate. What is the greatest film ever made?",
+    "options": [
+        { "text": "The Godfather", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Pulp Fiction", "affiliateLink": "https://amzn.to/4kjbN8P" },
+        { "text": "The Shawshank Redemption", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "The Dark Knight", "affiliateLink": "https://amzn.to/4kkDk9X" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 10080,
+    "pledgeAmount": 15,
+    "tipCount": 80,
+    "likes": 3500,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I learn to play a musical instrument as an adult?",
+    "description": "I've always regretted not learning an instrument as a kid. Is it too late to start now?",
+    "options": [
+        { "text": "Yes, it's a great way to challenge yourself and be creative.", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "No, it's too difficult and time-consuming to learn as an adult.", "affiliateLink": "https://amzn.to/3TDBO85" },
+        { "text": "Start with a simple instrument like the ukulele.", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "Take a few lessons to see if you enjoy it before committing.", "affiliateLink": "https://amzn.to/3I1BsFL" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 2880,
+    "pledgeAmount": 10,
+    "tipCount": 20,
+    "likes": 600,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which of these is the most beautiful car ever made?",
+    "description": "Let's talk automotive art. Which car is a true masterpiece of design?",
+    "options": [
+        { "text": "Jaguar E-Type", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Jaguar E-Type", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Ferrari 250 GTO", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Ferrari 250 GTO", "affiliateLink": "https://amzn.to/449bHMd" },
+        { "text": "Lamborghini Miura", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Lamborghini Miura", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "Aston Martin DB5", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "Aston Martin DB5", "affiliateLink": "https://amzn.to/4epLYm6" }
+    ],
+    "category": "Cars",
+    "timer": 10080,
+    "pledgeAmount": 200,
+    "tipCount": 80,
+    "likes": 4000,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "What's the best way to make new friends as an adult?",
+    "description": "It's hard to meet new people outside of work and school. What's the best way to expand your social circle?",
+    "options": [
+        { "text": "Join a club or take a class based on your hobbies.", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "Use friendship apps like Bumble BFF.", "affiliateLink": "https://amzn.to/4ns8RJR" },
+        { "text": "Volunteer for a cause you care about.", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "Reconnect with old friends.", "affiliateLink": "https://amzn.to/40pH8iY" }
+    ],
+    "category": "Relationships",
+    "timer": 4320,
+    "pledgeAmount": 10,
+    "tipCount": 25,
+    "likes": 700,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which of these skincare products is the most essential?",
+    "description": "If you could only use one skincare product for the rest of your life, what would it be?",
+    "options": [
+        { "text": "Sunscreen", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Moisturizer", "affiliateLink": "https://amzn.to/4kjbN8P" },
+        { "text": "Cleanser", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "Retinol", "affiliateLink": "https://amzn.to/4kkDk9X" }
+    ],
+    "category": "Beauty",
+    "timer": 2880,
+    "pledgeAmount": 5,
+    "tipCount": 20,
+    "likes": 800,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Is it okay to unfollow someone on social media if you know them in real life?",
+    "description": "Their posts are annoying, but I don't want to create drama. What's the best course of action?",
+    "options": [
+        { "text": "Yes, your mental peace is more important. Unfollow.", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "No, it's not worth the potential awkwardness. Mute them instead.", "affiliateLink": "https://amzn.to/3TDBO85" }
+    ],
+    "category": "Relationships",
+    "timer": 1440,
+    "pledgeAmount": 0,
+    "tipCount": 10,
+    "likes": 400,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Which type of cuisine would you want to eat for the rest of your life?",
+    "description": "If you had to choose just one, which cuisine would you pick?",
+    "options": [
+        { "text": "Italian", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "Mexican", "affiliateLink": "https://amzn.to/3I1BsFL" },
+        { "text": "Japanese", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "Indian", "affiliateLink": "https://amzn.to/449bHMd" }
+    ],
+    "category": "Food",
+    "timer": 10080,
+    "pledgeAmount": 10,
+    "tipCount": 50,
+    "likes": 2000,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "What's the best piece of advice you've ever received?",
+    "description": "Let's share some wisdom. What's a piece of advice that has stuck with you?",
+    "options": [
+        { "text": "'This too shall pass.'", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "'Don't set yourself on fire to keep others warm.'", "affiliateLink": "https://amzn.to/4epLYm6" },
+        { "text": "'Done is better than perfect.'", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "'Be a pineapple: stand tall, wear a crown, and be sweet on the inside.'", "affiliateLink": "https://amzn.to/4ns8RJR" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 4320,
+    "pledgeAmount": 0,
+    "tipCount": 25,
+    "likes": 1000,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which of these is the best streaming service?",
+    "description": "In the golden age of streaming, which platform offers the best content and value?",
+    "options": [
+        { "text": "Netflix", "affiliateLink": "https://amzn.to/3I1BpK5" },
+        { "text": "HBO Max", "affiliateLink": "https://amzn.to/40pH8iY" },
+        { "text": "Disney+", "affiliateLink": "https://amzn.to/44sfTWf" },
+        { "text": "Hulu", "affiliateLink": "https://amzn.to/4kjbN8P" }
+    ],
+    "category": "Tech",
+    "timer": 7200,
+    "pledgeAmount": 10,
+    "tipCount": 40,
+    "likes": 1500,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "What's the best way to deal with a bad haircut?",
+    "description": "I just got a terrible haircut and I want to cry. How do I survive the next few months?",
+    "options": [
+        { "text": "Wear a hat. Every day.", "affiliateLink": "https://amzn.to/46kcs6q" },
+        { "text": "Experiment with different hairstyles and accessories.", "affiliateLink": "https://amzn.to/4kkDk9X" },
+        { "text": "Go back to the salon and ask them to fix it.", "affiliateLink": "https://amzn.to/44GQdX5" },
+        { "text": "Shave it all off and start fresh.", "affiliateLink": "https://amzn.to/3TDBO85" }
+    ],
+    "category": "Beauty",
+    "timer": 1440,
+    "pledgeAmount": 5,
+    "tipCount": 15,
+    "likes": 500,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Which of these is the best way to drink tequila?",
+    "description": "Let's talk about the best way to enjoy this iconic spirit.",
+    "options": [
+        { "text": "As a shot with salt and lime.", "affiliateLink": "https://amzn.to/4ns8YVN" },
+        { "text": "In a margarita.", "affiliateLink": "https://amzn.to/3I1BsFL" },
+        { "text": "Sipped slowly and neat.", "affiliateLink": "https://amzn.to/4l1waZj" },
+        { "text": "In a Paloma.", "affiliateLink": "https://amzn.to/449bHMd" }
+    ],
+    "category": "Food",
+    "timer": 2880,
+    "pledgeAmount": 5,
+    "tipCount": 25,
+    "likes": 800,
+    "nsfw": true,
+    "type": "standard"
+  },
+  {
+    "question": "Which is the better way to end a relationship?",
+    "description": "Breaking up is hard to do. What's the most respectful way to end things?",
+    "options": [
+        { "text": "In person, with a clear and honest conversation.", "affiliateLink": "https://amzn.to/3GiqWcE" },
+        { "text": "Over the phone or video call if you're long-distance.", "affiliateLink": "https://amzn.to/4epLYm6" },
+        { "text": "A heartfelt letter or email.", "affiliateLink": "https://amzn.to/4l5vORg" },
+        { "text": "Ghosting. (Just kidding... or am I?)", "affiliateLink": "https://amzn.to/4ns8RJR" }
+    ],
+    "category": "Relationships",
+    "timer": 4320,
+    "pledgeAmount": 10,
+    "tipCount": 30,
+    "likes": 1000,
+    "nsfw": false,
+    "type": "standard"
   }
 ]
-
-    
