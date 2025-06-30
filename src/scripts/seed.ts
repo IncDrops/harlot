@@ -1,7 +1,7 @@
 
 import { initializeApp, cert } from 'firebase-admin/app';
-import { getFirestore, CollectionReference, DocumentReference } from 'firebase-admin/firestore';
-import type { Poll, User, Comment } from '../lib/types';
+import { getFirestore } from 'firebase-admin/firestore';
+import type { Poll, User } from '../lib/types';
 import path from 'path';
 
 // --- IMPORTANT ---
@@ -19,7 +19,8 @@ try {
     process.exit(1);
 }
 
-import { dummyUsers } from '../lib/dummy-data';
+// Import all data sources
+import allUsers from './users_seed_122.json';
 import masterPolls from './polls_master.json';
 import masterComments from './comments_seed.json';
 
@@ -30,7 +31,7 @@ initializeApp({
 
 const db = getFirestore();
 
-// Helper to recursively delete collections and subcollections
+// Helper to recursively delete collections
 async function deleteCollection(collectionPath: string, batchSize: number) {
   const collectionRef = db.collection(collectionPath);
   const query = collectionRef.orderBy('__name__').limit(batchSize);
@@ -49,20 +50,13 @@ async function deleteCollection(collectionPath: string, batchSize: number) {
 
     const batch = db.batch();
     for (const doc of snapshot.docs) {
-      // Deleting the document itself
+      const subcollections = await doc.ref.listCollections();
+      for(const subcollection of subcollections) {
+        await deleteCollection(subcollection.path, batchSize);
+      }
       batch.delete(doc.ref);
     }
     
-    // Deleting subcollections recursively must be done before deleting the parent document.
-    // However, since we are deleting the document itself, we don't need to manually delete subcollections
-    // if we process the entire collection deletion. For safety, let's explicitly handle it.
-    for (const doc of snapshot.docs) {
-      const subcollections = await doc.ref.listCollections();
-      for (const subcollection of subcollections) {
-        await deleteCollection(subcollection.path, batchSize);
-      }
-    }
-
     await batch.commit();
 
     process.nextTick(() => {
@@ -77,38 +71,45 @@ async function seedData() {
     console.log('--- Clearing existing data ---');
     await deleteCollection('users', 100);
     console.log('🗑️  Users collection cleared.');
-    await deleteCollection('polls', 100); // This will clear polls and their subcollections
-    console.log('🗑️  Polls collection and all sub-comments cleared.');
+    await deleteCollection('polls', 100); 
+    console.log('🗑️  Polls collection and all sub-collections cleared.');
     
     // --- 1. Seed Users ---
     const usersCollection = db.collection('users');
     console.log('🌱 Seeding users...');
     const userBatch = db.batch();
-    const userIds: string[] = [];
-    dummyUsers.forEach(user => {
-      const docRef = usersCollection.doc(String(user.id));
-      userIds.push(user.id);
-      userBatch.set(docRef, { ...user, id: user.id, birthDate: new Date(user.birthDate) });
+    allUsers.forEach((user: any) => {
+      const docRef = usersCollection.doc(String(user.numericId));
+      userBatch.set(docRef, {
+         id: String(user.numericId),
+         numericId: user.numericId,
+         username: user.username,
+         displayName: user.displayName,
+         avatar: `https://i.pravatar.cc/150?u=${user.username}`,
+         birthDate: new Date(user.birthday).toISOString(),
+         gender: user.gender,
+         pollitPoints: user.pollItPoints || 0,
+         tipsReceived: user.tipsReceived || 0,
+       });
     });
     await userBatch.commit();
-    console.log(`✅ Seeded ${dummyUsers.length} users.`);
+    console.log(`✅ Seeded ${allUsers.length} users.`);
+    const userIds = allUsers.map(u => String(u.numericId));
   
     // --- 2. Seed Polls ---
     console.log('🌱 Seeding polls...');
     const pollsCollection = db.collection('polls');
     const pollBatch = db.batch();
     const pollIds: string[] = [];
-    const commentCounts: { [key: string]: number } = {};
-
+    
     masterPolls.forEach((poll: any) => {
         const docRef = pollsCollection.doc();
         pollIds.push(docRef.id);
-        commentCounts[docRef.id] = 0; // Initialize comment count
         const now = new Date();
-        const createdAt = new Date(now.getTime() - Math.random() * 30 * 24 * 60 * 60 * 1000); // Random time in last 30 days
-        const durationMs = (poll.timer || 1440) * 60 * 1000; // default 1 day
+        const createdAt = new Date(now.getTime() - Math.random() * 30 * 24 * 60 * 60 * 1000);
+        const durationMs = (poll.timer || 1440) * 60 * 1000;
 
-        pollBatch.set(docRef, {
+        const pollData: Omit<Poll, 'id'> = {
             question: poll.question,
             description: poll.description || "A community-powered decision.",
             options: poll.options.map((opt: any, index: number) => ({
@@ -117,9 +118,10 @@ async function seedData() {
                 votes: Math.floor(Math.random() * 300),
                 imageUrl: opt.imageUrl || null,
                 affiliateLink: opt.affiliateLink || null,
+                'data-ai-hint': opt['data-ai-hint'] || null,
             })),
-            type: poll.options.length > 2 ? 'standard' : '2nd_opinion',
-            creatorId: poll.creatorId || userIds[Math.floor(Math.random() * userIds.length)],
+            type: poll.type || (poll.options.length > 2 ? 'standard' : '2nd_opinion'),
+            creatorId: userIds[Math.floor(Math.random() * userIds.length)],
             createdAt: createdAt.toISOString(),
             endsAt: new Date(createdAt.getTime() + durationMs).toISOString(),
             durationMs: durationMs,
@@ -130,8 +132,13 @@ async function seedData() {
             isProcessed: false,
             category: poll.category || 'General',
             likes: poll.likes || Math.floor(Math.random() * 500),
-            comments: 0 // Will be updated after seeding comments
-        });
+            comments: 0 // Will be updated
+        };
+        
+        // Remove null values for cleaner Firestore documents
+        if (pollData.videoUrl === null) delete pollData.videoUrl;
+
+        pollBatch.set(docRef, pollData);
     });
     await pollBatch.commit();
     console.log(`✅ Seeded ${masterPolls.length} polls.`);
@@ -143,15 +150,15 @@ async function seedData() {
 
     masterComments.forEach((comment: any) => {
       const randomPollId = pollIds[Math.floor(Math.random() * pollIds.length)];
-      const randomUser = dummyUsers[Math.floor(Math.random() * dummyUsers.length)];
+      const randomUser = allUsers[Math.floor(Math.random() * allUsers.length)];
       
       const commentRef = db.collection('polls').doc(randomPollId).collection('comments').doc();
 
       commentBatch.set(commentRef, {
         pollId: randomPollId,
-        userId: randomUser.id,
+        userId: String(randomUser.numericId),
         username: randomUser.username,
-        avatar: randomUser.avatar,
+        avatar: `https://i.pravatar.cc/150?u=${randomUser.username}`,
         text: comment.text,
         createdAt: new Date(comment.createdAt),
       });
@@ -173,14 +180,17 @@ async function seedData() {
     console.log('✅ Updated comment counts.');
 }
 
-
 async function main() {
-    console.log('--- Starting Comprehensive Database Seed ---');
-    await seedData();
-    console.log('--- Database Seed Finished Successfully ---');
+    try {
+        console.log('--- Starting Comprehensive Database Seed ---');
+        await seedData();
+        console.log('--- Database Seed Finished Successfully ---');
+    } catch (error) {
+        console.error('❌ Error during database seed:', error);
+        process.exit(1);
+    }
 }
 
-main().catch(error => {
-    console.error('❌ Error during database seed:', error);
-    process.exit(1);
-});
+main();
+
+    

@@ -6,11 +6,10 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { CommentListItem } from './comment-list-item';
-import { getCommentsForPoll, addCommentToPoll } from '@/lib/firebase';
+import { getCommentsForPoll, addCommentToPoll, getUserById } from '@/lib/firebase';
 import type { Comment } from '@/lib/types';
 import { useAuth } from '@/contexts/auth-context';
 import { useToast } from '@/hooks/use-toast';
-import { dummyUsers } from '@/lib/dummy-data';
 
 interface CommentSheetProps {
   pollId: string;
@@ -51,9 +50,19 @@ export function CommentSheet({ pollId, isOpen, onOpenChange }: CommentSheetProps
 
     setIsSubmitting(true);
     try {
-      const currentUserProfile = dummyUsers.find(u => u.username === user.email?.split('@')[0]) || dummyUsers[0];
-
-      const commentData = {
+      const currentUserProfile = await getUserById(user.uid);
+      if (!currentUserProfile) {
+        toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Could not find your user profile to post a comment."
+        });
+        setIsSubmitting(false);
+        return;
+      }
+      
+      const commentData: Omit<Comment, 'id' | 'createdAt'> = {
+        pollId: pollId,
         userId: user.uid,
         username: currentUserProfile.username,
         avatar: currentUserProfile.avatar,

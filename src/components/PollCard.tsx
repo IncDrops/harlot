@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useMemo } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, PanInfo } from 'framer-motion';
 import { formatDistanceToNowStrict } from 'date-fns';
@@ -133,9 +133,14 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
       return (
         <div className="grid grid-cols-2 gap-2 mt-4">
           {poll.options.map((option, index) => (
-            <div key={`${poll.id}-option-${index}`} className="relative aspect-square cursor-pointer" onClick={() => !showResults && onVote(poll.id, option.id)}>
+            <div key={`${poll.id}-option-${option.id || index}`} className="relative aspect-square cursor-pointer group" onClick={() => !showResults && onVote(poll.id, option.id)}>
               {option.imageUrl && (
-                <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-2xl object-cover" data-ai-hint="comparison abstract" />
+                <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-2xl object-cover" data-ai-hint={option['data-ai-hint'] || 'comparison abstract'} />
+              )}
+              {!showResults && (
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-white text-lg font-bold text-center p-2">{option.text}</span>
+                </div>
               )}
               {showResults && (
                 <div className="absolute inset-0 bg-black/60 flex items-center justify-center rounded-2xl flex-col">
@@ -157,7 +162,7 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
             {poll.options.map((option: PollOption, index) => {
               const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;
               return (
-                <div key={`${poll.id}-option-${index}`}>
+                <div key={`${poll.id}-option-${option.id || index}`}>
                   {showResults ? (
                      <div className="space-y-1">
                       <div className="flex justify-between text-sm font-medium">
@@ -249,3 +254,5 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     </>
   );
 }
+
+    

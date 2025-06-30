@@ -1,66 +1,6 @@
 
 [
   {
-    "question": "Should I stop eating this brand of cereal now that they changed the box art and it feels weird?",
-    "description": "A community-powered decision on: Should I stop eating this brand of cereal now that they changed the box art and it feels weird?",
-    "options": [
-      { "text": "Yes, follow your instincts", "affiliateLink": "https://amzn.to/3Ilaqcg" },
-      { "text": "Chill, it's just a box", "affiliateLink": "https://amzn.to/3Ilaqcg" }
-    ],
-    "timer": 4320,
-    "pledge": 7,
-    "tipCount": 2,
-    "nsfw": false
-  },
-  {
-    "question": "Should I make my bestie's man my sneaky link if he already DMed me twice?",
-    "description": "A community-powered decision on: Should I make my bestie's man my sneaky link if he already DMed me twice?",
-    "options": [
-      { "text": "Slide quietly", "affiliateLink": "https://amzn.to/4nskjFf" },
-      { "text": "You need therapy", "affiliateLink": "https://amzn.to/4kk2BBd" }
-    ],
-    "timer": 60,
-    "pledge": 50,
-    "tipCount": 8,
-    "nsfw": true
-  },
-  {
-    "question": "My wife said no to another beer. Should I crack it anyway?",
-    "description": "A community-powered decision on: My wife said no to another beer. Should I crack it anyway?",
-    "options": [
-      { "text": "Yes, freedom is brewed", "affiliateLink": "https://amzn.to/3TUNcw5" },
-      { "text": "Nah bro, she’s your ride", "affiliateLink": "https://amzn.to/3ZWMSk3" }
-    ],
-    "timer": 1,
-    "pledge": 100,
-    "tipCount": 12,
-    "nsfw": false
-  },
-  {
-    "question": "I’ve worn this hoodie 5 days in a row. Should I retire it for the week?",
-    "description": "A community-powered decision on: I’ve worn this hoodie 5 days in a row. Should I retire it for the week?",
-    "options": [
-      { "text": "Yes, it’s time", "affiliateLink": null },
-      { "text": "No, it’s seasoned now", "affiliateLink": null }
-    ],
-    "timer": 720,
-    "pledge": 4,
-    "tipCount": 0,
-    "nsfw": false
-  },
-  {
-    "question": "She only eats chicken tenders. Should I still take her seriously?",
-    "description": "A community-powered decision on: She only eats chicken tenders. Should I still take her seriously?",
-    "options": [
-      { "text": "Yes, love her anyway", "affiliateLink": "https://amzn.to/3TjXi9L" },
-      { "text": "No, she’s a grown toddler", "affiliateLink": "https://amzn.to/4lzHQT2" }
-    ],
-    "timer": 9,
-    "pledge": 22,
-    "tipCount": 3,
-    "nsfw": false
-  },
-  {
     "question": "My houseplant is getting too big for its pot. Do I repot it, or prune it back aggressively?",
     "description": "Get second opinions on your overgrown plant.",
     "options": [
@@ -69,60 +9,85 @@
       { "text": "Get a bigger house for your plant.", "affiliateLink": "https://amzn.to/3Ilaqcg" },
       { "text": "Donate it to a botanical garden.", "affiliateLink": "https://amzn.to/4lxGhoG" }
     ],
-    "timer": 1320,
+    "category": "Dilemma",
+    "timer": 1334,
     "pledge": 30,
     "tipCount": 12,
-    "nsfw": false
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I learn to code to boost my career, or is it too late for an old dog to learn new tricks?",
+    "description": "Get second opinions on: should i learn to code to boost my career, or is it too late for an old dog to learn new tricks?",
+    "options": [
+      { "text": "Never too late! Code away!", "affiliateLink": null },
+      { "text": "Focus on refining current skills.", "affiliateLink": null },
+      { "text": "Try a beginner course, see if it sticks.", "affiliateLink": "https://amzn.to/3ZWMSk3" },
+      { "text": "Network instead of code.", "affiliateLink": null }
+    ],
+    "category": "Career",
+    "timer": 15670,
+    "pledge": 5,
+    "tipCount": 4,
+    "nsfw": false,
+    "type": "standard"
   },
   {
     "question": "My best friend keeps ghosting me for their new significant other. Do I confront them or just accept our friendship has changed?",
-    "description": "Navigating friendship changes when a new partner enters the picture.",
+    "description": "Get second opinions on: my best friend keeps ghosting me for their new significant other. do i confront them or just accept our friendship has changed?",
     "options": [
-      { "text": "Confront them, open communication is vital.", "affiliateLink": "https://amzn.to/4lxGurY" },
-      { "text": "Give them space, they'll come back around.", "affiliateLink": "https://amzn.to/3ZWMSk3" },
-      { "text": "Find new friends who prioritize you.", "affiliateLink": "https://amzn.to/3TOs8r7" },
-      { "text": "Send a passive-aggressive meme.", "affiliateLink": "https://amzn.to/3TUNcw5" }
+      { "text": "Confront them, open communication is vital.", "affiliateLink": "https://amzn.to/4nskjFf" },
+      { "text": "Give them space, they'll come back around.", "affiliateLink": "https://amzn.to/4lxGhoG" },
+      { "text": "Find new friends who prioritize you.", "affiliateLink": "https://amzn.to/3TjXi9L" },
+      { "text": "Send a passive-aggressive meme.", "affiliateLink": "https://amzn.to/4lpzLjA" }
     ],
-    "timer": 3840,
+    "category": "Friendship",
+    "timer": 3868,
     "pledge": 50,
-    "tipCount": 15,
-    "nsfw": false
+    "tipCount": 18,
+    "nsfw": false,
+    "type": "standard"
   },
   {
-    "question": "Is it ever okay to eat cold pizza for breakfast?",
-    "description": "Asking for a friend who's currently staring at a leftover slice.",
+    "question": "Is it ever okay to eat cold pizza for breakfast? Asking for a friend who's currently staring at a leftover slice.",
+    "description": "Get second opinions on: is it ever okay to eat cold pizza for breakfast? asking for a friend who's currently staring at a leftover slice.",
     "options": [
       { "text": "Absolutely, it's a breakfast staple!", "affiliateLink": null },
       { "text": "No, heat it up or don't bother.", "affiliateLink": null },
-      { "text": "Only if you're desperate.", "affiliateLink": null },
+      { "text": "Only if you're desperate.", "affiliateLink": "https://amzn.to/3TUNcw5" },
       { "text": "It's a culinary crime.", "affiliateLink": null }
     ],
-    "timer": 6300,
+    "category": "Food",
+    "timer": 6708,
     "pledge": 0,
-    "tipCount": 5,
-    "nsfw": false
+    "tipCount": 8,
+    "nsfw": false,
+    "type": "standard"
   },
   {
-    "question": "Should I get bangs? It feels like a big commitment for my face shape.",
-    "description": "Contemplating a hairstyle change but worried about the upkeep.",
+    "question": "My roommate never cleans. Do I create a chore chart, or passive-aggressively clean only my side?",
+    "description": "Get second opinions on: my roommate never cleans. do i create a chore chart, or passive-aggressively clean only my side?",
     "options": [
-      { "text": "Go for it! Hair grows back.", "affiliateLink": "https://amzn.to/3TjXi9L" },
-      { "text": "No bangs, too much maintenance.", "affiliateLink": "https://amzn.to/4lzHQT2" },
-      { "text": "Try clip-in bangs first.", "affiliateLink": "https://amzn.to/4lpzLjA" },
-      { "text": "Ask your stylist for their professional opinion.", "affiliateLink": null }
+      { "text": "Chore chart! Clear expectations.", "affiliateLink": "https://amzn.to/3TOs8r7" },
+      { "text": "Passive aggression wins every time.", "affiliateLink": "https://amzn.to/4lxGurY" },
+      { "text": "Move out.", "affiliateLink": "https://amzn.to/4lsQ0wf" },
+      { "text": "Hire a cleaner for common areas.", "affiliateLink": "https://amzn.to/3ZWMSk3" }
     ],
-    "timer": 1040,
+    "category": "Dilemma",
+    "timer": 2654,
     "pledge": 10,
-    "tipCount": 3,
-    "nsfw": false
+    "tipCount": 5,
+    "nsfw": false,
+    "type": "standard"
   },
   {
     "question": "Which outfit for the job interview?",
     "description": "Need to make a great first impression. Which look says 'hire me'?",
     "options": [
-      { "text": "Classic suit", "imageUrl": "https://placehold.co/300x300.png", "data-ai-hint": "business suit" },
-      { "text": "Business casual", "imageUrl": "https://placehold.co/300x300.png", "data-ai-hint": "business casual" }
+      { "text": "Classic suit", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "business suit" },
+      { "text": "Business casual", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "business casual" }
     ],
+    "category": "Career",
     "timer": 120,
     "pledge": 25,
     "tipCount": 8,
@@ -133,9 +98,10 @@
     "question": "Pizza or sushi for dinner?",
     "description": "The eternal question for a Friday night.",
     "options": [
-      { "text": "Pizza", "imageUrl": "https://placehold.co/300x300.png", "data-ai-hint": "pizza slice" },
-      { "text": "Sushi", "imageUrl": "https://placehold.co/300x300.png", "data-ai-hint": "sushi roll" }
+      { "text": "Pizza", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "pizza slice" },
+      { "text": "Sushi", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "sushi roll" }
     ],
+    "category": "Food",
     "timer": 15,
     "pledge": 5,
     "tipCount": 2,
@@ -149,10 +115,12 @@
       { "text": "Yes, know your worth!", "affiliateLink": "https://amzn.to/4lsQ0wf" },
       { "text": "Wait for your annual review.", "affiliateLink": null }
     ],
+    "category": "Career",
     "timer": 10080,
     "pledge": 100,
     "tipCount": 20,
-    "nsfw": false
+    "nsfw": false,
+    "type": "standard"
   },
   {
     "question": "Should I make the first move or wait?",
@@ -161,10 +129,12 @@
       { "text": "Make the move!", "affiliateLink": "https://amzn.to/3GkmTwl" },
       { "text": "Wait for them to show interest.", "affiliateLink": "https://amzn.to/4lzALSw" }
     ],
+    "category": "Dating",
     "timer": 360,
     "pledge": 15,
     "tipCount": 7,
-    "nsfw": false
+    "nsfw": false,
+    "type": "standard"
   },
   {
     "question": "Is it time to come out to my family?",
@@ -173,9 +143,83 @@
       { "text": "Yes, live your truth.", "affiliateLink": null },
       { "text": "Wait until you feel 100% ready.", "affiliateLink": null }
     ],
+    "category": "Life",
     "timer": 25920,
     "pledge": 0,
     "tipCount": 30,
-    "nsfw": true
+    "nsfw": true,
+    "type": "standard"
+  },
+  {
+    "question": "Should I stop eating this brand of cereal now that they changed the box art and it feels weird?",
+    "description": "A community-powered decision on: Should I stop eating this brand of cereal now that they changed the box art and it feels weird?",
+    "options": [
+      { "text": "Yes, follow your instincts", "affiliateLink": "https://amzn.to/3Ilaqcg" },
+      { "text": "Chill, it's just a box", "affiliateLink": "https://amzn.to/3Ilaqcg" }
+    ],
+    "category": "Quirky",
+    "timer": 4320,
+    "pledge": 7,
+    "tipCount": 2,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I make my bestie's man my sneaky link if he already DMed me twice?",
+    "description": "A community-powered decision on: Should I make my bestie's man my sneaky link if he already DMed me twice?",
+    "options": [
+      { "text": "Slide quietly", "affiliateLink": "https://amzn.to/4nskjFf" },
+      { "text": "You need therapy", "affiliateLink": "https://amzn.to/4kk2BBd" }
+    ],
+    "category": "Dating",
+    "timer": 60,
+    "pledge": 50,
+    "tipCount": 8,
+    "nsfw": true,
+    "type": "standard"
+  },
+  {
+    "question": "My wife said no to another beer. Should I crack it anyway?",
+    "description": "A community-powered decision on: My wife said no to another beer. Should I crack it anyway?",
+    "options": [
+      { "text": "Yes, freedom is brewed", "affiliateLink": "https://amzn.to/3TUNcw5" },
+      { "text": "Nah bro, she’s your ride", "affiliateLink": "https://amzn.to/3ZWMSk3" }
+    ],
+    "category": "Relationships",
+    "timer": 1,
+    "pledge": 100,
+    "tipCount": 12,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "I’ve worn this hoodie 5 days in a row. Should I retire it for the week?",
+    "description": "A community-powered decision on: I’ve worn this hoodie 5 days in a row. Should I retire it for the week?",
+    "options": [
+      { "text": "Yes, it’s time", "affiliateLink": null },
+      { "text": "No, it’s seasoned now", "affiliateLink": null }
+    ],
+    "category": "Quirky",
+    "timer": 720,
+    "pledge": 4,
+    "tipCount": 0,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "She only eats chicken tenders. Should I still take her seriously?",
+    "description": "A community-powered decision on: She only eats chicken tenders. Should I still take her seriously?",
+    "options": [
+      { "text": "Yes, love her anyway", "affiliateLink": "https://amzn.to/3TjXi9L" },
+      { "text": "No, she’s a grown toddler", "affiliateLink": "https://amzn.to/4lzHQT2" }
+    ],
+    "category": "Dating",
+    "timer": 9,
+    "pledge": 22,
+    "tipCount": 3,
+    "nsfw": false,
+    "type": "standard"
   }
 ]
+
+    
