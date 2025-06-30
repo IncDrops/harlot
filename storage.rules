@@ -1,23 +1,25 @@
+
 rules_version = '2';
+
 service firebase.storage {
   match /b/{bucket}/o {
-
-    // === User Uploads (e.g. avatars, receipts)
-    match /user_uploads/{userId}/{allPaths=**} {
-      allow read, write: if request.auth != null &&
-        request.auth.uid == userId;
-    }
-
-    // === Poll Images (public)
-    match /poll_images/{allPaths=**} {
+  
+    // Match any file in the 'polls' directory
+    match /polls/{allPaths=**} {
+      // Anyone can read poll images/videos
       allow read: if true;
+      // Only authenticated users can write (upload) files.
+      // For stricter security, you could check file size, type, or match
+      // the uploader's UID to a poll document they are creating.
       allow write: if request.auth != null;
     }
-
-    // === Tip Proofs (optional)
-    match /tip_receipts/{userId}/{allPaths=**} {
-      allow read, write: if request.auth != null &&
-        request.auth.uid == userId;
+    
+    // Match any file in the 'avatars' directory
+    match /avatars/{userId}/{allPaths=**} {
+       // Anyone can read profile pictures
+      allow read: if true;
+      // Only the authenticated user can upload their own avatar
+      allow write: if request.auth != null && request.auth.uid == userId;
     }
   }
 }

@@ -4,45 +4,60 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Users: Can read anyone's public profile, but only write to their own.
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    // Rules for the 'users' collection
     match /users/{userId} {
+      // Anyone can read a user's public profile data.
       allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == userId;
+      // Only the authenticated owner can create or update their own user document.
+      allow create, update: if isOwner(userId);
+      
+      // Rules for user notifications subcollection
+      match /notifications/{notificationId} {
+        // Only the owner can manage their notifications.
+        allow read, list, update, delete: if isOwner(userId);
+        // Notifications are created by server-side functions, not clients.
+        allow create: if false; 
+      }
     }
 
-    // Polls: Anyone can read, but only authenticated users can create.
-    // Only the creator of a poll can update or delete it.
+    // Rules for the 'polls' collection
     match /polls/{pollId} {
-      allow read: if true;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth != null && resource.data.creatorId == request.auth.uid;
-
-      // Comments: Authenticated users can create comments.
-      // Users can only update or delete their own comments.
+      // Anyone can read polls. NSFW filtering is handled client-side.
+      allow read, list: if true;
+      
+      // Any signed-in user can create a poll, but they must be the author.
+      allow create: if isSignedIn() && request.resource.data.creatorId == request.auth.uid;
+      
+      // Only the poll creator can update or delete it.
+      // Note: Vote counts should be updated via transactions, not direct writes.
+      allow update, delete: if isSignedIn() && resource.data.creatorId == request.auth.uid;
+      
+      // Rules for the 'comments' subcollection
       match /comments/{commentId} {
-        allow read: if true;
-        allow create: if request.auth != null;
-        allow update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
+        // Anyone can read comments.
+        allow read, list: if true;
+        // Any signed-in user can add a comment, but it must be their own.
+        allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+        // Only the author of a comment can delete it.
+        allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
       }
-
-      // Likes: Authenticated users can like/unlike (create/delete their own like doc).
+      
+      // Rules for the 'likes' subcollection
       match /likes/{userId} {
-        allow read: if true;
-        allow create, delete: if request.auth != null && request.auth.uid == userId;
+        // No one can list who liked a poll for privacy.
+        allow read, list: if false;
+        // A user can only create or delete their own like document.
+        allow create, delete: if isOwner(userId);
       }
-
-      // Votes: Authenticated users can create a vote.
-      // A user cannot change their vote once cast.
-      match /votes/{voteId} {
-        allow read: if request.auth != null; // Or make public if needed
-        allow create: if request.auth != null;
-        allow update, delete: if false; // Votes are immutable
-      }
-    }
-
-    // Notifications: Users can only read, write, and delete their own notifications.
-    match /users/{userId}/notifications/{notificationId} {
-        allow read, write, delete: if request.auth != null && request.auth.uid == userId;
     }
   }
 }
