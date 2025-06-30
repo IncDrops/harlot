@@ -135,8 +135,8 @@ async function seedData() {
             comments: 0 // Will be updated
         };
         
-        // Remove null values for cleaner Firestore documents
-        if (pollData.videoUrl === null) delete pollData.videoUrl;
+        // Remove undefined/null values for cleaner Firestore documents
+        if (pollData.videoUrl === null || pollData.videoUrl === undefined) delete pollData.videoUrl;
 
         pollBatch.set(docRef, pollData);
     });
@@ -192,5 +192,3 @@ async function main() {
 }
 
 main();
-
-    
