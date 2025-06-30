@@ -134,7 +134,7 @@ export default function HomePage() {
     const isLocked = poll.pledged && poll.pledgeAmount && (poll.pledgeAmount * 0.5) / (majorityVotes + 1) < 0.10;
 
     const voteAction = () => {
-      const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
+      const isTwoOptionPoll = poll.options.length === 2;
       if (isTwoOptionPoll) {
         const direction = poll.options.findIndex(o => o.id === optionId) === 0 ? 'left' : 'right';
         handleSwipeVote(pollId, optionId, direction);
@@ -185,7 +185,7 @@ export default function HomePage() {
 
             const isLastElement = polls.length === index + 1;
             const hasVoted = votedStates[poll.id] || false;
-            const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
+            const isTwoOptionPoll = poll.options.length === 2;
             return (
                 <motion.div 
                     layout
