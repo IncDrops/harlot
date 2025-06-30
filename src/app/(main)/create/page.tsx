@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -18,6 +18,8 @@ import { useToast } from '@/hooks/use-toast';
 import { uploadFile } from '@/lib/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image';
+import { useAuth } from '@/contexts/auth-context';
+import { useRouter } from 'next/navigation';
 
 const pollFormSchema = z.object({
   question: z.string().min(10, "Question must be at least 10 characters.").max(500),
@@ -40,6 +42,8 @@ const pollFormSchema = z.object({
 type PollFormValues = z.infer<typeof pollFormSchema>;
 
 export default function CreatePollPage() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const [videoPreview, setVideoPreview] = useState<string | null>(null);
@@ -47,6 +51,12 @@ export default function CreatePollPage() {
   
   const videoInputRef = useRef<HTMLInputElement>(null);
   const optionImageInputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/signin');
+    }
+  }, [user, loading, router]);
 
   const form = useForm<PollFormValues>({
     resolver: zodResolver(pollFormSchema),
@@ -142,6 +152,14 @@ export default function CreatePollPage() {
     } finally {
         setIsSubmitting(false);
     }
+  }
+
+  if (loading || !user) {
+    return (
+      <div className="container mx-auto py-8 text-center">
+        <p>Loading...</p>
+      </div>
+    );
   }
   
   return (

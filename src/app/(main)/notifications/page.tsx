@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/auth-context";
 import { getNotificationsForUser } from "@/lib/firebase";
 import type { Notification } from "@/lib/types";
 import { formatDistanceToNowStrict } from 'date-fns';
+import { useRouter } from 'next/navigation';
 
 const notificationDetails = {
     'new_follower': { icon: UserPlus, text: (n: Notification) => `${n.fromUsername} started following you.` },
@@ -19,20 +20,29 @@ const notificationDetails = {
 };
 
 export default function NotificationsPage() {
-    const { user } = useAuth();
+    const { user, loading: authLoading } = useAuth();
+    const router = useRouter();
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (user) {
+        if (!authLoading && !user) {
+          router.push('/signin');
+        } else if (user) {
             setLoading(true);
             getNotificationsForUser(user.uid)
                 .then(setNotifications)
                 .finally(() => setLoading(false));
-        } else {
-            setLoading(false);
         }
-    }, [user]);
+    }, [user, authLoading, router]);
+
+    if (authLoading || !user) {
+        return (
+          <div className="container mx-auto py-8 text-center">
+            <p>Loading...</p>
+          </div>
+        );
+    }
 
   return (
     <div className="container mx-auto py-8">

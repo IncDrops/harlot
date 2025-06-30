@@ -1,6 +1,9 @@
 
 "use client";
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/auth-context';
 import { ConversationList } from "@/components/messages/ConversationList";
 import { MessageList } from "@/components/messages/MessageList";
 import { MessageInput } from "@/components/messages/MessageInput";
@@ -9,7 +12,23 @@ import { useMessages } from "@/contexts/message-context";
 import { MessageSquare } from "lucide-react";
 
 export default function MessagesPage() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
   const { currentChatUser } = useMessages();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/signin');
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user) {
+    return (
+      <div className="container mx-auto py-8 text-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-8 h-[calc(100vh-144px)]">

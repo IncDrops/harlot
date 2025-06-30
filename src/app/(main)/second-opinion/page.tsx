@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -17,6 +17,8 @@ import { Switch } from '@/components/ui/switch';
 import { uploadFile } from '@/lib/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image';
+import { useAuth } from '@/contexts/auth-context';
+import { useRouter } from 'next/navigation';
 
 const secondOpinionFormSchema = z.object({
   question: z.string().min(10, "Question must be at least 10 characters.").max(140),
@@ -35,6 +37,8 @@ const secondOpinionFormSchema = z.object({
 type SecondOpinionFormValues = z.infer<typeof secondOpinionFormSchema>;
 
 export default function CreateSecondOpinionPage() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   
@@ -45,6 +49,12 @@ export default function CreateSecondOpinionPage() {
   const image1InputRef = useRef<HTMLInputElement>(null);
   const image2InputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/signin');
+    }
+  }, [user, loading, router]);
 
   const form = useForm<SecondOpinionFormValues>({
     resolver: zodResolver(secondOpinionFormSchema),
@@ -130,6 +140,14 @@ export default function CreateSecondOpinionPage() {
     } finally {
         setIsSubmitting(false);
     }
+  }
+
+  if (loading || !user) {
+    return (
+      <div className="container mx-auto py-8 text-center">
+        <p>Loading...</p>
+      </div>
+    );
   }
   
   return (
