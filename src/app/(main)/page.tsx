@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
@@ -176,7 +177,12 @@ export default function HomePage() {
     <div className="container mx-auto py-8 px-2 sm:px-4">
       <div className="w-full max-w-2xl mx-auto space-y-6">
         <AnimatePresence>
-            {polls.filter(p => Array.isArray(p.options)).map((poll, index) => {
+            {polls.map((poll, index) => {
+            // Gracefully handle any polls that might have missing data
+            if (!Array.isArray(poll.options) || poll.options.length === 0) {
+              return null;
+            }
+
             const isLastElement = polls.length === index + 1;
             const hasVoted = votedStates[poll.id] || false;
             const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
