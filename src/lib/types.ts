@@ -1,6 +1,7 @@
 
+
 export interface User {
-  id: number;
+  id: string;
   name: string;
   username: string;
   avatar: string;
@@ -38,8 +39,8 @@ export interface Notification {
 }
 
 export interface Poll {
-  id: number;
-  creatorId: number;
+  id: string;
+  creatorId: string;
   question: string;
   options: PollOption[];
   description?: string;

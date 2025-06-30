@@ -1,3 +1,4 @@
+
 // Firebase Config
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import {
@@ -25,6 +26,7 @@ import {
   query,
   orderBy,
   getDocs,
+  getDoc,
   doc,
   runTransaction,
   increment,
@@ -34,10 +36,11 @@ import {
   deleteDoc,
   where,
   limit,
-  collectionGroup,
+  startAfter,
+  QueryDocumentSnapshot,
+  DocumentData,
 } from "firebase/firestore";
 import type { Comment, Notification, Poll, User } from "./types";
-import { dummyPolls, dummyUsers } from './dummy-data';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -65,11 +68,23 @@ if (!getApps().length) {
   db = getFirestore(app);
 }
 
+// Helper to convert Firestore doc to a serializable object
+const fromFirestore = <T>(doc: QueryDocumentSnapshot<DocumentData>): T => {
+    const data = doc.data();
+    return {
+        id: doc.id,
+        ...data,
+        createdAt: (data.createdAt as Timestamp)?.toDate().toISOString() || new Date().toISOString(),
+    } as T;
+};
+
+
 // ──────────── AUTH FUNCTIONS ────────────
 
 export const signUp = async (email: string, password: string): Promise<UserCredential> => {
   if (!auth) throw new Error("Auth is not initialized.");
   const userCred = await createUserWithEmailAndPassword(auth, email, password);
+  // You might want to create a user document in Firestore here as well
   await sendEmailVerification(userCred.user);
   return userCred;
 };
@@ -99,28 +114,29 @@ export const getCommentsForPoll = async (pollId: string): Promise<Comment[]> => 
   const commentsCol = collection(db, `polls/${pollId}/comments`);
   const q = query(commentsCol, orderBy("createdAt", "desc"));
   const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => {
-    const data = doc.data();
-    return {
-      id: doc.id,
-      ...data,
-      createdAt: (data.createdAt as Timestamp)?.toDate().toISOString() || new Date().toISOString(),
-    } as Comment;
-  });
+  return snapshot.docs.map(doc => fromFirestore<Comment>(doc));
 };
 
 export const addCommentToPoll = async (pollId: string, commentData: Omit<Comment, "id" | "createdAt">): Promise<void> => {
   const pollRef = doc(db, "polls", pollId);
-  const commentRef = doc(collection(pollRef, "comments"));
+  const commentCol = collection(pollRef, "comments");
 
   await runTransaction(db, async (transaction) => {
-    transaction.set(commentRef, {
+    // We get the poll doc to ensure it exists, but we don't need to read it.
+    await transaction.get(pollRef); 
+    
+    // Add the new comment
+    const newCommentRef = doc(commentCol);
+    transaction.set(newCommentRef, {
       ...commentData,
       createdAt: serverTimestamp(),
     });
+
+    // Increment the comment count on the poll
     transaction.update(pollRef, { comments: increment(1) });
   });
 };
+
 
 // ──────────── LIKES ────────────
 
@@ -141,39 +157,77 @@ export const toggleLikeOnPoll = async (pollId: string, userId: string): Promise<
 };
 
 // ──────────── USERS ────────────
+export const getUserById = async (userId: string): Promise<User | null> => {
+    const userRef = doc(db, 'users', userId);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+        return fromFirestore<User>(userSnap as QueryDocumentSnapshot<DocumentData>);
+    }
+    return null;
+}
 
-export const getUserByUsername = async (username: string) => {
-  const user = dummyUsers.find((u: User) => u.username === username);
-  return Promise.resolve(user || null);
+export const getUserByUsername = async (username: string): Promise<User | null> => {
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where('username', '==', username), limit(1));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+        return null;
+    }
+    return fromFirestore<User>(querySnapshot.docs[0]);
 };
 
 // ──────────── POLLS ────────────
+export const getPolls = async (lastVisible: QueryDocumentSnapshot | null = null) => {
+    const pollsRef = collection(db, 'polls');
+    const constraints = [orderBy('createdAt', 'desc'), limit(10)];
+    if(lastVisible) {
+        constraints.push(startAfter(lastVisible));
+    }
+    const q = query(pollsRef, ...constraints);
+    const documentSnapshots = await getDocs(q);
+    
+    const polls = documentSnapshots.docs.map(doc => fromFirestore<Poll>(doc));
+    const newLastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
 
-export const getPollsByUser = async (userId: number) => {
-  const polls = dummyPolls.filter((p: Poll) => p.creatorId === userId);
-  return Promise.resolve(polls);
+    return { polls, lastVisible: newLastVisible || null };
+};
+
+
+export const getPollsByUser = async (userId: string): Promise<Poll[]> => {
+    const pollsRef = collection(db, 'polls');
+    const q = query(pollsRef, where('creatorId', '==', userId), orderBy('createdAt', 'desc'));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => fromFirestore<Poll>(doc));
 };
 
 // ──────────── SEARCH ────────────
 
 export const searchPolls = async (searchTerm: string): Promise<Poll[]> => {
+  if (searchTerm.trim() === '') return [];
+  // Note: This is a client-side search for simplicity with a small dataset.
+  // For production with a large number of polls, a dedicated search service
+  // like Algolia or Typesense integrated with Firebase is recommended.
+  const pollsRef = collection(db, 'polls');
+  const q = query(pollsRef, orderBy('createdAt', 'desc'));
+  const querySnapshot = await getDocs(q);
+  
+  const allPolls = querySnapshot.docs.map(doc => fromFirestore<Poll>(doc));
+  
   const lowercasedTerm = searchTerm.toLowerCase();
-  const results = dummyPolls.filter((poll: Poll) => 
-    poll.question.toLowerCase().includes(lowercasedTerm)
+  return allPolls.filter(poll => 
+    poll.question.toLowerCase().includes(lowercasedTerm) ||
+    poll.category.toLowerCase().includes(lowercasedTerm)
   );
-  return Promise.resolve(results);
 };
+
 
 // ──────────── NOTIFICATIONS ────────────
 
 export const getNotificationsForUser = async (userId: string): Promise<Notification[]> => {
-  const mockNotifications: Notification[] = [
-    { id: '1', type: 'tip_received', fromUsername: 'akira_dev', fromId: '2', amount: 5, createdAt: new Date(Date.now() - 3600000).toISOString(), read: false },
-    { id: '2', type: 'new_vote', fromUsername: 'yuki_motion', fromId: '1', pollId: '1', createdAt: new Date(Date.now() - 7200000).toISOString(), read: false },
-    { id: '3', type: 'new_follower', fromUsername: 'sakura_blossom', fromId: '5', createdAt: new Date(Date.now() - 10800000).toISOString(), read: true },
-    { id: '4', type: 'new_comment', fromUsername: 'hana_chan', fromId: '3', pollId: '2', createdAt: new Date(Date.now() - 86400000).toISOString(), read: true },
-  ];
-  return Promise.resolve(mockNotifications);
+    const notificationsRef = collection(db, `users/${userId}/notifications`);
+    const q = query(notificationsRef, orderBy('createdAt', 'desc'), limit(20));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => fromFirestore<Notification>(doc));
 };
 
 export { auth, storage, db };

@@ -4,7 +4,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PollCard } from "@/components/poll-card";
-import { dummyPolls } from "@/lib/dummy-data";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   AlertDialog,
@@ -20,34 +19,47 @@ import {
 import type { Poll } from "@/lib/types";
 import { useAuth } from "@/contexts/auth-context";
 import { useToast } from "@/hooks/use-toast";
-
-const POLLS_PER_PAGE = 10;
+import { getPolls } from "@/lib/firebase";
+import type { QueryDocumentSnapshot } from "firebase/firestore";
 
 export default function HomePage() {
   const { user } = useAuth();
   const { toast } = useToast();
   const [polls, setPolls] = useState<Poll[]>([]);
-  const [page, setPage] = useState(0);
+  const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot | null>(null);
   const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   
-  const [votedStates, setVotedStates] = useState<{ [key: number]: boolean }>({});
-  const [cardKeys, setCardKeys] = useState<{ [key: number]: number }>({});
-  const [swipeDirections, setSwipeDirections] = useState<{ [key: number]: "left" | "right" | null }>({});
+  const [votedStates, setVotedStates] = useState<{ [key: string]: boolean }>({});
+  const [cardKeys, setCardKeys] = useState<{ [key: string]: number }>({});
+  const [swipeDirections, setSwipeDirections] = useState<{ [key: string]: "left" | "right" | null }>({});
   
   const [isAnimating, setIsAnimating] = useState(false);
   const observer = useRef<IntersectionObserver>();
 
   const [monetizationLockAlert, setMonetizationLockAlert] = useState<{ poll: Poll; optionId: number; onConfirm: () => void; } | null>(null);
 
-  const loadMorePolls = useCallback(() => {
-    if (!hasMore) return;
-    const newPolls = dummyPolls.slice(0, (page + 1) * POLLS_PER_PAGE);
-    if (newPolls.length >= dummyPolls.length) {
-      setHasMore(false);
+  const loadMorePolls = useCallback(async () => {
+    if (isLoading || !hasMore) return;
+    setIsLoading(true);
+
+    try {
+        const { polls: newPolls, lastVisible: newLastVisible } = await getPolls(lastVisible);
+        setPolls(prev => [...prev, ...newPolls]);
+        setLastVisible(newLastVisible);
+        if (!newLastVisible) {
+            setHasMore(false);
+        }
+    } catch (error) {
+        console.error("Failed to load polls:", error);
+        toast({
+            variant: "destructive",
+            title: "Could not load more polls.",
+        });
+    } finally {
+        setIsLoading(false);
     }
-    setPolls(newPolls);
-    setPage(prev => prev + 1);
-  }, [page, hasMore]);
+  }, [isLoading, hasMore, lastVisible, toast]);
   
   useEffect(() => {
     loadMorePolls();
@@ -55,7 +67,7 @@ export default function HomePage() {
   }, []); // Initial load
 
   const lastPollElementRef = useCallback((node: HTMLDivElement) => {
-    if (isAnimating) return;
+    if (isLoading) return;
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && hasMore) {
@@ -63,7 +75,7 @@ export default function HomePage() {
       }
     });
     if (node) observer.current.observe(node);
-  }, [isAnimating, hasMore, loadMorePolls]);
+  }, [isLoading, hasMore, loadMorePolls]);
 
   useEffect(() => {
     if (isAnimating) {
@@ -76,7 +88,7 @@ export default function HomePage() {
     };
   }, [isAnimating]);
 
-  const performVote = (pollId: number, optionId: number) => {
+  const performVote = (pollId: string, optionId: number) => {
      setPolls(currentPolls =>
         currentPolls.map(p => {
           if (p.id === pollId) {
@@ -97,7 +109,7 @@ export default function HomePage() {
       );
   }
 
-  const handleVote = (pollId: number, optionId: number) => {
+  const handleVote = (pollId: string, optionId: number) => {
     if (!user) {
       toast({
         variant: "destructive",
@@ -132,7 +144,7 @@ export default function HomePage() {
   };
 
 
-  const handleSwipeVote = (pollId: number, optionId: number, direction: "left" | "right") => {
+  const handleSwipeVote = (pollId: string, optionId: number, direction: "left" | "right") => {
     if (isAnimating || votedStates[pollId]) return;
 
     setIsAnimating(true);
@@ -179,14 +191,14 @@ export default function HomePage() {
             </div>
            )
         })}
-        {hasMore && (
+        {isLoading && (
            <Card>
             <CardContent className="p-8">
               <p>Loading more polls...</p>
             </CardContent>
           </Card>
         )}
-         {!hasMore && (
+         {!hasMore && !isLoading && (
             <Card>
                 <CardContent className="p-8 text-center">
                     <p>You've seen all the polls for now!</p>

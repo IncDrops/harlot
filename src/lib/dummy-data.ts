@@ -1,3 +1,4 @@
+
 import type { User, Poll } from './types';
 
 // Helper function to generate a random birth date for someone between 18 and 40
@@ -13,21 +14,21 @@ const getRandomBirthDate = (): string => {
 
 
 export const dummyUsers: User[] = [
-  { id: 1, name: 'Yuki Tanaka', username: 'yuki_motion', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 1250 },
-  { id: 2, name: 'Akira Saito', username: 'akira_dev', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 5300 },
-  { id: 3, name: 'Hana Kimura', username: 'hana_chan', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 800 },
-  { id: 4, name: 'Kenji Watanabe', username: 'kenji_w', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 2400 },
-  { id: 5, name: 'Sakura Ishikawa', username: 'sakura_blossom', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 9100 },
-  { id: 6, name: 'Ren Kato', username: 'ren_the_great', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 150 },
-  { id: 7, name: 'Aoi Yamamoto', username: 'aoi_blue', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'non-binary', pollitPoints: 4200 },
-  { id: 8, name: 'Daiki Mori', username: 'daiki_forest', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 3300 },
-  { id: 9, name: 'Emma Davis', username: 'emmadavis105', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 10000 },
-  { id: 10, name: 'Haruto Abe', username: 'haruto_sun', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 0 },
-  { id: 11, name: 'Liam Smith', username: 'liam_s', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 200 },
-  { id: 12, name: 'Noah Johnson', username: 'noah_j', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 1100 },
-  { id: 13, name: 'James Brown', username: 'james_b', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 3100 },
-  { id: 14, name: 'Ben Carter', username: 'bencarter', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 4700 },
-  { id: 15, name: 'Sophia Miller', username: 'sophia_m', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 1200 },
+  { id: '1', name: 'Yuki Tanaka', username: 'yuki_motion', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 1250 },
+  { id: '2', name: 'Akira Saito', username: 'akira_dev', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 5300 },
+  { id: '3', name: 'Hana Kimura', username: 'hana_chan', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 800 },
+  { id: '4', name: 'Kenji Watanabe', username: 'kenji_w', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 2400 },
+  { id: '5', name: 'Sakura Ishikawa', username: 'sakura_blossom', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 9100 },
+  { id: '6', name: 'Ren Kato', username: 'ren_the_great', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 150 },
+  { id: '7', name: 'Aoi Yamamoto', username: 'aoi_blue', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'non-binary', pollitPoints: 4200 },
+  { id: '8', name: 'Daiki Mori', username: 'daiki_forest', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 3300 },
+  { id: '9', name: 'Emma Davis', username: 'emmadavis105', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 10000 },
+  { id: '10', name: 'Haruto Abe', username: 'haruto_sun', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 0 },
+  { id: '11', name: 'Liam Smith', username: 'liam_s', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 200 },
+  { id: '12', name: 'Noah Johnson', username: 'noah_j', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 1100 },
+  { id: '13', name: 'James Brown', username: 'james_b', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 3100 },
+  { id: '14', name: 'Ben Carter', username: 'bencarter', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'male', pollitPoints: 4700 },
+  { id: '15', name: 'Sophia Miller', username: 'sophia_m', avatar: 'https://placehold.co/100x100.png', birthDate: getRandomBirthDate(), gender: 'female', pollitPoints: 1200 },
 ].map(user => ({...user, avatar: `https://i.pravatar.cc/150?u=${user.username}`}));
 
 
@@ -210,8 +211,8 @@ const generatePolls = (): Poll[] => {
   const now = new Date();
   return polls.slice(0, 100).map((p, i) => ({
     ...p,
-    id: i + 1,
-    creatorId: (i % 15) + 1,
+    id: String(i + 1),
+    creatorId: String((i % 15) + 1),
     createdAt: new Date(now.getTime() - i * 60000 * 30 * (Math.random() + 0.5)).toISOString(), // Stagger creation times
   }));
 };

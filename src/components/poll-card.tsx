@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useMemo } from 'react';
@@ -14,16 +15,17 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { CommentSheet } from '@/components/comment-sheet';
 import { TipDialog } from '@/components/tip-dialog';
-import { dummyUsers } from '@/lib/dummy-data';
+import { Skeleton } from '@/components/ui/skeleton';
 import type { Poll, PollOption, User } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/auth-context';
+import { useUser } from '@/hooks/use-user';
 import { toggleLikeOnPoll } from '@/lib/firebase';
 import { useToast } from '@/hooks/use-toast';
 
 interface PollCardProps {
   poll: Poll;
-  onVote: (pollId: number, optionId: number) => void;
+  onVote: (pollId: string, optionId: number) => void;
   onSwipe: (direction: 'left' | 'right') => void;
   showResults: boolean;
   isTwoOptionPoll: boolean;
@@ -38,7 +40,7 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(poll.likes);
 
-  const creator = useMemo(() => dummyUsers.find(u => u.id === poll.creatorId), [poll.creatorId]) as User | undefined;
+  const { user: creator, loading: creatorLoading } = useUser(poll.creatorId);
 
   const totalVotes = useMemo(() => {
     return poll.options.reduce((acc, option) => acc + option.votes, 0);
@@ -106,6 +108,33 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     onDragEnd: handleDragEnd,
   };
 
+
+  if (creatorLoading) {
+    return (
+        <Card className="rounded-2xl overflow-hidden shadow-lg w-full max-w-2xl mx-auto bg-card">
+            <CardHeader>
+                <div className="flex items-start gap-3">
+                    <Skeleton className="h-12 w-12 rounded-full" />
+                    <div className="flex-1 space-y-2">
+                        <Skeleton className="h-4 w-1/2" />
+                        <Skeleton className="h-3 w-1/4" />
+                    </div>
+                </div>
+                <Skeleton className="h-5 w-full mt-4" />
+                <Skeleton className="h-5 w-3/4 mt-1" />
+            </CardHeader>
+            <CardContent>
+                <Skeleton className="h-32 w-full" />
+            </CardContent>
+             <CardFooter className="flex justify-around items-center border-t pt-2 pb-2">
+                <Skeleton className="h-8 w-16" />
+                <Skeleton className="h-8 w-16" />
+                <Skeleton className="h-8 w-16" />
+                <Skeleton className="h-8 w-16" />
+            </CardFooter>
+        </Card>
+    );
+  }
 
   if (!creator) return null;
 
