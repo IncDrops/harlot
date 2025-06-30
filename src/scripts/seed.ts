@@ -84,6 +84,7 @@ async function seedData() {
         // Batching because getUsers has a limit of 100 identifiers per call
         for (let i = 0; i < userIdentifiers.length; i += 100) {
             const batch = userIdentifiers.slice(i, i + 100);
+            if (batch.length === 0) continue;
             const listUsersResult = await auth.getUsers(batch);
             listUsersResult.users.forEach(userRecord => {
                 uidsToDelete.push(userRecord.uid);
@@ -96,8 +97,12 @@ async function seedData() {
         } else {
             console.log('✅ No previously seeded Auth users found.');
         }
-    } catch (error) {
-        console.error('⚠️  An error occurred while trying to delete seeded users. This might be fine on the first run.', error);
+    } catch (error: any) {
+        if(error.code === 'auth/user-not-found') {
+             console.log('✅ No previously seeded Auth users found to delete.');
+        } else {
+            console.error('⚠️  An error occurred while trying to delete seeded users. This might be fine on the first run.', error);
+        }
     }
     
     // Clear Firestore
@@ -113,7 +118,7 @@ async function seedData() {
 
     for (const user of allUsers) {
       const email = `${user.username}@pollitago.com`;
-      const password = 'password123'; // Standard password for all seeded users
+      const password = 'Password123!'; // Use a stronger password
 
       // Create user in Firebase Auth
       const userRecord = await auth.createUser({
