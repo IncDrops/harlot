@@ -119,6 +119,7 @@ export default function HomePage() {
 
   const handleVote = (pollId: string, optionId: number) => {
     if (!user) {
+      router.push('/signin');
       toast({
         variant: "destructive",
         title: "Authentication Required",
@@ -188,7 +189,6 @@ export default function HomePage() {
             const isTwoOptionPoll = poll.options.length === 2;
             return (
                 <motion.div 
-                    layout
                     ref={isLastElement ? lastPollElementRef : null} 
                     key={`${poll.id}-${cardKeys[poll.id] || 0}`}
                     initial={{ opacity: 0, y: 50, rotate: 3 }}
