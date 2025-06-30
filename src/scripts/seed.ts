@@ -1,6 +1,5 @@
-
 import { initializeApp, cert } from 'firebase-admin/app';
-import { getFirestore } from 'firebase-admin/firestore';
+import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { getAuth } from 'firebase-admin/auth';
 import type { Poll, User } from '../lib/types';
 import path from 'path';
@@ -32,6 +31,7 @@ initializeApp({
 
 const db = getFirestore();
 const auth = getAuth();
+const BATCH_LIMIT = 450; // Keep safely below the 500 operation limit for Firestore batches
 
 // Helper to recursively delete collections
 async function deleteCollection(collectionPath: string, batchSize: number) {
@@ -116,51 +116,56 @@ async function seedData() {
     console.log('🌱 Seeding Auth and Firestore users...');
     const userIds: string[] = [];
 
+    // Using a for...of loop for robust async operations
     for (const user of allUsers) {
       const email = `${user.username}@pollitago.com`;
-      const password = 'Password123!'; // Use a stronger password
+      const password = 'Password123!';
 
-      // Create user in Firebase Auth
-      const userRecord = await auth.createUser({
-        email,
-        password,
-        displayName: user.displayName,
-        emailVerified: true,
-      });
+      try {
+        // Create user in Firebase Auth
+        const userRecord = await auth.createUser({
+          email,
+          password,
+          displayName: user.displayName,
+          emailVerified: true,
+        });
 
-      const uid = userRecord.uid;
-      userIds.push(uid);
+        const uid = userRecord.uid;
+        userIds.push(uid);
 
-      // Create Firestore doc with gender-specific avatar
-      const docRef = usersCollection.doc(uid);
-      let avatarUrl = `https://i.pravatar.cc/150?u=${user.username}`;
-      if (user.gender === 'male' || user.gender === 'female') {
-          avatarUrl += `&g=${user.gender}`;
+        // Create Firestore doc
+        const docRef = usersCollection.doc(uid);
+        let avatarUrl = `https://i.pravatar.cc/150?u=${user.username}`;
+        if (user.gender === 'male' || user.gender === 'female') {
+            avatarUrl += `&g=${user.gender}`;
+        }
+
+        const userProfileData: Omit<User, 'bio' | 'pronouns'> = {
+            id: uid,
+            numericId: user.numericId,
+            username: user.username,
+            displayName: user.displayName,
+            avatar: avatarUrl,
+            birthDate: new Date(user.birthday).toISOString(),
+            gender: user.gender as User['gender'],
+            pollitPoints: user.pollItPoints || 0,
+            tipsReceived: user.tipsReceived || 0,
+        };
+        await docRef.set(userProfileData);
+      } catch (error) {
+        console.error(`❌ Failed to create user ${user.username}:`, error);
       }
-
-      // We need to set the user profile with a specific type to avoid `any`
-      const userProfileData: Omit<User, 'bio' | 'pronouns'> = {
-         id: uid, // Use the real Auth UID
-         numericId: user.numericId,
-         username: user.username,
-         displayName: user.displayName,
-         avatar: avatarUrl,
-         birthDate: new Date(user.birthday).toISOString(),
-         gender: user.gender as User['gender'],
-         pollitPoints: user.pollItPoints || 0,
-         tipsReceived: user.tipsReceived || 0,
-      };
-      await docRef.set(userProfileData);
     }
-    console.log(`✅ Seeded ${allUsers.length} users into Auth and Firestore.`);
-  
-    // --- 2. Seed Polls ---
+    console.log(`✅ Seeded ${userIds.length} users into Auth and Firestore.`);
+ 
+    // --- 2. Seed Polls (BATCHED) ---
     console.log('🌱 Seeding polls...');
     const pollsCollection = db.collection('polls');
-    const pollBatch = db.batch();
+    let pollBatch = db.batch();
     const pollIds: string[] = [];
-    
-    masterPolls.forEach((poll: any) => {
+    let pollCount = 0;
+
+    for (const poll of masterPolls) {
         const docRef = pollsCollection.doc();
         pollIds.push(docRef.id);
         const now = new Date();
@@ -177,7 +182,7 @@ async function seedData() {
                 imageUrl: opt.imageUrl || null,
                 affiliateLink: opt.affiliateLink || null,
             })),
-            type: poll.type || (poll.options.length > 2 ? 'standard' : '2nd_opinion'),
+            type: (poll.type || (poll.options.length > 2 ? 'standard' : '2nd_opinion')) as 'standard' | '2nd_opinion',
             creatorId: userIds[Math.floor(Math.random() * userIds.length)],
             createdAt: createdAt.toISOString(),
             endsAt: new Date(createdAt.getTime() + durationMs).toISOString(),
@@ -198,51 +203,93 @@ async function seedData() {
         }
 
         pollBatch.set(docRef, pollData);
-    });
-    await pollBatch.commit();
+        pollCount++;
+
+        // When batch is full, commit it and start a new one
+        if (pollCount % BATCH_LIMIT === 0) {
+            console.log(`📝 Committing a batch of ${BATCH_LIMIT} polls...`);
+            await pollBatch.commit();
+            pollBatch = db.batch();
+        }
+    }
+
+    // Commit any remaining polls in the last batch
+    if (pollCount % BATCH_LIMIT !== 0) {
+        console.log(`📝 Committing the final batch of ${pollCount % BATCH_LIMIT} polls...`);
+        await pollBatch.commit();
+    }
     console.log(`✅ Seeded ${masterPolls.length} polls.`);
 
-    // --- 3. Seed Comments ---
+    // --- 3. Seed Comments (BATCHED) ---
     console.log('🌱 Seeding comments...');
-    const commentBatch = db.batch();
+    let commentBatch = db.batch();
     const pollCommentUpdates: { [key: string]: number } = {};
+    let commentCount = 0;
 
-    masterComments.forEach((comment: any) => {
-      const randomPollId = pollIds[Math.floor(Math.random() * pollIds.length)];
-      const randomUserIndex = Math.floor(Math.random() * allUsers.length);
-      const randomUser = allUsers[randomUserIndex];
-      const randomUserId = userIds[randomUserIndex];
-      
-      const commentRef = db.collection('polls').doc(randomPollId).collection('comments').doc();
+    for (const comment of masterComments) {
+        const randomPollId = pollIds[Math.floor(Math.random() * pollIds.length)];
+        const randomUserIndex = Math.floor(Math.random() * allUsers.length);
+        const randomUser = allUsers[randomUserIndex];
+        const randomUserId = userIds[randomUserIndex];
+        
+        const commentRef = db.collection('polls').doc(randomPollId).collection('comments').doc();
 
-      let avatarUrl = `https://i.pravatar.cc/150?u=${randomUser.username}`;
-      if (randomUser.gender === 'male' || randomUser.gender === 'female') {
-          avatarUrl += `&g=${randomUser.gender}`;
-      }
+        let avatarUrl = `https://i.pravatar.cc/150?u=${randomUser.username}`;
+        if (randomUser.gender === 'male' || randomUser.gender === 'female') {
+            avatarUrl += `&g=${randomUser.gender}`;
+        }
 
-      commentBatch.set(commentRef, {
-        pollId: randomPollId,
-        userId: randomUserId,
-        username: randomUser.username,
-        avatar: avatarUrl,
-        text: comment.text,
-        createdAt: new Date(comment.createdAt),
-      });
+        commentBatch.set(commentRef, {
+          pollId: randomPollId,
+          userId: randomUserId,
+          username: randomUser.username,
+          avatar: avatarUrl,
+          text: comment.text,
+          createdAt: new Date(comment.createdAt),
+        });
 
-      pollCommentUpdates[randomPollId] = (pollCommentUpdates[randomPollId] || 0) + 1;
-    });
+        pollCommentUpdates[randomPollId] = (pollCommentUpdates[randomPollId] || 0) + 1;
+        commentCount++;
 
-    await commentBatch.commit();
+        if (commentCount % BATCH_LIMIT === 0) {
+            console.log(`📝 Committing a batch of ${BATCH_LIMIT} comments...`);
+            await commentBatch.commit();
+            commentBatch = db.batch();
+        }
+    }
+
+    // Commit the final batch of comments
+    if (commentCount % BATCH_LIMIT !== 0) {
+        console.log(`📝 Committing the final batch of ${commentCount % BATCH_LIMIT} comments...`);
+        await commentBatch.commit();
+    }
     console.log(`✅ Seeded ${masterComments.length} comments into random polls.`);
 
-    // --- 4. Update Comment Counts on Polls ---
+    // --- 4. Update Comment Counts on Polls (BATCHED) ---
     console.log('🔄 Updating comment counts on polls...');
-    const updateCountsBatch = db.batch();
-    for (const pollId in pollCommentUpdates) {
+    let updateCountsBatch = db.batch();
+    let updatesCount = 0;
+    const pollIdsWithNewComments = Object.keys(pollCommentUpdates);
+
+    for (const pollId of pollIdsWithNewComments) {
         const pollRef = db.collection('polls').doc(pollId);
-        updateCountsBatch.update(pollRef, { comments: pollCommentUpdates[pollId] });
+        // Using FieldValue.increment is safer for counters
+        const incrementValue = pollCommentUpdates[pollId];
+        updateCountsBatch.update(pollRef, { comments: FieldValue.increment(incrementValue) });
+        updatesCount++;
+
+        if (updatesCount % BATCH_LIMIT === 0) {
+            console.log(`📝 Committing a batch of ${BATCH_LIMIT} comment count updates...`);
+            await updateCountsBatch.commit();
+            updateCountsBatch = db.batch();
+        }
     }
-    await updateCountsBatch.commit();
+
+    // Commit any remaining updates
+    if (updatesCount > 0 && updatesCount % BATCH_LIMIT !== 0) {
+        console.log(`📝 Committing the final batch of ${updatesCount % BATCH_LIMIT} comment count updates...`);
+        await updateCountsBatch.commit();
+    }
     console.log('✅ Updated comment counts.');
 }
 
@@ -250,7 +297,7 @@ async function main() {
     try {
         console.log('--- Starting Comprehensive Database Seed ---');
         await seedData();
-        console.log('--- Database Seed Finished Successfully ---');
+        console.log('--- ✔️ Database Seed Finished Successfully ---');
     } catch (error) {
         console.error('❌ Error during database seed:', error);
         process.exit(1);

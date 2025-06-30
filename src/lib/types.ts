@@ -20,6 +20,7 @@ export interface PollOption {
   votes: number;
   imageUrl?: string | null;
   affiliateLink?: string | null;
+  dataAiHint?: string;
 }
 
 export interface Comment {
