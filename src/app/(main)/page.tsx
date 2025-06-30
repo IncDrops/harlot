@@ -176,29 +176,39 @@ export default function HomePage() {
     <>
     <div className="container mx-auto py-8 px-2 sm:px-4">
       <div className="w-full max-w-2xl mx-auto space-y-6">
-        {polls.map((poll, index) => {
-           const isLastElement = polls.length === index + 1;
-           const hasVoted = votedStates[poll.id] || false;
-           const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
-           return (
-            <div ref={isLastElement ? lastPollElementRef : null} key={`${poll.id}-${cardKeys[poll.id] || 0}`}>
-                <PollCard
-                  poll={poll}
-                  onVote={handleVote}
-                  onSwipe={(direction) => {
-                    if (!isTwoOptionPoll || hasVoted) {
-                      return;
-                    }
-                    const optionId = poll.options[direction === 'left' ? 0 : 1].id;
-                    handleVote(poll.id, optionId);
-                  }}
-                  showResults={hasVoted}
-                  isTwoOptionPoll={isTwoOptionPoll}
-                  custom={swipeDirections[poll.id]}
-                />
-            </div>
-           )
-        })}
+        <AnimatePresence>
+            {polls.map((poll, index) => {
+            const isLastElement = polls.length === index + 1;
+            const hasVoted = votedStates[poll.id] || false;
+            const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
+            return (
+                <motion.div 
+                    layout
+                    ref={isLastElement ? lastPollElementRef : null} 
+                    key={`${poll.id}-${cardKeys[poll.id] || 0}`}
+                    initial={{ opacity: 0, y: 50, rotate: 3 }}
+                    animate={{ opacity: 1, y: 0, rotate: 0 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                >
+                    <PollCard
+                        poll={poll}
+                        onVote={handleVote}
+                        onSwipe={(direction) => {
+                            if (!isTwoOptionPoll || hasVoted) {
+                            return;
+                            }
+                            const optionId = poll.options[direction === 'left' ? 0 : 1].id;
+                            handleVote(poll.id, optionId);
+                        }}
+                        showResults={hasVoted}
+                        isTwoOptionPoll={isTwoOptionPoll}
+                        custom={swipeDirections[poll.id]}
+                    />
+                </motion.div>
+            )
+            })}
+        </AnimatePresence>
         {isLoading && (
            <Card>
             <CardContent className="p-8">
