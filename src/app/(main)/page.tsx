@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
@@ -99,7 +98,7 @@ export default function HomePage() {
   const performVote = (pollId: string, optionId: number) => {
      setPolls(currentPolls =>
         currentPolls.map(p => {
-          if (p.id === pollId) {
+          if (p.id === pollId && Array.isArray(p.options)) {
             const newOptions = [...p.options];
             const optIndex = newOptions.findIndex(o => o.id === optionId);
             if(optIndex !== -1) {
@@ -128,7 +127,7 @@ export default function HomePage() {
     }
 
     const poll = polls.find(p => p.id === pollId);
-    if (!poll || votedStates[pollId]) return;
+    if (!poll || !Array.isArray(poll.options) || votedStates[pollId]) return;
 
     const majorityVotes = Math.max(...poll.options.map(o => o.votes), 0);
     const isLocked = poll.pledged && poll.pledgeAmount && (poll.pledgeAmount * 0.5) / (majorityVotes + 1) < 0.10;
@@ -177,7 +176,7 @@ export default function HomePage() {
     <div className="container mx-auto py-8 px-2 sm:px-4">
       <div className="w-full max-w-2xl mx-auto space-y-6">
         <AnimatePresence>
-            {polls.map((poll, index) => {
+            {polls.filter(p => Array.isArray(p.options)).map((poll, index) => {
             const isLastElement = polls.length === index + 1;
             const hasVoted = votedStates[poll.id] || false;
             const isTwoOptionPoll = poll.options.length === 2 && poll.type === 'standard';
@@ -195,7 +194,7 @@ export default function HomePage() {
                         poll={poll}
                         onVote={handleVote}
                         onSwipe={(direction) => {
-                            if (!isTwoOptionPoll || hasVoted) {
+                            if (!isTwoOptionPoll || hasVoted || !poll.options) {
                             return;
                             }
                             const optionId = poll.options[direction === 'left' ? 0 : 1].id;
@@ -243,8 +242,10 @@ export default function HomePage() {
         <AlertDialogFooter>
           <AlertDialogCancel onClick={() => setMonetizationLockAlert(null)}>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={() => {
-            monetizationLockAlert?.onConfirm();
-            setMonetizationLockAlert(null);
+            if(monetizationLockAlert) {
+                monetizationLockAlert.onConfirm();
+                setMonetizationLockAlert(null);
+            }
           }}>Vote Anyway</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
