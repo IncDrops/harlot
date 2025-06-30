@@ -2,11 +2,11 @@ import { initializeApp, cert, ServiceAccount } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
 import serviceAccount from "./serviceAccountKey.json";
-import users from "./users_seed.json";
+import users from "./users_seed_122.json";
 
 // Define the User type structure
 type User = {
-  id: string;
+  id: string; // UUID
   username: string;
   displayName: string;
   bio: string;
@@ -29,11 +29,11 @@ async function uploadUsers() {
   const usersCollection = db.collection("users");
 
   (users as User[]).forEach((user, index) => {
-    const numericId = (index + 1).toString(); // "1", "2", ..., "22"
+    const numericId = (index + 1).toString(); // use "1", "2", ..., "122"
     const docRef = usersCollection.doc(numericId);
 
     batch.set(docRef, {
-      uid: user.id, // keep original UUID in case it's needed later
+      uid: user.id, // preserve original UUID
       username: user.username,
       displayName: user.displayName,
       bio: user.bio,
