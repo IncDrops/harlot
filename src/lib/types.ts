@@ -2,12 +2,16 @@
 
 export interface User {
   id: string;
-  name: string;
+  numericId: number;
+  displayName: string;
   username: string;
   avatar: string;
+  bio?: string;
+  pronouns?: string;
   birthDate: string; // ISO string
   gender: 'male' | 'female' | 'non-binary' | 'prefer-not-to-say';
   pollitPoints: number;
+  tipsReceived?: number;
 }
 
 export interface PollOption {

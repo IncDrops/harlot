@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useMemo } from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { motion, PanInfo } from 'framer-motion';
 import { formatDistanceToNowStrict } from 'date-fns';
@@ -204,13 +204,13 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
             <div className="flex items-start gap-3">
               <Link href={`/profile/${creator.username}`} passHref>
                 <Avatar className="h-12 w-12 border-2 border-primary/50 cursor-pointer">
-                  <AvatarImage src={creator.avatar} alt={creator.username} data-ai-hint="anime avatar" />
-                  <AvatarFallback>{creator.name[0]}</AvatarFallback>
+                  {creator.avatar && <AvatarImage src={creator.avatar} alt={creator.username} data-ai-hint="anime avatar" />}
+                  <AvatarFallback>{creator.displayName[0]}</AvatarFallback>
                 </Avatar>
               </Link>
               <div className="flex-1">
                 <Link href={`/profile/${creator.username}`} passHref>
-                    <CardTitle className="text-base font-bold font-headline hover:underline cursor-pointer">{creator.name}</CardTitle>
+                    <CardTitle className="text-base font-bold font-headline hover:underline cursor-pointer">{creator.displayName}</CardTitle>
                 </Link>
                 <CardDescription className="text-xs">
                   @{creator.username} · {formatDistanceToNowStrict(new Date(poll.createdAt), { addSuffix: true })}

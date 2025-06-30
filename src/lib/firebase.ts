@@ -166,6 +166,17 @@ export const getUserById = async (userId: string): Promise<User | null> => {
     return null;
 }
 
+export const getUserByNumericId = async (numericId: string): Promise<User | null> => {
+    const usersRef = collection(db, 'users');
+    // Note: This requires a Firestore index on 'numericId'
+    const q = query(usersRef, where('numericId', '==', parseInt(numericId, 10)), limit(1));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+        return null;
+    }
+    return fromFirestore<User>(querySnapshot.docs[0]);
+}
+
 export const getUserByUsername = async (username: string): Promise<User | null> => {
     const usersRef = collection(db, 'users');
     const q = query(usersRef, where('username', '==', username), limit(1));

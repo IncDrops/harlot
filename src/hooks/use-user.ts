@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import type { User } from '@/lib/types';
-import { getUserById } from '@/lib/firebase';
+import { getUserByNumericId } from '@/lib/firebase';
 
 const userCache = new Map<string, User>();
 
@@ -18,8 +18,9 @@ export function useUser(userId: string | undefined) {
             return;
         }
 
-        if (userCache.has(userId)) {
-            setUser(userCache.get(userId)!);
+        const cacheKey = String(userId);
+        if (userCache.has(cacheKey)) {
+            setUser(userCache.get(cacheKey)!);
             setLoading(false);
             return;
         }
@@ -27,11 +28,11 @@ export function useUser(userId: string | undefined) {
         let isMounted = true;
         setLoading(true);
 
-        getUserById(userId)
+        getUserByNumericId(userId)
             .then(fetchedUser => {
                 if (isMounted) {
                     if (fetchedUser) {
-                        userCache.set(userId, fetchedUser);
+                        userCache.set(cacheKey, fetchedUser);
                         setUser(fetchedUser);
                     }
                     setLoading(false);

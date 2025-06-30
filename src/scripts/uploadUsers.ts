@@ -30,10 +30,12 @@ async function uploadUsers() {
   const batch = db.batch();
   const usersCollection = db.collection("users");
 
-  (users as User[]).forEach((user) => {
-    const docRef = usersCollection.doc(user.id); // use provided ID
+  (users as User[]).forEach((user, index) => {
+    const docRef = usersCollection.doc(user.id); // use provided ID from seed
     batch.set(docRef, {
       ...user,
+      numericId: index + 1, // Add numeric ID for linking polls
+      avatar: `https://i.pravatar.cc/150?u=${user.username}`, // Add placeholder avatar
       createdAt: new Date(user.createdAt),
     });
   });

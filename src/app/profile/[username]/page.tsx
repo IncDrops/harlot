@@ -71,9 +71,9 @@ export default function UserProfilePage({ params }: { params: { username: string
                 <CardHeader className="text-center">
                     <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
                         <AvatarImage src={user.avatar} alt="User Avatar" data-ai-hint="anime avatar"/>
-                        <AvatarFallback>{user.name?.[0].toUpperCase()}</AvatarFallback>
+                        <AvatarFallback>{user.displayName?.[0].toUpperCase()}</AvatarFallback>
                     </Avatar>
-                    <CardTitle className="text-2xl">{user.name}</CardTitle>
+                    <CardTitle className="text-2xl">{user.displayName}</CardTitle>
                     <CardDescription>@{user.username}</CardDescription>
                      <div className="flex justify-center gap-6 pt-4 text-sm text-muted-foreground">
                         <div className="text-center">
@@ -105,13 +105,13 @@ export default function UserProfilePage({ params }: { params: { username: string
                         </Card>
                          <Card className="bg-muted/50 p-4 text-center">
                              <CardTitle className="flex items-center justify-center gap-2 text-base font-semibold"><DollarSign className="w-5 h-5 text-green-500" /> Tips Earned</CardTitle>
-                             <p className="text-2xl font-bold mt-2">$0.00</p>
+                             <p className="text-2xl font-bold mt-2">${user.tipsReceived?.toFixed(2) || '0.00'}</p>
                         </Card>
                     </div>
                 </CardContent>
             </Card>
 
-            <h2 className="text-xl font-bold mb-4 max-w-2xl mx-auto">Polls by {user.name}</h2>
+            <h2 className="text-xl font-bold mb-4 max-w-2xl mx-auto">Polls by {user.displayName}</h2>
             <div className="max-w-2xl mx-auto space-y-6">
             {polls.length > 0 ? (
                 polls.map(poll => {
@@ -130,7 +130,7 @@ export default function UserProfilePage({ params }: { params: { username: string
             ) : (
                 <Card>
                     <CardContent className="p-8 text-center text-muted-foreground">
-                        <p>{user.name} hasn't posted any polls yet.</p>
+                        <p>{user.displayName} hasn't posted any polls yet.</p>
                     </CardContent>
                 </Card>
             )}

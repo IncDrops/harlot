@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DollarSign, Coins, Gift } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { dummyUsers } from "@/lib/dummy-data";
+import { getUserById } from "@/lib/firebase";
 import type { User } from "@/lib/types";
 
 export default function ProfilePage() {
@@ -32,17 +32,14 @@ export default function ProfilePage() {
     useEffect(() => {
         if (!loading && !user) {
             router.push('/signin');
-        } else if (user) {
-            // In a real app, you'd fetch this from your database.
-            // For now, we find a matching dummy user or use a default.
-            const matchedUser = dummyUsers.find(u => u.username === user.email?.split('@')[0]) || dummyUsers[0];
-            setDisplayUser({
-                ...matchedUser,
-                // @ts-ignore
-                email: user.email,
-            });
+        } else if (user && !displayUser) {
+           getUserById(user.uid).then(dbUser => {
+               if(dbUser) {
+                   setDisplayUser(dbUser);
+               }
+           })
         }
-    }, [user, loading, router]);
+    }, [user, loading, router, displayUser]);
 
     const handleStripeConnect = () => {
         toast({
@@ -70,9 +67,9 @@ export default function ProfilePage() {
             <CardHeader className="text-center">
                 <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
                     <AvatarImage src={displayUser.avatar} alt="User Avatar" data-ai-hint="anime avatar" />
-                    <AvatarFallback>{displayUser.name?.[0].toUpperCase()}</AvatarFallback>
+                    <AvatarFallback>{displayUser.displayName?.[0].toUpperCase()}</AvatarFallback>
                 </Avatar>
-                <CardTitle className="text-2xl">{displayUser.name}</CardTitle>
+                <CardTitle className="text-2xl">{displayUser.displayName}</CardTitle>
                 <CardDescription>@{displayUser.username}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -83,7 +80,7 @@ export default function ProfilePage() {
                     </Card>
                      <Card className="bg-muted/50 p-4 text-center">
                          <CardTitle className="flex items-center justify-center gap-2"><DollarSign className="w-5 h-5 text-green-500" /> Tips Earned</CardTitle>
-                         <p className="text-3xl font-bold mt-2">$0.00</p>
+                         <p className="text-3xl font-bold mt-2">${displayUser.tipsReceived?.toFixed(2) || '0.00'}</p>
                     </Card>
                 </div>
                  <Card className="bg-muted/50">
