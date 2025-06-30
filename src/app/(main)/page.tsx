@@ -45,7 +45,11 @@ export default function HomePage() {
 
     try {
         const { polls: newPolls, lastVisible: newLastVisible } = await getPolls(lastVisible);
-        setPolls(prev => [...prev, ...newPolls]);
+        setPolls(prev => {
+            const allPolls = [...prev, ...newPolls];
+            const pollMap = new Map(allPolls.map(p => [p.id, p]));
+            return Array.from(pollMap.values());
+        });
         setLastVisible(newLastVisible);
         if (!newLastVisible) {
             setHasMore(false);
