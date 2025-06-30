@@ -97,17 +97,6 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     exitLeft: { x: "-120%", opacity: 0, rotate: -15, transition: { duration: 0.8 } },
     exitRight: { x: "120%", opacity: 0, rotate: 15, transition: { duration: 0.8 } },
   };
-  
-  const motionProps = {
-    variants: cardVariants,
-    initial: "hidden",
-    animate: custom ? (custom === 'left' ? 'exitLeft' : 'exitRight') : 'visible',
-    drag: (isTwoOptionPoll && !showResults ? "x" : false),
-    dragConstraints: { left: 0, right: 0 },
-    dragElastic: 0.2,
-    onDragEnd: handleDragEnd,
-  };
-
 
   if (creatorLoading) {
     return (
@@ -183,6 +172,11 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
                         className="w-full justify-start p-4 h-auto text-left rounded-xl"
                         onClick={() => onVote(poll.id, option.id)}
                       >
+                       {option.imageUrl && (
+                          <div className="relative w-12 h-12 mr-4 flex-shrink-0">
+                            <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-md object-cover" />
+                          </div>
+                        )}
                         {option.text}
                       </Button>
                   )}
@@ -195,7 +189,16 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
 
   return (
     <>
-      <motion.div {...motionProps} className="shadow-lg rounded-2xl">
+      <motion.div
+        className="shadow-lg rounded-2xl"
+        variants={cardVariants}
+        initial="hidden"
+        animate={custom ? (custom === 'left' ? 'exitLeft' : 'exitRight') : 'visible'}
+        drag={isTwoOptionPoll && !showResults ? "x" : false}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.2}
+        onDragEnd={handleDragEnd}
+      >
         <Card className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full max-w-2xl mx-auto bg-card">
           <CardHeader>
             <div className="flex items-start gap-3">
