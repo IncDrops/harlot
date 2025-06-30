@@ -18,10 +18,14 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import type { Poll } from "@/lib/types";
+import { useAuth } from "@/contexts/auth-context";
+import { useToast } from "@/hooks/use-toast";
 
 const POLLS_PER_PAGE = 10;
 
 export default function HomePage() {
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [polls, setPolls] = useState<Poll[]>([]);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
@@ -94,6 +98,15 @@ export default function HomePage() {
   }
 
   const handleVote = (pollId: number, optionId: number) => {
+    if (!user) {
+      toast({
+        variant: "destructive",
+        title: "Authentication Required",
+        description: "Please sign in or create an account to vote.",
+      });
+      return;
+    }
+
     const poll = polls.find(p => p.id === pollId);
     if (!poll || votedStates[pollId]) return;
 
@@ -125,16 +138,18 @@ export default function HomePage() {
     setIsAnimating(true);
     setSwipeDirections(prev => ({ ...prev, [pollId]: direction }));
     
-    // Perform vote and show results immediately
-    performVote(pollId, optionId);
-    setVotedStates(prev => ({ ...prev, [pollId]: true }));
+    // Perform vote after a delay to allow animation to start
+    setTimeout(() => {
+        performVote(pollId, optionId);
+        setVotedStates(prev => ({ ...prev, [pollId]: true }));
+    }, 700);
     
-    // Animate back
+    // Lock scroll and reset card after animation completes
     setTimeout(() => {
         setSwipeDirections(prev => ({ ...prev, [pollId]: null }));
         setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
         setIsAnimating(false);
-    }, 500);
+    }, 800);
   };
 
   return (
