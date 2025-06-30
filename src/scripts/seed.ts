@@ -71,18 +71,33 @@ async function deleteCollection(collectionPath: string, batchSize: number) {
 // Main seeding function
 async function seedData() {
     console.log('--- Clearing existing data ---');
-     // Clear Auth users
+
+    // --- SAFER AUTH USER DELETION ---
+    console.log('🗑️  Looking for previously seeded Auth users to delete...');
     try {
-        const listUsersResult = await auth.listUsers(1000);
-        if (listUsersResult.users.length > 0) {
-            const uidsToDelete = listUsersResult.users.map(u => u.uid);
+        const seededUserEmails = allUsers.map(u => `${u.username}@pollitago.com`);
+        
+        // Batch lookup users by email
+        const userIdentifiers = seededUserEmails.map(email => ({ email }));
+        const uidsToDelete: string[] = [];
+        
+        // Batching because getUsers has a limit of 100 identifiers per call
+        for (let i = 0; i < userIdentifiers.length; i += 100) {
+            const batch = userIdentifiers.slice(i, i + 100);
+            const listUsersResult = await auth.getUsers(batch);
+            listUsersResult.users.forEach(userRecord => {
+                uidsToDelete.push(userRecord.uid);
+            });
+        }
+        
+        if (uidsToDelete.length > 0) {
             await auth.deleteUsers(uidsToDelete);
-            console.log(`🗑️  Deleted ${uidsToDelete.length} Auth users.`);
+            console.log(`✅ Deleted ${uidsToDelete.length} previously seeded Auth users. Your personal account was not touched.`);
         } else {
-            console.log('✅ No Auth users to delete.');
+            console.log('✅ No previously seeded Auth users found.');
         }
     } catch (error) {
-        console.error('⚠️ Could not clear Auth users. This might be fine on first run.');
+        console.error('⚠️  An error occurred while trying to delete seeded users. This might be fine on the first run.', error);
     }
     
     // Clear Firestore
@@ -119,14 +134,14 @@ async function seedData() {
       }
 
       // We need to set the user profile with a specific type to avoid `any`
-      const userProfileData = {
+      const userProfileData: Omit<User, 'bio' | 'pronouns'> = {
          id: uid, // Use the real Auth UID
          numericId: user.numericId,
          username: user.username,
          displayName: user.displayName,
          avatar: avatarUrl,
          birthDate: new Date(user.birthday).toISOString(),
-         gender: user.gender,
+         gender: user.gender as User['gender'],
          pollitPoints: user.pollItPoints || 0,
          tipsReceived: user.tipsReceived || 0,
       };
