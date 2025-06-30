@@ -1,3 +1,4 @@
+// Firebase Config
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import {
   getAuth,
@@ -7,7 +8,6 @@ import {
   sendEmailVerification,
   onAuthStateChanged,
   Auth,
-  User,
   UserCredential,
 } from "firebase/auth";
 import {
@@ -36,7 +36,7 @@ import {
   limit,
   collectionGroup,
 } from "firebase/firestore";
-import type { Comment, Notification, Poll } from "./types";
+import type { Comment, Notification, Poll, User } from "./types";
 import { dummyPolls, dummyUsers } from './dummy-data';
 
 const firebaseConfig = {
@@ -143,14 +143,14 @@ export const toggleLikeOnPoll = async (pollId: string, userId: string): Promise<
 // ──────────── USERS ────────────
 
 export const getUserByUsername = async (username: string) => {
-  const user = dummyUsers.find(u => u.username === username);
+  const user = dummyUsers.find((u: User) => u.username === username);
   return Promise.resolve(user || null);
 };
 
 // ──────────── POLLS ────────────
 
 export const getPollsByUser = async (userId: number) => {
-  const polls = dummyPolls.filter(p => p.creatorId === userId);
+  const polls = dummyPolls.filter((p: Poll) => p.creatorId === userId);
   return Promise.resolve(polls);
 };
 
@@ -158,7 +158,7 @@ export const getPollsByUser = async (userId: number) => {
 
 export const searchPolls = async (searchTerm: string): Promise<Poll[]> => {
   const lowercasedTerm = searchTerm.toLowerCase();
-  const results = dummyPolls.filter(poll => 
+  const results = dummyPolls.filter((poll: Poll) => 
     poll.question.toLowerCase().includes(lowercasedTerm)
   );
   return Promise.resolve(results);
@@ -174,58 +174,6 @@ export const getNotificationsForUser = async (userId: string): Promise<Notificat
     { id: '4', type: 'new_comment', fromUsername: 'hana_chan', fromId: '3', pollId: '2', createdAt: new Date(Date.now() - 86400000).toISOString(), read: true },
   ];
   return Promise.resolve(mockNotifications);
-};
-
-// ──────────── VOTE LOGIC ────────────
-
-export const submitVote = async ({
-  pollId,
-  userId,
-  optionId,
-}: {
-  pollId: string;
-  userId: string;
-  optionId: number;
-}): Promise<void> => {
-  if (!db) throw new Error("Firestore is not configured.");
-
-  const pollRef = doc(db, "polls", pollId);
-  const voteRef = doc(pollRef, "votes", userId); // ensures 1 vote per user per poll
-
-  try {
-    await runTransaction(db, async (transaction) => {
-      const voteDoc = await transaction.get(voteRef);
-
-      if (voteDoc.exists()) {
-        console.warn("User already voted.");
-        return;
-      }
-
-      const pollDoc = await transaction.get(pollRef);
-      if (!pollDoc.exists()) throw new Error("Poll not found.");
-
-      const pollData = pollDoc.data();
-      const updatedOptions = pollData.options.map((opt: any) => {
-        if (opt.id === optionId) {
-          return { ...opt, votes: (opt.votes || 0) + 1 };
-        }
-        return opt;
-      });
-
-      transaction.set(voteRef, {
-        userId,
-        optionId,
-        createdAt: serverTimestamp(),
-      });
-
-      transaction.update(pollRef, {
-        options: updatedOptions,
-      });
-    });
-  } catch (error) {
-    console.error("Vote transaction failed:", error);
-    throw error;
-  }
 };
 
 export { auth, storage, db };
