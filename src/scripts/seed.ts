@@ -1,9 +1,9 @@
 
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore, CollectionReference } from 'firebase-admin/firestore';
-import { dummyUsers, richPolls } from '../lib/dummy-data';
 import type { Poll } from '../lib/types';
 import path from 'path';
+import { dummyUsers } from '../lib/dummy-data';
 
 // --- IMPORTANT ---
 // This script requires a service account key.
@@ -14,7 +14,7 @@ import path from 'path';
 let serviceAccount: any;
 try {
     // Correct path assuming script is run from project root (e.g., `npm run seed`)
-    serviceAccount = require(path.join(process.cwd(), 'serviceAccountKey.json'));
+    serviceAccount = require(path.resolve(process.cwd(), 'serviceAccountKey.json'));
 } catch (e) {
     console.error("❌ Error: serviceAccountKey.json not found in the project root directory.");
     console.error("Please follow the instructions in the comments of src/scripts/seed.ts to create one.");
@@ -22,6 +22,7 @@ try {
 }
 
 // Import all poll data sources
+import { richPolls } from '../lib/dummy-data';
 import fourOptionPolls from '../seed/four_option_seed_fixed.json';
 import secondOpinionPolls from '../seed/second_opinion_seed.json';
 import threeOptionPolls from '../seed/three_option_seed.json';
@@ -104,7 +105,7 @@ async function seedData() {
         // Skip if question is missing, indicating bad data
         if (!poll.question) return;
 
-        const standardizedPoll: Omit<Poll, 'id'> = {
+        const standardizedPoll: { [key: string]: any } = {
             question: poll.question,
             description: poll.description || `A decision about: ${poll.question}`,
             options: poll.options || [
@@ -122,10 +123,14 @@ async function seedData() {
             category: poll.category || 'General',
             likes: poll.likes ?? 0,
             comments: poll.comments ?? 0,
-            videoUrl: (typeof poll.videoUrl === 'string' && poll.videoUrl.trim() !== '') ? poll.videoUrl : undefined,
         };
+        
+        // Conditionally add videoUrl to avoid sending 'undefined' to Firestore
+        if (typeof poll.videoUrl === 'string' && poll.videoUrl.trim() !== '') {
+            standardizedPoll.videoUrl = poll.videoUrl;
+        }
       
-        combinedPolls.push(standardizedPoll);
+        combinedPolls.push(standardizedPoll as Omit<Poll, 'id'>);
     });
         
     console.log(`📊 Total combined polls to be seeded: ${combinedPolls.length}`);
@@ -139,7 +144,7 @@ async function seedData() {
       const docRef = pollsRef.doc(); // Firestore auto-ID
       const createdAt = new Date(now.getTime() - (i + 1) * 60000 * 15 * (Math.random() + 0.5)); // Stagger creation times
       
-      const pollWithTimestamp: Omit<Poll, 'id'> & { endsAt: Date, isProcessed: boolean } = {
+      const pollWithTimestamp = {
         ...poll,
         createdAt: createdAt.toISOString(),
         endsAt: new Date(createdAt.getTime() + poll.durationMs),
