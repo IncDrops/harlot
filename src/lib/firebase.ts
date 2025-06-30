@@ -39,6 +39,7 @@ import {
   startAfter,
   QueryDocumentSnapshot,
   DocumentData,
+  QueryConstraint,
 } from "firebase/firestore";
 import type { Comment, Notification, Poll, User } from "./types";
 
@@ -190,7 +191,7 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
 // ──────────── POLLS ────────────
 export const getPolls = async (lastVisible: QueryDocumentSnapshot | null = null) => {
     const pollsRef = collection(db, 'polls');
-    const constraints = [orderBy('createdAt', 'desc'), limit(10)];
+    const constraints: QueryConstraint[] = [orderBy('createdAt', 'desc'), limit(10)];
     if(lastVisible) {
         constraints.push(startAfter(lastVisible));
     }
