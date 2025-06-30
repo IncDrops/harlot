@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DollarSign, Coins, Gift, MessageSquare } from "lucide-react";
+import { DollarSign, Coins, MessageSquare, UserPlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { User, Poll } from "@/lib/types";
 import { getUserByUsername, getPollsByUser } from "@/lib/firebase";
@@ -75,22 +75,39 @@ export default function UserProfilePage({ params }: { params: { username: string
                     </Avatar>
                     <CardTitle className="text-2xl">{user.name}</CardTitle>
                     <CardDescription>@{user.username}</CardDescription>
+                     <div className="flex justify-center gap-6 pt-4 text-sm text-muted-foreground">
+                        <div className="text-center">
+                            <span className="font-bold text-foreground">{polls.length}</span> Posts
+                        </div>
+                        <div className="text-center">
+                            <span className="font-bold text-foreground">1.2k</span> Followers
+                        </div>
+                        <div className="text-center">
+                            <span className="font-bold text-foreground">340</span> Following
+                        </div>
+                    </div>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                         <Button>
+                            <UserPlus className="w-4 h-4 mr-2" />
+                            Follow
+                        </Button>
+                        <Button variant="outline">
+                            <MessageSquare className="w-4 h-4 mr-2" />
+                            Message
+                        </Button>
+                    </div>
                     <div className="grid grid-cols-2 gap-4">
                         <Card className="bg-muted/50 p-4 text-center">
-                             <CardTitle className="flex items-center justify-center gap-2"><Coins className="w-5 h-5 text-yellow-500" /> PollitPoints</CardTitle>
-                             <p className="text-3xl font-bold mt-2">{user.pollitPoints?.toLocaleString()}</p>
+                             <CardTitle className="flex items-center justify-center gap-2 text-base font-semibold"><Coins className="w-5 h-5 text-yellow-500" /> PollitPoints</CardTitle>
+                             <p className="text-2xl font-bold mt-2">{user.pollitPoints?.toLocaleString()}</p>
                         </Card>
                          <Card className="bg-muted/50 p-4 text-center">
-                             <CardTitle className="flex items-center justify-center gap-2"><DollarSign className="w-5 h-5 text-green-500" /> Tips Earned</CardTitle>
-                             <p className="text-3xl font-bold mt-2">$0.00</p>
+                             <CardTitle className="flex items-center justify-center gap-2 text-base font-semibold"><DollarSign className="w-5 h-5 text-green-500" /> Tips Earned</CardTitle>
+                             <p className="text-2xl font-bold mt-2">$0.00</p>
                         </Card>
                     </div>
-                     <Button className="w-full">
-                        <MessageSquare className="w-4 h-4 mr-2" />
-                        Send Message
-                    </Button>
                 </CardContent>
             </Card>
 
