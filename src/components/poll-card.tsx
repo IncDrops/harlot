@@ -85,29 +85,27 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, y: 50, rotate: 3 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      rotate: 0,
+      transition: { duration: 0.5, ease: "easeOut" } 
+    },
     exitLeft: { x: "-120%", opacity: 0, rotate: -15, transition: { duration: 0.8 } },
     exitRight: { x: "120%", opacity: 0, rotate: 15, transition: { duration: 0.8 } },
   };
+  
+  const motionProps = {
+    variants: cardVariants,
+    initial: "hidden",
+    animate: custom ? (custom === 'left' ? 'exitLeft' : 'exitRight') : 'visible',
+    drag: (isTwoOptionPoll && !showResults ? "x" : false) as const,
+    dragConstraints: { left: 0, right: 0 },
+    dragElastic: 0.2,
+    onDragEnd: handleDragEnd,
+  };
 
-  const motionProps = isTwoOptionPoll && !showResults
-    ? {
-        drag: "x" as const,
-        dragConstraints: { left: 0, right: 0 },
-        dragElastic: 0.2,
-        onDragEnd: handleDragEnd,
-        variants: cardVariants,
-        initial: "visible",
-        animate: custom ? (custom === 'left' ? 'exitLeft' : 'exitRight') : 'visible',
-        exit: custom === 'left' ? 'exitLeft' : 'exitRight',
-      }
-    : {
-        variants: cardVariants,
-        initial: "hidden",
-        animate: "visible",
-        exit: "hidden",
-    };
 
   if (!creator) return null;
 
