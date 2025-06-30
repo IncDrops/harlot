@@ -102,7 +102,7 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     variants: cardVariants,
     initial: "hidden",
     animate: custom ? (custom === 'left' ? 'exitLeft' : 'exitRight') : 'visible',
-    drag: (isTwoOptionPoll && !showResults ? "x" : false) as const,
+    drag: (isTwoOptionPoll && !showResults ? "x" : false),
     dragConstraints: { left: 0, right: 0 },
     dragElastic: 0.2,
     onDragEnd: handleDragEnd,
@@ -145,7 +145,9 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
         <div className="grid grid-cols-2 gap-2 mt-4">
           {poll.options.map((option) => (
             <div key={option.id} className="relative aspect-square cursor-pointer" onClick={() => !showResults && onVote(poll.id, option.id)}>
-              <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-2xl object-cover" data-ai-hint="comparison abstract" />
+              {option.imageUrl && (
+                <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-2xl object-cover" data-ai-hint="comparison abstract" />
+              )}
               {showResults && (
                 <div className="absolute inset-0 bg-black/60 flex items-center justify-center rounded-2xl flex-col">
                   <span className="text-white text-3xl font-bold font-headline">
