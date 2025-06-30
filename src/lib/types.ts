@@ -18,12 +18,13 @@ export interface PollOption {
   id: number;
   text: string;
   votes: number;
-  imageUrl?: string;
-  affiliateLink?: string;
+  imageUrl?: string | null;
+  affiliateLink?: string | null;
 }
 
 export interface Comment {
   id: string;
+  pollId: string;
   userId: string;
   username: string;
   avatar: string;
@@ -51,6 +52,8 @@ export interface Poll {
   videoUrl?: string;
   type: 'standard' | '2nd_opinion';
   createdAt: string;
+  endsAt: string;
+  isProcessed: boolean;
   durationMs: number;
   pledged: boolean;
   pledgeAmount?: number;

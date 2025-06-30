@@ -1,9 +1,8 @@
 
 import { initializeApp, cert } from 'firebase-admin/app';
-import { getFirestore, CollectionReference } from 'firebase-admin/firestore';
-import type { Poll } from '../lib/types';
+import { getFirestore, CollectionReference, DocumentReference } from 'firebase-admin/firestore';
+import type { Poll, User, Comment } from '../lib/types';
 import path from 'path';
-import { dummyUsers } from '../lib/dummy-data';
 
 // --- IMPORTANT ---
 // This script requires a service account key.
@@ -13,7 +12,6 @@ import { dummyUsers } from '../lib/dummy-data';
 // IMPORTANT: Do not commit this file to a public repository!
 let serviceAccount: any;
 try {
-    // Correct path assuming script is run from project root (e.g., `npm run seed`)
     serviceAccount = require(path.resolve(process.cwd(), 'serviceAccountKey.json'));
 } catch (e) {
     console.error("❌ Error: serviceAccountKey.json not found in the project root directory.");
@@ -21,13 +19,9 @@ try {
     process.exit(1);
 }
 
-// Import all poll data sources
-import { richPolls } from '../lib/dummy-data';
-import fourOptionPolls from '../seed/four_option_seed_fixed.json';
-import secondOpinionPolls from '../seed/second_opinion_seed.json';
-import threeOptionPolls from '../seed/three_option_seed.json';
-import twoOptionPolls from '../seed/two_option_seed.json';
-import pollsMaster from './polls_master.json';
+import { dummyUsers } from '../lib/dummy-data';
+import masterPolls from './polls_master.json';
+import masterComments from './comments_seed.json';
 
 
 initializeApp({
@@ -36,126 +30,149 @@ initializeApp({
 
 const db = getFirestore();
 
-// Helper to clear collections
-async function deleteCollection(collectionRef: CollectionReference, batchSize: number) {
+// Helper to recursively delete collections and subcollections
+async function deleteCollection(collectionPath: string, batchSize: number) {
+  const collectionRef = db.collection(collectionPath);
   const query = collectionRef.orderBy('__name__').limit(batchSize);
 
   return new Promise<void>((resolve, reject) => {
     deleteQueryBatch(query, resolve).catch(reject);
   });
-}
 
-async function deleteQueryBatch(query: FirebaseFirestore.Query, resolve: () => void) {
-  const snapshot = await query.get();
+  async function deleteQueryBatch(query: FirebaseFirestore.Query, resolve: () => void) {
+    const snapshot = await query.get();
 
-  const batchSize = snapshot.size;
-  if (batchSize === 0) {
-    resolve();
-    return;
+    if (snapshot.size === 0) {
+      resolve();
+      return;
+    }
+
+    const batch = db.batch();
+    for (const doc of snapshot.docs) {
+      // Deleting the document itself
+      batch.delete(doc.ref);
+    }
+    
+    // Deleting subcollections recursively must be done before deleting the parent document.
+    // However, since we are deleting the document itself, we don't need to manually delete subcollections
+    // if we process the entire collection deletion. For safety, let's explicitly handle it.
+    for (const doc of snapshot.docs) {
+      const subcollections = await doc.ref.listCollections();
+      for (const subcollection of subcollections) {
+        await deleteCollection(subcollection.path, batchSize);
+      }
+    }
+
+    await batch.commit();
+
+    process.nextTick(() => {
+      deleteQueryBatch(query, resolve);
+    });
   }
-
-  const batch = db.batch();
-  snapshot.docs.forEach((doc) => {
-    batch.delete(doc.ref);
-  });
-  await batch.commit();
-
-  process.nextTick(() => {
-    deleteQueryBatch(query, resolve);
-  });
 }
+
 
 // Main seeding function
 async function seedData() {
     console.log('--- Clearing existing data ---');
-    await deleteCollection(db.collection('users'), 100);
+    await deleteCollection('users', 100);
     console.log('🗑️  Users collection cleared.');
-    await deleteCollection(db.collection('polls'), 100);
-    console.log('🗑️  Polls collection cleared.');
+    await deleteCollection('polls', 100); // This will clear polls and their subcollections
+    console.log('🗑️  Polls collection and all sub-comments cleared.');
     
     // --- 1. Seed Users ---
-    const usersRef = db.collection('users');
+    const usersCollection = db.collection('users');
     console.log('🌱 Seeding users...');
     const userBatch = db.batch();
+    const userIds: string[] = [];
     dummyUsers.forEach(user => {
-      const docRef = usersRef.doc(String(user.id));
-      userBatch.set(docRef, { ...user, birthDate: new Date(user.birthDate) });
+      const docRef = usersCollection.doc(String(user.id));
+      userIds.push(user.id);
+      userBatch.set(docRef, { ...user, id: user.id, birthDate: new Date(user.birthDate) });
     });
     await userBatch.commit();
     console.log(`✅ Seeded ${dummyUsers.length} users.`);
   
-    // --- 2. Combine and Standardize All Polls ---
-    console.log('🌱 Combining and standardizing all poll sources...');
-    let combinedPolls: Omit<Poll, 'id'>[] = [];
-
-    // Function to convert minutes to milliseconds
-    const timerToMs = (minutes: number) => minutes * 60 * 1000;
-
-    // Process each JSON file and add to combined list
-    const allJsonPolls: any[] = [
-      ...richPolls,
-      ...fourOptionPolls,
-      ...secondOpinionPolls,
-      ...threeOptionPolls,
-      ...twoOptionPolls,
-      ...pollsMaster
-    ];
-
-    allJsonPolls.forEach((poll: any) => {
-        // Skip if question is missing, indicating bad data
-        if (!poll.question) return;
-
-        const standardizedPoll: { [key: string]: any } = {
-            question: poll.question,
-            description: poll.description || `A decision about: ${poll.question}`,
-            options: poll.options || [
-              { id: 1, text: 'Yes', votes: 0 },
-              { id: 2, text: 'No', votes: 0 }
-            ],
-            type: poll.type || 'standard',
-            creatorId: String(poll.creatorId) || dummyUsers[Math.floor(Math.random() * dummyUsers.length)].id,
-            createdAt: poll.createdAt ? new Date(poll.createdAt).toISOString() : new Date().toISOString(),
-            durationMs: poll.durationMs ?? (poll.timer ? timerToMs(poll.timer) : 24 * 60 * 60 * 1000), // default 1 day
-            pledged: poll.pledged ?? (poll.pledge > 0),
-            pledgeAmount: poll.pledgeAmount ?? poll.pledge ?? 0,
-            tipCount: poll.tipCount ?? 0,
-            isNSFW: poll.nsfw ?? poll.isNSFW ?? false,
-            category: poll.category || 'General',
-            likes: poll.likes ?? 0,
-            comments: poll.comments ?? 0,
-        };
-        
-        // Conditionally add videoUrl to avoid sending 'undefined' to Firestore
-        if (typeof poll.videoUrl === 'string' && poll.videoUrl.trim() !== '') {
-            standardizedPoll.videoUrl = poll.videoUrl;
-        }
-      
-        combinedPolls.push(standardizedPoll as Omit<Poll, 'id'>);
-    });
-        
-    console.log(`📊 Total combined polls to be seeded: ${combinedPolls.length}`);
-
-    // --- 3. Seed Combined Polls ---
-    const pollsRef = db.collection('polls');
+    // --- 2. Seed Polls ---
+    console.log('🌱 Seeding polls...');
+    const pollsCollection = db.collection('polls');
     const pollBatch = db.batch();
-    const now = new Date();
+    const pollIds: string[] = [];
+    const commentCounts: { [key: string]: number } = {};
 
-    combinedPolls.forEach((poll, i) => {
-      const docRef = pollsRef.doc(); // Firestore auto-ID
-      const createdAt = new Date(now.getTime() - (i + 1) * 60000 * 15 * (Math.random() + 0.5)); // Stagger creation times
-      
-      const pollWithTimestamp = {
-        ...poll,
-        createdAt: createdAt.toISOString(),
-        endsAt: new Date(createdAt.getTime() + poll.durationMs),
-        isProcessed: false,
-      };
-      pollBatch.set(docRef, pollWithTimestamp);
+    masterPolls.forEach((poll: any) => {
+        const docRef = pollsCollection.doc();
+        pollIds.push(docRef.id);
+        commentCounts[docRef.id] = 0; // Initialize comment count
+        const now = new Date();
+        const createdAt = new Date(now.getTime() - Math.random() * 30 * 24 * 60 * 60 * 1000); // Random time in last 30 days
+        const durationMs = (poll.timer || 1440) * 60 * 1000; // default 1 day
+
+        pollBatch.set(docRef, {
+            question: poll.question,
+            description: poll.description || "A community-powered decision.",
+            options: poll.options.map((opt: any, index: number) => ({
+                id: index + 1,
+                text: opt.text,
+                votes: Math.floor(Math.random() * 300),
+                imageUrl: opt.imageUrl || null,
+                affiliateLink: opt.affiliateLink || null,
+            })),
+            type: poll.options.length > 2 ? 'standard' : '2nd_opinion',
+            creatorId: poll.creatorId || userIds[Math.floor(Math.random() * userIds.length)],
+            createdAt: createdAt.toISOString(),
+            endsAt: new Date(createdAt.getTime() + durationMs).toISOString(),
+            durationMs: durationMs,
+            pledged: poll.pledge > 0,
+            pledgeAmount: poll.pledge || 0,
+            tipCount: poll.tipCount || Math.floor(Math.random() * 25),
+            isNSFW: poll.nsfw || false,
+            isProcessed: false,
+            category: poll.category || 'General',
+            likes: poll.likes || Math.floor(Math.random() * 500),
+            comments: 0 // Will be updated after seeding comments
+        });
     });
-    
     await pollBatch.commit();
-    console.log(`✅ Seeded ${combinedPolls.length} polls.`);
+    console.log(`✅ Seeded ${masterPolls.length} polls.`);
+
+    // --- 3. Seed Comments ---
+    console.log('🌱 Seeding comments...');
+    const commentBatch = db.batch();
+    const pollCommentUpdates: { [key: string]: number } = {};
+
+    masterComments.forEach((comment: any) => {
+      const randomPollId = pollIds[Math.floor(Math.random() * pollIds.length)];
+      const randomUser = dummyUsers[Math.floor(Math.random() * dummyUsers.length)];
+      
+      const commentRef = db.collection('polls').doc(randomPollId).collection('comments').doc();
+
+      commentBatch.set(commentRef, {
+        pollId: randomPollId,
+        userId: randomUser.id,
+        username: randomUser.username,
+        avatar: randomUser.avatar,
+        text: comment.text,
+        createdAt: new Date(comment.createdAt),
+      });
+
+      pollCommentUpdates[randomPollId] = (pollCommentUpdates[randomPollId] || 0) + 1;
+    });
+
+    await commentBatch.commit();
+    console.log(`✅ Seeded ${masterComments.length} comments into random polls.`);
+
+    // --- 4. Update Comment Counts on Polls ---
+    console.log('🔄 Updating comment counts on polls...');
+    const updateCountsBatch = db.batch();
+    for (const pollId in pollCommentUpdates) {
+        const pollRef = db.collection('polls').doc(pollId);
+        updateCountsBatch.update(pollRef, { comments: pollCommentUpdates[pollId] });
+    }
+    await updateCountsBatch.commit();
+    console.log('✅ Updated comment counts.');
 }
+
 
 async function main() {
     console.log('--- Starting Comprehensive Database Seed ---');
