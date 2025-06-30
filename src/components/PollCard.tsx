@@ -132,8 +132,8 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     if (poll.type === '2nd_opinion' && poll.options[0]?.imageUrl && poll.options[1]?.imageUrl) {
       return (
         <div className="grid grid-cols-2 gap-2 mt-4">
-          {poll.options.map((option) => (
-            <div key={option.id} className="relative aspect-square cursor-pointer" onClick={() => !showResults && onVote(poll.id, option.id)}>
+          {poll.options.map((option, index) => (
+            <div key={`${poll.id}-option-${index}`} className="relative aspect-square cursor-pointer" onClick={() => !showResults && onVote(poll.id, option.id)}>
               {option.imageUrl && (
                 <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-2xl object-cover" data-ai-hint="comparison abstract" />
               )}
@@ -154,10 +154,10 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     // Standard polls
     return (
         <div className="space-y-2 mt-4">
-            {poll.options.map((option: PollOption) => {
+            {poll.options.map((option: PollOption, index) => {
               const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;
               return (
-                <div key={option.id}>
+                <div key={`${poll.id}-option-${index}`}>
                   {showResults ? (
                      <div className="space-y-1">
                       <div className="flex justify-between text-sm font-medium">
