@@ -54,14 +54,19 @@ async function deleteQueryBatch(query: FirebaseFirestore.Query, resolve: () => v
 }
 
 async function seedData() {
+    console.log('--- Clearing existing data ---');
+    await deleteCollection(db.collection('users'), 50);
+    console.log('🗑️  Users collection cleared.');
+    await deleteCollection(db.collection('polls'), 50);
+    console.log('🗑️  Polls collection cleared.');
+    
     // --- Seed Users ---
     const usersRef = db.collection('users');
-    console.log('🗑️  Clearing existing users...');
-    await deleteCollection(usersRef, 50);
     console.log('🌱 Seeding users...');
     const userBatch = db.batch();
     dummyUsers.forEach(user => {
-      const docRef = usersRef.doc(user.id);
+      // Use the numeric ID as the document ID for easier lookup
+      const docRef = usersRef.doc(String(user.id));
       userBatch.set(docRef, { ...user, birthDate: new Date(user.birthDate) });
     });
     await userBatch.commit();
@@ -69,9 +74,7 @@ async function seedData() {
   
     // --- Seed Polls ---
     const pollsRef = db.collection('polls');
-    console.log('🗑️  Clearing existing polls...');
-    await deleteCollection(pollsRef, 50);
-    console.log('🌱 Seeding rich polls...');
+    console.log('🌱 Seeding polls...');
     const pollBatch = db.batch();
     const now = new Date();
     richPolls.forEach((poll, i) => {
@@ -82,7 +85,7 @@ async function seedData() {
       const pollData = {
         ...poll,
         creatorId: creator.id,
-        createdAt: createdAt, // use Date object for firestore
+        createdAt: createdAt,
         endsAt: new Date(createdAt.getTime() + poll.durationMs),
         isProcessed: false,
       };

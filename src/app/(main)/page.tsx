@@ -179,7 +179,7 @@ export default function HomePage() {
         <AnimatePresence>
             {polls.map((poll, index) => {
             // Gracefully handle any polls that might have missing data
-            if (!Array.isArray(poll.options) || poll.options.length === 0) {
+            if (!poll || !Array.isArray(poll.options) || poll.options.length === 0) {
               return null;
             }
 
