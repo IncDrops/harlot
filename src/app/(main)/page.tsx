@@ -1,10 +1,10 @@
+
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PollCard } from "@/components/poll-card";
 import { dummyPolls } from "@/lib/dummy-data";
-import { Tagline } from "@/components/logo";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   AlertDialog,
@@ -136,10 +136,6 @@ export default function HomePage() {
         setIsAnimating(false);
     }, 500);
   };
-
-  const handleNextPoll = (pollId: number) => {
-     setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
-  }
 
   return (
     <>
