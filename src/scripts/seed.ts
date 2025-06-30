@@ -125,14 +125,15 @@ async function seedData() {
             createdAt: createdAt.toISOString(),
             endsAt: new Date(createdAt.getTime() + durationMs).toISOString(),
             durationMs: durationMs,
-            pledged: poll.pledge > 0,
-            pledgeAmount: poll.pledge || 0,
+            pledged: poll.pledgeAmount > 0,
+            pledgeAmount: poll.pledgeAmount || 0,
             tipCount: poll.tipCount || Math.floor(Math.random() * 25),
             isNSFW: poll.nsfw || false,
             isProcessed: false,
             category: poll.category || 'General',
             likes: poll.likes || Math.floor(Math.random() * 500),
-            comments: 0 // Will be updated
+            comments: 0, // Will be updated
+            videoUrl: poll.videoUrl
         };
         
         // Remove undefined/null values for cleaner Firestore documents
@@ -192,3 +193,5 @@ async function main() {
 }
 
 main();
+
+    

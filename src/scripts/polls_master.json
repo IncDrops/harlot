@@ -1,8 +1,8 @@
 
 [
   {
-    "question": "Sequin or Mesh Dresses, or one of each, I need two dresses. Top two choices are it.",
-    "description": "Help me choose my outfits for the weekend!",
+    "question": "Sequin or Mesh Dresses, or one of each? I need two dresses. Top two choices are it.",
+    "description": "Help me choose my outfits for the weekend! I can't decide between these vibes.",
     "options": [
       { "text": "Long sleeve two-piece sheer mesh mini dress", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "mesh dress", "affiliateLink": "https://amzn.to/44pCu5W" },
       { "text": "Short sleeve loose club dress/party dress", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "sequin dress", "affiliateLink": "https://amzn.to/3Gb1shh" },
@@ -11,24 +11,24 @@
     ],
     "category": "Fashion",
     "timer": 4320,
-    "pledge": 25,
+    "pledgeAmount": 25,
     "tipCount": 7,
     "likes": 231,
     "nsfw": false,
     "type": "standard"
   },
   {
-    "question": "Which 2-piece set should I get? I want to look professional and a little naughty, like very naughty and a little professional.",
-    "description": "Help me find the perfect balance for my next event.",
+    "question": "Which 2-piece set should I get? I want to look professional and a little naughty.",
+    "description": "Like, very naughty and a little professional. Help me find the perfect balance for my next event.",
     "options": [
       { "text": "2-piece mesh crop top and mini skirt", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "mesh outfit", "affiliateLink": "https://amzn.to/45LN1KY" },
       { "text": "2-piece high slit Maxi skirt set", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "maxi skirt", "affiliateLink": "https://amzn.to/3ZW64yt" },
-      { "text": "Summer 2-piece pants set with belted bottoms and v-neck top", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "pants set", "affiliateLink": "https://amzn.to/45Miqgm" },
+      { "text": "Summer 2-piece pants set with belted bottoms", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "pants set", "affiliateLink": "https://amzn.to/45Miqgm" },
       { "text": "2-piece Midi club skirt set", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "club skirt", "affiliateLink": "https://amzn.to/4lvVhDr" }
     ],
     "category": "Fashion",
     "timer": 1440,
-    "pledge": 50,
+    "pledgeAmount": 50,
     "tipCount": 15,
     "likes": 450,
     "nsfw": true,
@@ -36,14 +36,14 @@
   },
   {
     "question": "Best bodysuit. Keep in mind… little booties matter.",
-    "description": "Which of these looks best?",
+    "description": "Which of these looks best? Be honest.",
     "options": [
       { "text": "Long sleeve ribbed yoga bodysuit", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "yoga bodysuit", "affiliateLink": "https://amzn.to/4nlCb4J" },
       { "text": "One piece backless bodysuit", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "backless bodysuit", "affiliateLink": "https://amzn.to/3TLatAz" }
     ],
     "category": "Fashion",
     "timer": 2880,
-    "pledge": 10,
+    "pledgeAmount": 10,
     "tipCount": 3,
     "likes": 189,
     "nsfw": true,
@@ -60,24 +60,24 @@
     ],
     "category": "Festival",
     "timer": 10080,
-    "pledge": 30,
+    "pledgeAmount": 30,
     "tipCount": 22,
     "likes": 512,
     "nsfw": true,
     "type": "standard"
   },
   {
-    "question": "Which of these pairs of heels scream, “We can’t even start a conversation for less than $1000?”",
+    "question": "Which heels scream, “We can’t even start a conversation for less than $1000?”",
     "description": "I want to look like a walking professional escort billboard.",
     "options": [
-      { "text": "Black stilettos", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "black stilettos", "affiliateLink": "https://amzn.to/4ki2TbH" },
-      { "text": "DKNY black bootie fashion boot", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "fashion boot", "affiliateLink": "https://amzn.to/4keLsIO" },
-      { "text": "Black peep toe stilettos", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "peep toe", "affiliateLink": "https://amzn.to/4kgCZFd" },
-      { "text": "Thigh high boots", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "thigh high", "affiliateLink": "https://amzn.to/4kiARwP" }
+      { "text": "Classic Black Stilettos", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "black stilettos", "affiliateLink": "https://amzn.to/4ki2TbH" },
+      { "text": "DKNY Black Bootie Fashion Boot", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "fashion boot", "affiliateLink": "https://amzn.to/4keLsIO" },
+      { "text": "Black Peep Toe Stilettos", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "peep toe", "affiliateLink": "https://amzn.to/4kgCZFd" },
+      { "text": "Thigh High Boots", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "thigh high", "affiliateLink": "https://amzn.to/4kiARwP" }
     ],
     "category": "Fashion",
     "timer": 720,
-    "pledge": 100,
+    "pledgeAmount": 100,
     "tipCount": 45,
     "likes": 890,
     "nsfw": true,
@@ -87,27 +87,27 @@
     "question": "Which tee makes the better statement?",
     "description": "Help me choose my next graphic tee.",
     "options": [
-      { "text": "Blue tee with flowers, keeping it simple and elegantly cozy", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "blue tee", "affiliateLink": "https://amzn.to/4kjXwJ4" },
-      { "text": "“YOU ARE” tee adding some more eye-candy", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "graphic tee", "affiliateLink": "https://amzn.to/4kfzj6C" }
+      { "text": "Blue tee with flowers, elegantly cozy", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "blue tee", "affiliateLink": "https://amzn.to/4kjXwJ4" },
+      { "text": "“YOU ARE” tee, adding some eye-candy", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "graphic tee", "affiliateLink": "https://amzn.to/4kfzj6C" }
     ],
     "category": "Fashion",
     "timer": 1440,
-    "pledge": 5,
+    "pledgeAmount": 5,
     "tipCount": 1,
     "likes": 98,
     "nsfw": false,
     "type": "2nd_opinion"
   },
   {
-    "question": "I need a new phone for my graphic design work but don’t want to get rid of my current iPhone 15 Pro Max.",
-    "description": "Help a designer out!",
+    "question": "Which iPhone for graphic design work, if I'm keeping my 15 Pro Max?",
+    "description": "Help a designer out! Should I get the newest Pro Max or save money with the 16e?",
     "options": [
-      { "text": "Get a newer iPhone 16 Pro Max", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "new iphone", "affiliateLink": "https://amzn.to/447ShY7" },
+      { "text": "Get the newer iPhone 16 Pro Max", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "new iphone", "affiliateLink": "https://amzn.to/447ShY7" },
       { "text": "Get the iPhone 16e and save money", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "iphone box", "affiliateLink": "https://amzn.to/4ld84eo" }
     ],
     "category": "Tech",
     "timer": 4320,
-    "pledge": 200,
+    "pledgeAmount": 200,
     "tipCount": 18,
     "likes": 341,
     "nsfw": false,
@@ -115,51 +115,21 @@
   },
   {
     "question": "Airpods Pro 2 or Bose Quiet Comfort Earbuds II?",
-    "description": "The ultimate battle for my ears.",
+    "description": "The ultimate battle for my ears. What's the verdict?",
     "options": [
       { "text": "Airpods Pro 2", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "airpods pro", "affiliateLink": "https://amzn.to/4erd1O1" },
       { "text": "Bose Quiet Comfort Earbuds II", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "bose earbuds", "affiliateLink": "https://amzn.to/446sXlb" }
     ],
     "category": "Tech",
     "timer": 10080,
-    "pledge": 25,
+    "pledgeAmount": 25,
     "tipCount": 11,
     "likes": 288,
     "nsfw": false,
     "type": "2nd_opinion"
   },
-  {
-    "question": "Should I quit my job or keep collecting the check while dead inside?",
-    "description": "The eternal millennial question.",
-    "options": [
-      { "text": "Quit. Die loud.", "affiliateLink": "https://amzn.to/3Ilaqcg" },
-      { "text": "Stay. Die silent.", "affiliateLink": "https://amzn.to/447OtGd" }
-    ],
-    "category": "Career",
-    "timer": 43200,
-    "pledge": 75,
-    "tipCount": 15,
-    "likes": 650,
-    "nsfw": false,
-    "type": "standard"
-  },
-  {
-    "question": "They eat Kit Kats without breaking them. Is this relationship sustainable?",
-    "description": "Asking for a friend who's questioning everything.",
-    "options": [
-      { "text": "No, that’s psychotic", "affiliateLink": "https://amzn.to/4nskjFf" },
-      { "text": "Yes, love is layered", "affiliateLink": "https://amzn.to/4kk2BBd" }
-    ],
-    "category": "Relationships",
-    "timer": 360,
-    "pledge": 6,
-    "tipCount": 2,
-    "likes": 432,
-    "nsfw": false,
-    "type": "standard"
-  },
-  {
-    "question": "Which lingerie is best for a 5’0 95 lb with no booty and 34B boobs?",
+    {
+    "question": "Which lingerie is best for a 5’0 95 lb frame with 34B boobs?",
     "description": "I’ve always been very small and have only had boobs for less than a year so I know nothing about lingerie. I want to start with Victoria’s Secret but my Friends say Avidlove would frame me better. I need a 2nd opinion. My build is more like those in the VS pics.",
     "options": [
       { "text": "Victoria’s Secret Shop", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "lingerie model", "affiliateLink": "https://amzn.to/3TLg5eb" },
@@ -168,10 +138,232 @@
     "videoUrl": "https://aax-us-iad.amazon.com/x/c/JEnukV21T2T-zDnBmyvxCiMAAAGXuDfD0wEAAAH2AQBvbm9fdHhuX2JpZDUgICBvbm9fdHhuX2ltcDIgICB95SSn/clv1c_ek-Ym4fXUsbCSxE60CNn_NwzPL8Hq3H5v4jpVo6VCScV-FnpB5MLVsJCfnwn2OnQ8Ma9ugowUavmldywitFegQ3Z-wGdVfc_bxaMUdWGDiGwe33jGqjiEGFsMn3Omg5xpxBLTUgl0xvazPFxj8JSy6CboIc9VvTp18P02Xuqiuff-MjcMGGswIHPnhlMM5FNKSLiZMKcG6xerkmIPE522iK3XrR1wwaEWRhSGCUqpKLvF4EY-YE2-qsZWQmtx0xkYdbU0-1EjBcXD7y3CczGBjvB1xE02PUyjjWVgU3Qs8qzrtJyuPMlpNH2sbCu9_tVvJC91hTkSOks3PwzXjVvaTDGFVgGs4ynZpruvJZ5Hapgpu1o6mOWFW0w85UiQ2zKO9NJvKM9BCHjVJi7rKcLNt4JUJeBV6G0DQTeNG2jcSFmWZ9jMIE2kIUvr1wmgu2IcuvRk-NvkcYQOpAPIukWKt3IipA4M2U2iOWXJ0rGC8csCP1OvTr09-zcCdC0eBqs3G-nDCYQ4O1FFpL3S5hQOMGxoDh6S39tYc-Gisw6A8J-I_6hTQ92ukyo-QBbIQr57Fxfyf9_HonKDsITr-iQIWXZT35vsxGp8_2qBWm65IIeoBrlifx3tnb7u1GtiY_DTuT2cFLNUVC9YzZj3EdWQml4lfr6YZFLfB-rIYC4EOB96rZMSQMzpESzfZrLThhe0SZwbs_p93mfIjah66ovBZFFZLWmXm_Nv90impB72I08TGNF7TGTe9pDSP7AYuGlwZxE8Ix3DAvKCBS4P0uurKR5jjLgt9xbens8vwEGWk6veMp3BGge_EHKbj1L-mGv9PJNeT0lD3dRn462GT2oXWclxvgmByOSB9ScD_e5Ff9LyA2FhBAFJxEDWugCJY7zrOR8FEBn7g/https://www.amazon.com/stores/page/35664C49-FA0E-44A5-8A07-45703B991F0C/?_encoding=UTF8&pd_rd_plhdr=t&pd_rd_i=B0BSZJ8KTN&ref_=sbx_be_s_sparkle_ssd_vid&store_ref=SBV_A0208887C02OIZLF26CD-A0918772EGPTZ2N080HU&lp_asins=B0BSZJ8KTN%2CB0C26D3PQL%2CB0CMFDFFRP&pd_rd_w=jCCOQ&content-id=amzn1.sym.9f2b2b9e-47e9-4764-a4dc-2be2f6fca36d%3Aamzn1.sym.9f2b2b9e-47e9-4764-a4dc-2be2f6fca36d&pf_rd_p=9f2b2b9e-47e9-4764-a4dc-2be2f6fca36d&pf_rd_r=GTM0M3J4NYNTWSD7YFAA&pd_rd_wg=jcdTf&pd_rd_r=5c0757c5-5140-4eb2-8e7b-55618937a17c",
     "category": "Beauty",
     "timer": 10080,
-    "pledge": 75,
+    "pledgeAmount": 75,
     "tipCount": 50,
     "likes": 1200,
     "nsfw": true,
     "type": "2nd_opinion"
+  },
+  {
+    "question": "Best value out of these lip gloss sets? I’m already an e.l.f. girl, so I’m leaning that way.",
+    "description": "Help me decide on my next lip gloss haul!",
+    "options": [
+        { "text": "Lip Oil Pack - 5 Colors Tinted Lip Glow Oil", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "lip gloss", "affiliateLink": "https://amzn.to/4enzFXs" },
+        { "text": "e.l.f. Squeeze Me Lip Balm Set of 5", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "lip balm", "affiliateLink": "https://amzn.to/4l4qBt0" }
+    ],
+    "category": "Beauty",
+    "timer": 1440,
+    "pledgeAmount": 10,
+    "tipCount": 8,
+    "likes": 150,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Which lash kit is better for a beginner?",
+    "description": "I'm new to lash clusters and want something that's easy to apply but still gives a fluffy look.",
+    "options": [
+        { "text": "Lash Clusters Kit Fluffy 80D 100D", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "eyelash kit", "affiliateLink": "https://amzn.to/4kc464l" },
+        { "text": "Lash Clusters Kit 320pcs Extension", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "eyelash extensions", "affiliateLink": "https://amzn.to/4lwKmtb" }
+    ],
+    "category": "Beauty",
+    "timer": 2880,
+    "pledgeAmount": 15,
+    "tipCount": 12,
+    "likes": 210,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "I can only buy one more perfume this year. Which one is the best investment?",
+    "description": "Help me choose a signature scent that will last!",
+    "options": [
+        { "text": "Ariana Grande Cloud Eau De Parfum", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "perfume bottle", "affiliateLink": "https://amzn.to/45IqwGN" },
+        { "text": "Yves Saint Laurent YSL 4-Piece Mini Set", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "perfume set", "affiliateLink": "https://amzn.to/4npvsXr" },
+        { "text": "Marc Jacobs Perfect Eau de Parfum", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "flower perfume", "affiliateLink": "https://amzn.to/4kiPj83" }
+    ],
+    "category": "Beauty",
+    "timer": 10080,
+    "pledgeAmount": 40,
+    "tipCount": 25,
+    "likes": 600,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "My bestie’s ex keeps watching my stories. Should I block or flirt harder?",
+    "description": "A little bit of drama never hurt anyone... right?",
+    "options": [
+      { "text": "Block with honor", "affiliateLink": "https://amzn.to/4kk2BBd" },
+      { "text": "Tap in for revenge", "affiliateLink": "https://amzn.to/4nskjFf" }
+    ],
+    "category": "Relationships",
+    "timer": 720,
+    "pledgeAmount": 33,
+    "tipCount": 9,
+    "likes": 411,
+    "nsfw": true,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "She said she forgave me but still brings it up when she’s drunk. Should I leave or stay delusional?",
+    "description": "Is this a red flag or just part of the process?",
+    "options": [
+      { "text": "Pack your pride", "affiliateLink": "https://amzn.to/3TjXi9L" },
+      { "text": "Stay & gaslight back", "affiliateLink": "https://amzn.to/4kk2BBd" }
+    ],
+    "category": "Relationships",
+    "timer": 1440,
+    "pledgeAmount": 22,
+    "tipCount": 6,
+    "likes": 305,
+    "nsfw": true,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "What's your toxic work habit?",
+    "description": "We all have one. What's yours?",
+    "options": [
+      { "text": "Working through lunch", "affiliateLink": "https://amzn.to/3Ilaqcg" },
+      { "text": "Pretending to be busy", "affiliateLink": "https://amzn.to/447OtGd" },
+      { "text": "Replying ‘on it’ to everything", "affiliateLink": "https://amzn.to/3TUNcw5" }
+    ],
+    "category": "Career",
+    "timer": 2880,
+    "pledgeAmount": 0,
+    "tipCount": 13,
+    "likes": 106,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Should I learn to code to boost my career, or is it too late for an old dog to learn new tricks?",
+    "description": "Contemplating a career shift and need some perspective.",
+    "options": [
+        { "text": "Never too late! Code away!", "affiliateLink": "https://amzn.to/3ZWMSk3" },
+        { "text": "Focus on refining current skills.", "affiliateLink": "https://amzn.to/4lzALSw" },
+        { "text": "Try a beginner course, see if it sticks.", "affiliateLink": "https://amzn.to/3Ilaqcg" },
+        { "text": "Network instead of code.", "affiliateLink": "https://amzn.to/3GkmTwl" }
+    ],
+    "category": "Career",
+    "timer": 10080,
+    "pledgeAmount": 5,
+    "tipCount": 4,
+    "likes": 270,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "My best friend keeps ghosting me for their new significant other. Confront them or accept it?",
+    "description": "Is our friendship over or is this just a phase?",
+    "options": [
+        { "text": "Confront them, open communication is vital.", "affiliateLink": "https://amzn.to/4nskjFf" },
+        { "text": "Give them space, they'll come back around.", "affiliateLink": "https://amzn.to/4lxGhoG" },
+        { "text": "Find new friends who prioritize you.", "affiliateLink": "https://amzn.to/3TjXi9L" },
+        { "text": "Send a passive-aggressive meme.", "affiliateLink": "https://amzn.to/4lpzLjA" }
+    ],
+    "category": "Relationships",
+    "timer": 2880,
+    "pledgeAmount": 50,
+    "tipCount": 18,
+    "likes": 340,
+    "nsfw": false,
+    "type": "standard"
+  },
+    {
+    "question": "Which interior LED kit is the better vibe for a 2022 Honda Civic?",
+    "description": "Trying to upgrade my car's interior lighting and can't decide between these two popular options.",
+    "options": [
+      { "text": "Govee Car LED Lights with App Control", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "car interior lights", "affiliateLink": "https://amzn.to/44EDF2r" },
+      { "text": "Nilight 72 LED Dream Color Strip Lights", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "car led strips", "affiliateLink": "https://amzn.to/3I3u38O" }
+    ],
+    "category": "Cars",
+    "timer": 4320,
+    "pledgeAmount": 20,
+    "tipCount": 5,
+    "likes": 180,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Should I get a dedicated skincare fridge or just use a mini can cooler?",
+    "description": "I want to keep my products cool but don't know if a specialty fridge is worth it.",
+    "options": [
+      { "text": "Frigidaire Mini Portable Fridge", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "mini fridge", "affiliateLink": "https://amzn.to/4nxKjzd" },
+      { "text": "CutieWorld Skincare Fridge with LED Mirror", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "skincare fridge", "affiliateLink": "https://amzn.to/4l8GWwW" }
+    ],
+    "category": "Home and Vibey Stuff",
+    "timer": 2880,
+    "pledgeAmount": 15,
+    "tipCount": 10,
+    "likes": 250,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Which projector is best for an apartment bedroom with some light leak?",
+    "description": "My curtains aren't perfect. I need a projector that can handle a little bit of ambient light.",
+    "options": [
+      { "text": "Epson Pro EX11000 Wireless Laser Projector", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "projector home", "affiliateLink": "https://amzn.to/4lu3k3B" },
+      { "text": "BenQ TK700STi 4K HDR Gaming Projector", "imageUrl": "https://placehold.co/400x400.png", "data-ai-hint": "gaming projector", "affiliateLink": "https://amzn.to/4l8GvTo" }
+    ],
+    "category": "Home and Vibey Stuff",
+    "timer": 7200,
+    "pledgeAmount": 150,
+    "tipCount": 28,
+    "likes": 480,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "Is pineapple on pizza an abomination or a stroke of genius?",
+    "description": "Let's settle the great debate once and for all.",
+    "options": [
+      { "text": "Genius! Sweet and savory perfection.", "affiliateLink": "https://amzn.to/3TjXi9L" },
+      { "text": "Abomination! Keep fruit off my pizza.", "affiliateLink": "https://amzn.to/447OtGd" }
+    ],
+    "category": "Food",
+    "timer": 10080,
+    "pledgeAmount": 5,
+    "tipCount": 50,
+    "likes": 1500,
+    "nsfw": false,
+    "type": "2nd_opinion"
+  },
+  {
+    "question": "My ex just invited me to their wedding. Go and be the bigger person, or politely decline?",
+    "description": "This feels like a trap, but also maybe a chance for closure?",
+    "options": [
+      { "text": "Go, show them you're thriving!", "affiliateLink": "https://amzn.to/3Ilaqcg" },
+      { "text": "Decline, spare yourself the awkwardness.", "affiliateLink": "https://amzn.to/4nskjFf" },
+      { "text": "Send a nice gift, but don't attend.", "affiliateLink": "https://amzn.to/4lzHQT2" },
+      { "text": "Bring a hotter date.", "affiliateLink": "https://amzn.to/4kk2BBd" }
+    ],
+    "category": "Relationships",
+    "timer": 2880,
+    "pledgeAmount": 25,
+    "tipCount": 18,
+    "likes": 398,
+    "nsfw": false,
+    "type": "standard"
+  },
+  {
+    "question": "Is it okay to talk to yourself out loud when you're alone?",
+    "description": "Asking for a friend... who is me.",
+    "options": [
+      { "text": "Totally normal! It helps organize thoughts.", "affiliateLink": "https://amzn.to/3TOs8r7" },
+      { "text": "Only if you don't answer yourself back.", "affiliateLink": "https://amzn.to/4lsQ0wf" },
+      { "text": "Maybe get a therapist.", "affiliateLink": "https://amzn.to/4lzALSw" },
+      { "text": "Only if it's in a foreign language.", "affiliateLink": "https://amzn.to/3Ilaqcg" }
+    ],
+    "category": "Misc and Fun",
+    "timer": 4320,
+    "pledgeAmount": 0,
+    "tipCount": 11,
+    "likes": 339,
+    "nsfw": false,
+    "type": "standard"
   }
 ]
+
+    

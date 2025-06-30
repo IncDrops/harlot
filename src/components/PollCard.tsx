@@ -254,3 +254,5 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     </>
   );
 }
+
+    
