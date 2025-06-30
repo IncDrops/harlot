@@ -91,7 +91,7 @@ async function seedData() {
     const timerToMs = (minutes: number) => minutes * 60 * 1000;
 
     // Process each JSON file and add to combined list
-    const allJsonPolls = [
+    const allJsonPolls: any[] = [
       ...richPolls,
       ...fourOptionPolls,
       ...secondOpinionPolls,
@@ -107,11 +107,14 @@ async function seedData() {
         const standardizedPoll: Omit<Poll, 'id'> = {
             question: poll.question,
             description: poll.description || `A decision about: ${poll.question}`,
-            options: poll.options || [{id: 1, text: 'Yes', votes: 0}, {id: 2, text: 'No', votes: 0}],
+            options: poll.options || [
+              { id: 1, text: 'Yes', votes: 0 },
+              { id: 2, text: 'No', votes: 0 }
+            ],
             type: poll.type || 'standard',
-            creatorId: poll.creatorId || dummyUsers[Math.floor(Math.random() * dummyUsers.length)].id,
+            creatorId: String(poll.creatorId) || dummyUsers[Math.floor(Math.random() * dummyUsers.length)].id,
             createdAt: poll.createdAt ? new Date(poll.createdAt).toISOString() : new Date().toISOString(),
-            durationMs: poll.timer ? timerToMs(poll.timer) : 24 * 60 * 60 * 1000, // Default to 1 day
+            durationMs: poll.durationMs ?? (poll.timer ? timerToMs(poll.timer) : 24 * 60 * 60 * 1000), // default 1 day
             pledged: poll.pledged ?? (poll.pledge > 0),
             pledgeAmount: poll.pledgeAmount ?? poll.pledge ?? 0,
             tipCount: poll.tipCount ?? 0,
@@ -119,11 +122,12 @@ async function seedData() {
             category: poll.category || 'General',
             likes: poll.likes ?? 0,
             comments: poll.comments ?? 0,
-            videoUrl: poll.videoUrl || undefined,
+            videoUrl: (typeof poll.videoUrl === 'string' && poll.videoUrl.trim() !== '') ? poll.videoUrl : undefined,
         };
+      
         combinedPolls.push(standardizedPoll);
     });
-
+        
     console.log(`📊 Total combined polls to be seeded: ${combinedPolls.length}`);
 
     // --- 3. Seed Combined Polls ---
@@ -135,13 +139,13 @@ async function seedData() {
       const docRef = pollsRef.doc(); // Firestore auto-ID
       const createdAt = new Date(now.getTime() - (i + 1) * 60000 * 15 * (Math.random() + 0.5)); // Stagger creation times
       
-      const pollData: Omit<Poll, 'id'> & { endsAt: Date, isProcessed: boolean } = {
+      const pollWithTimestamp: Omit<Poll, 'id'> & { endsAt: Date, isProcessed: boolean } = {
         ...poll,
         createdAt: createdAt.toISOString(),
         endsAt: new Date(createdAt.getTime() + poll.durationMs),
         isProcessed: false,
       };
-      pollBatch.set(docRef, pollData);
+      pollBatch.set(docRef, pollWithTimestamp);
     });
     
     await pollBatch.commit();
