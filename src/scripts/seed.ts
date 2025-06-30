@@ -7,13 +7,13 @@ import type { Poll } from '../lib/types';
 // This script requires a service account key to run.
 // 1. Go to your Firebase Project Settings -> Service accounts.
 // 2. Click "Generate new private key" and save the JSON file.
-// 3. Rename the file to "serviceAccountKey.json" and place it in the "src/scripts" directory.
+// 3. Rename the file to "serviceAccountKey.json" and place it in your project's root directory.
 // IMPORTANT: Never commit this file to a public repository!
 let serviceAccount: any;
 try {
-    serviceAccount = require('./serviceAccountKey.json');
+    serviceAccount = require('../../serviceAccountKey.json');
 } catch (e) {
-    console.error("❌ Error: serviceAccountKey.json not found.");
+    console.error("❌ Error: serviceAccountKey.json not found in the project root directory.");
     console.error("Please follow the instructions in the comments of src/scripts/seed.ts to create one.");
     process.exit(1);
 }
@@ -82,10 +82,10 @@ async function seedData() {
       const creator = dummyUsers[i % dummyUsers.length];
       const createdAt = new Date(now.getTime() - (i+1) * 60000 * 45 * (Math.random() + 0.5)); // Stagger creation times
       
-      const pollData = {
+      const pollData: Omit<Poll, 'id'> & { endsAt: Date, isProcessed: boolean } = {
         ...poll,
         creatorId: creator.id,
-        createdAt: createdAt,
+        createdAt: createdAt.toISOString(),
         endsAt: new Date(createdAt.getTime() + poll.durationMs),
         isProcessed: false,
       };
