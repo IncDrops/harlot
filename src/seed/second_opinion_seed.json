@@ -1,0 +1,3415 @@
+[
+  {
+    "id": "0db5e7dd929b5d053c9573214c11cf9c",
+    "question": "1. \"Coffee or tea for my afternoon boost?\"",
+    "description": "Help me decide: 1. \"Coffee or tea for my afternoon boost?\"",
+    "timer": 120,
+    "pledge": 7.22,
+    "tipCount": 19,
+    "likes": 56,
+    "comments": 14,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA",
+      "https://amzn.to/3GkmTwl"
+    ],
+    "creatorId": "17",
+    "createdAt": "2025-06-30T07:53:49.860975",
+    "nsfw": false
+  },
+  {
+    "id": "8dd086c9766ccce393f22b70b5d5d665",
+    "question": "2. \"Should I take the stairs or elevator?\"",
+    "description": "Help me decide: 2. \"Should I take the stairs or elevator?\"",
+    "timer": 60,
+    "pledge": 9.43,
+    "tipCount": 15,
+    "likes": 56,
+    "comments": 7,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd",
+      "https://amzn.to/4nskjFf"
+    ],
+    "creatorId": "76",
+    "createdAt": "2025-06-30T07:53:49.861024",
+    "nsfw": false
+  },
+  {
+    "id": "9d9d0a87e359f0890505e94b7c1c39d9",
+    "question": "3. \"Red lipstick or nude for tonight's date?\"",
+    "description": "Help me decide: 3. \"Red lipstick or nude for tonight's date?\"",
+    "timer": 180,
+    "pledge": 0,
+    "tipCount": 14,
+    "likes": 11,
+    "comments": 9,
+    "affiliateLinks": [],
+    "creatorId": "19",
+    "createdAt": "2025-06-30T07:53:49.861045",
+    "nsfw": true
+  },
+  {
+    "id": "a5179e1f191e49e68efe5deb83f6f3b0",
+    "question": "4. \"Netflix or YouTube for background noise while working?\"",
+    "description": "Help me decide: 4. \"Netflix or YouTube for background noise while working?\"",
+    "timer": 60,
+    "pledge": 0,
+    "tipCount": 3,
+    "likes": 24,
+    "comments": 1,
+    "affiliateLinks": [],
+    "creatorId": "52",
+    "createdAt": "2025-06-30T07:53:49.861065",
+    "nsfw": false
+  },
+  {
+    "id": "ef1df249683c09ecca62d105835cff97",
+    "question": "5. \"Should I text back immediately or wait an hour?\"",
+    "description": "Help me decide: 5. \"Should I text back immediately or wait an hour?\"",
+    "timer": 240,
+    "pledge": 8.79,
+    "tipCount": 19,
+    "likes": 114,
+    "comments": 30,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "77",
+    "createdAt": "2025-06-30T07:53:49.861091",
+    "nsfw": false
+  },
+  {
+    "id": "6e4a63dfd85d65478dced21248e16919",
+    "question": "6. \"Uber or walk to the restaurant?\"",
+    "description": "Help me decide: 6. \"Uber or walk to the restaurant?\"",
+    "timer": 120,
+    "pledge": 4.26,
+    "tipCount": 12,
+    "likes": 12,
+    "comments": 14,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA",
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "14",
+    "createdAt": "2025-06-30T07:53:49.861126",
+    "nsfw": false
+  },
+  {
+    "id": "c2c20d5bcbf81475062bcf69f342e520",
+    "question": "7. \"Should I order dessert or skip it?\"",
+    "description": "Help me decide: 7. \"Should I order dessert or skip it?\"",
+    "timer": 180,
+    "pledge": 0,
+    "tipCount": 20,
+    "likes": 2,
+    "comments": 28,
+    "affiliateLinks": [],
+    "creatorId": "18",
+    "createdAt": "2025-06-30T07:53:49.861141",
+    "nsfw": false
+  },
+  {
+    "id": "c6473881626f798e98da9ea495242bfd",
+    "question": "8. \"Workout now or after dinner?\"",
+    "description": "Help me decide: 8. \"Workout now or after dinner?\"",
+    "timer": 300,
+    "pledge": 0,
+    "tipCount": 10,
+    "likes": 100,
+    "comments": 27,
+    "affiliateLinks": [],
+    "creatorId": "50",
+    "createdAt": "2025-06-30T07:53:49.861154",
+    "nsfw": false
+  },
+  {
+    "id": "edd1eba3d0ab19da2007e2793594173a",
+    "question": "9. \"Should I buy the expensive shampoo or stick with drugstore?\"",
+    "description": "Help me decide: 9. \"Should I buy the expensive shampoo or stick with drugstore?\"",
+    "timer": 240,
+    "pledge": 0,
+    "tipCount": 17,
+    "likes": 104,
+    "comments": 24,
+    "affiliateLinks": [],
+    "creatorId": "22",
+    "createdAt": "2025-06-30T07:53:49.861168",
+    "nsfw": false
+  },
+  {
+    "id": "16cfc8eead92c507c14304a8c831b105",
+    "question": "10. \"Call mom now or text her later?\"",
+    "description": "Help me decide: 10. \"Call mom now or text her later?\"",
+    "timer": 120,
+    "pledge": 2.02,
+    "tipCount": 10,
+    "likes": 40,
+    "comments": 15,
+    "affiliateLinks": [
+      "https://amzn.to/3Ilaqcg",
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "57",
+    "createdAt": "2025-06-30T07:53:49.861185",
+    "nsfw": false
+  },
+  {
+    "id": "8052c5e89b2ce64ef8a4800c7a83d967",
+    "question": "Fashion & Style Decisions (30 minutes",
+    "description": "Help me decide: Fashion & Style Decisions (30 minutes",
+    "timer": 259200,
+    "pledge": 7.42,
+    "tipCount": 5,
+    "likes": 34,
+    "comments": 24,
+    "affiliateLinks": [
+      "https://amzn.to/3TOs8r7",
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "7",
+    "createdAt": "2025-06-30T07:53:49.861202",
+    "nsfw": false
+  },
+  {
+    "id": "dfa97aae015eb4dd89240f3462f56b5a",
+    "question": "11. \"Which outfit for the job interview?\"",
+    "description": "Help me decide: 11. \"Which outfit for the job interview?\"",
+    "timer": 7200,
+    "pledge": 7.05,
+    "tipCount": 0,
+    "likes": 52,
+    "comments": 12,
+    "affiliateLinks": [
+      "https://amzn.to/3TjXi9L",
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "26",
+    "createdAt": "2025-06-30T07:53:49.861219",
+    "nsfw": false
+  },
+  {
+    "id": "f1ffe80b3eb57b8a35aaf3a807d74844",
+    "question": "12. \"Should I cut my hair short or keep it long?\"",
+    "description": "Help me decide: 12. \"Should I cut my hair short or keep it long?\"",
+    "timer": 259200,
+    "pledge": 11.9,
+    "tipCount": 9,
+    "likes": 59,
+    "comments": 8,
+    "affiliateLinks": [
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "37",
+    "createdAt": "2025-06-30T07:53:49.861244",
+    "nsfw": false
+  },
+  {
+    "id": "a39a030ab85a6440f239a0c02d10fefa",
+    "question": "13. \"Black dress or colorful jumpsuit for the wedding?\"",
+    "description": "Help me decide: 13. \"Black dress or colorful jumpsuit for the wedding?\"",
+    "timer": 86400,
+    "pledge": 6.41,
+    "tipCount": 4,
+    "likes": 76,
+    "comments": 20,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA",
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "53",
+    "createdAt": "2025-06-30T07:53:49.861267",
+    "nsfw": false
+  },
+  {
+    "id": "7318fe0842f3da5892b2880261e6169b",
+    "question": "14. \"Should I buy these expensive sneakers?\"",
+    "description": "Help me decide: 14. \"Should I buy these expensive sneakers?\"",
+    "timer": 172800,
+    "pledge": 6.73,
+    "tipCount": 0,
+    "likes": 22,
+    "comments": 7,
+    "affiliateLinks": [
+      "https://amzn.to/4nskjFf",
+      "https://amzn.to/4lsQ0wf"
+    ],
+    "creatorId": "43",
+    "createdAt": "2025-06-30T07:53:49.861283",
+    "nsfw": false
+  },
+  {
+    "id": "3a1aa6cf4e27e85fa40ed510e62a91bf",
+    "question": "15. \"Beard or clean shaven for my dating profile?\"",
+    "description": "Help me decide: 15. \"Beard or clean shaven for my dating profile?\"",
+    "timer": 86400,
+    "pledge": 6.77,
+    "tipCount": 24,
+    "likes": 54,
+    "comments": 10,
+    "affiliateLinks": [
+      "https://amzn.to/4nskjFf"
+    ],
+    "creatorId": "80",
+    "createdAt": "2025-06-30T07:53:49.861298",
+    "nsfw": false
+  },
+  {
+    "id": "e0d6a120e03401f4f1f3af4d1bcc8121",
+    "question": "16. \"Which hairstyle makes me look more professional?\"",
+    "description": "Help me decide: 16. \"Which hairstyle makes me look more professional?\"",
+    "timer": 14400,
+    "pledge": 3.68,
+    "tipCount": 12,
+    "likes": 80,
+    "comments": 11,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd"
+    ],
+    "creatorId": "33",
+    "createdAt": "2025-06-30T07:53:49.861321",
+    "nsfw": false
+  },
+  {
+    "id": "5e8d25b28169f333b9263a933f0883d6",
+    "question": "17. \"Should I get a tattoo on my forearm?\"",
+    "description": "Help me decide: 17. \"Should I get a tattoo on my forearm?\"",
+    "timer": 259200,
+    "pledge": 12.67,
+    "tipCount": 4,
+    "likes": 42,
+    "comments": 1,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf",
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "68",
+    "createdAt": "2025-06-30T07:53:49.861342",
+    "nsfw": true
+  },
+  {
+    "id": "0af08eeb85196b9c60d7992174e7ecb8",
+    "question": "18. \"Glasses or contacts for my new job?\"",
+    "description": "Help me decide: 18. \"Glasses or contacts for my new job?\"",
+    "timer": 86400,
+    "pledge": 13.83,
+    "tipCount": 25,
+    "likes": 61,
+    "comments": 11,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5",
+      "https://amzn.to/447OtGd"
+    ],
+    "creatorId": "63",
+    "createdAt": "2025-06-30T07:53:49.861361",
+    "nsfw": false
+  },
+  {
+    "id": "5430cfe8f8cdb1697eb2db05a0e1645d",
+    "question": "19. \"Should I dye my hair this bold color?\"",
+    "description": "Help me decide: 19. \"Should I dye my hair this bold color?\"",
+    "timer": 172800,
+    "pledge": 11.56,
+    "tipCount": 5,
+    "likes": 57,
+    "comments": 4,
+    "affiliateLinks": [
+      "https://amzn.to/4nskjFf",
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "51",
+    "createdAt": "2025-06-30T07:53:49.861385",
+    "nsfw": false
+  },
+  {
+    "id": "66fab74e2da49c078446073c5afa9883",
+    "question": "20. \"Which perfume/cologne should be my signature scent?\"",
+    "description": "Help me decide: 20. \"Which perfume/cologne should be my signature scent?\"",
+    "timer": 259200,
+    "pledge": 8.61,
+    "tipCount": 25,
+    "likes": 12,
+    "comments": 21,
+    "affiliateLinks": [
+      "https://amzn.to/3Ilaqcg",
+      "https://amzn.to/4lpzLjA"
+    ],
+    "creatorId": "70",
+    "createdAt": "2025-06-30T07:53:49.861413",
+    "nsfw": false
+  },
+  {
+    "id": "5f7abb5875190639ac0852f69dcc6378",
+    "question": "Food & Dining (1 minute",
+    "description": "Help me decide: Food & Dining (1 minute",
+    "timer": 7200,
+    "pledge": 14.39,
+    "tipCount": 2,
+    "likes": 64,
+    "comments": 10,
+    "affiliateLinks": [
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "72",
+    "createdAt": "2025-06-30T07:53:49.861430",
+    "nsfw": false
+  },
+  {
+    "id": "ad3e5176ff35ec221e4264f4a7ce8ef9",
+    "question": "21. \"Pizza or sushi for dinner?\"",
+    "description": "Help me decide: 21. \"Pizza or sushi for dinner?\"",
+    "timer": 900,
+    "pledge": 13.34,
+    "tipCount": 23,
+    "likes": 17,
+    "comments": 23,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5",
+      "https://amzn.to/4lsQ0wf"
+    ],
+    "creatorId": "40",
+    "createdAt": "2025-06-30T07:53:49.861445",
+    "nsfw": false
+  },
+  {
+    "id": "e4641d2fa789e8d3effd934b74e92a39",
+    "question": "22. \"Should I try the exotic restaurant or stick to familiar food?\"",
+    "description": "Help me decide: 22. \"Should I try the exotic restaurant or stick to familiar food?\"",
+    "timer": 1800,
+    "pledge": 0,
+    "tipCount": 6,
+    "likes": 116,
+    "comments": 19,
+    "affiliateLinks": [],
+    "creatorId": "56",
+    "createdAt": "2025-06-30T07:53:49.861456",
+    "nsfw": false
+  },
+  {
+    "id": "99d2decbf8da44f9b511837730d5a4d9",
+    "question": "23. \"Cooking at home or ordering takeout tonight?\"",
+    "description": "Help me decide: 23. \"Cooking at home or ordering takeout tonight?\"",
+    "timer": 600,
+    "pledge": 14.25,
+    "tipCount": 4,
+    "likes": 82,
+    "comments": 7,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd",
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "63",
+    "createdAt": "2025-06-30T07:53:49.861471",
+    "nsfw": false
+  },
+  {
+    "id": "063589ed28b2525c017b5798c7aa09d7",
+    "question": "24. \"Which dish should I order at this new place?\"",
+    "description": "Help me decide: 24. \"Which dish should I order at this new place?\"",
+    "timer": 300,
+    "pledge": 3.39,
+    "tipCount": 17,
+    "likes": 18,
+    "comments": 18,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "73",
+    "createdAt": "2025-06-30T07:53:49.861486",
+    "nsfw": false
+  },
+  {
+    "id": "145a27d81eb14b98716c869378f3b98e",
+    "question": "25. \"Should I go vegetarian for a month?\"",
+    "description": "Help me decide: 25. \"Should I go vegetarian for a month?\"",
+    "timer": 7200,
+    "pledge": 6.08,
+    "tipCount": 17,
+    "likes": 48,
+    "comments": 9,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGurY",
+      "https://amzn.to/4nskjFf"
+    ],
+    "creatorId": "75",
+    "createdAt": "2025-06-30T07:53:49.861500",
+    "nsfw": false
+  },
+  {
+    "id": "ff4da2f4f31e2f3600af94ad7801499c",
+    "question": "26. \"Spicy or mild curry?\"",
+    "description": "Help me decide: 26. \"Spicy or mild curry?\"",
+    "timer": 180,
+    "pledge": 8.24,
+    "tipCount": 18,
+    "likes": 35,
+    "comments": 21,
+    "affiliateLinks": [
+      "https://amzn.to/4nskjFf",
+      "https://amzn.to/3Ilaqcg"
+    ],
+    "creatorId": "6",
+    "createdAt": "2025-06-30T07:53:49.861515",
+    "nsfw": false
+  },
+  {
+    "id": "8e2e22f1729e708ee51815bf588859e4",
+    "question": "27. \"Should I meal prep this week or wing it?\"",
+    "description": "Help me decide: 27. \"Should I meal prep this week or wing it?\"",
+    "timer": 3600,
+    "pledge": 0,
+    "tipCount": 20,
+    "likes": 64,
+    "comments": 1,
+    "affiliateLinks": [],
+    "creatorId": "78",
+    "createdAt": "2025-06-30T07:53:49.861525",
+    "nsfw": false
+  },
+  {
+    "id": "400d6d5d0dde3fb335c9fbef651b8ba3",
+    "question": "28. \"Which birthday cake flavor for my party?\"",
+    "description": "Help me decide: 28. \"Which birthday cake flavor for my party?\"",
+    "timer": 86400,
+    "pledge": 6.5,
+    "tipCount": 4,
+    "likes": 29,
+    "comments": 30,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA"
+    ],
+    "creatorId": "28",
+    "createdAt": "2025-06-30T07:53:49.861539",
+    "nsfw": false
+  },
+  {
+    "id": "b229cf43fd32e071b1da169d1d6c1a2b",
+    "question": "29. \"Should I try intermittent fasting?\"",
+    "description": "Help me decide: 29. \"Should I try intermittent fasting?\"",
+    "timer": 7200,
+    "pledge": 0,
+    "tipCount": 2,
+    "likes": 4,
+    "comments": 1,
+    "affiliateLinks": [],
+    "creatorId": "43",
+    "createdAt": "2025-06-30T07:53:49.861551",
+    "nsfw": false
+  },
+  {
+    "id": "fd54405b6e812fcf70e42bdf2c863c7f",
+    "question": "30. \"Bar or restaurant for our group dinner?\"",
+    "description": "Help me decide: 30. \"Bar or restaurant for our group dinner?\"",
+    "timer": 2700,
+    "pledge": 0,
+    "tipCount": 20,
+    "likes": 29,
+    "comments": 12,
+    "affiliateLinks": [],
+    "creatorId": "23",
+    "createdAt": "2025-06-30T07:53:49.861568",
+    "nsfw": false
+  },
+  {
+    "id": "bc6201c39930595c0670845a2a4d8f6f",
+    "question": "Career & Professional (3 hours",
+    "description": "Help me decide: Career & Professional (3 hours",
+    "timer": 2678400,
+    "pledge": 13.19,
+    "tipCount": 21,
+    "likes": 28,
+    "comments": 28,
+    "affiliateLinks": [
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "45",
+    "createdAt": "2025-06-30T07:53:49.861766",
+    "nsfw": false
+  },
+  {
+    "id": "b715d6eccc761c3f750729181eab0425",
+    "question": "31. \"Should I ask for a raise this quarter?\"",
+    "description": "Help me decide: 31. \"Should I ask for a raise this quarter?\"",
+    "timer": 604800,
+    "pledge": 4.46,
+    "tipCount": 16,
+    "likes": 92,
+    "comments": 9,
+    "affiliateLinks": [
+      "https://amzn.to/4nskjFf",
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "27",
+    "createdAt": "2025-06-30T07:53:49.861790",
+    "nsfw": false
+  },
+  {
+    "id": "d0640f6a44f9e12ea35ee6d377507a08",
+    "question": "32. \"Accept the job offer or negotiate for more?\"",
+    "description": "Help me decide: 32. \"Accept the job offer or negotiate for more?\"",
+    "timer": 259200,
+    "pledge": 10.99,
+    "tipCount": 16,
+    "likes": 17,
+    "comments": 5,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "42",
+    "createdAt": "2025-06-30T07:53:49.861807",
+    "nsfw": false
+  },
+  {
+    "id": "6cec9ff2f6cd3edc7052c2b06badf3b3",
+    "question": "33. \"Should I start my own business or stay employed?\"",
+    "description": "Help me decide: 33. \"Should I start my own business or stay employed?\"",
+    "timer": 2678400,
+    "pledge": 10.06,
+    "tipCount": 20,
+    "likes": 44,
+    "comments": 27,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA"
+    ],
+    "creatorId": "31",
+    "createdAt": "2025-06-30T07:53:49.861823",
+    "nsfw": false
+  },
+  {
+    "id": "e8df9df98e5c6c44044e67d081c364e3",
+    "question": "34. \"Which certification should I pursue first?\"",
+    "description": "Help me decide: 34. \"Which certification should I pursue first?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 16,
+    "likes": 75,
+    "comments": 4,
+    "affiliateLinks": [],
+    "creatorId": "36",
+    "createdAt": "2025-06-30T07:53:49.861835",
+    "nsfw": false
+  },
+  {
+    "id": "04d6d60cb5dbd00838cb355c95cf64d9",
+    "question": "35. \"Should I confront my difficult coworker?\"",
+    "description": "Help me decide: 35. \"Should I confront my difficult coworker?\"",
+    "timer": 172800,
+    "pledge": 0,
+    "tipCount": 19,
+    "likes": 0,
+    "comments": 26,
+    "affiliateLinks": [],
+    "creatorId": "9",
+    "createdAt": "2025-06-30T07:53:49.861850",
+    "nsfw": false
+  },
+  {
+    "id": "830e0cb2cd04efdabc1f312566a64f35",
+    "question": "36. \"Remote work or office for my new position?\"",
+    "description": "Help me decide: 36. \"Remote work or office for my new position?\"",
+    "timer": 432000,
+    "pledge": 0,
+    "tipCount": 19,
+    "likes": 6,
+    "comments": 24,
+    "affiliateLinks": [],
+    "creatorId": "61",
+    "createdAt": "2025-06-30T07:53:49.861870",
+    "nsfw": false
+  },
+  {
+    "id": "2e7972cfee789b3a0f579a42018600be",
+    "question": "37. \"Should I quit without another job lined up?\"",
+    "description": "Help me decide: 37. \"Should I quit without another job lined up?\"",
+    "timer": 1814400,
+    "pledge": 5.26,
+    "tipCount": 6,
+    "likes": 110,
+    "comments": 3,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "14",
+    "createdAt": "2025-06-30T07:53:49.861886",
+    "nsfw": false
+  },
+  {
+    "id": "146c82865038b16f00020576fdd04488",
+    "question": "38. \"Which industry should I transition into?\"",
+    "description": "Help me decide: 38. \"Which industry should I transition into?\"",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 16,
+    "likes": 78,
+    "comments": 20,
+    "affiliateLinks": [],
+    "creatorId": "41",
+    "createdAt": "2025-06-30T07:53:49.861897",
+    "nsfw": false
+  },
+  {
+    "id": "8f4bc0e823480e4aec6a19eb02cbbcec",
+    "question": "39. \"Should I take the promotion that requires relocation?\"",
+    "description": "Help me decide: 39. \"Should I take the promotion that requires relocation?\"",
+    "timer": 1209600,
+    "pledge": 14.51,
+    "tipCount": 16,
+    "likes": 50,
+    "comments": 13,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU",
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "63",
+    "createdAt": "2025-06-30T07:53:49.861912",
+    "nsfw": false
+  },
+  {
+    "id": "16cd85122bdff280f9b2b965d8488e4c",
+    "question": "40. \"Freelancing or full-time employment?\"",
+    "description": "Help me decide: 40. \"Freelancing or full-time employment?\"",
+    "timer": 2419200,
+    "pledge": 0,
+    "tipCount": 19,
+    "likes": 114,
+    "comments": 17,
+    "affiliateLinks": [],
+    "creatorId": "27",
+    "createdAt": "2025-06-30T07:53:49.861923",
+    "nsfw": false
+  },
+  {
+    "id": "6aae0a66566e0b248104d71d63676ff2",
+    "question": "Relationship & Dating (30 minutes",
+    "description": "Help me decide: Relationship & Dating (30 minutes",
+    "timer": 1814400,
+    "pledge": 13.38,
+    "tipCount": 22,
+    "likes": 101,
+    "comments": 16,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf",
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "56",
+    "createdAt": "2025-06-30T07:53:49.861938",
+    "nsfw": true
+  },
+  {
+    "id": "6848dd4c1119301930d1701dc1fcdb03",
+    "question": "41. \"Should I make the first move or wait?\"",
+    "description": "Help me decide: 41. \"Should I make the first move or wait?\"",
+    "timer": 21600,
+    "pledge": 0,
+    "tipCount": 13,
+    "likes": 64,
+    "comments": 24,
+    "affiliateLinks": [],
+    "creatorId": "13",
+    "createdAt": "2025-06-30T07:53:49.861949",
+    "nsfw": false
+  },
+  {
+    "id": "55c02d75bfeed33744f1b67bbd5975e3",
+    "question": "42. \"Is it too early to say 'I love you'?\"",
+    "description": "Help me decide: 42. \"Is it too early to say 'I love you'?\"",
+    "timer": 259200,
+    "pledge": 4.6,
+    "tipCount": 1,
+    "likes": 114,
+    "comments": 3,
+    "affiliateLinks": [
+      "https://amzn.to/4lzHQT2"
+    ],
+    "creatorId": "17",
+    "createdAt": "2025-06-30T07:53:49.861963",
+    "nsfw": true
+  },
+  {
+    "id": "fb48b1615148ee0a7c8b91670b51ef9b",
+    "question": "43. \"Should we move in together?\"",
+    "description": "Help me decide: 43. \"Should we move in together?\"",
+    "timer": 1209600,
+    "pledge": 8.59,
+    "tipCount": 4,
+    "likes": 107,
+    "comments": 13,
+    "affiliateLinks": [
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "69",
+    "createdAt": "2025-06-30T07:53:49.861977",
+    "nsfw": false
+  },
+  {
+    "id": "2d607f4fdd5d2fbb3b243a03b57a7d78",
+    "question": "44. \"Which dating app should I focus on?\"",
+    "description": "Help me decide: 44. \"Which dating app should I focus on?\"",
+    "timer": 172800,
+    "pledge": 2.62,
+    "tipCount": 7,
+    "likes": 99,
+    "comments": 10,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "3",
+    "createdAt": "2025-06-30T07:53:49.861991",
+    "nsfw": false
+  },
+  {
+    "id": "282a36393d125bfa73d84acf13d15ab8",
+    "question": "45. \"Should I give my ex another chance?\"",
+    "description": "Help me decide: 45. \"Should I give my ex another chance?\"",
+    "timer": 604800,
+    "pledge": 5.35,
+    "tipCount": 23,
+    "likes": 30,
+    "comments": 4,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf"
+    ],
+    "creatorId": "24",
+    "createdAt": "2025-06-30T07:53:49.862005",
+    "nsfw": false
+  },
+  {
+    "id": "bce8daeefa9a077b9f5ec181a792d66c",
+    "question": "46. \"Is this person right for me long-term?\"",
+    "description": "Help me decide: 46. \"Is this person right for me long-term?\"",
+    "timer": 1814400,
+    "pledge": 0,
+    "tipCount": 25,
+    "likes": 50,
+    "comments": 30,
+    "affiliateLinks": [],
+    "creatorId": "63",
+    "createdAt": "2025-06-30T07:53:49.862020",
+    "nsfw": false
+  },
+  {
+    "id": "7f49209ad682da7f2df6c54694f93e28",
+    "question": "47. \"Should I introduce them to my parents?\"",
+    "description": "Help me decide: 47. \"Should I introduce them to my parents?\"",
+    "timer": 432000,
+    "pledge": 0,
+    "tipCount": 3,
+    "likes": 28,
+    "comments": 15,
+    "affiliateLinks": [],
+    "creatorId": "75",
+    "createdAt": "2025-06-30T07:53:49.862036",
+    "nsfw": false
+  },
+  {
+    "id": "ee0f49600708d40c9dd79ec4639e8802",
+    "question": "48. \"Break up over text or in person?\"",
+    "description": "Help me decide: 48. \"Break up over text or in person?\"",
+    "timer": 14400,
+    "pledge": 0,
+    "tipCount": 22,
+    "likes": 46,
+    "comments": 4,
+    "affiliateLinks": [],
+    "creatorId": "45",
+    "createdAt": "2025-06-30T07:53:49.862061",
+    "nsfw": false
+  },
+  {
+    "id": "c1485e7dff6b57a818b12fc956e18ee4",
+    "question": "49. \"Should we take a relationship break?\"",
+    "description": "Help me decide: 49. \"Should we take a relationship break?\"",
+    "timer": 259200,
+    "pledge": 14.71,
+    "tipCount": 6,
+    "likes": 21,
+    "comments": 14,
+    "affiliateLinks": [
+      "https://amzn.to/3TjXi9L"
+    ],
+    "creatorId": "38",
+    "createdAt": "2025-06-30T07:53:49.862077",
+    "nsfw": true
+  },
+  {
+    "id": "8043a00a6cb2bc130dda818aee19a618",
+    "question": "50. \"Which anniversary gift shows I care most?\"",
+    "description": "Help me decide: 50. \"Which anniversary gift shows I care most?\"",
+    "timer": 172800,
+    "pledge": 0,
+    "tipCount": 17,
+    "likes": 1,
+    "comments": 15,
+    "affiliateLinks": [],
+    "creatorId": "72",
+    "createdAt": "2025-06-30T07:53:49.862087",
+    "nsfw": false
+  },
+  {
+    "id": "293b8d45f2c2473fd40ef47256b4fb13",
+    "question": "Living Situation & Home (2 hours",
+    "description": "Help me decide: Living Situation & Home (2 hours",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 1,
+    "likes": 45,
+    "comments": 24,
+    "affiliateLinks": [],
+    "creatorId": "17",
+    "createdAt": "2025-06-30T07:53:49.862097",
+    "nsfw": false
+  },
+  {
+    "id": "64eb409e1795d315cb1e7a010a71c3f1",
+    "question": "51. \"Should I buy or rent in this market?\"",
+    "description": "Help me decide: 51. \"Should I buy or rent in this market?\"",
+    "timer": 2678400,
+    "pledge": 8.58,
+    "tipCount": 11,
+    "likes": 89,
+    "comments": 4,
+    "affiliateLinks": [
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "20",
+    "createdAt": "2025-06-30T07:53:49.862115",
+    "nsfw": false
+  },
+  {
+    "id": "1632bd04a8275c7a5b1ec74adb5e178e",
+    "question": "52. \"Apartment A or Apartment B?\"",
+    "description": "Help me decide: 52. \"Apartment A or Apartment B?\"",
+    "timer": 604800,
+    "pledge": 0,
+    "tipCount": 15,
+    "likes": 2,
+    "comments": 25,
+    "affiliateLinks": [],
+    "creatorId": "39",
+    "createdAt": "2025-06-30T07:53:49.862143",
+    "nsfw": false
+  },
+  {
+    "id": "b0ecacfddf5f806e4234692c19db9c10",
+    "question": "53. \"Should I get a roommate to save money?\"",
+    "description": "Help me decide: 53. \"Should I get a roommate to save money?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 3,
+    "likes": 120,
+    "comments": 7,
+    "affiliateLinks": [],
+    "creatorId": "35",
+    "createdAt": "2025-06-30T07:53:49.862153",
+    "nsfw": false
+  },
+  {
+    "id": "affe42f8aa50ad057758c6562cc2615f",
+    "question": "54. \"Which neighborhood should I move to?\"",
+    "description": "Help me decide: 54. \"Which neighborhood should I move to?\"",
+    "timer": 1814400,
+    "pledge": 13.98,
+    "tipCount": 12,
+    "likes": 82,
+    "comments": 2,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA"
+    ],
+    "creatorId": "6",
+    "createdAt": "2025-06-30T07:53:49.862168",
+    "nsfw": false
+  },
+  {
+    "id": "45eb33fbafcb2f0f8df3d007f5fd3e72",
+    "question": "55. \"Should I renovate the kitchen first?\"",
+    "description": "Help me decide: 55. \"Should I renovate the kitchen first?\"",
+    "timer": 864000,
+    "pledge": 8.67,
+    "tipCount": 23,
+    "likes": 89,
+    "comments": 29,
+    "affiliateLinks": [
+      "https://amzn.to/3TOs8r7",
+      "https://amzn.to/4lzHQT2"
+    ],
+    "creatorId": "21",
+    "createdAt": "2025-06-30T07:53:49.862188",
+    "nsfw": false
+  },
+  {
+    "id": "e8808d9a7643c2c43e98e7d6aa174166",
+    "question": "56. \"Hardwood floors or luxury vinyl?\"",
+    "description": "Help me decide: 56. \"Hardwood floors or luxury vinyl?\"",
+    "timer": 432000,
+    "pledge": 0,
+    "tipCount": 10,
+    "likes": 64,
+    "comments": 14,
+    "affiliateLinks": [],
+    "creatorId": "6",
+    "createdAt": "2025-06-30T07:53:49.862205",
+    "nsfw": false
+  },
+  {
+    "id": "9604304be695c27db0cf44994c91a32f",
+    "question": "57. \"Should I downsize to a smaller place?\"",
+    "description": "Help me decide: 57. \"Should I downsize to a smaller place?\"",
+    "timer": 2419200,
+    "pledge": 1.21,
+    "tipCount": 5,
+    "likes": 80,
+    "comments": 15,
+    "affiliateLinks": [
+      "https://amzn.to/3TjXi9L",
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "14",
+    "createdAt": "2025-06-30T07:53:49.862220",
+    "nsfw": false
+  },
+  {
+    "id": "232d67d448fb80097440bfe48af73ba9",
+    "question": "58. \"Which paint color for the living room?\"",
+    "description": "Help me decide: 58. \"Which paint color for the living room?\"",
+    "timer": 259200,
+    "pledge": 0,
+    "tipCount": 22,
+    "likes": 69,
+    "comments": 1,
+    "affiliateLinks": [],
+    "creatorId": "80",
+    "createdAt": "2025-06-30T07:53:49.862231",
+    "nsfw": false
+  },
+  {
+    "id": "e063f468a2d788fc202996e6a9cc3e30",
+    "question": "59. \"Should I buy this house even though it needs work?\"",
+    "description": "Help me decide: 59. \"Should I buy this house even though it needs work?\"",
+    "timer": 1209600,
+    "pledge": 6.66,
+    "tipCount": 13,
+    "likes": 58,
+    "comments": 3,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA",
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "43",
+    "createdAt": "2025-06-30T07:53:49.862245",
+    "nsfw": false
+  },
+  {
+    "id": "02560aee5f456bfaf615b6d0d6c7d89f",
+    "question": "60. \"Condo or single-family home?\"",
+    "description": "Help me decide: 60. \"Condo or single-family home?\"",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 12,
+    "likes": 106,
+    "comments": 30,
+    "affiliateLinks": [],
+    "creatorId": "58",
+    "createdAt": "2025-06-30T07:53:49.862256",
+    "nsfw": false
+  },
+  {
+    "id": "ba0fd0021c33d4621c21496aae7ac791",
+    "question": "Health & Fitness (1 hour",
+    "description": "Help me decide: Health & Fitness (1 hour",
+    "timer": 2592000,
+    "pledge": 13.48,
+    "tipCount": 23,
+    "likes": 11,
+    "comments": 21,
+    "affiliateLinks": [
+      "https://amzn.to/3ZWMSk3",
+      "https://amzn.to/3GkmTwl"
+    ],
+    "creatorId": "44",
+    "createdAt": "2025-06-30T07:53:49.862271",
+    "nsfw": false
+  },
+  {
+    "id": "e6de6e455a3bb03a9378600b38ac5b04",
+    "question": "61. \"Should I join the expensive gym or workout at home?\"",
+    "description": "Help me decide: 61. \"Should I join the expensive gym or workout at home?\"",
+    "timer": 259200,
+    "pledge": 0,
+    "tipCount": 1,
+    "likes": 65,
+    "comments": 2,
+    "affiliateLinks": [],
+    "creatorId": "75",
+    "createdAt": "2025-06-30T07:53:49.862281",
+    "nsfw": false
+  },
+  {
+    "id": "427e9d8749522cfe74cb0c23775671ec",
+    "question": "62. \"Morning or evening workout routine?\"",
+    "description": "Help me decide: 62. \"Morning or evening workout routine?\"",
+    "timer": 172800,
+    "pledge": 3.41,
+    "tipCount": 17,
+    "likes": 62,
+    "comments": 17,
+    "affiliateLinks": [
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "78",
+    "createdAt": "2025-06-30T07:53:49.862295",
+    "nsfw": false
+  },
+  {
+    "id": "2ef9cc9034fd397d18695d3f22d7b0f9",
+    "question": "63. \"Should I try the trendy new diet?\"",
+    "description": "Help me decide: 63. \"Should I try the trendy new diet?\"",
+    "timer": 604800,
+    "pledge": 7.04,
+    "tipCount": 10,
+    "likes": 51,
+    "comments": 27,
+    "affiliateLinks": [
+      "https://amzn.to/447OtGd"
+    ],
+    "creatorId": "51",
+    "createdAt": "2025-06-30T07:53:49.862320",
+    "nsfw": false
+  },
+  {
+    "id": "9ec7186e95abc7562e1f4baf594d5988",
+    "question": "64. \"Personal trainer or group fitness classes?\"",
+    "description": "Help me decide: 64. \"Personal trainer or group fitness classes?\"",
+    "timer": 432000,
+    "pledge": 1.34,
+    "tipCount": 19,
+    "likes": 0,
+    "comments": 2,
+    "affiliateLinks": [
+      "https://amzn.to/3TjXi9L",
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "38",
+    "createdAt": "2025-06-30T07:53:49.862342",
+    "nsfw": false
+  },
+  {
+    "id": "7f32420782087765a4d4d722cdf5187f",
+    "question": "65. \"Should I get elective surgery?\"",
+    "description": "Help me decide: 65. \"Should I get elective surgery?\"",
+    "timer": 2592000,
+    "pledge": 0,
+    "tipCount": 21,
+    "likes": 41,
+    "comments": 23,
+    "affiliateLinks": [],
+    "creatorId": "18",
+    "createdAt": "2025-06-30T07:53:49.862354",
+    "nsfw": false
+  },
+  {
+    "id": "92ae34c6d0de01458d8af0fa42efabd4",
+    "question": "66. \"Which fitness goal should I prioritize?\"",
+    "description": "Help me decide: 66. \"Which fitness goal should I prioritize?\"",
+    "timer": 1209600,
+    "pledge": 4.57,
+    "tipCount": 5,
+    "likes": 6,
+    "comments": 12,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf"
+    ],
+    "creatorId": "61",
+    "createdAt": "2025-06-30T07:53:49.862368",
+    "nsfw": false
+  },
+  {
+    "id": "381866f761edb4d5dade495d76637b07",
+    "question": "67. \"Should I run the marathon this year?\"",
+    "description": "Help me decide: 67. \"Should I run the marathon this year?\"",
+    "timer": 1814400,
+    "pledge": 2.55,
+    "tipCount": 9,
+    "likes": 65,
+    "comments": 14,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "15",
+    "createdAt": "2025-06-30T07:53:49.862384",
+    "nsfw": false
+  },
+  {
+    "id": "279188e37199046380b3191955eef3c3",
+    "question": "68. \"Therapy or self-help books for my anxiety?\"",
+    "description": "Help me decide: 68. \"Therapy or self-help books for my anxiety?\"",
+    "timer": 864000,
+    "pledge": 0,
+    "tipCount": 13,
+    "likes": 36,
+    "comments": 29,
+    "affiliateLinks": [],
+    "creatorId": "2",
+    "createdAt": "2025-06-30T07:53:49.862401",
+    "nsfw": false
+  },
+  {
+    "id": "8a87eaadf66c9cac2b5c7ee321408d95",
+    "question": "69. \"Should I quit smoking cold turkey or gradually?\"",
+    "description": "Help me decide: 69. \"Should I quit smoking cold turkey or gradually?\"",
+    "timer": 604800,
+    "pledge": 5.03,
+    "tipCount": 5,
+    "likes": 68,
+    "comments": 13,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5",
+      "https://amzn.to/4lzHQT2"
+    ],
+    "creatorId": "70",
+    "createdAt": "2025-06-30T07:53:49.862420",
+    "nsfw": false
+  },
+  {
+    "id": "9ea0e0c3dd3c05df6611d4ba8a10d4f3",
+    "question": "70. \"Which medical specialist should I see first?\"",
+    "description": "Help me decide: 70. \"Which medical specialist should I see first?\"",
+    "timer": 259200,
+    "pledge": 0,
+    "tipCount": 4,
+    "likes": 58,
+    "comments": 16,
+    "affiliateLinks": [],
+    "creatorId": "24",
+    "createdAt": "2025-06-30T07:53:49.862431",
+    "nsfw": false
+  },
+  {
+    "id": "46b0bf2dab7573a96fc4bb115d2961be",
+    "question": "Financial Decisions (1 hour",
+    "description": "Help me decide: Financial Decisions (1 hour",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 2,
+    "likes": 16,
+    "comments": 19,
+    "affiliateLinks": [],
+    "creatorId": "58",
+    "createdAt": "2025-06-30T07:53:49.862447",
+    "nsfw": false
+  },
+  {
+    "id": "6647da19c39833e1644056c6e6cfbda5",
+    "question": "71. \"Should I invest in cryptocurrency?\"",
+    "description": "Help me decide: 71. \"Should I invest in cryptocurrency?\"",
+    "timer": 1209600,
+    "pledge": 11.38,
+    "tipCount": 18,
+    "likes": 89,
+    "comments": 21,
+    "affiliateLinks": [
+      "https://amzn.to/447OtGd"
+    ],
+    "creatorId": "74",
+    "createdAt": "2025-06-30T07:53:49.862483",
+    "nsfw": false
+  },
+  {
+    "id": "79a7cb663f1d215753976474f27d600f",
+    "question": "72. \"Pay off debt or build emergency fund first?\"",
+    "description": "Help me decide: 72. \"Pay off debt or build emergency fund first?\"",
+    "timer": 1814400,
+    "pledge": 0,
+    "tipCount": 23,
+    "likes": 48,
+    "comments": 18,
+    "affiliateLinks": [],
+    "creatorId": "12",
+    "createdAt": "2025-06-30T07:53:49.862494",
+    "nsfw": false
+  },
+  {
+    "id": "d381939041874f77b591b9b0576869d0",
+    "question": "73. \"Should I buy the extended warranty?\"",
+    "description": "Help me decide: 73. \"Should I buy the extended warranty?\"",
+    "timer": 7200,
+    "pledge": 12.22,
+    "tipCount": 23,
+    "likes": 82,
+    "comments": 29,
+    "affiliateLinks": [
+      "https://amzn.to/3TjXi9L",
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "74",
+    "createdAt": "2025-06-30T07:53:49.862510",
+    "nsfw": false
+  },
+  {
+    "id": "34806611ee2e63b1b2c657590f2dcef8",
+    "question": "74. \"Which retirement account should I max out?\"",
+    "description": "Help me decide: 74. \"Which retirement account should I max out?\"",
+    "timer": 2419200,
+    "pledge": 0,
+    "tipCount": 0,
+    "likes": 118,
+    "comments": 21,
+    "affiliateLinks": [],
+    "creatorId": "45",
+    "createdAt": "2025-06-30T07:53:49.862520",
+    "nsfw": false
+  },
+  {
+    "id": "155b7c73ad84d9d9a95980924c8ba8c4",
+    "question": "75. \"Should I take out a personal loan?\"",
+    "description": "Help me decide: 75. \"Should I take out a personal loan?\"",
+    "timer": 604800,
+    "pledge": 11.72,
+    "tipCount": 19,
+    "likes": 4,
+    "comments": 24,
+    "affiliateLinks": [
+      "https://amzn.to/4lzHQT2",
+      "https://amzn.to/4kk2BBd"
+    ],
+    "creatorId": "25",
+    "createdAt": "2025-06-30T07:53:49.862535",
+    "nsfw": false
+  },
+  {
+    "id": "63f43da5631fb775ddcd7942fc3ad2a8",
+    "question": "76. \"Expensive vacation or save the money?\"",
+    "description": "Help me decide: 76. \"Expensive vacation or save the money?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 21,
+    "likes": 46,
+    "comments": 21,
+    "affiliateLinks": [],
+    "creatorId": "59",
+    "createdAt": "2025-06-30T07:53:49.862545",
+    "nsfw": false
+  },
+  {
+    "id": "4b63714a3eaf462dfe721d40b982c49a",
+    "question": "77. \"Should I buy or lease the car?\"",
+    "description": "Help me decide: 77. \"Should I buy or lease the car?\"",
+    "timer": 864000,
+    "pledge": 0,
+    "tipCount": 6,
+    "likes": 25,
+    "comments": 19,
+    "affiliateLinks": [],
+    "creatorId": "14",
+    "createdAt": "2025-06-30T07:53:49.862555",
+    "nsfw": false
+  },
+  {
+    "id": "5c62ad4ef4508d12872bd7ff0c7418da",
+    "question": "78. \"Which investment strategy for my age?\"",
+    "description": "Help me decide: 78. \"Which investment strategy for my age?\"",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 20,
+    "likes": 51,
+    "comments": 20,
+    "affiliateLinks": [],
+    "creatorId": "59",
+    "createdAt": "2025-06-30T07:53:49.862565",
+    "nsfw": false
+  },
+  {
+    "id": "027fdb28e011390b29f3fe8aa31f713e",
+    "question": "79. \"Should I lend money to my friend?\"",
+    "description": "Help me decide: 79. \"Should I lend money to my friend?\"",
+    "timer": 259200,
+    "pledge": 0,
+    "tipCount": 20,
+    "likes": 14,
+    "comments": 27,
+    "affiliateLinks": [],
+    "creatorId": "70",
+    "createdAt": "2025-06-30T07:53:49.862575",
+    "nsfw": false
+  },
+  {
+    "id": "5c5ea68978877bc4d75213eb3629a1e0",
+    "question": "80. \"Credit card or cash for major purchases?\"",
+    "description": "Help me decide: 80. \"Credit card or cash for major purchases?\"",
+    "timer": 14400,
+    "pledge": 4.67,
+    "tipCount": 18,
+    "likes": 88,
+    "comments": 2,
+    "affiliateLinks": [
+      "https://amzn.to/3Ilaqcg",
+      "https://amzn.to/4lzHQT2"
+    ],
+    "creatorId": "1",
+    "createdAt": "2025-06-30T07:53:49.862588",
+    "nsfw": false
+  },
+  {
+    "id": "227b215a82d90165bcca652f04ec250d",
+    "question": "Education & Learning (3 days",
+    "description": "Help me decide: Education & Learning (3 days",
+    "timer": 2678400,
+    "pledge": 7.96,
+    "tipCount": 8,
+    "likes": 24,
+    "comments": 6,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGhoG",
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "62",
+    "createdAt": "2025-06-30T07:53:49.862608",
+    "nsfw": false
+  },
+  {
+    "id": "ed0e67ea4805c28a192e1ade48745c78",
+    "question": "81. \"Should I go back to school for my Master's?\"",
+    "description": "Help me decide: 81. \"Should I go back to school for my Master's?\"",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 3,
+    "likes": 4,
+    "comments": 18,
+    "affiliateLinks": [],
+    "creatorId": "26",
+    "createdAt": "2025-06-30T07:53:49.862624",
+    "nsfw": false
+  },
+  {
+    "id": "dea7e9da89e986005a51a94d9ac35505",
+    "question": "82. \"Online degree or traditional college?\"",
+    "description": "Help me decide: 82. \"Online degree or traditional college?\"",
+    "timer": 2419200,
+    "pledge": 0,
+    "tipCount": 13,
+    "likes": 97,
+    "comments": 6,
+    "affiliateLinks": [],
+    "creatorId": "28",
+    "createdAt": "2025-06-30T07:53:49.862641",
+    "nsfw": false
+  },
+  {
+    "id": "3f915087723af3d38845285eb0712bc1",
+    "question": "83. \"Which programming language should I learn first?\"",
+    "description": "Help me decide: 83. \"Which programming language should I learn first?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 12,
+    "likes": 76,
+    "comments": 13,
+    "affiliateLinks": [],
+    "creatorId": "38",
+    "createdAt": "2025-06-30T07:53:49.862658",
+    "nsfw": false
+  },
+  {
+    "id": "45ada3dae84b8f894c556f278f2df764",
+    "question": "84. \"Should I take a gap year?\"",
+    "description": "Help me decide: 84. \"Should I take a gap year?\"",
+    "timer": 1814400,
+    "pledge": 4.01,
+    "tipCount": 2,
+    "likes": 70,
+    "comments": 11,
+    "affiliateLinks": [
+      "https://amzn.to/3GkmTwl"
+    ],
+    "creatorId": "6",
+    "createdAt": "2025-06-30T07:53:49.862789",
+    "nsfw": false
+  },
+  {
+    "id": "ba8ec2009f0e645ab85acd1864b58f72",
+    "question": "85. \"Which university should I choose?\"",
+    "description": "Help me decide: 85. \"Which university should I choose?\"",
+    "timer": 2678400,
+    "pledge": 1.12,
+    "tipCount": 17,
+    "likes": 63,
+    "comments": 4,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA"
+    ],
+    "creatorId": "20",
+    "createdAt": "2025-06-30T07:53:49.862820",
+    "nsfw": false
+  },
+  {
+    "id": "ba3d4e52956ad084d3a049ddd441d492",
+    "question": "86. \"Should I change my major?\"",
+    "description": "Help me decide: 86. \"Should I change my major?\"",
+    "timer": 1814400,
+    "pledge": 3.75,
+    "tipCount": 16,
+    "likes": 10,
+    "comments": 7,
+    "affiliateLinks": [
+      "https://amzn.to/447OtGd",
+      "https://amzn.to/3TjXi9L"
+    ],
+    "creatorId": "21",
+    "createdAt": "2025-06-30T07:53:49.862844",
+    "nsfw": false
+  },
+  {
+    "id": "0e5edb43f6aed85edc8271c5130cc44a",
+    "question": "87. \"Study abroad or summer internship?\"",
+    "description": "Help me decide: 87. \"Study abroad or summer internship?\"",
+    "timer": 2419200,
+    "pledge": 0,
+    "tipCount": 23,
+    "likes": 43,
+    "comments": 8,
+    "affiliateLinks": [],
+    "creatorId": "22",
+    "createdAt": "2025-06-30T07:53:49.862863",
+    "nsfw": false
+  },
+  {
+    "id": "3376b94dc21a12d5066c7f48aa938c04",
+    "question": "88. \"Which professional course adds most value?\"",
+    "description": "Help me decide: 88. \"Which professional course adds most value?\"",
+    "timer": 1209600,
+    "pledge": 9.63,
+    "tipCount": 14,
+    "likes": 53,
+    "comments": 1,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf",
+      "https://amzn.to/3TjXi9L"
+    ],
+    "creatorId": "50",
+    "createdAt": "2025-06-30T07:53:49.862887",
+    "nsfw": false
+  },
+  {
+    "id": "aa6ad3d52a613cafdba851f8026caa73",
+    "question": "89. \"Should I learn a new language?\"",
+    "description": "Help me decide: 89. \"Should I learn a new language?\"",
+    "timer": 604800,
+    "pledge": 2.68,
+    "tipCount": 25,
+    "likes": 113,
+    "comments": 3,
+    "affiliateLinks": [
+      "https://amzn.to/3Ilaqcg",
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "75",
+    "createdAt": "2025-06-30T07:53:49.862913",
+    "nsfw": false
+  },
+  {
+    "id": "a5eb265a9a3b2ceeb890d956a62c096b",
+    "question": "90. \"Full-time or part-time MBA?\"",
+    "description": "Help me decide: 90. \"Full-time or part-time MBA?\"",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 9,
+    "likes": 75,
+    "comments": 9,
+    "affiliateLinks": [],
+    "creatorId": "25",
+    "createdAt": "2025-06-30T07:53:49.862932",
+    "nsfw": false
+  },
+  {
+    "id": "9ee63f6d9ad88e2b18e98415dca15793",
+    "question": "Travel & Adventure (2 hours",
+    "description": "Help me decide: Travel & Adventure (2 hours",
+    "timer": 2678400,
+    "pledge": 7.03,
+    "tipCount": 9,
+    "likes": 39,
+    "comments": 21,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5",
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "14",
+    "createdAt": "2025-06-30T07:53:49.862976",
+    "nsfw": false
+  },
+  {
+    "id": "5861ad02f7add5f5e1e24f182d694a99",
+    "question": "91. \"Solo travel or group trip?\"",
+    "description": "Help me decide: 91. \"Solo travel or group trip?\"",
+    "timer": 604800,
+    "pledge": 12.11,
+    "tipCount": 6,
+    "likes": 5,
+    "comments": 6,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd"
+    ],
+    "creatorId": "36",
+    "createdAt": "2025-06-30T07:53:49.863001",
+    "nsfw": false
+  },
+  {
+    "id": "fd26c77d33c18ce9bdd07ce6fa16b584",
+    "question": "92. \"Beach vacation or mountain adventure?\"",
+    "description": "Help me decide: 92. \"Beach vacation or mountain adventure?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 20,
+    "likes": 91,
+    "comments": 10,
+    "affiliateLinks": [],
+    "creatorId": "36",
+    "createdAt": "2025-06-30T07:53:49.863020",
+    "nsfw": false
+  },
+  {
+    "id": "6f688ce4d4ad01eacb71f27a7f305aac",
+    "question": "93. \"Should I book the flight now or wait for deals?\"",
+    "description": "Help me decide: 93. \"Should I book the flight now or wait for deals?\"",
+    "timer": 259200,
+    "pledge": 6.39,
+    "tipCount": 18,
+    "likes": 88,
+    "comments": 28,
+    "affiliateLinks": [
+      "https://amzn.to/3ZWMSk3",
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "59",
+    "createdAt": "2025-06-30T07:53:49.863045",
+    "nsfw": false
+  },
+  {
+    "id": "e44673c5031ef56f7bae12993acaaa02",
+    "question": "94. \"Backpacking or luxury travel?\"",
+    "description": "Help me decide: 94. \"Backpacking or luxury travel?\"",
+    "timer": 1814400,
+    "pledge": 11.91,
+    "tipCount": 3,
+    "likes": 118,
+    "comments": 17,
+    "affiliateLinks": [
+      "https://amzn.to/4lzALSw",
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "36",
+    "createdAt": "2025-06-30T07:53:49.863073",
+    "nsfw": false
+  },
+  {
+    "id": "9b5f7d76e693d198c7a4a327d29c544a",
+    "question": "95. \"Which country for my first international trip?\"",
+    "description": "Help me decide: 95. \"Which country for my first international trip?\"",
+    "timer": 2678400,
+    "pledge": 6.51,
+    "tipCount": 5,
+    "likes": 95,
+    "comments": 17,
+    "affiliateLinks": [
+      "https://amzn.to/4nskjFf",
+      "https://amzn.to/3TjXi9L"
+    ],
+    "creatorId": "73",
+    "createdAt": "2025-06-30T07:53:49.863097",
+    "nsfw": false
+  },
+  {
+    "id": "d6583b7600fa82cfba8f4ace5f9e303f",
+    "question": "96. \"Should I extend my vacation by two days?\"",
+    "description": "Help me decide: 96. \"Should I extend my vacation by two days?\"",
+    "timer": 21600,
+    "pledge": 13.27,
+    "tipCount": 12,
+    "likes": 77,
+    "comments": 29,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd",
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "38",
+    "createdAt": "2025-06-30T07:53:49.863122",
+    "nsfw": false
+  },
+  {
+    "id": "3da46381e53c7f7b44e29b8571229a2c",
+    "question": "97. \"Cruise or all-inclusive resort?\"",
+    "description": "Help me decide: 97. \"Cruise or all-inclusive resort?\"",
+    "timer": 864000,
+    "pledge": 9.25,
+    "tipCount": 5,
+    "likes": 69,
+    "comments": 6,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf",
+      "https://amzn.to/4lpzLjA"
+    ],
+    "creatorId": "55",
+    "createdAt": "2025-06-30T07:53:49.863148",
+    "nsfw": false
+  },
+  {
+    "id": "a7fe067a3d10d59f4a9d432d1628f0a6",
+    "question": "98. \"Which travel insurance is worth it?\"",
+    "description": "Help me decide: 98. \"Which travel insurance is worth it?\"",
+    "timer": 172800,
+    "pledge": 8.27,
+    "tipCount": 8,
+    "likes": 65,
+    "comments": 3,
+    "affiliateLinks": [
+      "https://amzn.to/447OtGd",
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "44",
+    "createdAt": "2025-06-30T07:53:49.863173",
+    "nsfw": false
+  },
+  {
+    "id": "20b66718af6d00864bf01355a87240e3",
+    "question": "99. \"Should I travel during peak season?\"",
+    "description": "Help me decide: 99. \"Should I travel during peak season?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 16,
+    "likes": 39,
+    "comments": 16,
+    "affiliateLinks": [],
+    "creatorId": "18",
+    "createdAt": "2025-06-30T07:53:49.863193",
+    "nsfw": false
+  },
+  {
+    "id": "80b4f4b14e7ad4f6f40a7a3850a47bbc",
+    "question": "100. \"Airbnb or hotel for this destination?\"",
+    "description": "Help me decide: 100. \"Airbnb or hotel for this destination?\"",
+    "timer": 345600,
+    "pledge": 6.83,
+    "tipCount": 20,
+    "likes": 82,
+    "comments": 29,
+    "affiliateLinks": [
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "80",
+    "createdAt": "2025-06-30T07:53:49.863219",
+    "nsfw": false
+  },
+  {
+    "id": "ff07a837d1113d386ff3da951df8a71b",
+    "question": "Technology & Digital Life (30 minutes",
+    "description": "Help me decide: Technology & Digital Life (30 minutes",
+    "timer": 1209600,
+    "pledge": 8.82,
+    "tipCount": 11,
+    "likes": 120,
+    "comments": 9,
+    "affiliateLinks": [
+      "https://amzn.to/4nskjFf"
+    ],
+    "creatorId": "79",
+    "createdAt": "2025-06-30T07:53:49.863247",
+    "nsfw": false
+  },
+  {
+    "id": "cce7099eeae4545c33345b4315363e4c",
+    "question": "101. \"iPhone or Android for my upgrade?\"",
+    "description": "Help me decide: 101. \"iPhone or Android for my upgrade?\"",
+    "timer": 604800,
+    "pledge": 7.44,
+    "tipCount": 22,
+    "likes": 62,
+    "comments": 20,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf"
+    ],
+    "creatorId": "80",
+    "createdAt": "2025-06-30T07:53:49.863272",
+    "nsfw": false
+  },
+  {
+    "id": "3cc64f7bffed7597073e3cbf0124ba2c",
+    "question": "102. \"Should I delete social media for a month?\"",
+    "description": "Help me decide: 102. \"Should I delete social media for a month?\"",
+    "timer": 259200,
+    "pledge": 2.06,
+    "tipCount": 11,
+    "likes": 57,
+    "comments": 22,
+    "affiliateLinks": [
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "68",
+    "createdAt": "2025-06-30T07:53:49.863294",
+    "nsfw": false
+  },
+  {
+    "id": "d8ba9af982b462060068e53c7b7e582b",
+    "question": "103. \"Which streaming service should I keep?\"",
+    "description": "Help me decide: 103. \"Which streaming service should I keep?\"",
+    "timer": 172800,
+    "pledge": 0,
+    "tipCount": 8,
+    "likes": 8,
+    "comments": 21,
+    "affiliateLinks": [],
+    "creatorId": "19",
+    "createdAt": "2025-06-30T07:53:49.863313",
+    "nsfw": false
+  },
+  {
+    "id": "666ecb9db24c379e3579ce3129258b82",
+    "question": "104. \"Should I upgrade my laptop now?\"",
+    "description": "Help me decide: 104. \"Should I upgrade my laptop now?\"",
+    "timer": 432000,
+    "pledge": 3.74,
+    "tipCount": 19,
+    "likes": 42,
+    "comments": 21,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd",
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "7",
+    "createdAt": "2025-06-30T07:53:49.863338",
+    "nsfw": false
+  },
+  {
+    "id": "84887a46266ee4e6d5d6dfc458c798a5",
+    "question": "105. \"Smart home devices or keep it simple?\"",
+    "description": "Help me decide: 105. \"Smart home devices or keep it simple?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 24,
+    "likes": 73,
+    "comments": 17,
+    "affiliateLinks": [],
+    "creatorId": "48",
+    "createdAt": "2025-06-30T07:53:49.863355",
+    "nsfw": false
+  },
+  {
+    "id": "c4a52c830260371447663ba30e883541",
+    "question": "106. \"Should I start a blog or YouTube channel?\"",
+    "description": "Help me decide: 106. \"Should I start a blog or YouTube channel?\"",
+    "timer": 864000,
+    "pledge": 3.82,
+    "tipCount": 11,
+    "likes": 25,
+    "comments": 1,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGurY"
+    ],
+    "creatorId": "2",
+    "createdAt": "2025-06-30T07:53:49.863385",
+    "nsfw": false
+  },
+  {
+    "id": "9addafdd42ecfbbb1d5055bd96fd32cc",
+    "question": "107. \"Which cloud storage service?\"",
+    "description": "Help me decide: 107. \"Which cloud storage service?\"",
+    "timer": 86400,
+    "pledge": 6.38,
+    "tipCount": 16,
+    "likes": 44,
+    "comments": 12,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd",
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "54",
+    "createdAt": "2025-06-30T07:53:49.863408",
+    "nsfw": false
+  },
+  {
+    "id": "607b49f35c696ffb341eccd9baf5dd29",
+    "question": "108. \"Should I buy crypto or stick to stocks?\"",
+    "description": "Help me decide: 108. \"Should I buy crypto or stick to stocks?\"",
+    "timer": 604800,
+    "pledge": 0,
+    "tipCount": 16,
+    "likes": 7,
+    "comments": 21,
+    "affiliateLinks": [],
+    "creatorId": "80",
+    "createdAt": "2025-06-30T07:53:49.863435",
+    "nsfw": false
+  },
+  {
+    "id": "83cb0258be9def5442e677f634443829",
+    "question": "109. \"Gaming console or PC upgrade?\"",
+    "description": "Help me decide: 109. \"Gaming console or PC upgrade?\"",
+    "timer": 1209600,
+    "pledge": 12.71,
+    "tipCount": 20,
+    "likes": 90,
+    "comments": 9,
+    "affiliateLinks": [
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "45",
+    "createdAt": "2025-06-30T07:53:49.863450",
+    "nsfw": false
+  },
+  {
+    "id": "6a74e3e8fce762dc75b5601b0344fd7f",
+    "question": "110. \"Should I get the latest phone or wait?\"",
+    "description": "Help me decide: 110. \"Should I get the latest phone or wait?\"",
+    "timer": 259200,
+    "pledge": 10.34,
+    "tipCount": 19,
+    "likes": 94,
+    "comments": 24,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "33",
+    "createdAt": "2025-06-30T07:53:49.863466",
+    "nsfw": false
+  },
+  {
+    "id": "d0121e049d0f6e1d1aa104eaea25815f",
+    "question": "Family & Personal Relationships (2 hours",
+    "description": "Help me decide: Family & Personal Relationships (2 hours",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 3,
+    "likes": 46,
+    "comments": 20,
+    "affiliateLinks": [],
+    "creatorId": "14",
+    "createdAt": "2025-06-30T07:53:49.863483",
+    "nsfw": true
+  },
+  {
+    "id": "487955f247bcb6073009a19ab5a41dd1",
+    "question": "111. \"Should I have kids now or wait?\"",
+    "description": "Help me decide: 111. \"Should I have kids now or wait?\"",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 9,
+    "likes": 35,
+    "comments": 11,
+    "affiliateLinks": [],
+    "creatorId": "74",
+    "createdAt": "2025-06-30T07:53:49.863497",
+    "nsfw": false
+  },
+  {
+    "id": "91c8bcf5abc64837ab8eb1943db4293b",
+    "question": "112. \"Move closer to family or stay independent?\"",
+    "description": "Help me decide: 112. \"Move closer to family or stay independent?\"",
+    "timer": 2419200,
+    "pledge": 14.12,
+    "tipCount": 21,
+    "likes": 63,
+    "comments": 12,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU",
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "73",
+    "createdAt": "2025-06-30T07:53:49.863511",
+    "nsfw": false
+  },
+  {
+    "id": "8fa3ff49ec6eeeeb0874df8775548116",
+    "question": "113. \"Should I forgive my sibling?\"",
+    "description": "Help me decide: 113. \"Should I forgive my sibling?\"",
+    "timer": 1209600,
+    "pledge": 11.35,
+    "tipCount": 11,
+    "likes": 23,
+    "comments": 17,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA",
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "27",
+    "createdAt": "2025-06-30T07:53:49.863537",
+    "nsfw": false
+  },
+  {
+    "id": "5716b6ef7a9bede09a9f53036de2aa37",
+    "question": "114. \"Which parent should I spend the holidays with?\"",
+    "description": "Help me decide: 114. \"Which parent should I spend the holidays with?\"",
+    "timer": 1814400,
+    "pledge": 2.21,
+    "tipCount": 10,
+    "likes": 107,
+    "comments": 20,
+    "affiliateLinks": [
+      "https://amzn.to/3Ilaqcg",
+      "https://amzn.to/447OtGd"
+    ],
+    "creatorId": "13",
+    "createdAt": "2025-06-30T07:53:49.863559",
+    "nsfw": false
+  },
+  {
+    "id": "41158ea81d342aa12af03563870ea001",
+    "question": "115. \"Should I tell my family about my relationship?\"",
+    "description": "Help me decide: 115. \"Should I tell my family about my relationship?\"",
+    "timer": 604800,
+    "pledge": 2.0,
+    "tipCount": 18,
+    "likes": 102,
+    "comments": 1,
+    "affiliateLinks": [
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "45",
+    "createdAt": "2025-06-30T07:53:49.863574",
+    "nsfw": true
+  },
+  {
+    "id": "1856153df062ffc75139a574900e8c8b",
+    "question": "116. \"Is it time to put my parent in assisted living?\"",
+    "description": "Help me decide: 116. \"Is it time to put my parent in assisted living?\"",
+    "timer": 1814400,
+    "pledge": 12.6,
+    "tipCount": 16,
+    "likes": 49,
+    "comments": 30,
+    "affiliateLinks": [
+      "https://amzn.to/4lzHQT2",
+      "https://amzn.to/4lpzLjA"
+    ],
+    "creatorId": "50",
+    "createdAt": "2025-06-30T07:53:49.863589",
+    "nsfw": false
+  },
+  {
+    "id": "76d3cc40bd56a27b0d4e068f68b21ca2",
+    "question": "117. \"Should I reconnect with old friends?\"",
+    "description": "Help me decide: 117. \"Should I reconnect with old friends?\"",
+    "timer": 864000,
+    "pledge": 0,
+    "tipCount": 6,
+    "likes": 40,
+    "comments": 17,
+    "affiliateLinks": [],
+    "creatorId": "34",
+    "createdAt": "2025-06-30T07:53:49.863599",
+    "nsfw": false
+  },
+  {
+    "id": "e8964b6fd503afa1ba0349d651534168",
+    "question": "118. \"Which family tradition should we start?\"",
+    "description": "Help me decide: 118. \"Which family tradition should we start?\"",
+    "timer": 1209600,
+    "pledge": 7.05,
+    "tipCount": 15,
+    "likes": 64,
+    "comments": 0,
+    "affiliateLinks": [
+      "https://amzn.to/3TOs8r7",
+      "https://amzn.to/447OtGd"
+    ],
+    "creatorId": "25",
+    "createdAt": "2025-06-30T07:53:49.863613",
+    "nsfw": false
+  },
+  {
+    "id": "68fc43f6650ac96896c056b61077075b",
+    "question": "119. \"Should I host Thanksgiving this year?\"",
+    "description": "Help me decide: 119. \"Should I host Thanksgiving this year?\"",
+    "timer": 2419200,
+    "pledge": 2.35,
+    "tipCount": 4,
+    "likes": 92,
+    "comments": 25,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd",
+      "https://amzn.to/4lxGurY"
+    ],
+    "creatorId": "80",
+    "createdAt": "2025-06-30T07:53:49.863630",
+    "nsfw": false
+  },
+  {
+    "id": "d0e14bbd0c3a706f5880d61ee1d12317",
+    "question": "120. \"Is it worth flying across the country for the wedding?\"",
+    "description": "Help me decide: 120. \"Is it worth flying across the country for the wedding?\"",
+    "timer": 604800,
+    "pledge": 0,
+    "tipCount": 2,
+    "likes": 98,
+    "comments": 1,
+    "affiliateLinks": [],
+    "creatorId": "33",
+    "createdAt": "2025-06-30T07:53:49.863641",
+    "nsfw": false
+  },
+  {
+    "id": "7a062ab7c1aa92d23d214ffaea834492",
+    "question": "Creative & Artistic Pursuits (4 hours",
+    "description": "Help me decide: Creative & Artistic Pursuits (4 hours",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 0,
+    "likes": 34,
+    "comments": 29,
+    "affiliateLinks": [],
+    "creatorId": "10",
+    "createdAt": "2025-06-30T07:53:49.863652",
+    "nsfw": false
+  },
+  {
+    "id": "5143c182586d24f199e07b6ccecb504d",
+    "question": "121. \"Should I pursue music seriously?\"",
+    "description": "Help me decide: 121. \"Should I pursue music seriously?\"",
+    "timer": 2678400,
+    "pledge": 15.67,
+    "tipCount": 16,
+    "likes": 67,
+    "comments": 16,
+    "affiliateLinks": [
+      "https://amzn.to/4lzALSw",
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "54",
+    "createdAt": "2025-06-30T07:53:49.863668",
+    "nsfw": false
+  },
+  {
+    "id": "d8104a7e52e01138390ed8dceea38201",
+    "question": "122. \"Which art medium should I focus on?\"",
+    "description": "Help me decide: 122. \"Which art medium should I focus on?\"",
+    "timer": 1814400,
+    "pledge": 10.15,
+    "tipCount": 16,
+    "likes": 72,
+    "comments": 20,
+    "affiliateLinks": [
+      "https://amzn.to/3ZWMSk3",
+      "https://amzn.to/447OtGd"
+    ],
+    "creatorId": "12",
+    "createdAt": "2025-06-30T07:53:49.863687",
+    "nsfw": false
+  },
+  {
+    "id": "171e66cfc996588960ebbe5825312dfc",
+    "question": "123. \"Should I share my writing publicly?\"",
+    "description": "Help me decide: 123. \"Should I share my writing publicly?\"",
+    "timer": 604800,
+    "pledge": 6.25,
+    "tipCount": 3,
+    "likes": 56,
+    "comments": 11,
+    "affiliateLinks": [
+      "https://amzn.to/3TOs8r7",
+      "https://amzn.to/3GkmTwl"
+    ],
+    "creatorId": "53",
+    "createdAt": "2025-06-30T07:53:49.863710",
+    "nsfw": false
+  },
+  {
+    "id": "7dcb089397439f820121b6062242d35e",
+    "question": "124. \"Take art classes or self-teach?\"",
+    "description": "Help me decide: 124. \"Take art classes or self-teach?\"",
+    "timer": 1209600,
+    "pledge": 10.03,
+    "tipCount": 8,
+    "likes": 90,
+    "comments": 23,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGurY"
+    ],
+    "creatorId": "1",
+    "createdAt": "2025-06-30T07:53:49.863728",
+    "nsfw": false
+  },
+  {
+    "id": "c34b0fac2480f6667ad113fc72694f49",
+    "question": "125. \"Should I enter the photography contest?\"",
+    "description": "Help me decide: 125. \"Should I enter the photography contest?\"",
+    "timer": 432000,
+    "pledge": 0,
+    "tipCount": 15,
+    "likes": 33,
+    "comments": 20,
+    "affiliateLinks": [],
+    "creatorId": "53",
+    "createdAt": "2025-06-30T07:53:49.863739",
+    "nsfw": false
+  },
+  {
+    "id": "717220367467513b1d6d72d3f9087ecd",
+    "question": "126. \"Which creative project deserves my time?\"",
+    "description": "Help me decide: 126. \"Which creative project deserves my time?\"",
+    "timer": 864000,
+    "pledge": 5.48,
+    "tipCount": 22,
+    "likes": 18,
+    "comments": 2,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "46",
+    "createdAt": "2025-06-30T07:53:49.863754",
+    "nsfw": false
+  },
+  {
+    "id": "cc471ffc02aee3d09433cd1effdca5ac",
+    "question": "127. \"Should I sell my art or keep it as a hobby?\"",
+    "description": "Help me decide: 127. \"Should I sell my art or keep it as a hobby?\"",
+    "timer": 1814400,
+    "pledge": 11.81,
+    "tipCount": 24,
+    "likes": 69,
+    "comments": 16,
+    "affiliateLinks": [
+      "https://amzn.to/3Ilaqcg"
+    ],
+    "creatorId": "71",
+    "createdAt": "2025-06-30T07:53:49.863768",
+    "nsfw": false
+  },
+  {
+    "id": "d5f999310490dda1bfe7eb5b7f273b54",
+    "question": "128. \"Learn guitar or piano first?\"",
+    "description": "Help me decide: 128. \"Learn guitar or piano first?\"",
+    "timer": 1209600,
+    "pledge": 5.95,
+    "tipCount": 8,
+    "likes": 105,
+    "comments": 16,
+    "affiliateLinks": [
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "60",
+    "createdAt": "2025-06-30T07:53:49.863782",
+    "nsfw": false
+  },
+  {
+    "id": "9fbe43c92708ef0ab6dce82fdb7afb27",
+    "question": "129. \"Should I write a book about my experience?\"",
+    "description": "Help me decide: 129. \"Should I write a book about my experience?\"",
+    "timer": 2678400,
+    "pledge": 12.46,
+    "tipCount": 0,
+    "likes": 93,
+    "comments": 4,
+    "affiliateLinks": [
+      "https://amzn.to/3GkmTwl"
+    ],
+    "creatorId": "38",
+    "createdAt": "2025-06-30T07:53:49.863796",
+    "nsfw": false
+  },
+  {
+    "id": "e437cee9d6cfacd9d7941b2b78fdef50",
+    "question": "130. \"Which dance style should I learn?\"",
+    "description": "Help me decide: 130. \"Which dance style should I learn?\"",
+    "timer": 604800,
+    "pledge": 0,
+    "tipCount": 0,
+    "likes": 76,
+    "comments": 19,
+    "affiliateLinks": [],
+    "creatorId": "53",
+    "createdAt": "2025-06-30T07:53:49.863806",
+    "nsfw": false
+  },
+  {
+    "id": "b3cd1b3c3076cb0668ffe8456801f6aa",
+    "question": "Age-Old Debates & Philosophical Questions (1 hour",
+    "description": "Help me decide: Age-Old Debates & Philosophical Questions (1 hour",
+    "timer": 1814400,
+    "pledge": 14.29,
+    "tipCount": 7,
+    "likes": 85,
+    "comments": 14,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGurY"
+    ],
+    "creatorId": "32",
+    "createdAt": "2025-06-30T07:53:49.863819",
+    "nsfw": false
+  },
+  {
+    "id": "9f4126a351953ae68ebc62f316fc4329",
+    "question": "131. \"Cats or dogs as pets?\"",
+    "description": "Help me decide: 131. \"Cats or dogs as pets?\"",
+    "timer": 259200,
+    "pledge": 7.7,
+    "tipCount": 15,
+    "likes": 40,
+    "comments": 28,
+    "affiliateLinks": [
+      "https://amzn.to/3Ilaqcg"
+    ],
+    "creatorId": "27",
+    "createdAt": "2025-06-30T07:53:49.863834",
+    "nsfw": false
+  },
+  {
+    "id": "ddc39dc8f0ae24c685d8b2ac3b9d3dd9",
+    "question": "132. \"Is it better to be feared or loved?\"",
+    "description": "Help me decide: 132. \"Is it better to be feared or loved?\"",
+    "timer": 604800,
+    "pledge": 5.27,
+    "tipCount": 3,
+    "likes": 30,
+    "comments": 5,
+    "affiliateLinks": [
+      "https://amzn.to/447OtGd",
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "35",
+    "createdAt": "2025-06-30T07:53:49.863848",
+    "nsfw": true
+  },
+  {
+    "id": "f15fb3c9a8fdc8442b910028da83e046",
+    "question": "133. \"Quality over quantity in friendships?\"",
+    "description": "Help me decide: 133. \"Quality over quantity in friendships?\"",
+    "timer": 1209600,
+    "pledge": 7.28,
+    "tipCount": 18,
+    "likes": 59,
+    "comments": 12,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5",
+      "https://amzn.to/4kk2BBd"
+    ],
+    "creatorId": "37",
+    "createdAt": "2025-06-30T07:53:49.863863",
+    "nsfw": false
+  },
+  {
+    "id": "a374ecee3d6ac5b3c826faaa242051fe",
+    "question": "134. \"Should I follow my passion or practical career?\"",
+    "description": "Help me decide: 134. \"Should I follow my passion or practical career?\"",
+    "timer": 1814400,
+    "pledge": 12.25,
+    "tipCount": 2,
+    "likes": 54,
+    "comments": 13,
+    "affiliateLinks": [
+      "https://amzn.to/4lpzLjA"
+    ],
+    "creatorId": "10",
+    "createdAt": "2025-06-30T07:53:49.863877",
+    "nsfw": false
+  },
+  {
+    "id": "c38d61e16af29e0924d3393db911d67f",
+    "question": "135. \"Is money the root of happiness?\"",
+    "description": "Help me decide: 135. \"Is money the root of happiness?\"",
+    "timer": 864000,
+    "pledge": 1.18,
+    "tipCount": 25,
+    "likes": 103,
+    "comments": 9,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "11",
+    "createdAt": "2025-06-30T07:53:49.863891",
+    "nsfw": false
+  },
+  {
+    "id": "6750442dc5b43a2ac406c67cb13ab062",
+    "question": "136. \"Nature vs. nurture in child development?\"",
+    "description": "Help me decide: 136. \"Nature vs. nurture in child development?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 24,
+    "likes": 86,
+    "comments": 28,
+    "affiliateLinks": [],
+    "creatorId": "58",
+    "createdAt": "2025-06-30T07:53:49.863902",
+    "nsfw": false
+  },
+  {
+    "id": "d2f9074f9e3eaef40dcfb31fe573b470",
+    "question": "137. \"Should art be created for beauty or message?\"",
+    "description": "Help me decide: 137. \"Should art be created for beauty or message?\"",
+    "timer": 604800,
+    "pledge": 0,
+    "tipCount": 3,
+    "likes": 80,
+    "comments": 4,
+    "affiliateLinks": [],
+    "creatorId": "18",
+    "createdAt": "2025-06-30T07:53:49.863913",
+    "nsfw": false
+  },
+  {
+    "id": "ff407ac1fead50914869097e3debbaa4",
+    "question": "138. \"Is it better to be the oldest or youngest sibling?\"",
+    "description": "Help me decide: 138. \"Is it better to be the oldest or youngest sibling?\"",
+    "timer": 259200,
+    "pledge": 0,
+    "tipCount": 13,
+    "likes": 7,
+    "comments": 21,
+    "affiliateLinks": [],
+    "creatorId": "48",
+    "createdAt": "2025-06-30T07:53:49.863923",
+    "nsfw": false
+  },
+  {
+    "id": "1f86847a9a27baeebd50fa40e14fda68",
+    "question": "139. \"Should we explore space or fix Earth first?\"",
+    "description": "Help me decide: 139. \"Should we explore space or fix Earth first?\"",
+    "timer": 1209600,
+    "pledge": 8.83,
+    "tipCount": 13,
+    "likes": 72,
+    "comments": 28,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5",
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "20",
+    "createdAt": "2025-06-30T07:53:49.863938",
+    "nsfw": false
+  },
+  {
+    "id": "2086befc8fd39f485d468bf5dab684d0",
+    "question": "140. \"Is social media connecting or dividing us?\"",
+    "description": "Help me decide: 140. \"Is social media connecting or dividing us?\"",
+    "timer": 604800,
+    "pledge": 13.15,
+    "tipCount": 19,
+    "likes": 117,
+    "comments": 26,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGurY"
+    ],
+    "creatorId": "53",
+    "createdAt": "2025-06-30T07:53:49.863951",
+    "nsfw": false
+  },
+  {
+    "id": "ec086e77ebfd58f3f254ea8c9897197b",
+    "question": "Spontaneous & Quirky Decisions (1 minute",
+    "description": "Help me decide: Spontaneous & Quirky Decisions (1 minute",
+    "timer": 21600,
+    "pledge": 7.47,
+    "tipCount": 18,
+    "likes": 35,
+    "comments": 28,
+    "affiliateLinks": [
+      "https://amzn.to/3Ilaqcg",
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "37",
+    "createdAt": "2025-06-30T07:53:49.863966",
+    "nsfw": false
+  },
+  {
+    "id": "a6ac8747ae29c7c07a8e7d7ff0b7b736",
+    "question": "141. \"Should I dye my hair bright pink tonight?\"",
+    "description": "Help me decide: 141. \"Should I dye my hair bright pink tonight?\"",
+    "timer": 1800,
+    "pledge": 0,
+    "tipCount": 19,
+    "likes": 107,
+    "comments": 23,
+    "affiliateLinks": [],
+    "creatorId": "19",
+    "createdAt": "2025-06-30T07:53:49.863977",
+    "nsfw": false
+  },
+  {
+    "id": "059dc272cc64164c3f5e467525bbec4f",
+    "question": "142. \"Book the spontaneous weekend getaway?\"",
+    "description": "Help me decide: 142. \"Book the spontaneous weekend getaway?\"",
+    "timer": 7200,
+    "pledge": 6.65,
+    "tipCount": 22,
+    "likes": 1,
+    "comments": 14,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf",
+      "https://amzn.to/4kk2BBd"
+    ],
+    "creatorId": "28",
+    "createdAt": "2025-06-30T07:53:49.863991",
+    "nsfw": false
+  },
+  {
+    "id": "33a3f45d507a22286d4cf49b39309060",
+    "question": "143. \"Should I adopt this stray cat?\"",
+    "description": "Help me decide: 143. \"Should I adopt this stray cat?\"",
+    "timer": 14400,
+    "pledge": 9.56,
+    "tipCount": 1,
+    "likes": 77,
+    "comments": 18,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf"
+    ],
+    "creatorId": "29",
+    "createdAt": "2025-06-30T07:53:49.864005",
+    "nsfw": false
+  },
+  {
+    "id": "0608209dc35c932ec770e66b5033b9cf",
+    "question": "144. \"Tell my crush how I feel right now?\"",
+    "description": "Help me decide: 144. \"Tell my crush how I feel right now?\"",
+    "timer": 900,
+    "pledge": 3.43,
+    "tipCount": 22,
+    "likes": 113,
+    "comments": 25,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU",
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "1",
+    "createdAt": "2025-06-30T07:53:49.864019",
+    "nsfw": true
+  },
+  {
+    "id": "98d738819acfed30554d993aef67d68b",
+    "question": "145. \"Should I enter the karaoke contest?\"",
+    "description": "Help me decide: 145. \"Should I enter the karaoke contest?\"",
+    "timer": 600,
+    "pledge": 1.12,
+    "tipCount": 17,
+    "likes": 25,
+    "comments": 27,
+    "affiliateLinks": [
+      "https://amzn.to/4lzALSw",
+      "https://amzn.to/4lxGurY"
+    ],
+    "creatorId": "15",
+    "createdAt": "2025-06-30T07:53:49.864033",
+    "nsfw": false
+  },
+  {
+    "id": "cd9625853f1edf9d94260c944600eeb5",
+    "question": "146. \"Buy the vintage leather jacket I've been eyeing?\"",
+    "description": "Help me decide: 146. \"Buy the vintage leather jacket I've been eyeing?\"",
+    "timer": 3600,
+    "pledge": 0,
+    "tipCount": 24,
+    "likes": 66,
+    "comments": 8,
+    "affiliateLinks": [],
+    "creatorId": "45",
+    "createdAt": "2025-06-30T07:53:49.864043",
+    "nsfw": false
+  },
+  {
+    "id": "c2eea369ead7504877b55afc770cf9f6",
+    "question": "147. \"Should I learn to skateboard at 30?\"",
+    "description": "Help me decide: 147. \"Should I learn to skateboard at 30?\"",
+    "timer": 10800,
+    "pledge": 0,
+    "tipCount": 15,
+    "likes": 82,
+    "comments": 22,
+    "affiliateLinks": [],
+    "creatorId": "75",
+    "createdAt": "2025-06-30T07:53:49.864064",
+    "nsfw": false
+  },
+  {
+    "id": "7d525fa045f893bd3a716c358403bd14",
+    "question": "148. \"Take the salsa dancing class tonight?\"",
+    "description": "Help me decide: 148. \"Take the salsa dancing class tonight?\"",
+    "timer": 7200,
+    "pledge": 1.31,
+    "tipCount": 12,
+    "likes": 33,
+    "comments": 10,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd"
+    ],
+    "creatorId": "79",
+    "createdAt": "2025-06-30T07:53:49.864078",
+    "nsfw": false
+  },
+  {
+    "id": "f13d82b0f28fdda3899f7fa0a51e09a7",
+    "question": "149. \"Should I get a motorcycle license?\"",
+    "description": "Help me decide: 149. \"Should I get a motorcycle license?\"",
+    "timer": 21600,
+    "pledge": 0,
+    "tipCount": 2,
+    "likes": 68,
+    "comments": 6,
+    "affiliateLinks": [],
+    "creatorId": "49",
+    "createdAt": "2025-06-30T07:53:49.864088",
+    "nsfw": false
+  },
+  {
+    "id": "7eff6665dd27237a42ab5fd4838ccbe8",
+    "question": "150. \"Try the exotic food truck?\"",
+    "description": "Help me decide: 150. \"Try the exotic food truck?\"",
+    "timer": 300,
+    "pledge": 5.98,
+    "tipCount": 8,
+    "likes": 23,
+    "comments": 6,
+    "affiliateLinks": [
+      "https://amzn.to/4nskjFf"
+    ],
+    "creatorId": "68",
+    "createdAt": "2025-06-30T07:53:49.864102",
+    "nsfw": false
+  },
+  {
+    "id": "4c8b2928434ea210d83380eb732bb672",
+    "question": "Life-Changing Major Decisions (7 days",
+    "description": "Help me decide: Life-Changing Major Decisions (7 days",
+    "timer": 2678400,
+    "pledge": 1.5,
+    "tipCount": 18,
+    "likes": 110,
+    "comments": 4,
+    "affiliateLinks": [
+      "https://amzn.to/4kk2BBd"
+    ],
+    "creatorId": "25",
+    "createdAt": "2025-06-30T07:53:49.864116",
+    "nsfw": false
+  },
+  {
+    "id": "ec21f302292053ad00795a77a6a8d6a4",
+    "question": "151. \"Should I move to another country?\"",
+    "description": "Help me decide: 151. \"Should I move to another country?\"",
+    "timer": 2678400,
+    "pledge": 11.68,
+    "tipCount": 17,
+    "likes": 41,
+    "comments": 1,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf"
+    ],
+    "creatorId": "59",
+    "createdAt": "2025-06-30T07:53:49.864130",
+    "nsfw": false
+  },
+  {
+    "id": "c268e8ddbe98feac1770e3407746897a",
+    "question": "152. \"Is it time to come out to my family?\"",
+    "description": "Help me decide: 152. \"Is it time to come out to my family?\"",
+    "timer": 1814400,
+    "pledge": 15.21,
+    "tipCount": 16,
+    "likes": 90,
+    "comments": 8,
+    "affiliateLinks": [
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "73",
+    "createdAt": "2025-06-30T07:53:49.864145",
+    "nsfw": false
+  },
+  {
+    "id": "1993c66fc121214104088ef36804b233",
+    "question": "153. \"Should I have weight loss surgery?\"",
+    "description": "Help me decide: 153. \"Should I have weight loss surgery?\"",
+    "timer": 2678400,
+    "pledge": 13.08,
+    "tipCount": 2,
+    "likes": 30,
+    "comments": 0,
+    "affiliateLinks": [
+      "https://amzn.to/3GkmTwl"
+    ],
+    "creatorId": "50",
+    "createdAt": "2025-06-30T07:53:49.864159",
+    "nsfw": false
+  },
+  {
+    "id": "1779aaf127e0c1c2d82c57a9a8ecebd7",
+    "question": "154. \"Adopt a child or try IVF again?\"",
+    "description": "Help me decide: 154. \"Adopt a child or try IVF again?\"",
+    "timer": 2678400,
+    "pledge": 1.27,
+    "tipCount": 16,
+    "likes": 62,
+    "comments": 1,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5",
+      "https://amzn.to/3TjXi9L"
+    ],
+    "creatorId": "7",
+    "createdAt": "2025-06-30T07:53:49.864174",
+    "nsfw": false
+  },
+  {
+    "id": "bfc58017f494b705ed2d5bc24dd8b03d",
+    "question": "155. \"Should I leave my 10-year marriage?\"",
+    "description": "Help me decide: 155. \"Should I leave my 10-year marriage?\"",
+    "timer": 2678400,
+    "pledge": 6.67,
+    "tipCount": 6,
+    "likes": 23,
+    "comments": 26,
+    "affiliateLinks": [
+      "https://amzn.to/3TjXi9L"
+    ],
+    "creatorId": "42",
+    "createdAt": "2025-06-30T07:53:49.864189",
+    "nsfw": true
+  },
+  {
+    "id": "bb6179df1209ae7a956650f420db5c41",
+    "question": "156. \"Take early retirement or work another decade?\"",
+    "description": "Help me decide: 156. \"Take early retirement or work another decade?\"",
+    "timer": 2678400,
+    "pledge": 8.15,
+    "tipCount": 1,
+    "likes": 7,
+    "comments": 2,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf",
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "44",
+    "createdAt": "2025-06-30T07:53:49.864204",
+    "nsfw": false
+  },
+  {
+    "id": "201c39d32c255083da1eb9bbfa46de8f",
+    "question": "157. \"Should I donate a kidney to my brother?\"",
+    "description": "Help me decide: 157. \"Should I donate a kidney to my brother?\"",
+    "timer": 2419200,
+    "pledge": 0,
+    "tipCount": 14,
+    "likes": 33,
+    "comments": 21,
+    "affiliateLinks": [],
+    "creatorId": "14",
+    "createdAt": "2025-06-30T07:53:49.864214",
+    "nsfw": false
+  },
+  {
+    "id": "8a99c810f2aaab9d606e1178895b57ee",
+    "question": "158. \"Change my gender identity publicly?\"",
+    "description": "Help me decide: 158. \"Change my gender identity publicly?\"",
+    "timer": 2678400,
+    "pledge": 0,
+    "tipCount": 7,
+    "likes": 90,
+    "comments": 24,
+    "affiliateLinks": [],
+    "creatorId": "4",
+    "createdAt": "2025-06-30T07:53:49.864225",
+    "nsfw": false
+  },
+  {
+    "id": "3b0635bd999c5ebe4f56e8154fd36abc",
+    "question": "159. \"Should I confront my addiction?\"",
+    "description": "Help me decide: 159. \"Should I confront my addiction?\"",
+    "timer": 1814400,
+    "pledge": 9.25,
+    "tipCount": 12,
+    "likes": 80,
+    "comments": 22,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGhoG",
+      "https://amzn.to/447OtGd"
+    ],
+    "creatorId": "4",
+    "createdAt": "2025-06-30T07:53:49.864239",
+    "nsfw": false
+  },
+  {
+    "id": "47c03b8dc32c65f280f7927e6371660a",
+    "question": "160. \"Move back home to care for aging parents?\"",
+    "description": "Help me decide: 160. \"Move back home to care for aging parents?\"",
+    "timer": 2678400,
+    "pledge": 11.98,
+    "tipCount": 24,
+    "likes": 34,
+    "comments": 18,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "19",
+    "createdAt": "2025-06-30T07:53:49.864253",
+    "nsfw": false
+  },
+  {
+    "id": "2702cc0891a977307be8969f11e60e27",
+    "question": "Entertainment & Social Activities (15 minutes",
+    "description": "Help me decide: Entertainment & Social Activities (15 minutes",
+    "timer": 604800,
+    "pledge": 5.67,
+    "tipCount": 14,
+    "likes": 99,
+    "comments": 3,
+    "affiliateLinks": [
+      "https://amzn.to/3TjXi9L"
+    ],
+    "creatorId": "77",
+    "createdAt": "2025-06-30T07:53:49.864267",
+    "nsfw": false
+  },
+  {
+    "id": "1396eaf333f8c97b833eafa59571926e",
+    "question": "161. \"Which movie for date night?\"",
+    "description": "Help me decide: 161. \"Which movie for date night?\"",
+    "timer": 1800,
+    "pledge": 9.65,
+    "tipCount": 6,
+    "likes": 40,
+    "comments": 9,
+    "affiliateLinks": [
+      "https://amzn.to/4lzHQT2",
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "4",
+    "createdAt": "2025-06-30T07:53:49.864281",
+    "nsfw": false
+  },
+  {
+    "id": "ddc4ad2c9d0486f48e7bd997f943f001",
+    "question": "162. \"Should I throw a surprise party?\"",
+    "description": "Help me decide: 162. \"Should I throw a surprise party?\"",
+    "timer": 604800,
+    "pledge": 0,
+    "tipCount": 23,
+    "likes": 87,
+    "comments": 17,
+    "affiliateLinks": [],
+    "creatorId": "22",
+    "createdAt": "2025-06-30T07:53:49.864291",
+    "nsfw": false
+  },
+  {
+    "id": "fcd50ad6deeedad9220c8b8f6562eb3b",
+    "question": "163. \"Concert or theater show this weekend?\"",
+    "description": "Help me decide: 163. \"Concert or theater show this weekend?\"",
+    "timer": 259200,
+    "pledge": 8.14,
+    "tipCount": 1,
+    "likes": 82,
+    "comments": 13,
+    "affiliateLinks": [
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "30",
+    "createdAt": "2025-06-30T07:53:49.864305",
+    "nsfw": false
+  },
+  {
+    "id": "ca7f6b7ffd1f86088a5b5f06a8066e5f",
+    "question": "164. \"Should I join the book club?\"",
+    "description": "Help me decide: 164. \"Should I join the book club?\"",
+    "timer": 172800,
+    "pledge": 2.55,
+    "tipCount": 11,
+    "likes": 79,
+    "comments": 24,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf",
+      "https://amzn.to/4kk2BBd"
+    ],
+    "creatorId": "46",
+    "createdAt": "2025-06-30T07:53:49.864331",
+    "nsfw": false
+  },
+  {
+    "id": "a842b8d092e2ad172db47d6fdce1e0dd",
+    "question": "165. \"Which board game for game night?\"",
+    "description": "Help me decide: 165. \"Which board game for game night?\"",
+    "timer": 3600,
+    "pledge": 0,
+    "tipCount": 22,
+    "likes": 89,
+    "comments": 11,
+    "affiliateLinks": [],
+    "creatorId": "58",
+    "createdAt": "2025-06-30T07:53:49.864346",
+    "nsfw": false
+  },
+  {
+    "id": "e244230cac0e4afeb26d8faafc234abe",
+    "question": "166. \"Should I host the Super Bowl party?\"",
+    "description": "Help me decide: 166. \"Should I host the Super Bowl party?\"",
+    "timer": 1209600,
+    "pledge": 1.76,
+    "tipCount": 17,
+    "likes": 92,
+    "comments": 3,
+    "affiliateLinks": [
+      "https://amzn.to/3GkmTwl",
+      "https://amzn.to/3Ilaqcg"
+    ],
+    "creatorId": "1",
+    "createdAt": "2025-06-30T07:53:49.864372",
+    "nsfw": false
+  },
+  {
+    "id": "78657cb0b4b77565672cf9b7e6dce323",
+    "question": "167. \"Museum or amusement park for our outing?\"",
+    "description": "Help me decide: 167. \"Museum or amusement park for our outing?\"",
+    "timer": 172800,
+    "pledge": 0,
+    "tipCount": 1,
+    "likes": 28,
+    "comments": 17,
+    "affiliateLinks": [],
+    "creatorId": "14",
+    "createdAt": "2025-06-30T07:53:49.864384",
+    "nsfw": false
+  },
+  {
+    "id": "603b576c9a35c24c76e8372737602968",
+    "question": "168. \"Should I take improv comedy classes?\"",
+    "description": "Help me decide: 168. \"Should I take improv comedy classes?\"",
+    "timer": 604800,
+    "pledge": 0,
+    "tipCount": 11,
+    "likes": 25,
+    "comments": 24,
+    "affiliateLinks": [],
+    "creatorId": "62",
+    "createdAt": "2025-06-30T07:53:49.864394",
+    "nsfw": false
+  },
+  {
+    "id": "5beb8c1a7d996cc3f7c903a0f8beb553",
+    "question": "169. \"Which podcast should I binge next?\"",
+    "description": "Help me decide: 169. \"Which podcast should I binge next?\"",
+    "timer": 14400,
+    "pledge": 9.61,
+    "tipCount": 18,
+    "likes": 14,
+    "comments": 21,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "62",
+    "createdAt": "2025-06-30T07:53:49.864408",
+    "nsfw": false
+  },
+  {
+    "id": "f6957518ef9e0515a30057595f93cbe0",
+    "question": "170. \"Should I start a dinner party tradition?\"",
+    "description": "Help me decide: 170. \"Should I start a dinner party tradition?\"",
+    "timer": 604800,
+    "pledge": 0,
+    "tipCount": 16,
+    "likes": 30,
+    "comments": 13,
+    "affiliateLinks": [],
+    "creatorId": "49",
+    "createdAt": "2025-06-30T07:53:49.864418",
+    "nsfw": false
+  },
+  {
+    "id": "54ef9b47ade83726d8f8404cad20a3cd",
+    "question": "Appearance & Self-Image (30 minutes",
+    "description": "Help me decide: Appearance & Self-Image (30 minutes",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 19,
+    "likes": 11,
+    "comments": 25,
+    "affiliateLinks": [],
+    "creatorId": "32",
+    "createdAt": "2025-06-30T07:53:49.864428",
+    "nsfw": false
+  },
+  {
+    "id": "8685247c6d61420ec591bc70c5ff3739",
+    "question": "171. \"Should I get plastic surgery?\"",
+    "description": "Help me decide: 171. \"Should I get plastic surgery?\"",
+    "timer": 1209600,
+    "pledge": 8.55,
+    "tipCount": 2,
+    "likes": 17,
+    "comments": 28,
+    "affiliateLinks": [
+      "https://amzn.to/4lzALSw"
+    ],
+    "creatorId": "70",
+    "createdAt": "2025-06-30T07:53:49.864442",
+    "nsfw": false
+  },
+  {
+    "id": "69a4e8bbda4dfae04b8169ff8fc14897",
+    "question": "172. \"Contacts or embrace my glasses?\"",
+    "description": "Help me decide: 172. \"Contacts or embrace my glasses?\"",
+    "timer": 259200,
+    "pledge": 0,
+    "tipCount": 12,
+    "likes": 101,
+    "comments": 18,
+    "affiliateLinks": [],
+    "creatorId": "26",
+    "createdAt": "2025-06-30T07:53:49.864458",
+    "nsfw": false
+  },
+  {
+    "id": "7817708ea450b8ec3095409b94500f06",
+    "question": "173. \"Should I lose 20 pounds before the reunion?\"",
+    "description": "Help me decide: 173. \"Should I lose 20 pounds before the reunion?\"",
+    "timer": 1209600,
+    "pledge": 5.99,
+    "tipCount": 2,
+    "likes": 48,
+    "comments": 14,
+    "affiliateLinks": [
+      "https://amzn.to/3Ilaqcg"
+    ],
+    "creatorId": "63",
+    "createdAt": "2025-06-30T07:53:49.864480",
+    "nsfw": false
+  },
+  {
+    "id": "13ab13c89026bb2b2bedd5ba4149dd80",
+    "question": "174. \"Get braces as an adult?\"",
+    "description": "Help me decide: 174. \"Get braces as an adult?\"",
+    "timer": 1209600,
+    "pledge": 15.46,
+    "tipCount": 13,
+    "likes": 40,
+    "comments": 5,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "80",
+    "createdAt": "2025-06-30T07:53:49.864499",
+    "nsfw": false
+  },
+  {
+    "id": "f64f58e5baea31dff29eee2e1b38c067",
+    "question": "175. \"Should I embrace my gray hair?\"",
+    "description": "Help me decide: 175. \"Should I embrace my gray hair?\"",
+    "timer": 604800,
+    "pledge": 6.71,
+    "tipCount": 9,
+    "likes": 22,
+    "comments": 7,
+    "affiliateLinks": [
+      "https://amzn.to/4lzHQT2",
+      "https://amzn.to/3Ilaqcg"
+    ],
+    "creatorId": "80",
+    "createdAt": "2025-06-30T07:53:49.864513",
+    "nsfw": false
+  },
+  {
+    "id": "5fbb14ee61cb5054a2325f13f817d28b",
+    "question": "176. \"Which skincare routine is worth the investment?\"",
+    "description": "Help me decide: 176. \"Which skincare routine is worth the investment?\"",
+    "timer": 432000,
+    "pledge": 10.98,
+    "tipCount": 12,
+    "likes": 78,
+    "comments": 23,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5",
+      "https://amzn.to/447OtGd"
+    ],
+    "creatorId": "53",
+    "createdAt": "2025-06-30T07:53:49.864530",
+    "nsfw": false
+  },
+  {
+    "id": "9f9930912493ff9dba246155abe601ed",
+    "question": "177. \"Should I get my teeth whitened professionally?\"",
+    "description": "Help me decide: 177. \"Should I get my teeth whitened professionally?\"",
+    "timer": 259200,
+    "pledge": 3.41,
+    "tipCount": 12,
+    "likes": 1,
+    "comments": 7,
+    "affiliateLinks": [
+      "https://amzn.to/4nskjFf"
+    ],
+    "creatorId": "43",
+    "createdAt": "2025-06-30T07:53:49.864553",
+    "nsfw": false
+  },
+  {
+    "id": "7939eba7bb01b8f5e3d69f6e5bc657c6",
+    "question": "178. \"Botox or age naturally?\"",
+    "description": "Help me decide: 178. \"Botox or age naturally?\"",
+    "timer": 1209600,
+    "pledge": 12.86,
+    "tipCount": 24,
+    "likes": 49,
+    "comments": 2,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5",
+      "https://amzn.to/3GkmTwl"
+    ],
+    "creatorId": "67",
+    "createdAt": "2025-06-30T07:53:49.864578",
+    "nsfw": false
+  },
+  {
+    "id": "1d798987d3cfd36632ee0fa4bdd3dd9e",
+    "question": "179. \"Should I pierce my ears again?\"",
+    "description": "Help me decide: 179. \"Should I pierce my ears again?\"",
+    "timer": 172800,
+    "pledge": 1.41,
+    "tipCount": 21,
+    "likes": 0,
+    "comments": 27,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGhoG",
+      "https://amzn.to/447OtGd"
+    ],
+    "creatorId": "41",
+    "createdAt": "2025-06-30T07:53:49.864593",
+    "nsfw": false
+  },
+  {
+    "id": "8fa23094e64382d08dd845d42c22eeab",
+    "question": "180. \"Which makeup style suits my face?\"",
+    "description": "Help me decide: 180. \"Which makeup style suits my face?\"",
+    "timer": 14400,
+    "pledge": 0,
+    "tipCount": 21,
+    "likes": 7,
+    "comments": 14,
+    "affiliateLinks": [],
+    "creatorId": "12",
+    "createdAt": "2025-06-30T07:53:49.864614",
+    "nsfw": false
+  },
+  {
+    "id": "5191bb7c7760a41a848c85ec038ea1a2",
+    "question": "Moral & Ethical Dilemmas (3 hours",
+    "description": "Help me decide: Moral & Ethical Dilemmas (3 hours",
+    "timer": 1814400,
+    "pledge": 7.31,
+    "tipCount": 21,
+    "likes": 46,
+    "comments": 11,
+    "affiliateLinks": [
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "75",
+    "createdAt": "2025-06-30T07:53:49.864645",
+    "nsfw": false
+  },
+  {
+    "id": "15b5b7f4a4a7c1a68147d3b5ad544436",
+    "question": "181. \"Should I report my friend's tax evasion?\"",
+    "description": "Help me decide: 181. \"Should I report my friend's tax evasion?\"",
+    "timer": 604800,
+    "pledge": 10.18,
+    "tipCount": 16,
+    "likes": 26,
+    "comments": 14,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU",
+      "https://amzn.to/4kk2BBd"
+    ],
+    "creatorId": "22",
+    "createdAt": "2025-06-30T07:53:49.864660",
+    "nsfw": false
+  },
+  {
+    "id": "73f166cf3526403a81a879360479bcbe",
+    "question": "182. \"Tell my neighbor their spouse is cheating?\"",
+    "description": "Help me decide: 182. \"Tell my neighbor their spouse is cheating?\"",
+    "timer": 259200,
+    "pledge": 3.1,
+    "tipCount": 16,
+    "likes": 96,
+    "comments": 2,
+    "affiliateLinks": [
+      "https://amzn.to/3GkmTwl",
+      "https://amzn.to/3TOs8r7"
+    ],
+    "creatorId": "27",
+    "createdAt": "2025-06-30T07:53:49.864676",
+    "nsfw": false
+  },
+  {
+    "id": "d5baa0afda62af087d15c27331744db5",
+    "question": "183. \"Should I return the extra change from the cashier?\"",
+    "description": "Help me decide: 183. \"Should I return the extra change from the cashier?\"",
+    "timer": 3600,
+    "pledge": 0,
+    "tipCount": 0,
+    "likes": 89,
+    "comments": 9,
+    "affiliateLinks": [],
+    "creatorId": "53",
+    "createdAt": "2025-06-30T07:53:49.864687",
+    "nsfw": false
+  },
+  {
+    "id": "f37cf679207113f4b5c31f8e0bf6f60a",
+    "question": "184. \"Adopt from a shelter or buy from a breeder?\"",
+    "description": "Help me decide: 184. \"Adopt from a shelter or buy from a breeder?\"",
+    "timer": 1209600,
+    "pledge": 6.35,
+    "tipCount": 7,
+    "likes": 67,
+    "comments": 16,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "53",
+    "createdAt": "2025-06-30T07:53:49.864704",
+    "nsfw": false
+  },
+  {
+    "id": "f94bcb8e777b4e4116f2d4190a8da71b",
+    "question": "185. \"Should I whistleblow at my company?\"",
+    "description": "Help me decide: 185. \"Should I whistleblow at my company?\"",
+    "timer": 1814400,
+    "pledge": 7.63,
+    "tipCount": 4,
+    "likes": 76,
+    "comments": 12,
+    "affiliateLinks": [
+      "https://amzn.to/4lsQ0wf",
+      "https://amzn.to/4nskjFf"
+    ],
+    "creatorId": "55",
+    "createdAt": "2025-06-30T07:53:49.864718",
+    "nsfw": false
+  },
+  {
+    "id": "bf789b362ff198c33f34e71fa343dd49",
+    "question": "186. \"Keep the wallet I found or turn it in?\"",
+    "description": "Help me decide: 186. \"Keep the wallet I found or turn it in?\"",
+    "timer": 10800,
+    "pledge": 7.13,
+    "tipCount": 14,
+    "likes": 107,
+    "comments": 10,
+    "affiliateLinks": [
+      "https://amzn.to/3TUNcw5"
+    ],
+    "creatorId": "67",
+    "createdAt": "2025-06-30T07:53:49.864731",
+    "nsfw": false
+  },
+  {
+    "id": "25272f4f33c857eab3d948a1279a9e5f",
+    "question": "187. \"Should I tell my friend their partner hit on me?\"",
+    "description": "Help me decide: 187. \"Should I tell my friend their partner hit on me?\"",
+    "timer": 432000,
+    "pledge": 1.94,
+    "tipCount": 13,
+    "likes": 101,
+    "comments": 24,
+    "affiliateLinks": [
+      "https://amzn.to/3GkmTwl"
+    ],
+    "creatorId": "61",
+    "createdAt": "2025-06-30T07:53:49.864746",
+    "nsfw": false
+  },
+  {
+    "id": "1387ff565dedc01b092ded303750f447",
+    "question": "188. \"Support the local business or shop online for savings?\"",
+    "description": "Help me decide: 188. \"Support the local business or shop online for savings?\"",
+    "timer": 172800,
+    "pledge": 0,
+    "tipCount": 8,
+    "likes": 9,
+    "comments": 11,
+    "affiliateLinks": [],
+    "creatorId": "46",
+    "createdAt": "2025-06-30T07:53:49.864757",
+    "nsfw": false
+  },
+  {
+    "id": "b764a16868be0f1bf79ed94d3fa035c2",
+    "question": "189. \"Should I lie to protect someone's feelings?\"",
+    "description": "Help me decide: 189. \"Should I lie to protect someone's feelings?\"",
+    "timer": 21600,
+    "pledge": 0,
+    "tipCount": 19,
+    "likes": 111,
+    "comments": 30,
+    "affiliateLinks": [],
+    "creatorId": "24",
+    "createdAt": "2025-06-30T07:53:49.864787",
+    "nsfw": false
+  },
+  {
+    "id": "cfa22b4bb6416c8e75e9c3308c59c7b2",
+    "question": "190. \"Call out racism I witnessed?\"",
+    "description": "Help me decide: 190. \"Call out racism I witnessed?\"",
+    "timer": 172800,
+    "pledge": 14.27,
+    "tipCount": 25,
+    "likes": 76,
+    "comments": 29,
+    "affiliateLinks": [
+      "https://amzn.to/4lxGhoG"
+    ],
+    "creatorId": "25",
+    "createdAt": "2025-06-30T07:53:49.864818",
+    "nsfw": false
+  },
+  {
+    "id": "dd34308ec8e15761c73ca9f2e0e1b27f",
+    "question": "Miscellaneous Life Choices (20 minutes",
+    "description": "Help me decide: Miscellaneous Life Choices (20 minutes",
+    "timer": 2592000,
+    "pledge": 7.83,
+    "tipCount": 7,
+    "likes": 67,
+    "comments": 15,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "26",
+    "createdAt": "2025-06-30T07:53:49.864842",
+    "nsfw": false
+  },
+  {
+    "id": "ac2d1b685c312a329a8e8562f5b8e76a",
+    "question": "191. \"Should I learn to drive stick shift?\"",
+    "description": "Help me decide: 191. \"Should I learn to drive stick shift?\"",
+    "timer": 604800,
+    "pledge": 0,
+    "tipCount": 24,
+    "likes": 70,
+    "comments": 30,
+    "affiliateLinks": [],
+    "creatorId": "67",
+    "createdAt": "2025-06-30T07:53:49.864855",
+    "nsfw": false
+  },
+  {
+    "id": "0ba314aaf3fdb8d94ed2a93fa4b7d133",
+    "question": "192. \"Get a second opinion on my medical diagnosis?\"",
+    "description": "Help me decide: 192. \"Get a second opinion on my medical diagnosis?\"",
+    "timer": 259200,
+    "pledge": 0,
+    "tipCount": 0,
+    "likes": 94,
+    "comments": 13,
+    "affiliateLinks": [],
+    "creatorId": "62",
+    "createdAt": "2025-06-30T07:53:49.864865",
+    "nsfw": false
+  },
+  {
+    "id": "28128126dbf19c9554ed867e04c8fb2c",
+    "question": "193. \"Should I volunteer at the animal shelter?\"",
+    "description": "Help me decide: 193. \"Should I volunteer at the animal shelter?\"",
+    "timer": 432000,
+    "pledge": 2.1,
+    "tipCount": 25,
+    "likes": 75,
+    "comments": 30,
+    "affiliateLinks": [
+      "https://amzn.to/3ThHzYU"
+    ],
+    "creatorId": "25",
+    "createdAt": "2025-06-30T07:53:49.864879",
+    "nsfw": false
+  },
+  {
+    "id": "7f6c469316478436fc37e268b919e8ac",
+    "question": "194. \"Learn to cook or keep ordering takeout?\"",
+    "description": "Help me decide: 194. \"Learn to cook or keep ordering takeout?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 22,
+    "likes": 118,
+    "comments": 12,
+    "affiliateLinks": [],
+    "creatorId": "73",
+    "createdAt": "2025-06-30T07:53:49.864890",
+    "nsfw": false
+  },
+  {
+    "id": "f85ee1384e687e1a6f4d7b7d4d22211e",
+    "question": "195. \"Should I buy a gun for home protection?\"",
+    "description": "Help me decide: 195. \"Should I buy a gun for home protection?\"",
+    "timer": 1814400,
+    "pledge": 0,
+    "tipCount": 19,
+    "likes": 44,
+    "comments": 11,
+    "affiliateLinks": [],
+    "creatorId": "14",
+    "createdAt": "2025-06-30T07:53:49.864901",
+    "nsfw": false
+  },
+  {
+    "id": "6471fa7291eeace7a5fb2e8c9c0169e7",
+    "question": "196. \"Take the jury duty or try to get excused?\"",
+    "description": "Help me decide: 196. \"Take the jury duty or try to get excused?\"",
+    "timer": 259200,
+    "pledge": 0,
+    "tipCount": 6,
+    "likes": 102,
+    "comments": 16,
+    "affiliateLinks": [],
+    "creatorId": "68",
+    "createdAt": "2025-06-30T07:53:49.864911",
+    "nsfw": false
+  },
+  {
+    "id": "b745121a5391ec3e8b8c1ac7a14025ad",
+    "question": "197. \"Should I donate blood regularly?\"",
+    "description": "Help me decide: 197. \"Should I donate blood regularly?\"",
+    "timer": 604800,
+    "pledge": 12.33,
+    "tipCount": 15,
+    "likes": 83,
+    "comments": 13,
+    "affiliateLinks": [
+      "https://amzn.to/4lzALSw",
+      "https://amzn.to/3ZWMSk3"
+    ],
+    "creatorId": "60",
+    "createdAt": "2025-06-30T07:53:49.864929",
+    "nsfw": false
+  },
+  {
+    "id": "d410e371cb8c8270ef51d4cb2329a4dd",
+    "question": "198. \"Learn a musical instrument at 45?\"",
+    "description": "Help me decide: 198. \"Learn a musical instrument at 45?\"",
+    "timer": 2592000,
+    "pledge": 0,
+    "tipCount": 5,
+    "likes": 91,
+    "comments": 20,
+    "affiliateLinks": [],
+    "creatorId": "6",
+    "createdAt": "2025-06-30T07:53:49.864940",
+    "nsfw": false
+  },
+  {
+    "id": "e13198b5fa9fcd23efc324b4c5eb51b4",
+    "question": "199. \"Should I write a will?\"",
+    "description": "Help me decide: 199. \"Should I write a will?\"",
+    "timer": 1209600,
+    "pledge": 0,
+    "tipCount": 1,
+    "likes": 119,
+    "comments": 18,
+    "affiliateLinks": [],
+    "creatorId": "19",
+    "createdAt": "2025-06-30T07:53:49.864950",
+    "nsfw": false
+  },
+  {
+    "id": "b6d49ffad36b8cda42b4bb349c697bd8",
+    "question": "200. \"Take the DNA ancestry test?\"",
+    "description": "Help me decide: 200. \"Take the DNA ancestry test?\"",
+    "timer": 259200,
+    "pledge": 0,
+    "tipCount": 16,
+    "likes": 68,
+    "comments": 30,
+    "affiliateLinks": [],
+    "creatorId": "73",
+    "createdAt": "2025-06-30T07:53:49.864960",
+    "nsfw": false
+  }
+]
