@@ -72,10 +72,25 @@ if (!getApps().length) {
 // Helper to convert Firestore doc to a serializable object
 const fromFirestore = <T>(doc: QueryDocumentSnapshot<DocumentData>): T => {
     const data = doc.data();
+    
+    // This function can be called for different collections (Polls, Users, Comments).
+    // We will specifically process the `createdAt` field if it exists.
+    const processedData = { ...data };
+
+    if (processedData.createdAt) {
+      const ts = processedData.createdAt;
+      if (ts && typeof ts.toDate === 'function') {
+        // It's a Firestore Timestamp, convert it to an ISO string.
+        processedData.createdAt = ts.toDate().toISOString();
+      } else {
+        // It might be an ISO string already, just ensure it's a valid Date string.
+        processedData.createdAt = new Date(ts).toISOString();
+      }
+    }
+    
     return {
         id: doc.id,
-        ...data,
-        createdAt: (data.createdAt as Timestamp)?.toDate().toISOString() || new Date().toISOString(),
+        ...processedData,
     } as T;
 };
 

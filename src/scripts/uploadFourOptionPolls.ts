@@ -1,6 +1,6 @@
 import { initializeApp, cert, ServiceAccount } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-import serviceAccount from "./serviceAccountKey.json";
+import serviceAccount from "../serviceAccountKey.json";
 import polls from "../seed/four_option_seed_fixed.json";
 
 // Define the shape of a poll
