@@ -38,6 +38,7 @@ export default function HomePage() {
   const observer = useRef<IntersectionObserver>();
 
   const [monetizationLockAlert, setMonetizationLockAlert] = useState<{ poll: Poll; optionId: number; onConfirm: () => void; } | null>(null);
+  const [loadingError, setLoadingError] = useState<string | null>(null);
 
   const loadMorePolls = useCallback(async () => {
     if (isLoading || !hasMore) return;
@@ -45,28 +46,31 @@ export default function HomePage() {
 
     try {
         const { polls: newPolls, lastVisible: newLastVisible } = await getPolls(lastVisible);
+        
         setPolls(prev => {
             const allPolls = [...prev, ...newPolls];
             const pollMap = new Map(allPolls.map(p => [p.id, p]));
             return Array.from(pollMap.values());
         });
+        
         setLastVisible(newLastVisible);
-        if (!newLastVisible) {
+
+        if (newPolls.length < 10) {
             setHasMore(false);
         }
-    } catch (error) {
+    } catch (error: any) {
         console.error("Failed to load polls:", error);
-        toast({
-            variant: "destructive",
-            title: "Could not load more polls.",
-        });
+        setLoadingError(error.message || "An unknown error occurred. Check Firestore rules and indexes.");
+        setHasMore(false);
     } finally {
         setIsLoading(false);
     }
-  }, [isLoading, hasMore, lastVisible, toast]);
+  }, [isLoading, hasMore, lastVisible]);
   
   useEffect(() => {
-    loadMorePolls();
+    if(!polls.length) {
+        loadMorePolls();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Initial load
 
@@ -202,7 +206,14 @@ export default function HomePage() {
             </CardContent>
           </Card>
         )}
-         {!hasMore && !isLoading && (
+         {!hasMore && !isLoading && polls.length === 0 && !loadingError && (
+            <Card>
+                <CardContent className="p-8 text-center">
+                    <p>There are no polls yet. Create one!</p>
+                </CardContent>
+            </Card>
+        )}
+         {!hasMore && !isLoading && polls.length > 0 && (
             <Card>
                 <CardContent className="p-8 text-center">
                     <p>You've seen all the polls for now!</p>
@@ -225,6 +236,21 @@ export default function HomePage() {
             monetizationLockAlert?.onConfirm();
             setMonetizationLockAlert(null);
           }}>Vote Anyway</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+    <AlertDialog open={!!loadingError} onOpenChange={() => setLoadingError(null)}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Error Loading Polls</AlertDialogTitle>
+          <AlertDialogDescription>
+            There was a problem fetching data from the database. This is often caused by a missing Firestore index. Please check your browser's developer console for a link to create the required index.
+            <br/><br/>
+            <strong className="break-words">Error details:</strong> {loadingError}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction onClick={() => setLoadingError(null)}>Close</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
