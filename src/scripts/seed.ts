@@ -87,14 +87,12 @@ async function seedData() {
     console.log('🌱 Combining and standardizing all poll sources...');
     let combinedPolls: Omit<Poll, 'id'>[] = [];
 
-    // Add richPolls from dummy-data.ts
-    combinedPolls.push(...richPolls);
-
     // Function to convert minutes to milliseconds
     const timerToMs = (minutes: number) => minutes * 60 * 1000;
 
     // Process each JSON file and add to combined list
     const allJsonPolls = [
+      ...richPolls,
       ...fourOptionPolls,
       ...secondOpinionPolls,
       ...threeOptionPolls,
@@ -109,7 +107,7 @@ async function seedData() {
         const standardizedPoll: Omit<Poll, 'id'> = {
             question: poll.question,
             description: poll.description || `A decision about: ${poll.question}`,
-            options: poll.options || [{text: 'Yes', votes: 0}, {text: 'No', votes: 0}],
+            options: poll.options || [{id: 1, text: 'Yes', votes: 0}, {id: 2, text: 'No', votes: 0}],
             type: poll.type || 'standard',
             creatorId: poll.creatorId || dummyUsers[Math.floor(Math.random() * dummyUsers.length)].id,
             createdAt: poll.createdAt ? new Date(poll.createdAt).toISOString() : new Date().toISOString(),
@@ -121,7 +119,7 @@ async function seedData() {
             category: poll.category || 'General',
             likes: poll.likes ?? 0,
             comments: poll.comments ?? 0,
-            videoUrl: poll.videoUrl,
+            videoUrl: poll.videoUrl || undefined,
         };
         combinedPolls.push(standardizedPoll);
     });
