@@ -11,6 +11,7 @@ import {
   startAfter,
   DocumentData,
   QueryDocumentSnapshot,
+  QueryConstraint,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { PollCard } from "@/components/PollCard";
@@ -28,7 +29,7 @@ export default function PollFeed() {
   const fetchPolls = useCallback(async (initial = false) => {
     try {
       const pollsCollection = collection(db, "polls");
-      const constraints = [orderBy("createdAt", "desc"), limit(10)];
+      const constraints: QueryConstraint[] = [orderBy("createdAt", "desc"), limit(10)];
       if (lastDoc && !initial) {
         constraints.push(startAfter(lastDoc));
       }
@@ -62,6 +63,7 @@ export default function PollFeed() {
 
   useEffect(() => {
     fetchPolls(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Changed dependency to empty to only run on mount
 
   useEffect(() => {
