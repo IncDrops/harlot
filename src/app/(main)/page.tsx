@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
@@ -34,10 +33,9 @@ export default function HomePage() {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   
   const [votedStates, setVotedStates] = useState<{ [key: string]: boolean }>({});
-  const [cardKeys, setCardKeys] = useState<{ [key: string]: number }>({});
+  const [animatingCards, setAnimatingCards] = useState<{ [key: string]: 'exiting' | 'entering' | null }>({});
   const [swipeDirections, setSwipeDirections] = useState<{ [key: string]: "left" | "right" | null }>({});
   
-  const [isAnimating, setIsAnimating] = useState(false);
   const observer = useRef<IntersectionObserver>();
 
   const [monetizationLockAlert, setMonetizationLockAlert] = useState<{ poll: Poll; optionId: number; onConfirm: () => void; } | null>(null);
@@ -87,30 +85,26 @@ export default function HomePage() {
     if (isLoading) return;
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
+      if (entries[0].isIntersecting && hasMore && !isLoading) {
         loadMorePolls();
       }
-    });
+    }, { threshold: 0.1 });
     if (node) observer.current.observe(node);
   }, [isLoading, hasMore, loadMorePolls]);
 
+  // Prevent body scroll when any card is animating
   useEffect(() => {
-    if (isAnimating) {
+    const hasAnimatingCards = Object.values(animatingCards).some(state => state !== null);
+    if (hasAnimatingCards) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
 
-    let timer: NodeJS.Timeout;
-    if(isAnimating) {
-        timer = setTimeout(() => setIsAnimating(false), 800);
-    }
-
     return () => {
       document.body.style.overflow = "";
-      if (timer) clearTimeout(timer);
     };
-  }, [isAnimating]);
+  }, [animatingCards]);
 
   const performVote = (pollId: string, optionId: number) => {
      setPolls(currentPolls =>
@@ -144,7 +138,7 @@ export default function HomePage() {
     }
 
     const poll = polls.find(p => p.id === pollId);
-    if (!poll || !Array.isArray(poll.options) || votedStates[pollId]) return;
+    if (!poll || !Array.isArray(poll.options) || votedStates[pollId] || animatingCards[pollId]) return;
 
     const majorityVotes = Math.max(...poll.options.map(o => o.votes), 0);
     const isLocked = poll.pledged && poll.pledgeAmount && (poll.pledgeAmount * 0.5) / (majorityVotes + 1) < 0.10;
@@ -168,46 +162,99 @@ export default function HomePage() {
   };
 
   const handleSwipeVote = (pollId: string, optionId: number, direction: "left" | "right") => {
-    if (isAnimating || votedStates[pollId]) return;
+    if (animatingCards[pollId] || votedStates[pollId]) return;
 
-    setIsAnimating(true);
+    // Start exit animation
+    setAnimatingCards(prev => ({ ...prev, [pollId]: 'exiting' }));
     setSwipeDirections(prev => ({ ...prev, [pollId]: direction }));
     
+    // After exit animation, update vote and start re-entry
     setTimeout(() => {
         performVote(pollId, optionId);
         setVotedStates(prev => ({ ...prev, [pollId]: true }));
-        setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
-    }, 400); // Wait for exit animation to finish
+        setAnimatingCards(prev => ({ ...prev, [pollId]: 'entering' }));
+    }, 400); // Wait for exit animation to complete
     
+    // Complete the animation cycle
     setTimeout(() => {
-        setIsAnimating(false);
+        setAnimatingCards(prev => ({ ...prev, [pollId]: null }));
         setSwipeDirections(prev => ({ ...prev, [pollId]: null }));
-    }, 1000); // Wait for all animations to complete
+    }, 1200); // Total animation time
   };
 
   const pollCardVariants = {
-    initial: { opacity: 0, y: 50, rotate: 0 },
-    shuffle: (index: number) => ({
-      opacity: 0,
-      x: -300,
-      rotate: -10,
-      transition: { delay: index * 0.1 }
-    }),
+    initial: { opacity: 0, x: -300, rotate: -10 },
     animate: (index: number) => ({
       opacity: 1,
-      y: 0,
       x: 0,
       rotate: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.6,
         ease: "easeOut",
         delay: isInitialLoad ? index * 0.1 : 0
       },
     }),
-    exitLeft: { x: "-120%", opacity: 0, rotate: -15, transition: { duration: 0.4, ease: "easeIn" } },
-    exitRight: { x: "120%", opacity: 0, rotate: 15, transition: { duration: 0.4, ease: "easeIn" } },
-    reEnterFromRight: { x: "120%", opacity: 0, rotate: 15 },
-    reEnterFromLeft: { x: "-120%", opacity: 0, rotate: -15 },
+    exitLeft: { 
+      x: "-120%", 
+      opacity: 0, 
+      rotate: -15, 
+      transition: { duration: 0.4, ease: "easeIn" } 
+    },
+    exitRight: { 
+      x: "120%", 
+      opacity: 0, 
+      rotate: 15, 
+      transition: { duration: 0.4, ease: "easeIn" } 
+    },
+    enterFromRight: {
+      x: "120%",
+      opacity: 0,
+      rotate: 15,
+    },
+    enterFromLeft: {
+      x: "-120%", 
+      opacity: 0,
+      rotate: -15,
+    },
+    reEnter: {
+      x: 0,
+      opacity: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay: 0.2
+      }
+    }
+  };
+
+  const getCardVariant = (poll: Poll, index: number) => {
+    const animationState = animatingCards[poll.id];
+    const swipeDirection = swipeDirections[poll.id];
+    const hasVoted = votedStates[poll.id];
+
+    if (animationState === 'exiting') {
+      return swipeDirection === 'left' ? 'exitLeft' : 'exitRight';
+    }
+    
+    if (animationState === 'entering') {
+      return 'reEnter';
+    }
+    
+    return 'animate';
+  };
+
+  const getInitialCardVariant = (poll: Poll, index: number) => {
+    const animationState = animatingCards[poll.id];
+    const swipeDirection = swipeDirections[poll.id];
+    const hasVoted = votedStates[poll.id];
+
+    if (animationState === 'entering') {
+      // Enter from opposite side of swipe direction
+      return swipeDirection === 'left' ? 'enterFromRight' : 'enterFromLeft';
+    }
+
+    return 'initial';
   };
 
   const visiblePolls = polls.filter(p => p && Array.isArray(p.options) && p.options.length > 0);
@@ -216,49 +263,41 @@ export default function HomePage() {
     <>
     <div className="container mx-auto py-8 px-2 sm:px-4">
       <div className="w-full max-w-2xl mx-auto space-y-6">
-        <AnimatePresence mode="popLayout">
-            {visiblePolls.map((poll, index) => {
-            const isLastElement = visiblePolls.length === index + 1;
-            const hasVoted = votedStates[poll.id] || false;
-            const isTwoOptionPoll = poll.options.length === 2;
-            const swipeDirection = swipeDirections[poll.id];
+        {visiblePolls.map((poll, index) => {
+          const isLastElement = visiblePolls.length === index + 1;
+          const hasVoted = votedStates[poll.id] || false;
+          const isTwoOptionPoll = poll.options.length === 2;
 
-            const getInitialVariant = () => {
-              if (hasVoted && swipeDirection) {
-                return swipeDirection === 'left' ? 'reEnterFromRight' : 'reEnterFromLeft';
-              }
-              if (isInitialLoad) return "shuffle";
-              return "initial";
-            }
-
-            return (
-                <motion.div
-                    layout
-                    ref={isLastElement ? lastPollElementRef : null} 
-                    key={`${poll.id}-${cardKeys[poll.id] || 0}`}
-                    custom={index}
-                    variants={pollCardVariants}
-                    initial={getInitialVariant()}
-                    animate={"animate"}
-                    exit={swipeDirection === 'left' ? 'exitLeft' : 'exitRight'}
-                >
-                    <PollCard
-                       poll={poll}
-                        onVote={handleVote}
-                        onSwipe={(direction) => {
-                            if (!isTwoOptionPoll || hasVoted || !poll.options) {
-                            return;
-                            }
-                            const optionId = poll.options[direction === 'left' ? 0 : 1].id;
-                            handleVote(poll.id, optionId);
-                        }}
-                        showResults={hasVoted}
-                        isTwoOptionPoll={isTwoOptionPoll}
-                    />
-                </motion.div>
-            )
-            })}
-        </AnimatePresence>
+          return (
+            <motion.div
+              layout
+              ref={isLastElement ? lastPollElementRef : null} 
+              key={poll.id}
+              custom={index}
+              variants={pollCardVariants}
+              initial={getInitialCardVariant(poll, index)}
+              animate={getCardVariant(poll, index)}
+              style={{ 
+                zIndex: animatingCards[poll.id] === 'exiting' ? 10 : 1 
+              }}
+            >
+              <PollCard
+                poll={poll}
+                onVote={handleVote}
+                onSwipe={(direction) => {
+                  if (!isTwoOptionPoll || hasVoted || !poll.options || animatingCards[poll.id]) {
+                    return;
+                  }
+                  const optionId = poll.options[direction === 'left' ? 0 : 1].id;
+                  handleVote(poll.id, optionId);
+                }}
+                showResults={hasVoted}
+                isTwoOptionPoll={isTwoOptionPoll}
+              />
+            </motion.div>
+          )
+        })}
+        
         {isLoading && (
            <Card>
             <CardContent className="p-8">
@@ -319,4 +358,3 @@ export default function HomePage() {
     </>
   );
 }
-
