@@ -213,20 +213,27 @@ export default function HomePage() {
     <>
     <div className="container mx-auto py-8 px-2 sm:px-4">
       <div className="w-full max-w-2xl mx-auto space-y-6">
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
             {visiblePolls.map((poll, index) => {
             const isLastElement = visiblePolls.length === index + 1;
             const hasVoted = votedStates[poll.id] || false;
             const isTwoOptionPoll = poll.options.length === 2;
             const swipeDirection = swipeDirections[poll.id];
 
+            const getInitialVariant = () => {
+              if (isInitialLoad) return "shuffle";
+              if (hasVoted) return "animate";
+              return "initial";
+            }
+
             return (
                 <motion.div
+                    layout
                     ref={isLastElement ? lastPollElementRef : null} 
                     key={`${poll.id}-${cardKeys[poll.id] || 0}`}
                     custom={index}
                     variants={pollCardVariants}
-                    initial={isInitialLoad ? "shuffle" : "initial"}
+                    initial={getInitialVariant()}
                     animate={"animate"}
                     exit={swipeDirection === 'left' ? 'exitLeft' : swipeDirection === 'right' ? 'exitRight' : undefined}
                 >
@@ -307,3 +314,4 @@ export default function HomePage() {
     </>
   );
 }
+
