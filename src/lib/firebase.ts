@@ -198,10 +198,15 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
 };
 
 // ──────────── POLLS ────────────
+export const createPoll = async (pollData: Omit<Poll, 'id'>): Promise<string> => {
+  const pollRef = await addDoc(collection(db, 'polls'), pollData);
+  return pollRef.id;
+}
+
 export const getPolls = async (lastVisible: QueryDocumentSnapshot | null = null) => {
     const pollsRef = collection(db, 'polls');
     // Order by document ID (__name__) instead of createdAt. This is more robust for pagination if createdAt has inconsistent data.
-    const constraints: QueryConstraint[] = [orderBy(documentId()), limit(25)];
+    const constraints: QueryConstraint[] = [orderBy(documentId(), 'desc'), limit(25)];
     if(lastVisible) {
         constraints.push(startAfter(lastVisible));
     }
@@ -238,7 +243,7 @@ export const searchPolls = async (searchTerm: string): Promise<Poll[]> => {
   const lowercasedTerm = searchTerm.toLowerCase();
   return allPolls.filter(poll => 
     poll.question.toLowerCase().includes(lowercasedTerm) ||
-    poll.category.toLowerCase().includes(lowercasedTerm)
+    (poll.category && poll.category.toLowerCase().includes(lowercasedTerm))
   );
 };
 

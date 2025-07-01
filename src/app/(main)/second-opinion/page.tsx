@@ -14,11 +14,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Image as ImageIcon, Video, ShieldCheck, Flame } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Switch } from '@/components/ui/switch';
-import { uploadFile } from '@/lib/firebase';
+import { uploadFile, createPoll } from '@/lib/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/auth-context';
 import { useRouter } from 'next/navigation';
+import type { Poll } from '@/lib/types';
 
 const secondOpinionFormSchema = z.object({
   question: z.string().min(10, "Question must be at least 10 characters.").max(140),
@@ -35,6 +36,18 @@ const secondOpinionFormSchema = z.object({
 });
 
 type SecondOpinionFormValues = z.infer<typeof secondOpinionFormSchema>;
+
+const getTimerDetails = (timerString: string) => {
+    const value = parseInt(timerString.slice(0, -1));
+    const unit = timerString.slice(-1);
+    let durationMs = 0;
+    if (unit === 'm') durationMs = value * 60 * 1000;
+    if (unit === 'h') durationMs = value * 60 * 60 * 1000;
+    if (unit === 'd') durationMs = value * 24 * 60 * 60 * 1000;
+    
+    const endsAt = new Date(Date.now() + durationMs).toISOString();
+    return { durationMs, endsAt };
+};
 
 export default function CreateSecondOpinionPage() {
   const { user, loading } = useAuth();
@@ -80,6 +93,10 @@ export default function CreateSecondOpinionPage() {
   };
 
   async function onSubmit(data: SecondOpinionFormValues) {
+    if (!user) {
+        toast({ variant: 'destructive', title: 'You must be logged in to create a poll.' });
+        return;
+    }
     setIsSubmitting(true);
     toast({
       title: "Creating your 2nd Opinion poll...",
@@ -89,35 +106,49 @@ export default function CreateSecondOpinionPage() {
     try {
       const uploadPromises = [];
       
+      let image1Url, image2Url, videoUrl;
+
       if (data.image1 instanceof File) {
           const filePath = `polls/images/${uuidv4()}-${data.image1.name}`;
-          uploadPromises.push(uploadFile(data.image1, filePath));
+          uploadPromises.push(uploadFile(data.image1, filePath).then(url => image1Url = url));
       }
       if (data.image2 instanceof File) {
           const filePath = `polls/images/${uuidv4()}-${data.image2.name}`;
-          uploadPromises.push(uploadFile(data.image2, filePath));
+          uploadPromises.push(uploadFile(data.image2, filePath).then(url => image2Url = url));
       }
       if (data.video instanceof File) {
           const filePath = `polls/videos/${uuidv4()}-${data.video.name}`;
-          uploadPromises.push(uploadFile(data.video, filePath));
+          uploadPromises.push(uploadFile(data.video, filePath).then(url => videoUrl = url));
       }
 
-      const [image1Url, image2Url, videoUrl] = await Promise.all(uploadPromises);
+      await Promise.all(uploadPromises);
 
-      const finalPollData = {
+      const { durationMs, endsAt } = getTimerDetails(data.timer);
+
+      const finalPollData: Omit<Poll, 'id'> = {
+        creatorId: user.uid,
         question: data.question,
-        timer: data.timer,
-        pledged: data.pledged,
-        pledgeAmount: data.pledgeAmount,
-        isNSFW: data.isNSFW,
-        videoUrl: videoUrl,
+        description: '',
         options: [
-            { text: 'Option A', imageUrl: image1Url },
-            { text: 'Option B', imageUrl: image2Url },
-        ]
+            { id: 1, text: 'Option A', imageUrl: image1Url || null, votes: 0 },
+            { id: 2, text: 'Option B', imageUrl: image2Url || null, votes: 0 },
+        ],
+        videoUrl: videoUrl,
+        type: '2nd_opinion',
+        createdAt: new Date().toISOString(),
+        endsAt: endsAt,
+        durationMs: durationMs,
+        pledged: data.pledged,
+        pledgeAmount: data.pledged ? data.pledgeAmount : 0,
+        tipCount: 0,
+        isNSFW: data.isNSFW || false,
+        isProcessed: false,
+        category: 'Comparison',
+        likes: 0,
+        comments: 0,
       };
       
-      console.log("Final 2nd Opinion Poll Data:", finalPollData);
+      await createPoll(finalPollData);
 
       toast({
         title: "Poll Created!",
@@ -125,10 +156,7 @@ export default function CreateSecondOpinionPage() {
         variant: "default",
       });
 
-      form.reset();
-      setImage1Preview(null);
-      setImage2Preview(null);
-      setVideoPreview(null);
+      router.push('/');
 
     } catch (error) {
       console.error("Error creating poll:", error);

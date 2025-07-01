@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -15,11 +15,12 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Image as ImageIcon, Link2, Trash2, Flame, ShieldCheck, Video } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { uploadFile } from '@/lib/firebase';
+import { uploadFile, createPoll } from '@/lib/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/auth-context';
 import { useRouter } from 'next/navigation';
+import type { Poll } from '@/lib/types';
 
 const pollFormSchema = z.object({
   question: z.string().min(10, "Question must be at least 10 characters.").max(500),
@@ -30,6 +31,7 @@ const pollFormSchema = z.object({
     image: z.any().optional(),
   })).min(2, "You must have at least 2 options.").max(4),
   video: z.any().optional(),
+  category: z.string().min(1, "Please select a category."),
   timer: z.string().min(1, "Please select a timer duration."),
   pledged: z.boolean().default(false),
   pledgeAmount: z.number().optional(),
@@ -40,6 +42,18 @@ const pollFormSchema = z.object({
 });
 
 type PollFormValues = z.infer<typeof pollFormSchema>;
+
+const getTimerDetails = (timerString: string) => {
+    const value = parseInt(timerString.slice(0, -1));
+    const unit = timerString.slice(-1);
+    let durationMs = 0;
+    if (unit === 'm') durationMs = value * 60 * 1000;
+    if (unit === 'h') durationMs = value * 60 * 60 * 1000;
+    if (unit === 'd') durationMs = value * 24 * 60 * 60 * 1000;
+    
+    const endsAt = new Date(Date.now() + durationMs).toISOString();
+    return { durationMs, endsAt };
+};
 
 export default function CreatePollPage() {
   const { user, loading } = useAuth();
@@ -64,6 +78,7 @@ export default function CreatePollPage() {
       question: '',
       description: '',
       options: [{ text: '', affiliateLink: '' }, { text: '', affiliateLink: '' }],
+      category: 'General',
       timer: '1d',
       pledged: false,
       isNSFW: false,
@@ -96,6 +111,10 @@ export default function CreatePollPage() {
   }
 
   async function onSubmit(data: PollFormValues) {
+    if (!user) {
+        toast({ variant: 'destructive', title: 'You must be logged in to create a poll.' });
+        return;
+    }
     setIsSubmitting(true);
     toast({
       title: "Creating your poll...",
@@ -119,18 +138,35 @@ export default function CreatePollPage() {
           uploadedVideoUrl = await uploadFile(data.video, filePath);
       }
 
-      const finalPollData = {
-          ...data,
-          videoUrl: uploadedVideoUrl,
+      const { durationMs, endsAt } = getTimerDetails(data.timer);
+
+      const finalPollData: Omit<Poll, 'id'> = {
+          creatorId: user.uid,
+          question: data.question,
+          description: data.description,
           options: data.options.map((opt, index) => ({
+              id: index + 1,
               text: opt.text,
               affiliateLink: opt.affiliateLink,
-              imageUrl: uploadedImageUrls[index],
+              imageUrl: uploadedImageUrls[index] || null,
+              votes: 0,
           })),
+          videoUrl: uploadedVideoUrl,
+          type: 'standard',
+          createdAt: new Date().toISOString(),
+          endsAt: endsAt,
+          durationMs: durationMs,
+          pledged: data.pledged,
+          pledgeAmount: data.pledged ? data.pledgeAmount : 0,
+          tipCount: 0,
+          isNSFW: data.isNSFW || false,
+          isProcessed: false,
+          category: data.category,
+          likes: 0,
+          comments: 0,
       };
-      
-      // In a real app, you'd save `finalPollData` to your database (e.g., Firestore) here.
-      console.log("Final Poll Data with URLs:", finalPollData);
+
+      await createPoll(finalPollData);
 
       toast({
         title: "Poll Created!",
@@ -138,9 +174,7 @@ export default function CreatePollPage() {
         variant: "default",
       });
 
-      form.reset();
-      setVideoPreview(null);
-      setOptionImagePreviews([]);
+      router.push('/');
 
     } catch (error) {
       console.error("Error creating poll:", error);
@@ -227,6 +261,34 @@ export default function CreatePollPage() {
                     </FormControl>
                     {videoPreview && <video src={videoPreview} controls className="w-full rounded-md mt-2 aspect-video" />}
                 </FormItem>
+
+                 <FormField
+                    control={form.control}
+                    name="category"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Category</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                    <SelectTrigger><SelectValue placeholder="Choose a category" /></SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                    <SelectItem value="Fashion">Fashion</SelectItem>
+                                    <SelectItem value="Beauty">Beauty</SelectItem>
+                                    <SelectItem value="Tech">Tech</SelectItem>
+                                    <SelectItem value="Food & Dining">Food & Dining</SelectItem>
+                                    <SelectItem value="Relationships">Relationships</SelectItem>
+                                    <SelectItem value="Career">Career</SelectItem>
+                                    <SelectItem value="Travel">Travel</SelectItem>
+                                    <SelectItem value="Gaming">Gaming</SelectItem>
+                                    <SelectItem value="General">General</SelectItem>
+                                    <SelectItem value="Misc and Fun">Misc and Fun</SelectItem>
+                                </SelectContent>
+                            </Select>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
               
               <FormField
                 control={form.control}
