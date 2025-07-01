@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { motion, PanInfo } from 'framer-motion';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { Heart, MessageCircle, Gift, Share2 } from 'lucide-react';
+import { doc, getDoc } from 'firebase/firestore';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -20,7 +21,7 @@ import type { Poll, PollOption, User } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/auth-context';
 import { useUser } from '@/hooks/use-user';
-import { toggleLikeOnPoll } from '@/lib/firebase';
+import { toggleLikeOnPoll, db } from '@/lib/firebase';
 import { useToast } from '@/hooks/use-toast';
 
 interface PollCardProps {
@@ -42,6 +43,18 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }
   const [likeCount, setLikeCount] = useState(poll.likes);
 
   const { user: creator, loading: creatorLoading } = useUser(poll.creatorId);
+
+  useEffect(() => {
+    // Check if the current user has liked this poll
+    if (user) {
+      const likeRef = doc(db, 'polls', poll.id, 'likes', user.uid);
+      getDoc(likeRef).then(docSnap => {
+        if (docSnap.exists()) {
+          setIsLiked(true);
+        }
+      });
+    }
+  }, [user, poll.id]);
 
   const [timeLeft, setTimeLeft] = useState<{
     days: number;
@@ -114,14 +127,18 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }
       return;
     }
     // Optimistic update
+    const originalIsLiked = isLiked;
+    const originalLikeCount = likeCount;
+    
     setIsLiked(!isLiked);
     setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
+
     try {
       await toggleLikeOnPoll(String(poll.id), user.uid);
     } catch (error) {
       // Revert on error
-      setIsLiked(isLiked);
-      setLikeCount(likeCount);
+      setIsLiked(originalIsLiked);
+      setLikeCount(originalLikeCount);
       toast({ variant: 'destructive', title: 'Something went wrong.' });
     }
   };
