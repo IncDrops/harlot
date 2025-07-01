@@ -31,6 +31,7 @@ export default function HomePage() {
   const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   
   const [votedStates, setVotedStates] = useState<{ [key: string]: boolean }>({});
   const [cardKeys, setCardKeys] = useState<{ [key: string]: number }>({});
@@ -76,6 +77,12 @@ export default function HomePage() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Initial load
 
+  useEffect(() => {
+    if(polls.length > 0 && isInitialLoad) {
+      setTimeout(() => setIsInitialLoad(false), polls.length * 100 + 500);
+    }
+  }, [polls.length, isInitialLoad]);
+
   const lastPollElementRef = useCallback((node: HTMLDivElement) => {
     if (isLoading) return;
     if (observer.current) observer.current.disconnect();
@@ -109,7 +116,6 @@ export default function HomePage() {
                 ...newOptions[optIndex],
                 votes: newOptions[optIndex].votes + 1,
               };
-               // Also update likes for engagement
                const newLikes = p.likes + 1;
                return { ...p, options: newOptions, likes: newLikes };
             }
@@ -154,25 +160,45 @@ export default function HomePage() {
     }
   };
 
-
   const handleSwipeVote = (pollId: string, optionId: number, direction: "left" | "right") => {
     if (isAnimating || votedStates[pollId]) return;
 
     setIsAnimating(true);
     setSwipeDirections(prev => ({ ...prev, [pollId]: direction }));
     
-    // Perform vote after a delay to allow animation to start
     setTimeout(() => {
         performVote(pollId, optionId);
         setVotedStates(prev => ({ ...prev, [pollId]: true }));
-    }, 700);
+    }, 300);
     
-    // Lock scroll and reset card after animation completes
     setTimeout(() => {
-        setSwipeDirections(prev => ({ ...prev, [pollId]: null }));
         setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
+        setSwipeDirections(prev => ({ ...prev, [pollId]: null }));
         setIsAnimating(false);
-    }, 800);
+    }, 500); 
+  };
+
+  const pollCardVariants = {
+    initial: { opacity: 0, y: 50, rotate: 0 },
+    shuffle: (index: number) => ({
+      opacity: 0,
+      x: -300,
+      rotate: -10,
+      transition: { delay: index * 0.1 }
+    }),
+    animate: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      x: 0,
+      rotate: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+        delay: isInitialLoad ? index * 0.1 : 0
+      },
+    }),
+    exitLeft: { x: "-120%", opacity: 0, rotate: -15, transition: { duration: 0.4, ease: "easeIn" } },
+    exitRight: { x: "120%", opacity: 0, rotate: 15, transition: { duration: 0.4, ease: "easeIn" } },
   };
 
   return (
@@ -181,7 +207,6 @@ export default function HomePage() {
       <div className="w-full max-w-2xl mx-auto space-y-6">
         <AnimatePresence>
             {polls.map((poll, index) => {
-            // Gracefully handle any polls that might have missing data
             if (!poll || !Array.isArray(poll.options) || poll.options.length === 0) {
               return null;
             }
@@ -189,14 +214,17 @@ export default function HomePage() {
             const isLastElement = polls.length === index + 1;
             const hasVoted = votedStates[poll.id] || false;
             const isTwoOptionPoll = poll.options.length === 2;
+            const swipeDirection = swipeDirections[poll.id];
+
             return (
                 <motion.div 
                     ref={isLastElement ? lastPollElementRef : null} 
                     key={`${poll.id}-${cardKeys[poll.id] || 0}`}
-                    initial={{ opacity: 0, y: 50, rotate: 3 }}
-                    animate={{ opacity: 1, y: 0, rotate: 0 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    custom={index}
+                    variants={pollCardVariants}
+                    initial={isInitialLoad ? "shuffle" : "initial"}
+                    animate={"animate"}
+                    exit={swipeDirection === 'left' ? 'exitLeft' : swipeDirection === 'right' ? 'exitRight' : undefined}
                 >
                     <PollCard
                         poll={poll}
@@ -210,7 +238,6 @@ export default function HomePage() {
                         }}
                         showResults={hasVoted}
                         isTwoOptionPoll={isTwoOptionPoll}
-                        custom={swipeDirections[poll.id]}
                     />
                 </motion.div>
             )

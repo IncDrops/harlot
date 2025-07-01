@@ -29,10 +29,11 @@ interface PollCardProps {
   onSwipe: (direction: 'left' | 'right') => void;
   showResults: boolean;
   isTwoOptionPoll: boolean;
-  custom?: 'left' | 'right' | null;
 }
 
-export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, custom }: PollCardProps) {
+const MotionCard = motion(Card);
+
+export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }: PollCardProps) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isCommentSheetOpen, setIsCommentSheetOpen] = useState(false);
@@ -65,7 +66,7 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
             });
         } else {
             setTimeLeft(null);
-            clearInterval(interval);
+            if(interval) clearInterval(interval);
         }
     }
 
@@ -145,18 +146,6 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     } else if (info.offset.x < -swipeThreshold) {
       onSwipe('left');
     }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50, rotate: 3 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      rotate: 0,
-      transition: { duration: 0.5, ease: "easeOut" } 
-    },
-    exitLeft: { x: "-120%", opacity: 0, rotate: -15, transition: { duration: 0.8 } },
-    exitRight: { x: "120%", opacity: 0, rotate: 15, transition: { duration: 0.8 } },
   };
 
   if (creatorLoading) {
@@ -255,17 +244,13 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
 
   return (
     <>
-      <motion.div
-        className="shadow-lg rounded-2xl"
-        variants={cardVariants}
-        initial="hidden"
-        animate={custom ? (custom === 'left' ? 'exitLeft' : 'exitRight') : 'visible'}
+      <MotionCard
+        className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full max-w-2xl mx-auto bg-card"
         drag={isTwoOptionPoll && !showResults ? "x" : false}
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.2}
         onDragEnd={handleDragEnd}
       >
-        <Card className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full max-w-2xl mx-auto bg-card">
           <CardHeader>
             <div className="flex items-start justify-between gap-3">
                 <div className="flex items-start gap-3">
@@ -321,8 +306,7 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
               <Share2 className="h-5 w-5"/>
             </Button>
           </CardFooter>
-        </Card>
-      </motion.div>
+      </MotionCard>
       <CommentSheet pollId={String(poll.id)} isOpen={isCommentSheetOpen} onOpenChange={setIsCommentSheetOpen} />
       {poll.pledged && creator && <TipDialog poll={poll} creator={creator} isOpen={isTipDialogOpen} onOpenChange={setIsTipDialogOpen} />}
     </>
