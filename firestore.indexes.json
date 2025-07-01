@@ -1,3 +1,4 @@
+
 {
   "indexes": [
     {
@@ -15,6 +16,16 @@
         {
           "fieldPath": "endsAt",
           "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "polls",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
         }
       ]
     }
