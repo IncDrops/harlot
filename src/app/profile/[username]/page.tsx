@@ -26,16 +26,9 @@ export default function UserProfilePage({ params }: { params: { username: string
                     setUser(fetchedUser);
                     const userPolls = await getPollsByUser(fetchedUser.id);
                     setPolls(userPolls);
-                } else {
-                    toast({
-                        variant: 'destructive',
-                        title: "User not found",
-                    });
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);
-                // This toast was showing even when the profile loaded correctly.
-                // It's better to rely on the UI showing a loading/not found state for a better user experience.
             } finally {
                 setLoading(false);
             }
@@ -44,7 +37,7 @@ export default function UserProfilePage({ params }: { params: { username: string
         if (params.username) {
             fetchUserData();
         }
-    }, [params.username, toast]);
+    }, [params.username]);
 
     if (loading) {
         return (
