@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "seed": "tsx src/scripts/seed.ts"
+    "seed": "tsx src/scripts/seed.ts",
+    "set-claims": "tsx src/scripts/setCustomClaims.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.23.1",
