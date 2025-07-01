@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -33,6 +34,7 @@ interface AuthContextType {
   signInWithGoogle: () => Promise<void>;
   signInAnonymously: () => Promise<void>;
   updateUserProfile: (displayName: string, photoURL?: string) => Promise<void>;
+  reloadProfile: () => Promise<void>;
 }
 
 // --- Default Context ---
@@ -46,6 +48,7 @@ const AuthContext = createContext<AuthContextType>({
   signInWithGoogle: async () => { throw new Error("Firebase not initialized"); },
   signInAnonymously: async () => { throw new Error("Firebase not initialized"); },
   updateUserProfile: async () => { throw new Error("Firebase not initialized"); },
+  reloadProfile: async () => { throw new Error("Firebase not initialized"); },
 });
 
 // --- Provider Component ---
@@ -53,6 +56,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [profile, setProfile] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const reloadProfile = async () => {
+    if (user) {
+      const userProfile = await getUserById(user.uid);
+      setProfile(userProfile);
+    }
+  };
 
   useEffect(() => {
     if (!auth) {
@@ -122,6 +132,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signInWithGoogle,
     signInAnonymously: signInAnonymouslyHandler,
     updateUserProfile,
+    reloadProfile,
   };
 
   return (

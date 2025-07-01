@@ -38,7 +38,7 @@ const profileFormSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export default function SettingsPage() {
-  const { user, profile, loading } = useAuth();
+  const { user, profile, loading, reloadProfile } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
   const { theme, setTheme } = useTheme();
@@ -107,12 +107,14 @@ export default function SettingsPage() {
 
         await updateUserProfileData(user.uid, updatedProfileData);
 
+        await reloadProfile();
+
         toast({
             title: "Profile Updated!",
             description: "Your changes have been saved.",
         });
         
-        router.refresh();
+        router.push(`/profile/${data.username}`);
 
     } catch (error: any) {
         console.error("Error updating profile:", error);
