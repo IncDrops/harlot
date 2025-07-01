@@ -8,6 +8,9 @@ import { ThemeProvider } from '@/contexts/theme-provider';
 export const metadata: Metadata = {
   title: 'PollitAGo: THE 2nd OPINION APP',
   description: 'The ultimate app for getting a second opinion on anything.',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
