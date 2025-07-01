@@ -42,6 +42,8 @@ import {
   QueryConstraint,
   documentId,
 } from "firebase/firestore";
+import { getFunctions } from 'firebase/functions';
+import type { Functions } from 'firebase/functions';
 import type { Comment, Notification, Poll, User } from "./types";
 
 const firebaseConfig = {
@@ -57,17 +59,20 @@ let app: FirebaseApp;
 let auth: Auth;
 let storage: IFirebaseStorage;
 let db: Firestore;
+let functions: Functions;
 
 if (!getApps().length) {
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   storage = getStorage(app);
   db = getFirestore(app);
+  functions = getFunctions(app);
 } else {
   app = getApps()[0];
   auth = getAuth(app);
   storage = getStorage(app);
   db = getFirestore(app);
+  functions = getFunctions(app);
 }
 
 // Helper to convert Firestore doc to a serializable object
@@ -205,7 +210,6 @@ export const createPoll = async (pollData: Omit<Poll, 'id'>): Promise<string> =>
 
 export const getPolls = async (lastVisible: QueryDocumentSnapshot | null = null) => {
     const pollsRef = collection(db, 'polls');
-    // Order by document ID (__name__) instead of createdAt. This is more robust for pagination if createdAt has inconsistent data.
     const constraints: QueryConstraint[] = [orderBy(documentId(), 'desc'), limit(25)];
     if(lastVisible) {
         constraints.push(startAfter(lastVisible));
@@ -213,7 +217,7 @@ export const getPolls = async (lastVisible: QueryDocumentSnapshot | null = null)
     const q = query(pollsRef, ...constraints);
     const documentSnapshots = await getDocs(q);
     
-    const polls = documentSnapshots.docs.map(doc => fromFirestore<Poll>(doc));
+    const polls = documentSnapshots.docs.map(doc => fromFirestore<Poll>(doc)).filter(p => p.options && p.options.length > 0);
     const newLastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
 
     return { polls, lastVisible: newLastVisible || null };
@@ -257,5 +261,5 @@ export const getNotificationsForUser = async (userId: string): Promise<Notificat
     return querySnapshot.docs.map(doc => fromFirestore<Notification>(doc));
 };
 
-export { auth, storage, db };
+export { auth, storage, db, functions };
 export default app;
