@@ -34,10 +34,8 @@ export default function UserProfilePage({ params }: { params: { username: string
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);
-                toast({
-                    variant: 'destructive',
-                    title: "Could not load profile.",
-                });
+                // This toast was showing even when the profile loaded correctly.
+                // It's better to rely on the UI showing a loading/not found state for a better user experience.
             } finally {
                 setLoading(false);
             }
