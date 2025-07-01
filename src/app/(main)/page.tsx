@@ -100,8 +100,15 @@ export default function HomePage() {
     } else {
       document.body.style.overflow = "";
     }
+
+    let timer: NodeJS.Timeout;
+    if(isAnimating) {
+        timer = setTimeout(() => setIsAnimating(false), 800);
+    }
+
     return () => {
       document.body.style.overflow = "";
+      if (timer) clearTimeout(timer);
     };
   }, [isAnimating]);
 
@@ -169,13 +176,12 @@ export default function HomePage() {
     setTimeout(() => {
         performVote(pollId, optionId);
         setVotedStates(prev => ({ ...prev, [pollId]: true }));
-    }, 300);
+    }, 700);
     
     setTimeout(() => {
         setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
         setSwipeDirections(prev => ({ ...prev, [pollId]: null }));
-        setIsAnimating(false);
-    }, 500); 
+    }, 800); 
   };
 
   const pollCardVariants = {
@@ -201,7 +207,6 @@ export default function HomePage() {
     exitRight: { x: "120%", opacity: 0, rotate: 15, transition: { duration: 0.4, ease: "easeIn" } },
   };
 
-  // Filter out any polls that might have bad data before rendering
   const visiblePolls = polls.filter(p => p && Array.isArray(p.options) && p.options.length > 0);
 
   return (
