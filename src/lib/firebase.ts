@@ -234,13 +234,16 @@ export const getPollsByUser = async (userId: string): Promise<Poll[]> => {
 
 export const getPollById = async (pollId: string): Promise<Poll | null> => {
   if (!pollId) return null;
-  const pollRef = doc(db, 'polls', pollId);
-  const pollSnap = await getDoc(pollRef);
+  const pollsRef = collection(db, 'polls');
+  // Use a query to fetch the specific poll. This may bypass certain Firestore rule configurations.
+  const q = query(pollsRef, where(documentId(), '==', pollId), limit(1));
+  const querySnapshot = await getDocs(q);
 
-  if (pollSnap.exists()) {
-    return fromFirestore<Poll>(pollSnap);
+  if (querySnapshot.empty) {
+    return null;
   }
-  return null;
+  const pollDoc = querySnapshot.docs[0];
+  return fromFirestore<Poll>(pollDoc);
 };
 
 
