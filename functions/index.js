@@ -1,12 +1,15 @@
 require('dotenv').config();
 const functions = require('firebase-functions');
 const { onSchedule } = require('firebase-functions/v2/scheduler');
+const { onCall, onRequest } = require('firebase-functions/v2/https');
+const { defineString } = require('firebase-functions/params');
 const admin = require('firebase-admin');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const express = require('express');
 const bodyParser = require('body-parser');
-const { setGlobalOptions } = require('firebase-functions');
-setGlobalOptions({ maxInstances: 10 });
+
+// Define secrets for deployment. Values are loaded from .env for local development.
+const STRIPE_SECRET_KEY = defineString('STRIPE_SECRET_KEY');
+const STRIPE_WEBHOOK_SECRET = defineString('STRIPE_WEBHOOK_SECRET');
 
 // Initialize Firebase Admin
 admin.initializeApp();
@@ -27,7 +30,7 @@ app.use(
 );
 
 // ⏱ Scheduled Poll Processor for PollitPoints
-exports.processPledgedPolls = onSchedule('every 60 minutes', async (event) => {
+exports.processPledgedPolls = onSchedule({schedule: 'every 60 minutes', maxInstances: 10}, async (event) => {
   const now = admin.firestore.Timestamp.now();
   const query = db.collection('polls')
     .where('pledged', '==', true)
@@ -81,8 +84,9 @@ exports.processPledgedPolls = onSchedule('every 60 minutes', async (event) => {
   });
 
 // 💸 Stripe Tip Checkout
-exports.createTipSession = functions.https.onCall(async (data, context) => {
-  const { amount, userId, pollId } = data;
+exports.createTipSession = onCall({ secrets: [STRIPE_SECRET_KEY], maxInstances: 10 }, async (request) => {
+  const stripe = require('stripe')(STRIPE_SECRET_KEY.value());
+  const { amount, userId, pollId } = request.data;
 
   if (!amount || !userId || !pollId) {
     throw new functions.https.HttpsError('invalid-argument', 'Missing required fields.');
@@ -106,7 +110,7 @@ exports.createTipSession = functions.https.onCall(async (data, context) => {
     success_url: `https://pollitago.com/poll/${pollId}?tip_success=true`,
     cancel_url: `https://pollitago.com/poll/${pollId}`,
     metadata: {
-      tipperId: context.auth?.uid || "anonymous",
+      tipperId: request.auth?.uid || "anonymous",
       creatorId: userId,
       pollId,
     },
@@ -117,6 +121,7 @@ exports.createTipSession = functions.https.onCall(async (data, context) => {
 
 // 🔔 Stripe Webhook
 app.post('/stripeWebhook', async (req, res) => {
+  const stripe = require('stripe')(STRIPE_SECRET_KEY.value());
   const sig = req.headers['stripe-signature'];
   let event;
 
@@ -124,7 +129,7 @@ app.post('/stripeWebhook', async (req, res) => {
     event = stripe.webhooks.constructEvent(
       req.body,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET
+      STRIPE_WEBHOOK_SECRET.value()
     );
   } catch (err) {
     console.error('❌ Stripe Webhook Signature Verification Failed:', err.message);
@@ -169,4 +174,4 @@ app.post('/stripeWebhook', async (req, res) => {
 });
 
 // ✅ Export webhook as Firebase HTTPS function
-exports.stripeWebhook = functions.https.onRequest(app);
+exports.stripeWebhook = onRequest({ secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET], maxInstances: 10 }, app);
