@@ -47,42 +47,34 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     hours: number;
     minutes: number;
     seconds: number;
-  } | null>(() => {
-    if (!poll.endsAt) return null;
-    const end = new Date(poll.endsAt);
-    const difference = end.getTime() - new Date().getTime();
-    if (difference <= 0) return null;
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((difference / 1000 / 60) % 60);
-    const seconds = Math.floor((difference / 1000) % 60);
-    return { days, hours, minutes, seconds };
-  });
+  } | null>(null);
 
   useEffect(() => {
-    if (!poll.endsAt || !timeLeft) return;
+    if (!poll.endsAt) return;
 
-    const interval = setInterval(() => {
-      const now = new Date();
-      const end = new Date(poll.endsAt);
-      const difference = end.getTime() - now.getTime();
+    const end = new Date(poll.endsAt);
+    
+    const calculateTimeLeft = () => {
+        const difference = end.getTime() - new Date().getTime();
+        if (difference > 0) {
+            setTimeLeft({
+                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                minutes: Math.floor((difference / 1000 / 60) % 60),
+                seconds: Math.floor((difference / 1000) % 60),
+            });
+        } else {
+            setTimeLeft(null);
+            clearInterval(interval);
+        }
+    }
 
-      if (difference <= 0) {
-        setTimeLeft(null);
-        clearInterval(interval);
-        return;
-      }
-
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((difference / 1000 / 60) % 60);
-      const seconds = Math.floor((difference / 1000) % 60);
-
-      setTimeLeft({ days, hours, minutes, seconds });
-    }, 1000);
+    const interval = setInterval(calculateTimeLeft, 1000);
+    calculateTimeLeft(); // Initial calculation
 
     return () => clearInterval(interval);
-  }, [poll.endsAt, timeLeft]);
+  }, [poll.endsAt]);
+
 
   const renderTimer = () => {
     if (!timeLeft) {

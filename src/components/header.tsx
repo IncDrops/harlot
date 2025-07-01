@@ -47,7 +47,7 @@ export function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-8 w-8">
-                     <AvatarImage src={profile?.avatar || `https://i.pravatar.cc/150?u=${user.email}`} alt={profile?.username || ""} />
+                     <AvatarImage src={profile?.avatar || `https://avatar.iran.liara.run/public/?username=${user.email}`} alt={profile?.username || ""} />
                     <AvatarFallback>{getAvatarFallback()}</AvatarFallback>
                   </Avatar>
                 </Button>

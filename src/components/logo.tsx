@@ -13,7 +13,7 @@ export function Logo({ className }: { className?: string }) {
 
 export function Tagline({ className }: { className?: string }) {
   return (
-    <p className={cn("font-body text-sm uppercase tracking-widest text-foreground", className)}>
+    <p className={cn("font-body text-sm uppercase tracking-widest text-foreground font-semibold", className)}>
       THE <sup>2nd</sup> OPINION APP
     </p>
   );

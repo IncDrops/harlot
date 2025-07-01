@@ -135,9 +135,12 @@ async function seedData() {
 
         // Create Firestore doc
         const docRef = usersCollection.doc(uid);
-        let avatarUrl = `https://i.pravatar.cc/150?u=${user.username}`;
-        if (user.gender === 'male' || user.gender === 'female') {
-            avatarUrl += `&g=${user.gender}`;
+        
+        let avatarUrl = `https://avatar.iran.liara.run/public/?username=${user.username}`;
+        if (user.gender === 'male') {
+            avatarUrl = `https://avatar.iran.liara.run/public/boy?username=${user.username}`;
+        } else if (user.gender === 'female') {
+            avatarUrl = `https://avatar.iran.liara.run/public/girl?username=${user.username}`;
         }
 
         const userProfileData: Omit<User, 'bio' | 'pronouns'> = {
@@ -234,9 +237,11 @@ async function seedData() {
         
         const commentRef = db.collection('polls').doc(randomPollId).collection('comments').doc();
 
-        let avatarUrl = `https://i.pravatar.cc/150?u=${randomUser.username}`;
-        if (randomUser.gender === 'male' || randomUser.gender === 'female') {
-            avatarUrl += `&g=${randomUser.gender}`;
+        let avatarUrl = `https://avatar.iran.liara.run/public/?username=${randomUser.username}`;
+        if (randomUser.gender === 'male') {
+            avatarUrl = `https://avatar.iran.liara.run/public/boy?username=${randomUser.username}`;
+        } else if (randomUser.gender === 'female') {
+            avatarUrl = `https://avatar.iran.liara.run/public/girl?username=${randomUser.username}`;
         }
 
         commentBatch.set(commentRef, {
