@@ -134,7 +134,7 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }
     setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
 
     try {
-      await toggleLikeOnPoll(String(poll.id), user.uid);
+      await toggleLikeOnPoll(poll.id, user.uid);
     } catch (error) {
       // Revert on error
       setIsLiked(originalIsLiked);
@@ -299,10 +299,10 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }
                     </div>
                 </div>
             </div>
-             <Link href={`/poll/${poll.id}`} passHref>
-                <p className="font-body text-lg pt-4 leading-relaxed hover:underline cursor-pointer">{poll.question}</p>
+             <Link href={`/poll/${poll.id}`} className="block cursor-pointer">
+                <p className="font-body text-lg pt-4 leading-relaxed hover:underline">{poll.question}</p>
+                {poll.description && <p className="text-sm text-muted-foreground pt-1">{poll.description}</p>}
              </Link>
-             {poll.description && <p className="text-sm text-muted-foreground pt-1">{poll.description}</p>}
           </CardHeader>
           <CardContent>
             {poll.videoUrl && <video src={poll.videoUrl} controls className="w-full rounded-lg aspect-video mb-4" />}
@@ -326,7 +326,7 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }
             </Button>
           </CardFooter>
       </MotionCard>
-      <CommentSheet pollId={String(poll.id)} isOpen={isCommentSheetOpen} onOpenChange={setIsCommentSheetOpen} />
+      <CommentSheet pollId={poll.id} isOpen={isCommentSheetOpen} onOpenChange={setIsCommentSheetOpen} />
       {poll.pledged && creator && <TipDialog poll={poll} creator={creator} isOpen={isTipDialogOpen} onOpenChange={setIsTipDialogOpen} />}
     </>
   );
