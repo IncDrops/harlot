@@ -41,6 +41,7 @@ import {
   DocumentData,
   QueryConstraint,
   documentId,
+  updateDoc,
 } from "firebase/firestore";
 import { getFunctions } from 'firebase/functions';
 import type { Functions } from 'firebase/functions';
@@ -180,6 +181,12 @@ export const getUserById = async (userId: string): Promise<User | null> => {
     }
     return null;
 }
+
+export const updateUserProfileData = async (userId: string, data: Partial<Omit<User, 'id' | 'numericId'>>): Promise<void> => {
+    if (!userId) throw new Error("User ID is required to update profile.");
+    const userRef = doc(db, 'users', userId);
+    await updateDoc(userRef, data);
+};
 
 export const getUserByNumericId = async (numericId: string): Promise<User | null> => {
     const usersRef = collection(db, 'users');
