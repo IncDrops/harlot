@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { PollCard, motion as motionCard } from "@/components/PollCard";
+import { PollCard } from "@/components/PollCard";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   AlertDialog,
@@ -216,7 +216,7 @@ export default function HomePage() {
             const swipeDirection = swipeDirections[poll.id];
 
             return (
-                <motionCard.div
+                <motion.div
                     ref={isLastElement ? lastPollElementRef : null} 
                     key={`${poll.id}-${cardKeys[poll.id] || 0}`}
                     custom={index}
@@ -238,7 +238,7 @@ export default function HomePage() {
                         showResults={hasVoted}
                         isTwoOptionPoll={isTwoOptionPoll}
                     />
-                </motionCard.div>
+                </motion.div>
             )
             })}
         </AnimatePresence>
