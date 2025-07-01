@@ -211,7 +211,7 @@ export const createPoll = async (pollData: Omit<Poll, 'id'>): Promise<string> =>
 
 export const getPolls = async (lastVisible: QueryDocumentSnapshot | null = null) => {
     const pollsRef = collection(db, 'polls');
-    const constraints: QueryConstraint[] = [orderBy(documentId(), 'desc'), limit(25)];
+    const constraints: QueryConstraint[] = [orderBy('createdAt', 'desc'), limit(25)];
     if(lastVisible) {
         constraints.push(startAfter(lastVisible));
     }
