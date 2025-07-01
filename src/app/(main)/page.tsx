@@ -176,12 +176,13 @@ export default function HomePage() {
     setTimeout(() => {
         performVote(pollId, optionId);
         setVotedStates(prev => ({ ...prev, [pollId]: true }));
-    }, 700);
+        setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
+    }, 400); // Wait for exit animation to finish
     
     setTimeout(() => {
-        setCardKeys(prev => ({...prev, [pollId]: (prev[pollId] || 0) + 1 }));
+        setIsAnimating(false);
         setSwipeDirections(prev => ({ ...prev, [pollId]: null }));
-    }, 800); 
+    }, 1000); // Wait for all animations to complete
   };
 
   const pollCardVariants = {
@@ -205,6 +206,8 @@ export default function HomePage() {
     }),
     exitLeft: { x: "-120%", opacity: 0, rotate: -15, transition: { duration: 0.4, ease: "easeIn" } },
     exitRight: { x: "120%", opacity: 0, rotate: 15, transition: { duration: 0.4, ease: "easeIn" } },
+    reEnterFromRight: { x: "120%", opacity: 0, rotate: 15 },
+    reEnterFromLeft: { x: "-120%", opacity: 0, rotate: -15 },
   };
 
   const visiblePolls = polls.filter(p => p && Array.isArray(p.options) && p.options.length > 0);
@@ -221,8 +224,10 @@ export default function HomePage() {
             const swipeDirection = swipeDirections[poll.id];
 
             const getInitialVariant = () => {
+              if (hasVoted && swipeDirection) {
+                return swipeDirection === 'left' ? 'reEnterFromRight' : 'reEnterFromLeft';
+              }
               if (isInitialLoad) return "shuffle";
-              if (hasVoted) return "animate";
               return "initial";
             }
 
@@ -235,7 +240,7 @@ export default function HomePage() {
                     variants={pollCardVariants}
                     initial={getInitialVariant()}
                     animate={"animate"}
-                    exit={swipeDirection === 'left' ? 'exitLeft' : swipeDirection === 'right' ? 'exitRight' : undefined}
+                    exit={swipeDirection === 'left' ? 'exitLeft' : 'exitRight'}
                 >
                     <PollCard
                        poll={poll}
