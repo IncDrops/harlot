@@ -40,6 +40,7 @@ import {
   QueryDocumentSnapshot,
   DocumentData,
   QueryConstraint,
+  documentId,
 } from "firebase/firestore";
 import type { Comment, Notification, Poll, User } from "./types";
 
@@ -72,32 +73,13 @@ if (!getApps().length) {
 // Helper to convert Firestore doc to a serializable object
 const fromFirestore = <T>(doc: QueryDocumentSnapshot<DocumentData>): T => {
     const data = doc.data();
-    const processedData = { ...data };
+    const processedData: { [key: string]: any } = { ...data };
 
-    const processTimestamp = (ts: any): string | null => {
-      if (!ts) return null;
-      // Handle Firestore Timestamp objects
-      if (ts instanceof Timestamp) {
-        return ts.toDate().toISOString();
-      }
-      // Handle server-generated objects with seconds/nanoseconds
-      if (typeof ts === 'object' && ts.seconds) {
-         return new Date(ts.seconds * 1000).toISOString();
-      }
-      // Handle existing ISO strings or other date strings
-      const date = new Date(ts);
-      if (!isNaN(date.getTime())) {
-          return date.toISOString();
-      }
-      return null;
-    }
-
-    if (processedData.createdAt) {
-      processedData.createdAt = processTimestamp(processedData.createdAt);
-    }
-    
-    if (processedData.endsAt) {
-      processedData.endsAt = processTimestamp(processedData.endsAt);
+    for (const key in processedData) {
+        const value = processedData[key];
+        if (value instanceof Timestamp) {
+            processedData[key] = value.toDate().toISOString();
+        }
     }
     
     return {
@@ -218,7 +200,8 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
 // ──────────── POLLS ────────────
 export const getPolls = async (lastVisible: QueryDocumentSnapshot | null = null) => {
     const pollsRef = collection(db, 'polls');
-    const constraints: QueryConstraint[] = [orderBy('createdAt', 'desc'), limit(25)];
+    // Order by document ID (__name__) instead of createdAt. This is more robust for pagination if createdAt has inconsistent data.
+    const constraints: QueryConstraint[] = [orderBy(documentId()), limit(25)];
     if(lastVisible) {
         constraints.push(startAfter(lastVisible));
     }
