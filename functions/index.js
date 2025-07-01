@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const functions = require('firebase-functions');
 const { onSchedule } = require('firebase-functions/v2/scheduler');
@@ -89,7 +90,11 @@ exports.createTipSession = onCall({ secrets: [STRIPE_SECRET_KEY], maxInstances: 
   const { amount, userId, pollId } = request.data;
 
   if (!amount || !userId || !pollId) {
-    throw new functions.https.HttpsError('invalid-argument', 'Missing required fields.');
+    throw new functions.https.HttpsError('invalid-argument', 'Missing required fields: amount, userId, and pollId are required.');
+  }
+
+  if (typeof amount !== 'number' || amount < 1) {
+    throw new functions.https.HttpsError('invalid-argument', 'The tip amount must be a number and at least $1.00.');
   }
 
   const session = await stripe.checkout.sessions.create({
@@ -101,7 +106,7 @@ exports.createTipSession = onCall({ secrets: [STRIPE_SECRET_KEY], maxInstances: 
           product_data: {
             name: `Tip for poll by user ${userId}`,
           },
-          unit_amount: Math.round(amount * 100),
+          unit_amount: Math.round(amount * 100), // Amount in cents
         },
         quantity: 1,
       },
@@ -113,6 +118,7 @@ exports.createTipSession = onCall({ secrets: [STRIPE_SECRET_KEY], maxInstances: 
       tipperId: request.auth?.uid || "anonymous",
       creatorId: userId,
       pollId,
+      tipAmount: amount,
     },
   });
 
@@ -139,30 +145,42 @@ app.post('/stripeWebhook', async (req, res) => {
   switch (event.type) {
     case 'checkout.session.completed': {
       const session = event.data.object;
-      const { creatorId, pollId, tipperId } = session.metadata;
+      const { creatorId, pollId, tipperId, tipAmount } = session.metadata;
 
-      if (!creatorId || !pollId || !tipperId) {
+      if (!creatorId || !pollId || !tipperId || !tipAmount) {
         console.error('❌ Missing metadata in session:', session.metadata);
-        return res.status(400).send('Missing metadata.');
+        return res.status(400).send('Missing required metadata.');
       }
 
-      const points = Math.floor(session.amount_total / 100) * 10;
+      // References to the documents we need to update
       const userRef = db.collection('users').doc(creatorId);
-      await userRef.update({
-        pollitPoints: admin.firestore.FieldValue.increment(points),
+      const pollRef = db.collection('polls').doc(pollId);
+      
+      const points = Math.floor(parseFloat(tipAmount)) * 10;
+      
+      // Update creator's points and total tips received in a transaction
+      await db.runTransaction(async (transaction) => {
+        transaction.update(userRef, {
+            pollitPoints: admin.firestore.FieldValue.increment(points),
+            tipsReceived: admin.firestore.FieldValue.increment(parseFloat(tipAmount))
+        });
+        transaction.update(pollRef, {
+            tipCount: admin.firestore.FieldValue.increment(1)
+        });
       });
 
+      // Create a notification for the creator
       const notificationRef = userRef.collection('notifications');
       await notificationRef.add({
         type: 'tip_received',
         fromId: tipperId,
         pollId,
-        amount: session.amount_total / 100,
+        amount: parseFloat(tipAmount),
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         read: false,
       });
 
-      console.log(`✅ Tip processed: ${points} points to ${creatorId}`);
+      console.log(`✅ Tip processed: ${points} points and $${tipAmount} to ${creatorId} for poll ${pollId}.`);
       break;
     }
 
