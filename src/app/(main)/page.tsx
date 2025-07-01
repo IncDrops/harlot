@@ -201,17 +201,16 @@ export default function HomePage() {
     exitRight: { x: "120%", opacity: 0, rotate: 15, transition: { duration: 0.4, ease: "easeIn" } },
   };
 
+  // Filter out any polls that might have bad data before rendering
+  const visiblePolls = polls.filter(p => p && Array.isArray(p.options) && p.options.length > 0);
+
   return (
     <>
     <div className="container mx-auto py-8 px-2 sm:px-4">
       <div className="w-full max-w-2xl mx-auto space-y-6">
         <AnimatePresence>
-            {polls.map((poll, index) => {
-            if (!poll || !Array.isArray(poll.options) || poll.options.length === 0) {
-              return null;
-            }
-
-            const isLastElement = polls.length === index + 1;
+            {visiblePolls.map((poll, index) => {
+            const isLastElement = visiblePolls.length === index + 1;
             const hasVoted = votedStates[poll.id] || false;
             const isTwoOptionPoll = poll.options.length === 2;
             const swipeDirection = swipeDirections[poll.id];
