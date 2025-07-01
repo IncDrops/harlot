@@ -144,9 +144,8 @@ async function seedData() {
             avatarUrl = `https://avatar.iran.liara.run/public/girl?username=${user.username}`;
         }
 
-        const userProfileData: Omit<User, 'bio' | 'pronouns'> = {
+        const userProfileData: User = {
             id: uid,
-            numericId: user.numericId,
             username: user.username,
             displayName: user.displayName,
             avatar: avatarUrl,
@@ -154,6 +153,8 @@ async function seedData() {
             gender: user.gender as User['gender'],
             pollitPoints: user.pollItPoints || 0,
             tipsReceived: user.tipsReceived || 0,
+            bio: user.bio || '',
+            pronouns: user.pronouns || ''
         };
         await docRef.set(userProfileData);
       } catch (error) {

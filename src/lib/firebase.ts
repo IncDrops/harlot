@@ -100,7 +100,8 @@ const fromFirestore = <T>(doc: QueryDocumentSnapshot<DocumentData>): T => {
 export const signUp = async (email: string, password: string): Promise<UserCredential> => {
   if (!auth) throw new Error("Auth is not initialized.");
   const userCred = await createUserWithEmailAndPassword(auth, email, password);
-  // You might want to create a user document in Firestore here as well
+  // NOTE: User profile document is now created by the onAuthStateChanged listener in AuthProvider
+  // to handle all sign-up methods consistently (email, Google, etc.).
   await sendEmailVerification(userCred.user);
   return userCred;
 };
@@ -177,27 +178,27 @@ export const getUserById = async (userId: string): Promise<User | null> => {
     const userRef = doc(db, 'users', userId);
     const userSnap = await getDoc(userRef);
     if (userSnap.exists()) {
-        return fromFirestore<User>(userSnap as QueryDocumentSnapshot<DocumentData>);
+        const data = userSnap.data();
+        const processedData: { [key: string]: any } = { ...data };
+        for (const key in processedData) {
+            const value = processedData[key];
+            if (value instanceof Timestamp) {
+                processedData[key] = value.toDate().toISOString();
+            }
+        }
+        return {
+            id: userSnap.id,
+            ...processedData,
+        } as User;
     }
     return null;
 }
 
-export const updateUserProfileData = async (userId: string, data: Partial<Omit<User, 'id' | 'numericId'>>): Promise<void> => {
+export const updateUserProfileData = async (userId: string, data: Partial<Omit<User, 'id'>>): Promise<void> => {
     if (!userId) throw new Error("User ID is required to update profile.");
     const userRef = doc(db, 'users', userId);
     await updateDoc(userRef, data);
 };
-
-export const getUserByNumericId = async (numericId: string): Promise<User | null> => {
-    const usersRef = collection(db, 'users');
-    // Note: This requires a Firestore index on 'numericId'
-    const q = query(usersRef, where('numericId', '==', parseInt(numericId, 10)), limit(1));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) {
-        return null;
-    }
-    return fromFirestore<User>(querySnapshot.docs[0]);
-}
 
 export const getUserByUsername = async (username: string): Promise<User | null> => {
     const usersRef = collection(db, 'users');

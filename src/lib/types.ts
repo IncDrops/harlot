@@ -2,7 +2,6 @@
 
 export interface User {
   id: string;
-  numericId: number;
   displayName: string;
   username: string;
   avatar: string;

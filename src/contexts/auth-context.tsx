@@ -8,22 +8,24 @@ import {
   signInWithPopup,
   signInAnonymously,
   updateProfile,
-  User,
+  User as FirebaseUser,
   UserCredential
 } from 'firebase/auth';
 import {
   auth,
+  db,
   signIn as firebaseSignIn,
   signUp as firebaseSignUp,
   signOut as firebaseSignOut,
   getUserById,
 } from '@/lib/firebase';
-import type { User as AppUser } from '@/lib/types'; // Import custom user type
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import type { User as AppUser } from '@/lib/types';
 
 // --- Auth Context Types ---
 interface AuthContextType {
-  user: User | null;
-  profile: AppUser | null; // Add profile to context
+  user: FirebaseUser | null;
+  profile: AppUser | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<UserCredential>;
   signUp: (email: string, password: string) => Promise<UserCredential>;
@@ -36,7 +38,7 @@ interface AuthContextType {
 // --- Default Context ---
 const AuthContext = createContext<AuthContextType>({
   user: null,
-  profile: null, // Add profile to default
+  profile: null,
   loading: true,
   signIn: async () => { throw new Error("Firebase not initialized"); },
   signUp: async () => { throw new Error("Firebase not initialized"); },
@@ -48,8 +50,8 @@ const AuthContext = createContext<AuthContextType>({
 
 // --- Provider Component ---
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [profile, setProfile] = useState<AppUser | null>(null); // Add profile state
+  const [user, setUser] = useState<FirebaseUser | null>(null);
+  const [profile, setProfile] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -61,11 +63,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       if (user) {
-        // User is signed in, fetch their Firestore profile
-        const userProfile = await getUserById(user.uid);
+        let userProfile = await getUserById(user.uid);
+        if (!userProfile) {
+          // Profile doesn't exist, so create it for new users (Google, Anon, or first-time email sign-in)
+          const username = (user.email || `user${user.uid.slice(0, 6)}`).split('@')[0].replace(/[^a-zA-Z0-9_]/g, '').slice(0, 15);
+          
+          const newUserProfileData: Omit<AppUser, 'id'> = {
+            displayName: user.displayName || username,
+            username: username,
+            avatar: user.photoURL || `https://avatar.iran.liara.run/public/?username=${username}`,
+            bio: '',
+            birthDate: new Date().toISOString(),
+            gender: 'prefer-not-to-say',
+            pollitPoints: 0,
+            tipsReceived: 0,
+          };
+          
+          await setDoc(doc(db, "users", user.uid), newUserProfileData);
+          userProfile = { id: user.uid, ...newUserProfileData };
+        }
         setProfile(userProfile);
       } else {
-        // User is signed out
         setProfile(null);
       }
       setLoading(false);
@@ -76,21 +94,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    setUser(result.user);
-    // Profile will be fetched by onAuthStateChanged
+    await signInWithPopup(auth, provider);
+    // onAuthStateChanged will handle profile creation/loading
   };
 
   const signInAnonymouslyHandler = async () => {
-    const result = await signInAnonymously(auth);
-    setUser(result.user);
-     // Profile will be fetched by onAuthStateChanged
+    await signInAnonymously(auth);
+    // onAuthStateChanged will handle profile creation/loading
   };
 
   const updateUserProfile = async (displayName: string, photoURL?: string) => {
     if (!auth.currentUser) return;
     await updateProfile(auth.currentUser, { displayName, photoURL });
-    setUser({ ...auth.currentUser }); // Refresh user state
+    setUser({ ...auth.currentUser });
      if (profile) {
         setProfile({ ...profile, displayName: displayName, avatar: photoURL || profile.avatar });
     }
@@ -98,7 +114,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const value: AuthContextType = {
     user,
-    profile, // Pass profile in value
+    profile,
     loading,
     signIn: firebaseSignIn,
     signUp: firebaseSignUp,

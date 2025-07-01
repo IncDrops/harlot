@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import type { User } from '@/lib/types';
-import { getUserByNumericId } from '@/lib/firebase';
+import { getUserById } from '@/lib/firebase';
 
 const userCache = new Map<string, User>();
 
@@ -28,7 +28,7 @@ export function useUser(userId: string | undefined) {
         let isMounted = true;
         setLoading(true);
 
-        getUserByNumericId(userId)
+        getUserById(userId)
             .then(fetchedUser => {
                 if (isMounted) {
                     if (fetchedUser) {
