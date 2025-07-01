@@ -58,7 +58,7 @@ export default function HomePage() {
         
         setLastVisible(newLastVisible);
 
-        if (newPolls.length < 10) {
+        if (newPolls.length < 50) {
             setHasMore(false);
         }
     } catch (error: any) {
