@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, PanInfo } from 'framer-motion';
@@ -41,6 +41,75 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
   const [likeCount, setLikeCount] = useState(poll.likes);
 
   const { user: creator, loading: creatorLoading } = useUser(poll.creatorId);
+
+  const [timeLeft, setTimeLeft] = useState<{
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  } | null>(() => {
+    if (!poll.endsAt) return null;
+    const end = new Date(poll.endsAt);
+    const difference = end.getTime() - new Date().getTime();
+    if (difference <= 0) return null;
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((difference / 1000 / 60) % 60);
+    const seconds = Math.floor((difference / 1000) % 60);
+    return { days, hours, minutes, seconds };
+  });
+
+  useEffect(() => {
+    if (!poll.endsAt || !timeLeft) return;
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const end = new Date(poll.endsAt);
+      const difference = end.getTime() - now.getTime();
+
+      if (difference <= 0) {
+        setTimeLeft(null);
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((difference / 1000 / 60) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
+
+      setTimeLeft({ days, hours, minutes, seconds });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [poll.endsAt, timeLeft]);
+
+  const renderTimer = () => {
+    if (!timeLeft) {
+      return <span className="text-muted-foreground">Poll ended</span>;
+    }
+
+    const { days, hours, minutes, seconds } = timeLeft;
+    const totalSecondsRemaining = days * 86400 + hours * 3600 + minutes * 60 + seconds;
+    const isEndingSoon = totalSecondsRemaining > 0 && totalSecondsRemaining < 60;
+
+    let displayString = "";
+    if (days > 0) {
+      displayString = `${days}d ${hours}h left`;
+    } else if (hours > 0) {
+      displayString = `${hours}h ${minutes}m left`;
+    } else if (minutes > 0) {
+      displayString = `${minutes}m ${seconds}s left`;
+    } else {
+      displayString = `${seconds}s left`;
+    }
+
+    return (
+      <span className={cn(isEndingSoon ? 'text-destructive font-bold' : 'text-muted-foreground')}>
+        {displayString}
+      </span>
+    );
+  };
 
   const totalVotes = useMemo(() => {
     return poll.options.reduce((acc, option) => acc + option.votes, 0);
@@ -206,22 +275,35 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
       >
         <Card className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full max-w-2xl mx-auto bg-card">
           <CardHeader>
-            <div className="flex items-start gap-3">
-              <Link href={`/profile/${creator.username}`} passHref>
-                <Avatar className="h-12 w-12 border-2 border-primary/50 cursor-pointer">
-                  {creator.avatar && <AvatarImage src={creator.avatar} alt={creator.username} data-ai-hint="anime avatar" />}
-                  <AvatarFallback>{creator.displayName[0]}</AvatarFallback>
-                </Avatar>
-              </Link>
-              <div className="flex-1">
-                <Link href={`/profile/${creator.username}`} passHref>
-                    <CardTitle className="text-base font-bold font-headline hover:underline cursor-pointer">{creator.displayName}</CardTitle>
-                </Link>
-                <CardDescription className="text-xs">
-                  @{creator.username} · {formatDistanceToNowStrict(new Date(poll.createdAt), { addSuffix: true })}
-                </CardDescription>
-              </div>
-              {poll.pledged && <Badge variant="default" className="bg-yellow-400 text-yellow-900 hover:bg-yellow-400/80">Pledged</Badge>}
+            <div className="flex items-start justify-between gap-3">
+                <div className="flex items-start gap-3">
+                    <Link href={`/profile/${creator.username}`} passHref>
+                    <Avatar className="h-12 w-12 border-2 border-primary/50 cursor-pointer">
+                        {creator.avatar && <AvatarImage src={creator.avatar} alt={creator.username} data-ai-hint="anime avatar" />}
+                        <AvatarFallback>{creator.displayName[0]}</AvatarFallback>
+                    </Avatar>
+                    </Link>
+                    <div>
+                    <Link href={`/profile/${creator.username}`} passHref>
+                        <CardTitle className="text-base font-bold font-headline hover:underline cursor-pointer">{creator.displayName}</CardTitle>
+                    </Link>
+                    <CardDescription className="text-xs">
+                        @{creator.username} · {formatDistanceToNowStrict(new Date(poll.createdAt), { addSuffix: true })}
+                    </CardDescription>
+                    </div>
+                </div>
+                <div className="text-right flex-shrink-0">
+                    {poll.pledged && poll.pledgeAmount && poll.pledgeAmount > 0 ? (
+                    <Badge variant="default" className="bg-yellow-400 text-yellow-900 hover:bg-yellow-400/80">
+                        Pledged ${poll.pledgeAmount.toFixed(2)}
+                    </Badge>
+                    ) : poll.pledged ? (
+                        <Badge variant="default" className="bg-yellow-400 text-yellow-900 hover:bg-yellow-400/80">Pledged</Badge>
+                    ) : null}
+                    <div className="text-xs mt-1">
+                    {renderTimer()}
+                    </div>
+                </div>
             </div>
              <p className="font-body text-lg pt-4 leading-relaxed">{poll.question}</p>
              {poll.description && <p className="text-sm text-muted-foreground pt-1">{poll.description}</p>}
@@ -254,5 +336,3 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
     </>
   );
 }
-
-    
