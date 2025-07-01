@@ -29,7 +29,7 @@ export default function PollFeed() {
   const fetchPolls = useCallback(async (initial = false) => {
     try {
         const pollsCollection = collection(db, "polls");
-        const constraints: QueryConstraint[] = [orderBy("createdAt", "desc"), limit(50)];
+        const constraints: QueryConstraint[] = [orderBy("createdAt", "desc"), limit(25)];
         if (lastDoc && !initial) {
             constraints.push(startAfter(lastDoc));
         }
