@@ -299,7 +299,9 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }
                     </div>
                 </div>
             </div>
-             <p className="font-body text-lg pt-4 leading-relaxed">{poll.question}</p>
+             <Link href={`/poll/${poll.id}`} passHref>
+                <p className="font-body text-lg pt-4 leading-relaxed hover:underline cursor-pointer">{poll.question}</p>
+             </Link>
              {poll.description && <p className="text-sm text-muted-foreground pt-1">{poll.description}</p>}
           </CardHeader>
           <CardContent>

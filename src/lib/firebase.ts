@@ -42,6 +42,7 @@ import {
   QueryConstraint,
   documentId,
   updateDoc,
+  DocumentSnapshot,
 } from "firebase/firestore";
 import { getFunctions } from 'firebase/functions';
 import type { Functions } from 'firebase/functions';
@@ -77,8 +78,11 @@ if (!getApps().length) {
 }
 
 // Helper to convert Firestore doc to a serializable object
-const fromFirestore = <T>(doc: QueryDocumentSnapshot<DocumentData>): T => {
+const fromFirestore = <T>(doc: QueryDocumentSnapshot<DocumentData> | DocumentSnapshot<DocumentData>): T => {
     const data = doc.data();
+    if (!data) {
+        throw new Error("Document data is empty!");
+    }
     const processedData: { [key: string]: any } = { ...data };
 
     for (const key in processedData) {
@@ -178,18 +182,7 @@ export const getUserById = async (userId: string): Promise<User | null> => {
     const userRef = doc(db, 'users', userId);
     const userSnap = await getDoc(userRef);
     if (userSnap.exists()) {
-        const data = userSnap.data();
-        const processedData: { [key: string]: any } = { ...data };
-        for (const key in processedData) {
-            const value = processedData[key];
-            if (value instanceof Timestamp) {
-                processedData[key] = value.toDate().toISOString();
-            }
-        }
-        return {
-            id: userSnap.id,
-            ...processedData,
-        } as User;
+        return fromFirestore<User>(userSnap);
     }
     return null;
 }
@@ -238,6 +231,18 @@ export const getPollsByUser = async (userId: string): Promise<Poll[]> => {
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => fromFirestore<Poll>(doc));
 };
+
+export const getPollById = async (pollId: string): Promise<Poll | null> => {
+  if (!pollId) return null;
+  const pollRef = doc(db, 'polls', pollId);
+  const pollSnap = await getDoc(pollRef);
+
+  if (pollSnap.exists()) {
+    return fromFirestore<Poll>(pollSnap);
+  }
+  return null;
+};
+
 
 // ──────────── SEARCH ────────────
 
