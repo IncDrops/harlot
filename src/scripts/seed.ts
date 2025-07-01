@@ -1,3 +1,4 @@
+
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { getAuth } from 'firebase-admin/auth';
@@ -162,7 +163,7 @@ async function seedData() {
     console.log(`✅ Seeded ${userIds.length} users into Auth and Firestore.`);
  
     // --- 2. Seed Polls (BATCHED) ---
-    console.log('🌱 Seeding polls...');
+    console.log('🌱 Seeding polls with robust data validation...');
     const pollsCollection = db.collection('polls');
     let pollBatch = db.batch();
     const pollIds: string[] = [];
@@ -176,32 +177,32 @@ async function seedData() {
         const durationMs = (poll.timer || 1440) * 60 * 1000;
 
         const pollData: Omit<Poll, 'id'> = {
-            question: poll.question,
+            question: poll.question || "Untitled Poll",
             description: poll.description || "A community-powered decision.",
-            options: poll.options.map((opt: any, index: number) => ({
+            options: (poll.options || []).map((opt: any, index: number) => ({
                 id: index + 1,
-                text: opt.text,
+                text: opt.text || `Option ${index + 1}`,
                 votes: Math.floor(Math.random() * 300),
                 imageUrl: opt.imageUrl || null,
                 affiliateLink: opt.affiliateLink || null,
             })),
-            type: (poll.type || (poll.options.length > 2 ? 'standard' : '2nd_opinion')) as 'standard' | '2nd_opinion',
+            type: (poll.type || (poll.options?.length > 2 ? 'standard' : '2nd_opinion')) as 'standard' | '2nd_opinion',
             creatorId: userIds[Math.floor(Math.random() * userIds.length)],
             createdAt: createdAt.toISOString(),
             endsAt: new Date(createdAt.getTime() + durationMs).toISOString(),
             durationMs: durationMs,
-            pledged: poll.pledgeAmount > 0,
+            pledged: (poll.pledgeAmount || 0) > 0,
             pledgeAmount: poll.pledgeAmount || 0,
             tipCount: poll.tipCount || Math.floor(Math.random() * 25),
             isNSFW: poll.nsfw || false,
             isProcessed: false,
             category: poll.category || 'General',
             likes: poll.likes || Math.floor(Math.random() * 500),
-            comments: 0,
+            comments: 0, // Will be updated by the comment seeding part
             videoUrl: poll.videoUrl,
         };
         
-        if (pollData.videoUrl === undefined) {
+        if (!pollData.videoUrl) {
           delete pollData.videoUrl;
         }
 
