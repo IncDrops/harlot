@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState, useMemo } from 'react';
@@ -24,17 +25,7 @@ import { cn } from '@/lib/utils';
 
 export default function PollDetailPage() {
   const params = useParams();
-  
-  // ADD DEBUGGING HERE
-  console.log('All available params:', params);
-  console.log('Raw params object:', JSON.stringify(params, null, 2));
-  
-  // Try both possible parameter names
-  const pollId = params.pollId as string || params.id as string;
-  
-  console.log('Extracted pollId:', pollId);
-  console.log('Type of pollId:', typeof pollId);
-  console.log('Is pollId truthy?', !!pollId);
+  const pollId = params.pollId as string;
   
   const { user } = useAuth();
   const { toast } = useToast();
@@ -54,34 +45,17 @@ export default function PollDetailPage() {
   }, [poll]);
 
   useEffect(() => {
-    console.log('useEffect triggered with pollId:', pollId);
-    
-    if (!pollId) {
-      console.log('No pollId found, returning early');
-      return;
-    }
+    if (!pollId) return;
 
     const fetchPoll = async () => {
-      console.log('Starting to fetch poll with ID:', pollId);
       setLoading(true);
-      
-      try {
-        const pollData = await getPollById(pollId);
-        console.log('Poll data received:', pollData);
-        
-        if (pollData) {
-          setPoll(pollData);
-          console.log('Poll set successfully');
-        } else {
-          console.log('No poll data found, calling notFound()');
-          return notFound();
-        }
-      } catch (error) {
-        console.error('Error fetching poll:', error);
+      const pollData = await getPollById(pollId);
+      if (pollData) {
+        setPoll(pollData);
+      } else {
         return notFound();
-      } finally {
-        setLoading(false);
       }
+      setLoading(false);
     };
 
     fetchPoll();
@@ -93,6 +67,8 @@ export default function PollDetailPage() {
       getDoc(likeRef).then(docSnap => {
         if (docSnap.exists()) setIsLiked(true);
       });
+      // In a real app, you'd check a 'votes' subcollection to see if user voted.
+      // For now, client-side state `votedOptionId` will suffice.
     }
   }, [user, poll]);
 
@@ -108,6 +84,8 @@ export default function PollDetailPage() {
     }
     if (votedOptionId || !poll) return;
 
+    // This is where you would call a Firebase function to cast a vote securely
+    // For now, we'll do an optimistic update on the client
     setPoll(currentPoll => {
       if (!currentPoll) return null;
       const newPoll = { ...currentPoll };
@@ -156,17 +134,9 @@ export default function PollDetailPage() {
   const isPollEnded = poll && new Date(poll.endsAt) < new Date();
   const showResults = votedOptionId !== null || isPollEnded;
 
-  // ADD DEBUGGING INFO TO THE UI
   if (loading || creatorLoading) {
     return (
       <div className="container mx-auto py-8 px-2 sm:px-4">
-        <div className="mb-4 p-4 bg-yellow-100 border border-yellow-400 rounded">
-          <h3 className="font-bold">Debug Info:</h3>
-          <p>Loading state: {loading ? 'true' : 'false'}</p>
-          <p>Creator loading: {creatorLoading ? 'true' : 'false'}</p>
-          <p>Poll ID: {pollId || 'undefined'}</p>
-          <p>All params: {JSON.stringify(params)}</p>
-        </div>
         <Card className="max-w-2xl mx-auto">
           <CardHeader>
             <div className="flex items-start gap-3">
@@ -194,19 +164,7 @@ export default function PollDetailPage() {
   }
 
   if (!poll || !creator) {
-    return (
-      <div className="container mx-auto py-8 px-2 sm:px-4">
-        <div className="mb-4 p-4 bg-red-100 border border-red-400 rounded">
-          <h3 className="font-bold">Debug Info - Poll Not Found:</h3>
-          <p>Poll ID: {pollId || 'undefined'}</p>
-          <p>Poll data: {poll ? 'exists' : 'null'}</p>
-          <p>Creator data: {creator ? 'exists' : 'null'}</p>
-          <p>All params: {JSON.stringify(params)}</p>
-          <p>Current URL: {typeof window !== 'undefined' ? window.location.href : 'server-side'}</p>
-        </div>
-        <p>Poll not found. This would normally trigger notFound().</p>
-      </div>
-    );
+    return notFound();
   }
   
   const renderPollContent = () => {
@@ -287,14 +245,6 @@ export default function PollDetailPage() {
   return (
     <>
       <div className="container mx-auto py-8 px-2 sm:px-4">
-        {/* DEBUG INFO */}
-        <div className="mb-4 p-4 bg-green-100 border border-green-400 rounded">
-          <h3 className="font-bold">Debug Info - Success:</h3>
-          <p>Poll ID: {pollId}</p>
-          <p>Poll found: {poll?.question}</p>
-          <p>Creator: {creator?.username}</p>
-        </div>
-        
         <Card className="max-w-2xl mx-auto">
           <CardHeader>
             <div className="flex items-start justify-between gap-3">
