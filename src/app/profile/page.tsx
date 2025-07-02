@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -39,11 +38,19 @@ export default function ProfilePage() {
         });
     };
     
-    if (loading || !profile) {
+    if (loading) {
         return (
              <div className="min-h-screen bg-muted/40 flex items-center justify-center">
                 <p>Loading profile...</p>
              </div>
+        )
+    }
+
+    if (!profile) {
+        return (
+            <div className="min-h-screen bg-muted/40 flex items-center justify-center">
+                <p>Could not load profile. Please try refreshing the page.</p>
+            </div>
         )
     }
 

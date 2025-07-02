@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useEffect, useRef } from 'react';
@@ -128,10 +127,18 @@ export default function SettingsPage() {
     }
   }
 
-  if (loading || !user || !profile) {
+  if (loading) {
     return (
       <div className="container mx-auto py-8 text-center">
         <p>Loading settings...</p>
+      </div>
+    );
+  }
+
+  if (!user || !profile) {
+    return (
+      <div className="container mx-auto py-8 text-center">
+        <p>Could not load profile. Please try refreshing the page.</p>
       </div>
     );
   }
