@@ -6,7 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { CommentListItem } from './comment-list-item';
-import { getCommentsForPoll, addCommentToPoll, getUserById } from '@/lib/firebase';
+import { getCommentsForPoll, addCommentToPoll } from '@/lib/firebase';
 import type { Comment } from '@/lib/types';
 import { useAuth } from '@/contexts/auth-context';
 import { useToast } from '@/hooks/use-toast';
@@ -18,7 +18,7 @@ interface CommentSheetProps {
 }
 
 export function CommentSheet({ pollId, isOpen, onOpenChange }: CommentSheetProps) {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const { toast } = useToast();
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
@@ -39,7 +39,7 @@ export function CommentSheet({ pollId, isOpen, onOpenChange }: CommentSheetProps
   }, [isOpen, pollId, toast]);
 
   const handleSubmitComment = async () => {
-    if (!user) {
+    if (!user || !profile) {
       toast({ variant: 'destructive', title: 'Please log in to comment.' });
       return;
     }
@@ -50,22 +50,11 @@ export function CommentSheet({ pollId, isOpen, onOpenChange }: CommentSheetProps
 
     setIsSubmitting(true);
     try {
-      const currentUserProfile = await getUserById(user.uid);
-      if (!currentUserProfile) {
-        toast({
-            variant: "destructive",
-            title: "Error",
-            description: "Could not find your user profile to post a comment."
-        });
-        setIsSubmitting(false);
-        return;
-      }
-      
       const commentData: Omit<Comment, 'id' | 'createdAt'> = {
         pollId: pollId,
         userId: user.uid,
-        username: currentUserProfile.username,
-        avatar: currentUserProfile.avatar,
+        username: profile.username,
+        avatar: profile.avatar,
         text: newComment,
       };
 
