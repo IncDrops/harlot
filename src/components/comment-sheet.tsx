@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -39,9 +40,17 @@ export function CommentSheet({ pollId, isOpen, onOpenChange }: CommentSheetProps
   }, [isOpen, pollId, toast]);
 
   const handleSubmitComment = async () => {
-    if (!user || !profile) {
+    if (!user) {
       toast({ variant: 'destructive', title: 'Please log in to comment.' });
       return;
+    }
+    if (!profile || !profile.username) {
+        toast({
+            variant: "destructive",
+            title: "Cannot post comment",
+            description: "Your user profile is not fully loaded yet. Please wait a moment and try again.",
+        });
+        return;
     }
     if (newComment.trim().length < 3) {
       toast({ variant: 'destructive', title: 'Comment must be at least 3 characters long.' });
@@ -50,19 +59,19 @@ export function CommentSheet({ pollId, isOpen, onOpenChange }: CommentSheetProps
 
     setIsSubmitting(true);
     try {
-      const commentData: Omit<Comment, 'id' | 'createdAt'> = {
-        pollId: pollId,
+      const commentPayload = {
         userId: user.uid,
         username: profile.username,
-        avatar: profile.avatar,
-        text: newComment,
+        avatar: profile.avatar || `https://avatar.iran.liara.run/public/?username=${profile.username}`,
+        text: newComment.trim(),
       };
 
-      await addCommentToPoll(pollId, commentData);
+      await addCommentToPoll(pollId, commentPayload);
       
       const optimisticComment: Comment = {
-        ...commentData,
         id: new Date().toISOString(), // temp id
+        pollId: pollId,
+        ...commentPayload,
         createdAt: new Date().toISOString(),
       };
       setComments([optimisticComment, ...comments]);

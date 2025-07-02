@@ -138,22 +138,22 @@ export const getCommentsForPoll = async (pollId: string): Promise<Comment[]> => 
   return snapshot.docs.map(doc => fromFirestore<Comment>(doc));
 };
 
-export const addCommentToPoll = async (pollId: string, commentData: Omit<Comment, "id" | "createdAt">): Promise<void> => {
+export const addCommentToPoll = async (pollId: string, commentData: Pick<Comment, 'userId' | 'username' | 'avatar' | 'text'>): Promise<void> => {
   const pollRef = doc(db, "polls", pollId);
   const commentCol = collection(pollRef, "comments");
 
   await runTransaction(db, async (transaction) => {
-    // We get the poll doc to ensure it exists, but we don't need to read it.
-    await transaction.get(pollRef); 
+    const pollDoc = await transaction.get(pollRef);
+    if (!pollDoc.exists()) {
+        throw new Error("Poll does not exist.");
+    }
     
-    // Add the new comment
     const newCommentRef = doc(commentCol);
     transaction.set(newCommentRef, {
       ...commentData,
       createdAt: serverTimestamp(),
     });
 
-    // Increment the comment count on the poll
     transaction.update(pollRef, { comments: increment(1) });
   });
 };
