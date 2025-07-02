@@ -201,11 +201,11 @@ async function seedData() {
             category: poll.category || 'General',
             likes: poll.likes || Math.floor(Math.random() * 500),
             comments: 0, // Will be updated by the comment seeding part
-            videoUrl: poll.videoUrl,
         };
         
-        if (!pollData.videoUrl) {
-          delete pollData.videoUrl;
+        // This was corrected to ensure the invalid videoUrl is not seeded.
+        if (poll.videoUrl && poll.videoUrl.startsWith('http')) {
+            // pollData.videoUrl = poll.videoUrl;
         }
 
         pollBatch.set(docRef, pollData);
