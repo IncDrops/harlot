@@ -71,32 +71,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
-      if (user) {
-        let userProfile = await getUserById(user.uid);
-        if (!userProfile) {
-          // Profile doesn't exist, so create it for new users (Google, Anon, or first-time email sign-in)
-          const username = (user.email || `user${user.uid.slice(0, 6)}`).split('@')[0].replace(/[^a-zA-Z0-9_]/g, '').slice(0, 15);
-          
-          const newUserProfileData: Omit<AppUser, 'id'> = {
-            displayName: user.displayName || username,
-            username: username,
-            avatar: user.photoURL || `https://avatar.iran.liara.run/public/?username=${username}`,
-            bio: '',
-            birthDate: new Date().toISOString(),
-            gender: 'prefer-not-to-say',
-            pollitPoints: 0,
-            tipsReceived: 0,
-          };
-          
-          await setDoc(doc(db, "users", user.uid), newUserProfileData);
-          userProfile = { id: user.uid, ...newUserProfileData };
+      try {
+        setUser(user);
+        if (user) {
+          let userProfile = await getUserById(user.uid);
+          if (!userProfile) {
+            // Profile doesn't exist, so create it for new users (Google, Anon, or first-time email sign-in)
+            const username = (user.email || `user${user.uid.slice(0, 6)}`).split('@')[0].replace(/[^a-zA-Z0-9_]/g, '').slice(0, 15);
+            
+            const newUserProfileData: Omit<AppUser, 'id'> = {
+              displayName: user.displayName || username,
+              username: username,
+              avatar: user.photoURL || `https://avatar.iran.liara.run/public/?username=${username}`,
+              bio: '',
+              birthDate: new Date().toISOString(),
+              gender: 'prefer-not-to-say',
+              pollitPoints: 0,
+              tipsReceived: 0,
+            };
+            
+            await setDoc(doc(db, "users", user.uid), newUserProfileData);
+            userProfile = { id: user.uid, ...newUserProfileData };
+          }
+          setProfile(userProfile);
+        } else {
+          setProfile(null);
         }
-        setProfile(userProfile);
-      } else {
+      } catch (error) {
+        console.error("Error during authentication state change:", error);
+        // Ensure app doesn't hang in a broken state
         setProfile(null);
+      } finally {
+        // This is crucial to prevent the app from showing a blank screen
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();
