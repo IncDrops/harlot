@@ -1,63 +1,51 @@
+
 rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    // Helper functions
-    function isSignedIn() {
-      return request.auth != null;
-    }
-
-    function isOwner(userId) {
-      return request.auth.uid == userId;
-    }
-
-    // USERS
-    // Anyone can read user profiles (for display names, avatars etc.)
-    // Only the owner can create or update their own profile
+    
+    // Users: Allow users to read any profile, but only write to their own.
     match /users/{userId} {
       allow read: if true;
-      allow create, update: if isSignedIn() && isOwner(userId);
+      allow write: if request.auth != null && request.auth.uid == userId;
     }
 
-    // POLLS
-    // Anyone can read polls
-    // Signed-in users can create polls
-    // Only the poll creator can update or delete their poll
+    // Polls: Allow anyone to read polls, but only authenticated users to create them.
+    // Liking and commenting are handled via subcollections and transactions.
     match /polls/{pollId} {
       allow read: if true;
-      allow create: if isSignedIn();
-      allow update, delete: if isSignedIn() && resource.data.creatorId == request.auth.uid;
+      allow create: if request.auth != null;
+      // Allow updates only for specific counter fields (likes, comments, tipCount)
+      // The `addCommentToPoll` function updates `comments`.
+      allow update: if request.auth != null && 
+                       request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes', 'comments', 'tipCount', 'isProcessed']);
+    }
 
-      // LIKES (subcollection)
-      // Anyone can read likes (for like counts)
-      // Signed-in users can create/delete their own like
-      match /likes/{userId} {
-        allow read: if true;
-        allow create, delete: if isSignedIn() && isOwner(userId);
-      }
+    // Comments: Allow authenticated users to create comments, and anyone to read them.
+    match /polls/{pollId}/comments/{commentId} {
+      allow read: if true;
+      // User must be logged in, and the comment's userId must match their own uid.
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
 
-      // COMMENTS (subcollection)
-      // Anyone can read comments
-      // Signed-in users can create comments
-      // Comment authors can delete their own comments
-      match /comments/{commentId} {
-        allow read: if true;
-        allow create: if isSignedIn();
-        allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
-      }
+    // Likes: Allow authenticated users to create/delete their own like document.
+    match /polls/{pollId}/likes/{userId} {
+      allow read: if true;
+      // A user can only like/unlike for themselves.
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Notifications: Users can only read their own notifications.
+    match /users/{userId}/notifications/{notificationId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      // Notifications are created by backend functions, so no client-side write rules are needed.
+      allow write: if false; 
     }
     
-    // MESSAGES
-    // Only participants can read or write messages in a conversation
+    // Messages: Users can only read/write messages where they are a participant.
     match /messages/{messageId} {
-        allow read, create: if isSignedIn() && request.auth.uid in resource.data.participants;
-    }
-
-    // NOTIFICATIONS
-    // Only the user themselves can access their notifications
-    match /users/{userId}/notifications/{notificationId} {
-      allow read, create, update, delete: if isSignedIn() && isOwner(userId);
+      allow read, write: if request.auth != null && request.auth.uid in resource.data.participants;
     }
   }
 }
