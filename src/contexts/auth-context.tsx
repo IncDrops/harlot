@@ -77,7 +77,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           let userProfile = await getUserById(user.uid);
           if (!userProfile) {
             // Profile doesn't exist, so create it for new users (Google, Anon, or first-time email sign-in)
-            const username = (user.email || `user${user.uid.slice(0, 6)}`).split('@')[0].replace(/[^a-zA-Z0-9_]/g, '').slice(0, 15);
+            let username = (user.email || `user${user.uid.slice(0, 6)}`).split('@')[0].replace(/[^a-zA-Z0-9_]/g, '').slice(0, 15);
+            // Ensure username is at least 3 characters long to comply with security rules
+            if (username.length < 3) {
+              username = `${username}${user.uid.slice(0, 4)}`;
+            }
+            username = username.slice(0, 20); // Final length check
             
             const newUserProfileData: Omit<AppUser, 'id'> = {
               displayName: user.displayName || username,
