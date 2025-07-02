@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState, useMemo } from 'react';
@@ -53,6 +52,7 @@ export default function PollDetailPage() {
       if (pollData) {
         setPoll(pollData);
       } else {
+        // We call notFound here if the poll ID itself is invalid
         return notFound();
       }
       setLoading(false);
@@ -134,7 +134,11 @@ export default function PollDetailPage() {
   const isPollEnded = poll && new Date(poll.endsAt) < new Date();
   const showResults = votedOptionId !== null || isPollEnded;
 
-  if (loading || creatorLoading) {
+  // --- Start of Corrected Code ---
+  // Show skeleton if poll is loading, if creator is loading, OR if the poll has
+  // loaded but the creator data hasn't arrived yet (the "in-between" state).
+  if (loading || creatorLoading || (poll && !creator)) {
+  // --- End of Corrected Code ---
     return (
       <div className="container mx-auto py-8 px-2 sm:px-4">
         <Card className="max-w-2xl mx-auto">
@@ -163,6 +167,8 @@ export default function PollDetailPage() {
     );
   }
 
+  // After all loading is finished, if either the poll or creator
+  // data is missing, it's a genuine "Not Found" situation.
   if (!poll || !creator) {
     return notFound();
   }
