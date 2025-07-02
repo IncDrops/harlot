@@ -123,11 +123,19 @@ async function seedData() {
       const password = 'Password123!';
 
       try {
-        // Create user in Firebase Auth
+        let avatarUrl = `https://avatar.iran.liara.run/public/?username=${user.username}`;
+        if (user.gender === 'male') {
+            avatarUrl = `https://avatar.iran.liara.run/public/boy?username=${user.username}`;
+        } else if (user.gender === 'female') {
+            avatarUrl = `https://avatar.iran.liara.run/public/girl?username=${user.username}`;
+        }
+
+        // Create user in Firebase Auth with the correct photoURL
         const userRecord = await auth.createUser({
           email,
           password,
           displayName: user.displayName,
+          photoURL: avatarUrl,
           emailVerified: true,
         });
 
@@ -137,13 +145,6 @@ async function seedData() {
         // Create Firestore doc
         const docRef = usersCollection.doc(uid);
         
-        let avatarUrl = `https://avatar.iran.liara.run/public/?username=${user.username}`;
-        if (user.gender === 'male') {
-            avatarUrl = `https://avatar.iran.liara.run/public/boy?username=${user.username}`;
-        } else if (user.gender === 'female') {
-            avatarUrl = `https://avatar.iran.liara.run/public/girl?username=${user.username}`;
-        }
-
         const userProfileData: User = {
             id: uid,
             username: user.username,
