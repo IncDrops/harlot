@@ -9,7 +9,7 @@ export interface User {
   pronouns?: string;
   birthDate: string; // ISO string
   gender: 'male' | 'female' | 'non-binary' | 'prefer-not-to-say';
-  pollitPoints: number;
+  pollitPoints?: number;
   tipsReceived?: number;
 }
 

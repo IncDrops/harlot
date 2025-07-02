@@ -84,19 +84,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             }
             username = username.slice(0, 20); // Final length check
             
-            const newUserProfileData: Omit<AppUser, 'id'> = {
+            // Do NOT set pollitPoints or tipsReceived here. Firestore rules will block this.
+            // These fields should be handled server-side or initialized by cloud functions.
+            const newUserProfileData: Omit<AppUser, 'id' | 'pollitPoints' | 'tipsReceived'> & { pollitPoints?: number; tipsReceived?: number; } = {
               displayName: user.displayName || username,
               username: username,
               avatar: user.photoURL || `https://avatar.iran.liara.run/public/?username=${username}`,
               bio: '',
               birthDate: new Date().toISOString(),
               gender: 'prefer-not-to-say',
-              pollitPoints: 0,
-              tipsReceived: 0,
             };
             
             await setDoc(doc(db, "users", user.uid), newUserProfileData);
-            userProfile = { id: user.uid, ...newUserProfileData };
+            userProfile = { id: user.uid, ...newUserProfileData, pollitPoints: 0, tipsReceived: 0 };
           }
           setProfile(userProfile);
         } else {
