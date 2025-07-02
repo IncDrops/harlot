@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
@@ -6,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, PanInfo } from 'framer-motion';
 import { formatDistanceToNowStrict } from 'date-fns';
-import { Heart, MessageCircle, Gift, Share2 } from 'lucide-react';
+import { Heart, MessageCircle, Gift, Share2, Check } from 'lucide-react';
 import { doc, getDoc } from 'firebase/firestore';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -30,11 +29,12 @@ interface PollCardProps {
   onSwipe: (direction: 'left' | 'right') => void;
   showResults: boolean;
   isTwoOptionPoll: boolean;
+  votedOptionId?: number | null;
 }
 
 const MotionCard = motion(Card);
 
-export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }: PollCardProps) {
+export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, votedOptionId }: PollCardProps) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isCommentSheetOpen, setIsCommentSheetOpen] = useState(false);
@@ -210,11 +210,16 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }
                 </div>
               )}
               {showResults && (
-                <div className="absolute inset-0 bg-black/60 flex items-center justify-center rounded-2xl flex-col">
+                <div className="absolute inset-0 bg-black/60 flex items-center justify-center rounded-2xl flex-col p-2">
                   <span className="text-white text-3xl font-bold font-headline">
                     {totalVotes > 0 ? Math.round((option.votes / totalVotes) * 100) : 0}%
                   </span>
-                  <span className="text-white/80 text-sm">{option.votes} votes</span>
+                  <span className="text-white/80 text-sm mb-2">{option.votes} votes</span>
+                   {showResults && votedOptionId === option.id && (
+                    <Badge variant="outline" className="bg-white/20 text-white backdrop-blur-sm border-white/50 text-xs">
+                        <Check className="h-3 w-3 mr-1" /> Voted
+                    </Badge>
+                  )}
                 </div>
               )}
             </div>
@@ -232,8 +237,15 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll }
                 <div key={`${poll.id}-option-${option.id || index}`}>
                   {showResults ? (
                      <div className="space-y-1">
-                      <div className="flex justify-between text-sm font-medium">
-                        <span className="font-semibold">{option.text}</span>
+                      <div className="flex justify-between items-center text-sm font-medium">
+                        <span className="font-semibold flex items-center gap-2">
+                           {option.text}
+                           {showResults && votedOptionId === option.id && (
+                                <Badge variant="secondary" className="text-xs">
+                                    <Check className="h-3 w-3 mr-1" /> You voted
+                                </Badge>
+                            )}
+                        </span>
                         <span className="text-muted-foreground">{Math.round(percentage)}% ({option.votes})</span>
                       </div>
                       <Progress value={percentage} className="h-4 rounded-full" />

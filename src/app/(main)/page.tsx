@@ -32,7 +32,7 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   
-  const [votedStates, setVotedStates] = useState<{ [key: string]: boolean }>({});
+  const [votedOptions, setVotedOptions] = useState<{ [key: string]: number | null }>({});
   const [animatingCards, setAnimatingCards] = useState<{ [key: string]: 'exiting' | 'entering' | null }>({});
   const [swipeDirections, setSwipeDirections] = useState<{ [key: string]: "left" | "right" | null }>({});
   
@@ -138,7 +138,7 @@ export default function HomePage() {
     }
 
     const poll = polls.find(p => p.id === pollId);
-    if (!poll || !Array.isArray(poll.options) || votedStates[pollId] || animatingCards[pollId]) return;
+    if (!poll || !Array.isArray(poll.options) || votedOptions[pollId] || animatingCards[pollId]) return;
 
     const majorityVotes = Math.max(...poll.options.map(o => o.votes), 0);
     const isLocked = poll.pledged && poll.pledgeAmount && (poll.pledgeAmount * 0.5) / (majorityVotes + 1) < 0.10;
@@ -150,7 +150,7 @@ export default function HomePage() {
         handleSwipeVote(pollId, optionId, direction);
       } else {
         performVote(pollId, optionId);
-        setVotedStates(prev => ({ ...prev, [pollId]: true }));
+        setVotedOptions(prev => ({ ...prev, [pollId]: optionId }));
       }
     };
     
@@ -162,7 +162,7 @@ export default function HomePage() {
   };
 
   const handleSwipeVote = (pollId: string, optionId: number, direction: "left" | "right") => {
-    if (animatingCards[pollId] || votedStates[pollId]) return;
+    if (animatingCards[pollId] || votedOptions[pollId]) return;
 
     // Start exit animation
     setAnimatingCards(prev => ({ ...prev, [pollId]: 'exiting' }));
@@ -171,7 +171,7 @@ export default function HomePage() {
     // After exit animation, update vote and start re-entry
     setTimeout(() => {
         performVote(pollId, optionId);
-        setVotedStates(prev => ({ ...prev, [pollId]: true }));
+        setVotedOptions(prev => ({ ...prev, [pollId]: optionId }));
         setAnimatingCards(prev => ({ ...prev, [pollId]: 'entering' }));
     }, 400); // Wait for exit animation to complete
     
@@ -228,12 +228,11 @@ export default function HomePage() {
     }
   };
 
-  const getCardVariant = (poll: Poll, index: number) => {
+  const getCardVariant = (poll: Poll) => {
     const animationState = animatingCards[poll.id];
-    const swipeDirection = swipeDirections[poll.id];
-    const hasVoted = votedStates[poll.id];
-
+    
     if (animationState === 'exiting') {
+      const swipeDirection = swipeDirections[poll.id];
       return swipeDirection === 'left' ? 'exitLeft' : 'exitRight';
     }
     
@@ -244,13 +243,12 @@ export default function HomePage() {
     return 'animate';
   };
 
-  const getInitialCardVariant = (poll: Poll, index: number) => {
+  const getInitialCardVariant = (poll: Poll) => {
     const animationState = animatingCards[poll.id];
-    const swipeDirection = swipeDirections[poll.id];
-    const hasVoted = votedStates[poll.id];
 
     if (animationState === 'entering') {
       // Enter from opposite side of swipe direction
+      const swipeDirection = swipeDirections[poll.id];
       return swipeDirection === 'left' ? 'enterFromRight' : 'enterFromLeft';
     }
 
@@ -265,7 +263,7 @@ export default function HomePage() {
       <div className="w-full max-w-2xl mx-auto space-y-6">
         {visiblePolls.map((poll, index) => {
           const isLastElement = visiblePolls.length === index + 1;
-          const hasVoted = votedStates[poll.id] || false;
+          const hasVoted = !!votedOptions[poll.id];
           const isTwoOptionPoll = poll.options.length === 2;
 
           return (
@@ -275,8 +273,8 @@ export default function HomePage() {
               key={poll.id}
               custom={index}
               variants={pollCardVariants}
-              initial={getInitialCardVariant(poll, index)}
-              animate={getCardVariant(poll, index)}
+              initial={getInitialCardVariant(poll)}
+              animate={getCardVariant(poll)}
               style={{ 
                 zIndex: animatingCards[poll.id] === 'exiting' ? 10 : 1 
               }}
@@ -292,6 +290,7 @@ export default function HomePage() {
                   handleVote(poll.id, optionId);
                 }}
                 showResults={hasVoted}
+                votedOptionId={votedOptions[poll.id]}
                 isTwoOptionPoll={isTwoOptionPoll}
               />
             </motion.div>
