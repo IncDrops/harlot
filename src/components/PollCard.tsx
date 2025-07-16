@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
@@ -311,8 +312,8 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
                     </div>
                 </div>
             </div>
-             <Link href={`/poll/${poll.id}`} className="block cursor-pointer">
-                <p className="font-body text-lg pt-4 leading-relaxed hover:underline">{poll.question}</p>
+             <Link href={`/poll/${poll.id}`} className="block cursor-pointer pt-4">
+                <p className="font-body text-lg leading-relaxed hover:underline">{poll.question}</p>
                 {poll.description && <p className="text-sm text-muted-foreground pt-1">{poll.description}</p>}
              </Link>
           </CardHeader>
