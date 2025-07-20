@@ -50,13 +50,9 @@ export interface Comment {
 
 export interface Notification {
     id: string;
-    type: 'new_follower' | 'new_vote' | 'poll_ending' | 'tip_received' | 'new_comment';
-    fromId: string;
-    fromUsername?: string;
-
-    pollId?: string;
-    amount?: number;
-
+    type: 'analysis_complete' | 'data_anomaly' | 'insight_available' | 'system_update';
+    title: string;
+    description: string;
     createdAt: string; // ISO string
     read: boolean;
 }

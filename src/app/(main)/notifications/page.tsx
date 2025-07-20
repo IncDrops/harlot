@@ -2,22 +2,57 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Bell, Gift, ThumbsUp, UserPlus, MessageSquare } from "lucide-react";
+import { Bell, CheckCircle, AlertTriangle, Info } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/auth-context";
-import { getNotificationsForUser } from "@/lib/firebase";
-import type { Notification } from "@/lib/types";
+import type { Notification } from "@/lib/types"; // Assuming Notification type exists
 import { formatDistanceToNowStrict } from 'date-fns';
 import { useRouter } from 'next/navigation';
+import { cn } from "@/lib/utils";
+
+// Mock data for demonstration purposes
+const mockNotifications: Notification[] = [
+    {
+        id: "1",
+        type: "analysis_complete",
+        title: "Market Entry analysis for 'Project Titan' is complete.",
+        description: "Primary recommendation: Proceed with Market Y.",
+        createdAt: new Date(Date.now() - 1000 * 60 * 15).toISOString(), // 15 mins ago
+        read: false,
+    },
+    {
+        id: "2",
+        type: "data_anomaly",
+        title: "Data Anomaly Detected in CRM Source",
+        description: "Higher than average lead drop-off rate detected in the last 24 hours.",
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), // 2 hours ago
+        read: false,
+    },
+    {
+        id: "3",
+        type: "insight_available",
+        title: "New Insight: Competitor 'Innovate Inc.' launched a new product.",
+        description: "Potential impact on our Q4 market share.",
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), // 1 day ago
+        read: true,
+    },
+     {
+        id: "4",
+        type: "system_update",
+        title: "System Maintenance Scheduled",
+        description: "Pollitago will be undergoing scheduled maintenance on Sunday at 2 AM.",
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString(), // 2 days ago
+        read: true,
+    }
+];
 
 const notificationDetails = {
-    'new_follower': { icon: UserPlus, text: (n: Notification) => `${n.fromUsername} started following you.` },
-    'new_vote': { icon: ThumbsUp, text: (n: Notification) => `${n.fromUsername} and others voted on your poll.` },
-    'poll_ending': { icon: Bell, text: (n: Notification) => `Your poll is ending soon.` },
-    'tip_received': { icon: Gift, text: (n: Notification) => `You received a $${n.amount} tip from ${n.fromUsername}.`},
-    'new_comment': { icon: MessageSquare, text: (n: Notification) => `${n.fromUsername} commented on your poll.`},
+    'analysis_complete': { icon: CheckCircle, color: 'text-green-500' },
+    'data_anomaly': { icon: AlertTriangle, color: 'text-yellow-500' },
+    'insight_available': { icon: Info, color: 'text-blue-500' },
+    'system_update': { icon: Bell, color: 'text-muted-foreground' },
 };
+
 
 export default function NotificationsPage() {
     const { user, loading: authLoading } = useAuth();
@@ -30,9 +65,11 @@ export default function NotificationsPage() {
           router.push('/signin');
         } else if (user) {
             setLoading(true);
-            getNotificationsForUser(user.uid)
-                .then(setNotifications)
-                .finally(() => setLoading(false));
+            // In a real app, this would be a fetch call to your backend
+            setTimeout(() => {
+                setNotifications(mockNotifications);
+                setLoading(false);
+            }, 1000);
         }
     }, [user, authLoading, router]);
 
@@ -45,36 +82,34 @@ export default function NotificationsPage() {
     }
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 max-w-4xl">
+       <h1 className="text-2xl font-heading font-bold mb-6">Notifications</h1>
       <Card>
-        <CardHeader>
-          <CardTitle>Notifications</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
+        <CardContent className="p-0">
+          <div className="space-y-0">
             {loading ? (
-                <div className="flex items-center justify-center h-48 text-muted-foreground">
+                <div className="flex items-center justify-center h-48 text-muted-foreground p-6">
                     <p>Loading notifications...</p>
                 </div>
             ) : notifications.length > 0 ? (
                 notifications.map((notification) => {
-                    const details = notificationDetails[notification.type as keyof typeof notificationDetails] || { icon: Bell, text: () => 'New notification' };
+                    const details = notificationDetails[notification.type as keyof typeof notificationDetails] || { icon: Bell, color: 'text-muted-foreground' };
                     return (
-                        <div key={notification.id} className="flex items-start gap-4 p-4 rounded-lg hover:bg-muted/50 transition-colors">
-                            <Avatar className="h-8 w-8 border">
-                                <div className="flex h-full w-full items-center justify-center rounded-full bg-background">
-                                   <details.icon className="h-4 w-4 text-muted-foreground" />
-                                </div>
-                            </Avatar>
-                            <div className="flex-1">
-                                <p className="text-sm">{details.text(notification)}</p>
-                                <p className="text-xs text-muted-foreground mt-1">{formatDistanceToNowStrict(new Date(notification.createdAt), { addSuffix: true })}</p>
+                        <div key={notification.id} className={cn("flex items-start gap-4 p-4 border-b transition-colors hover:bg-muted/50", !notification.read && "bg-muted/30 font-semibold")}>
+                            <div className="flex h-full w-auto items-center justify-center rounded-full bg-background mt-1">
+                               <details.icon className={cn("h-5 w-5", details.color)} />
                             </div>
+                            <div className="flex-1">
+                                <p className={cn("text-sm", !notification.read && "text-foreground")}>{notification.title}</p>
+                                <p className="text-sm text-muted-foreground font-normal">{notification.description}</p>
+                                <p className="text-xs text-muted-foreground mt-1 font-normal">{formatDistanceToNowStrict(new Date(notification.createdAt), { addSuffix: true })}</p>
+                            </div>
+                            {!notification.read && <div className="w-2 h-2 rounded-full bg-primary mt-2 animate-pulse"></div>}
                         </div>
                     );
                 })
             ) : (
-                <div className="flex flex-col items-center justify-center h-48 text-muted-foreground border rounded-lg">
+                <div className="flex flex-col items-center justify-center h-64 text-muted-foreground border-t">
                     <Bell className="h-12 w-12 mb-4" />
                     <p className="text-lg">You have no new notifications.</p>
                 </div>
