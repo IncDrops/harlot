@@ -62,7 +62,7 @@ export interface Message {
   text: string;
   senderId: string;
   recipientId: string;
-  createdAt: Date;
+  createdAt: string; // ISO String
   participants: string[];
   participantsId: string;
 }

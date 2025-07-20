@@ -14,16 +14,8 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { useAuth } from "@/contexts/auth-context";
-import type { User } from "@/lib/types";
+import type { User, Message } from "@/lib/types";
 
-type Message = {
-  id?: string;
-  text: string;
-  senderId: string;
-  recipientId: string;
-  createdAt: Date | null;
-  participants: string[];
-};
 
 type MessageContextType = {
   messages: Message[];
@@ -51,14 +43,11 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
       return;
     }
 
-    const participantsQuery = [
-        [user.uid, currentChatUser.id].sort().join('_'),
-        [currentChatUser.id, user.uid].sort().join('_')
-    ];
+    const participantsQueryValue = [user.uid, currentChatUser.id].sort().join('_');
 
     const q = query(
       collection(db, "messages"),
-      where("participantsId", "in", participantsQuery),
+      where("participantsId", "==", participantsQueryValue),
       orderBy("createdAt", "asc")
     );
 
@@ -68,7 +57,7 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
         return {
           id: doc.id,
           ...data,
-          createdAt: (data.createdAt as Timestamp)?.toDate() || null,
+          createdAt: (data.createdAt as Timestamp)?.toDate() || new Date(),
         } as Message;
       });
       setMessages(msgs);

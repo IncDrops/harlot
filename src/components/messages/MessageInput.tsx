@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useMessages } from "@/contexts/message-context";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 
@@ -21,17 +21,25 @@ export const MessageInput = () => {
     setText("");
     setIsSending(false);
   };
+  
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSend(e);
+    }
+  }
 
   return (
-    <form onSubmit={handleSend} className="flex items-center gap-2 pt-4 border-t">
-      <Input
-        type="text"
+    <form onSubmit={handleSend} className="flex items-start gap-2 pt-4 border-t">
+      <Textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="flex-1"
+        onKeyDown={handleKeyDown}
+        className="flex-1 resize-none"
         placeholder="Type a message..."
         disabled={!currentChatUser || isSending}
         autoComplete="off"
+        rows={1}
       />
       <Button type="submit" size="icon" disabled={!currentChatUser || !text.trim() || isSending}>
         <Send className="h-4 w-4" />

@@ -12,14 +12,15 @@ import { formatDistanceToNowStrict } from 'date-fns';
 export const MessageList = () => {
   const { messages, currentChatUser } = useMessages();
   const { user } = useAuth();
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Scroll to bottom when messages change
     const viewport = viewportRef.current;
     if (viewport) {
-      viewport.scrollTop = viewport.scrollHeight;
+      setTimeout(() => {
+        viewport.scrollTop = viewport.scrollHeight;
+      }, 0);
     }
   }, [messages]);
 
@@ -54,10 +55,10 @@ export const MessageList = () => {
                   ? "bg-primary text-primary-foreground rounded-br-none"
                   : "bg-muted rounded-bl-none"
               )}>
-                <p className="text-sm">{msg.text}</p>
+                <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
                  {msg.createdAt && (
-                    <p className={cn("text-xs mt-1", isSender ? "text-primary-foreground/70" : "text-muted-foreground")}>
-                        {formatDistanceToNowStrict(msg.createdAt, { addSuffix: true })}
+                    <p className={cn("text-xs mt-1 text-right", isSender ? "text-primary-foreground/70" : "text-muted-foreground")}>
+                        {formatDistanceToNowStrict(new Date(msg.createdAt), { addSuffix: true })}
                     </p>
                  )}
               </div>

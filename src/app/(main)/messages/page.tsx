@@ -8,10 +8,10 @@ import { ConversationList } from "@/components/messages/ConversationList";
 import { MessageList } from "@/components/messages/MessageList";
 import { MessageInput } from "@/components/messages/MessageInput";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useMessages } from "@/contexts/message-context";
+import { useMessages, MessageProvider } from "@/contexts/message-context";
 import { MessageSquare } from "lucide-react";
 
-export default function MessagesPage() {
+function MessagesContent() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const { currentChatUser } = useMessages();
@@ -43,7 +43,7 @@ export default function MessagesPage() {
         </Card>
         <Card className="flex flex-col h-full">
           <CardHeader>
-             <CardTitle>{currentChatUser ? `Chat with @${currentChatUser.username}` : "Chat"}</CardTitle>
+             <CardTitle>{currentChatUser ? `Chat with ${currentChatUser.displayName}` : "Select a Conversation"}</CardTitle>
           </CardHeader>
           <CardContent className="flex-1 flex flex-col min-h-0">
             {currentChatUser ? (
@@ -63,4 +63,12 @@ export default function MessagesPage() {
       </div>
     </div>
   );
+}
+
+export default function MessagesPage() {
+    return (
+        <MessageProvider>
+            <MessagesContent />
+        </MessageProvider>
+    )
 }
