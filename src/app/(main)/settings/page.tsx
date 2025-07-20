@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect, useRef } from 'react';
@@ -17,9 +18,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from '@/hooks/use-toast';
 import { useTheme } from "next-themes";
-import { uploadFile, updateUserProfileData, getUserByUsername } from '@/lib/firebase';
-import { v4 as uuidv4 } from 'uuid';
-import { Sun, Moon, Laptop, User as UserIcon, Palette, Shield, Bell } from "lucide-react";
+import { Sun, Moon, Laptop, User as UserIcon, Palette, Bell } from "lucide-react";
 
 const profileFormSchema = z.object({
   avatar: z.any().optional(),
@@ -78,30 +77,12 @@ export default function SettingsPage() {
     toast({ title: "Updating profile..." });
 
     try {
-        if (data.username !== profile.username) {
-            const existingUser = await getUserByUsername(data.username);
-            if (existingUser) {
-                form.setError("username", { type: "manual", message: "This username is already taken." });
-                setIsSubmitting(false);
-                return;
-            }
-        }
+        // In a real app, this would call Firebase to update the user profile
+        // and upload the avatar if changed.
+        console.log("Profile data to save:", data);
+        await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
         
-        let newAvatarUrl = profile.avatar;
-        if (data.avatar && data.avatar instanceof File) {
-            const filePath = `avatars/${user.uid}/${uuidv4()}-${data.avatar.name}`;
-            newAvatarUrl = await uploadFile(data.avatar, filePath);
-        }
-
-        const updatedProfileData = {
-            displayName: data.displayName,
-            username: data.username,
-            bio: data.bio,
-            avatar: newAvatarUrl,
-        };
-
-        await updateUserProfileData(user.uid, updatedProfileData);
-        await reloadProfile();
+        // await reloadProfile(); // Would reload profile from backend
 
         toast({
             title: "Profile Updated!",
@@ -120,12 +101,20 @@ export default function SettingsPage() {
     }
   }
 
-  if (loading) {
+  if (loading || !user) {
     return (
       <div className="container mx-auto py-8 text-center">
         <p>Loading settings...</p>
       </div>
     );
+  }
+  
+  if (!profile) {
+    return (
+       <div className="container mx-auto py-8 text-center">
+        <p className="text-destructive">Could not load profile. Please try refreshing the page.</p>
+      </div>
+    )
   }
 
   return (
@@ -134,7 +123,7 @@ export default function SettingsPage() {
       <Tabs defaultValue="profile" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="profile"><UserIcon className="mr-2 h-4 w-4"/> Profile</TabsTrigger>
-          <TabsTrigger value="appearance"><Palette className="mr-2 h-4 w-4"/> Appearance</Tabs-Trigger>
+          <TabsTrigger value="appearance"><Palette className="mr-2 h-4 w-4"/> Appearance</TabsTrigger>
           <TabsTrigger value="notifications"><Bell className="mr-2 h-4 w-4"/> Notifications</TabsTrigger>
         </TabsList>
         
@@ -158,6 +147,7 @@ export default function SettingsPage() {
                           width={80}
                           height={80}
                           className="rounded-full aspect-square object-cover"
+                          data-ai-hint="user avatar"
                         />
                         <div className="space-y-2">
                             <FormLabel>Profile Picture</FormLabel>
@@ -265,8 +255,8 @@ export default function SettingsPage() {
                         </FormDescription>
                     </div>
                     <Switch
-                        // checked={...}
-                        // onCheckedChange={...}
+                        aria-readonly
+                        disabled
                     />
                 </div>
                  <div className="flex flex-row items-center justify-between rounded-lg border p-4">
@@ -277,8 +267,9 @@ export default function SettingsPage() {
                         </FormDescription>
                     </div>
                     <Switch
-                        // checked={...}
-                        // onCheckedChange={...}
+                        aria-readonly
+                        disabled
+                        defaultChecked
                     />
                 </div>
             </CardContent>

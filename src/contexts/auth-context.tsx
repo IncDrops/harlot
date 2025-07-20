@@ -1,13 +1,11 @@
+
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import {
-  getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
-  signInAnonymously as firebaseSignInAnonymously,
-  updateProfile,
   User as FirebaseUser,
   UserCredential
 } from 'firebase/auth';
@@ -18,9 +16,12 @@ import {
   signUp as firebaseSignUp,
   signOut as firebaseSignOut,
   getUserById,
+  updateUserProfileData
 } from '@/lib/firebase';
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import type { User as AppUser } from '@/lib/types';
+import { useToast } from '@/hooks/use-toast';
+
 
 // --- Auth Context Types ---
 interface AuthContextType {
@@ -31,8 +32,6 @@ interface AuthContextType {
   signUp: (email: string, password: string) => Promise<UserCredential>;
   signOut: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
-  signInAnonymously: () => Promise<void>;
-  updateUserProfile: (displayName: string, photoURL?: string) => Promise<void>;
   reloadProfile: () => Promise<void>;
 }
 
@@ -45,8 +44,6 @@ const AuthContext = createContext<AuthContextType>({
   signUp: async () => { throw new Error("Firebase not initialized"); },
   signOut: async () => { throw new Error("Firebase not initialized"); },
   signInWithGoogle: async () => { throw new Error("Firebase not initialized"); },
-  signInAnonymously: async () => { throw new Error("Not implemented"); },
-  updateUserProfile: async () => { throw new Error("Firebase not initialized"); },
   reloadProfile: async () => { throw new Error("Firebase not initialized"); },
 });
 
@@ -55,8 +52,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [profile, setProfile] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
-  const reloadProfile = async () => {
+  const reloadProfile = useCallback(async () => {
     if (user) {
       try {
         const userProfile = await getUserById(user.uid);
@@ -66,7 +64,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setProfile(null);
       }
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -75,8 +73,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (user) {
           setUser(user);
           let userProfile = await getUserById(user.uid);
+          
           if (!userProfile) {
-            let username = (user.email || `user${user.uid.slice(0, 6)}`).split('@')[0].replace(/[^a-zA-Z0-9_]/g, '').slice(0, 15);
+            console.log("No profile found, creating one for new user:", user.uid);
+            let username = (user.email || `user${user.uid.slice(0, 6)}`).split('@')[0].replace(/[^a-zA-Z0-9_]/g, '');
             if (username.length < 3) {
                 username = `${username}${user.uid.slice(0, 4)}`;
             }
@@ -91,6 +91,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             
             await setDoc(doc(db, "users", user.uid), newUserProfileData);
             userProfile = { id: user.uid, ...newUserProfileData };
+            toast({
+              title: "Welcome to Pollitago!",
+              description: "Your new strategic advisor account has been created."
+            })
           }
           setProfile(userProfile);
         } else {
@@ -107,27 +111,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [toast]);
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
   };
-
-  const signInAnonymously = async () => {
-    // This functionality is removed for the enterprise version
-    throw new Error("Anonymous sign-in is not supported for this application.");
-  };
-
-  const updateUserProfile = async (displayName: string, photoURL?: string) => {
-    if (!auth.currentUser) return;
-    await updateProfile(auth.currentUser, { displayName, photoURL });
-    setUser({ ...auth.currentUser });
-     if (profile) {
-        setProfile({ ...profile, displayName: displayName, avatar: photoURL || profile.avatar });
-    }
-  };
-
+  
   const value: AuthContextType = {
     user,
     profile,
@@ -136,8 +126,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signUp: firebaseSignUp,
     signOut: firebaseSignOut,
     signInWithGoogle,
-    signInAnonymously,
-    updateUserProfile,
     reloadProfile,
   };
 
@@ -150,3 +138,4 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 // --- Hook to use Auth ---
 export const useAuth = () => useContext(AuthContext);
+

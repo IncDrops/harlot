@@ -3,8 +3,72 @@ export interface User {
   displayName: string;
   username: string;
   avatar: string;
-  role: 'admin' | 'user' | 'moderator';
+  role: 'admin' | 'user';
   bio?: string;
+  pollitPoints?: number;
+  tipsReceived?: number;
+}
+
+export interface PollOption {
+  id: number;
+  text: string;
+  votes: number;
+  imageUrl?: string | null;
+  affiliateLink?: string | null;
+  'data-ai-hint'?: string;
+}
+
+export interface Poll {
+  id: string;
+  question: string;
+  description?: string;
+  options: PollOption[];
+  type: 'standard' | '2nd_opinion';
+  creatorId: string;
+  createdAt: string; // ISO String
+  endsAt: string; // ISO String
+  pledged: boolean;
+  pledgeAmount?: number;
+  tipCount: number;
+  isNSFW: boolean;
+  isProcessed: boolean;
+  category?: string;
+  likes: number;
+  comments: number;
+  videoUrl?: string | null;
+}
+
+export interface Comment {
+    id: string;
+    pollId: string;
+    userId: string;
+    username: string;
+    avatar: string;
+    text: string;
+    createdAt: string; // ISO String
+}
+
+export interface Notification {
+    id: string;
+    type: 'new_follower' | 'new_vote' | 'poll_ending' | 'tip_received' | 'new_comment';
+    fromId: string;
+    fromUsername?: string;
+
+    pollId?: string;
+    amount?: number;
+
+    createdAt: string; // ISO string
+    read: boolean;
+}
+
+export interface Message {
+  id?: string;
+  text: string;
+  senderId: string;
+  recipientId: string;
+  createdAt: Date;
+  participants: string[];
+  participantsId: string;
 }
 
 export interface Analysis {

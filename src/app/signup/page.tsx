@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -30,14 +31,20 @@ export default function SignUpPage() {
       });
       return;
     }
+    if(password.length < 6) {
+      toast({
+        variant: "destructive",
+        title: "Sign Up Failed",
+        description: "Password must be at least 6 characters long.",
+      });
+      return;
+    }
+    
     setIsLoading(true);
     try {
       await signUp(email, password);
-      toast({
-        title: "Account Created",
-        description: "You have successfully signed up! Please sign in.",
-      });
-      router.push("/signin");
+      // The auth provider now handles profile creation and redirects
+      router.push("/");
     } catch (error: any) {
       toast({
         variant: "destructive",
@@ -49,12 +56,28 @@ export default function SignUpPage() {
     }
   };
 
+  const handleGoogleSignUp = async () => {
+    setIsLoading(true);
+    try {
+      await signInWithGoogle();
+      router.push("/");
+    } catch(error: any) {
+       toast({
+        variant: "destructive",
+        title: "Sign Up Failed",
+        description: error.message,
+      });
+    } finally {
+       setIsLoading(false);
+    }
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
           <Logo className="mx-auto" />
-           <p className="text-muted-foreground text-sm mt-2">IncDrops: Where Vision Meets AI-Powered Precision.</p>
+           <p className="text-muted-foreground text-sm mt-2">Where Vision Meets AI-Powered Precision.</p>
         </div>
         <Card className="shadow-2xl border-primary/20">
           <CardHeader>
@@ -88,7 +111,7 @@ export default function SignUpPage() {
                     </span>
                 </div>
               </div>
-              <Button variant="outline" className="w-full" onClick={signInWithGoogle}>
+              <Button variant="outline" className="w-full" onClick={handleGoogleSignUp} disabled={isLoading}>
                 Sign Up with SSO
               </Button>
             </form>
@@ -104,3 +127,4 @@ export default function SignUpPage() {
     </div>
   );
 }
+

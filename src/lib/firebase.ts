@@ -7,7 +7,6 @@ import {
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
   sendEmailVerification,
-  onAuthStateChanged,
   Auth,
   UserCredential,
 } from "firebase/auth";
@@ -40,13 +39,12 @@ import {
   QueryDocumentSnapshot,
   DocumentData,
   QueryConstraint,
-  documentId,
   updateDoc,
   DocumentSnapshot,
 } from "firebase/firestore";
 import { getFunctions } from 'firebase/functions';
 import type { Functions } from 'firebase/functions';
-import type { Comment, Notification, Poll, User } from "./types";
+import type { Comment, Notification, Poll, User, Analysis } from "./types";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -65,17 +63,15 @@ let functions: Functions;
 
 if (!getApps().length) {
   app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  storage = getStorage(app);
-  db = getFirestore(app);
-  functions = getFunctions(app);
 } else {
   app = getApps()[0];
-  auth = getAuth(app);
-  storage = getStorage(app);
-  db = getFirestore(app);
-  functions = getFunctions(app);
 }
+
+auth = getAuth(app);
+storage = getStorage(app);
+db = getFirestore(app);
+functions = getFunctions(app);
+
 
 // Helper to convert Firestore doc to a serializable object
 const fromFirestore = <T>(doc: QueryDocumentSnapshot<DocumentData> | DocumentSnapshot<DocumentData>): T => {
@@ -129,53 +125,6 @@ export const uploadFile = async (file: File, path: string): Promise<string> => {
   return await getDownloadURL(fileRef);
 };
 
-// ──────────── COMMENTS ────────────
-
-export const getCommentsForPoll = async (pollId: string): Promise<Comment[]> => {
-  const commentsCol = collection(db, `polls/${pollId}/comments`);
-  const q = query(commentsCol, orderBy("createdAt", "desc"));
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => fromFirestore<Comment>(doc));
-};
-
-export const addCommentToPoll = async (pollId: string, commentData: Pick<Comment, 'userId' | 'username' | 'avatar' | 'text'>): Promise<void> => {
-  const pollRef = doc(db, "polls", pollId);
-  const commentCol = collection(pollRef, "comments");
-
-  await runTransaction(db, async (transaction) => {
-    const pollDoc = await transaction.get(pollRef);
-    if (!pollDoc.exists()) {
-        throw new Error("Poll does not exist.");
-    }
-    
-    const newCommentRef = doc(commentCol);
-    transaction.set(newCommentRef, {
-      ...commentData,
-      createdAt: serverTimestamp(),
-    });
-
-    transaction.update(pollRef, { comments: increment(1) });
-  });
-};
-
-
-// ──────────── LIKES ────────────
-
-export const toggleLikeOnPoll = async (pollId: string, userId: string): Promise<void> => {
-  const pollRef = doc(db, "polls", pollId);
-  const likeRef = doc(pollRef, "likes", userId);
-
-  await runTransaction(db, async (transaction) => {
-    const likeDoc = await transaction.get(likeRef);
-    if (likeDoc.exists()) {
-      transaction.delete(likeRef);
-      transaction.update(pollRef, { likes: increment(-1) });
-    } else {
-      transaction.set(likeRef, { userId, createdAt: serverTimestamp() });
-      transaction.update(pollRef, { likes: increment(1) });
-    }
-  });
-};
 
 // ──────────── USERS ────────────
 export const getUserById = async (userId: string): Promise<User | null> => {
@@ -203,76 +152,18 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
     return fromFirestore<User>(querySnapshot.docs[0]);
 };
 
-// ──────────── POLLS ────────────
-export const createPoll = async (pollData: Omit<Poll, 'id'>): Promise<string> => {
-  const pollRef = await addDoc(collection(db, 'polls'), pollData);
-  return pollRef.id;
-}
 
-export const getPolls = async (lastVisible: QueryDocumentSnapshot | null = null) => {
-    const pollsRef = collection(db, 'polls');
-    const constraints: QueryConstraint[] = [orderBy('createdAt', 'desc'), limit(25)];
-    if(lastVisible) {
-        constraints.push(startAfter(lastVisible));
-    }
-    const q = query(pollsRef, ...constraints);
-    const documentSnapshots = await getDocs(q);
-    
-    const polls = documentSnapshots.docs.map(doc => fromFirestore<Poll>(doc)).filter(p => p.options && p.options.length > 0);
-    const newLastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
+// ──────────── ANALYSES ────────────
 
-    return { polls, lastVisible: newLastVisible || null };
+export const searchAnalyses = async (searchTerm: string): Promise<Analysis[]> => {
+  if (searchTerm.trim().length < 3) return [];
+  // This is a mock search function. In a real app, this would query Firestore
+  // with a where clause, or ideally, a dedicated search service like Algolia.
+  console.log("Searching for:", searchTerm);
+  return [];
 };
 
 
-export const getPollsByUser = async (userId: string): Promise<Poll[]> => {
-    const pollsRef = collection(db, 'polls');
-    const q = query(pollsRef, where('creatorId', '==', userId), orderBy('createdAt', 'desc'));
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => fromFirestore<Poll>(doc));
-};
-
-export const getPollById = async (pollId: string): Promise<Poll | null> => {
-  if (!pollId) return null;
-  const pollRef = doc(db, 'polls', pollId);
-  const pollSnap = await getDoc(pollRef);
-
-  if (!pollSnap.exists()) {
-    return null;
-  }
-  return fromFirestore<Poll>(pollSnap);
-};
-
-
-// ──────────── SEARCH ────────────
-
-export const searchPolls = async (searchTerm: string): Promise<Poll[]> => {
-  if (searchTerm.trim() === '') return [];
-  // Note: This is a client-side search for simplicity with a small dataset.
-  // For production with a large number of polls, a dedicated search service
-  // like Algolia or Typesense integrated with Firebase is recommended.
-  const pollsRef = collection(db, 'polls');
-  const q = query(pollsRef, orderBy('createdAt', 'desc'));
-  const querySnapshot = await getDocs(q);
-  
-  const allPolls = querySnapshot.docs.map(doc => fromFirestore<Poll>(doc));
-  
-  const lowercasedTerm = searchTerm.toLowerCase();
-  return allPolls.filter(poll => 
-    poll.question.toLowerCase().includes(lowercasedTerm) ||
-    (poll.category && poll.category.toLowerCase().includes(lowercasedTerm))
-  );
-};
-
-
-// ──────────── NOTIFICATIONS ────────────
-
-export const getNotificationsForUser = async (userId: string): Promise<Notification[]> => {
-    const notificationsRef = collection(db, `users/${userId}/notifications`);
-    const q = query(notificationsRef, orderBy('createdAt', 'desc'), limit(20));
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => fromFirestore<Notification>(doc));
-};
-
+// Export instances
 export { auth, storage, db, functions };
 export default app;

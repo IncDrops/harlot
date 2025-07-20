@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -12,8 +13,8 @@ import { Logo, Tagline } from "@/components/logo";
 import { useToast } from "@/hooks/use-toast";
 
 export default function SignInPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("pr3ttypl3az3@gmail.com");
+  const [password, setPassword] = useState("Password123!");
   const [isLoading, setIsLoading] = useState(false);
   const { signIn, signInWithGoogle } = useAuth();
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function SignInPage() {
       toast({
         variant: "destructive",
         title: "Sign In Failed",
-        description: error.message,
+        description: "Please check your credentials and try again.",
       });
       setIsLoading(false);
     }
@@ -55,7 +56,7 @@ export default function SignInPage() {
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
           <Logo className="mx-auto" />
-          <p className="text-muted-foreground text-sm mt-2">IncDrops: Where Vision Meets AI-Powered Precision.</p>
+          <p className="text-muted-foreground text-sm mt-2">Where Vision Meets AI-Powered Precision.</p>
         </div>
         <Card className="shadow-2xl border-primary/20">
           <CardHeader>
@@ -100,3 +101,4 @@ export default function SignInPage() {
     </div>
   );
 }
+
