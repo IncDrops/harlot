@@ -203,7 +203,7 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
           {poll.options.map((option, index) => (
             <div key={`${poll.id}-option-${option.id || index}`} className="relative aspect-square cursor-pointer group" onClick={() => !showResults && onVote(poll.id, option.id)}>
               {option.imageUrl && (
-                <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-2xl object-cover" data-ai-hint={option['dataAiHint'] || 'comparison abstract'} />
+                <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-2xl object-cover" data-ai-hint={option['data-ai-hint'] || 'comparison abstract'} />
               )}
               {!showResults && (
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity">
@@ -314,7 +314,7 @@ export function PollCard({ poll, onVote, onSwipe, showResults, isTwoOptionPoll, 
             </div>
              <Link href={`/poll/${poll.id}`} className="block cursor-pointer pt-4">
                 <p className="font-body text-lg leading-relaxed hover:underline">{poll.question}</p>
-                {poll.description && <p className="text-sm text-muted-foreground pt-1">{poll.description}</p>}
+                {poll.description && <p className="text-sm text-muted-foreground pt-1 hover:underline">{poll.description}</p>}
              </Link>
           </CardHeader>
           <CardContent>

@@ -178,7 +178,7 @@ export default function PollDetailPage() {
           {poll.options.map((option) => (
             <div key={option.id} className="relative aspect-square cursor-pointer group" onClick={() => !showResults && handleVote(option.id)}>
               {option.imageUrl && (
-                <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-2xl object-cover" data-ai-hint={option['dataAiHint'] || 'comparison abstract'} />
+                <Image src={option.imageUrl} alt={option.text} layout="fill" className="rounded-2xl object-cover" data-ai-hint={option['data-ai-hint'] || 'comparison abstract'} />
               )}
               {!showResults && (
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity">
@@ -279,8 +279,10 @@ export default function PollDetailPage() {
                     </div>
                 </div>
             </div>
-             <p className="font-body text-lg pt-4 leading-relaxed">{poll.question}</p>
-             {poll.description && <p className="text-sm text-muted-foreground pt-1">{poll.description}</p>}
+            <Link href={`/poll/${poll.id}`} className="block cursor-pointer">
+              <p className="font-body text-lg pt-4 leading-relaxed hover:underline">{poll.question}</p>
+              {poll.description && <p className="text-sm text-muted-foreground pt-1 hover:underline">{poll.description}</p>}
+            </Link>
           </CardHeader>
           <CardContent>
             {poll.videoUrl && <video src={poll.videoUrl} controls className="w-full rounded-lg aspect-video mb-4" />}
