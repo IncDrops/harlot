@@ -39,6 +39,7 @@ export default function SearchPage() {
       // const analyses = await searchAnalyses(term);
       // setResults(analyses);
       // Mock results for now
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setResults([]); 
     } catch (error) {
       console.error("Search failed:", error);
@@ -57,6 +58,7 @@ export default function SearchPage() {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
     setSearchTerm(term);
+    setIsSearching(true);
     debouncedSearch(term);
   };
 
@@ -76,7 +78,7 @@ export default function SearchPage() {
         <CardHeader>
           <CardTitle>Search Results</CardTitle>
            <CardDescription>
-                {isSearching ? "Searching for analyses..." : `Showing results for "${searchTerm}"`}
+                {isSearching ? "Searching for analyses..." : searchTerm ? `Showing results for "${searchTerm}"` : "Your past analyses will appear here."}
             </CardDescription>
         </CardHeader>
         <CardContent>
@@ -91,7 +93,8 @@ export default function SearchPage() {
               ))} */}
             </div>
           ) : (
-            <div className="flex items-center justify-center h-48 text-muted-foreground rounded-lg border-2 border-dashed">
+            <div className="flex flex-col items-center justify-center h-48 text-muted-foreground rounded-lg border-2 border-dashed">
+                <SearchIcon className="w-12 h-12 mb-4 text-muted-foreground/50"/>
               <p>
                 {searchTerm.length >= 3
                   ? "No results found."
