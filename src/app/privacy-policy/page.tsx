@@ -3,7 +3,7 @@ export default function PrivacyPolicy() {
       <div className="p-8 max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
         <p className="mb-2">
-          PollitAGo respects your privacy. We collect only the data necessary to provide and improve our services, such as your email for authentication.
+          Pollitago respects your privacy. We collect only the data necessary to provide and improve our services, such as your email for authentication.
         </p>
         <p className="mb-2">
           We do not sell, rent, or share your personal data with third parties.

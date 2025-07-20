@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Logo, Tagline } from "@/components/logo";
+import { Logo } from "@/components/logo";
 import { useToast } from "@/hooks/use-toast";
 
 export default function SignInPage() {
@@ -93,12 +93,11 @@ export default function SignInPage() {
           </CardContent>
         </Card>
         <p className="text-center text-xs text-muted-foreground">
-          Need help? <Link href="/support" className="underline hover:text-primary">Contact Support</Link>
+          Need help? <Link href="#" className="underline hover:text-primary">Contact Support</Link>
           {" "}|{" "}
-          <Link href="/privacy" className="underline hover:text-primary">Privacy Policy</Link>
+          <Link href="/privacy-policy" className="underline hover:text-primary">Privacy Policy</Link>
         </p>
       </div>
     </div>
   );
 }
-
