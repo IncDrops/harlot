@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <h1 className={cn("font-heading text-4xl font-bold tracking-tighter text-primary", className)}>
+    <h1 className={cn("font-heading text-2xl font-bold text-primary", className)}>
       Pollitago
     </h1>
   );

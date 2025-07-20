@@ -3,20 +3,19 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from '@/contexts/auth-context';
 import { ThemeProvider } from '@/contexts/theme-provider';
-import { Inter, Poppins, Lato } from 'next/font/google';
+import { Inter, Poppins } from 'next/font/google';
+import { cn } from '@/lib/utils';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-poppins',
-});
-const lato = Lato({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-lato',
+const fontSans = Inter({ 
+  subsets: ['latin'], 
+  variable: '--font-sans' 
 });
 
+const fontHeading = Poppins({
+  subsets: ['latin'],
+  weight: ['600', '700'],
+  variable: '--font-heading',
+});
 
 export const metadata: Metadata = {
   title: 'Pollitago: The Unbiased Strategic Advisor',
@@ -33,7 +32,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${poppins.variable} ${lato.variable} font-body antialiased`}>
+      <body className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable,
+          fontHeading.variable
+        )}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -42,8 +45,8 @@ export default function RootLayout({
         >
           <AuthProvider>
             {children}
+            <Toaster />
           </AuthProvider>
-          <Toaster />
         </ThemeProvider>
       </body>
     </html>
