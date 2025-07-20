@@ -14,15 +14,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from '@/hooks/use-toast';
 import { useTheme } from "next-themes";
-import { useSettings } from "@/hooks/use-settings";
 import { uploadFile, updateUserProfileData, getUserByUsername } from '@/lib/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import { Sun, Moon, Laptop, EyeOff, Eye, User as UserIcon, Palette, Shield } from "lucide-react";
+import { Sun, Moon, Laptop, User as UserIcon, Palette, Shield, Bell } from "lucide-react";
 
 const profileFormSchema = z.object({
   avatar: z.any().optional(),
@@ -41,7 +38,6 @@ export default function SettingsPage() {
   const router = useRouter();
   const { toast } = useToast();
   const { theme, setTheme } = useTheme();
-  const { showNsfw, toggleNsfw } = useSettings();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const avatarInputRef = useRef<HTMLInputElement>(null);
@@ -105,7 +101,6 @@ export default function SettingsPage() {
         };
 
         await updateUserProfileData(user.uid, updatedProfileData);
-
         await reloadProfile();
 
         toast({
@@ -113,8 +108,6 @@ export default function SettingsPage() {
             description: "Your changes have been saved.",
         });
         
-        router.push(`/profile/${data.username}`);
-
     } catch (error: any) {
         console.error("Error updating profile:", error);
         toast({
@@ -135,21 +128,14 @@ export default function SettingsPage() {
     );
   }
 
-  if (!user || !profile) {
-    return (
-      <div className="container mx-auto py-8 text-center">
-        <p>Could not load profile. Please try refreshing the page.</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="container mx-auto py-8">
-      <Tabs defaultValue="profile" className="max-w-2xl mx-auto">
+    <div className="container mx-auto py-8 max-w-4xl">
+      <h1 className="text-2xl font-heading font-bold mb-6">Settings</h1>
+      <Tabs defaultValue="profile" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="profile"><UserIcon className="mr-2 h-4 w-4"/> Profile</TabsTrigger>
-          <TabsTrigger value="appearance"><Palette className="mr-2 h-4 w-4"/> Appearance</TabsTrigger>
-          <TabsTrigger value="content"><Shield className="mr-2 h-4 w-4"/> Content</TabsTrigger>
+          <TabsTrigger value="appearance"><Palette className="mr-2 h-4 w-4"/> Appearance</Tabs-Trigger>
+          <TabsTrigger value="notifications"><Bell className="mr-2 h-4 w-4"/> Notifications</TabsTrigger>
         </TabsList>
         
         <TabsContent value="profile">
@@ -167,7 +153,7 @@ export default function SettingsPage() {
                     render={() => (
                       <FormItem className="flex items-center gap-4">
                         <Image
-                          src={avatarPreview || `https://avatar.iran.liara.run/public/?username=${profile.username}`}
+                          src={avatarPreview || `https://avatar.iran.liara.run/public/?username=${profile?.username}`}
                           alt="Avatar preview"
                           width={80}
                           height={80}
@@ -216,6 +202,7 @@ export default function SettingsPage() {
                                 <Input placeholder="your_username" className="pl-7" {...field} />
                             </div>
                         </FormControl>
+                         <FormDescription>This is your unique handle.</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -251,52 +238,47 @@ export default function SettingsPage() {
               <CardDescription>Customize the look and feel of the app.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-                <RadioGroup
-                    value={theme}
-                    onValueChange={setTheme}
-                    className="grid grid-cols-1 sm:grid-cols-3 gap-4"
-                    >
-                    <Label htmlFor="light" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary cursor-pointer">
-                        <RadioGroupItem value="light" id="light" className="sr-only" />
-                        <Sun className="mb-3 h-6 w-6" />
-                        Light
-                    </Label>
-                    <Label htmlFor="dark" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary cursor-pointer">
-                        <RadioGroupItem value="dark" id="dark" className="sr-only" />
-                        <Moon className="mb-3 h-6 w-6" />
-                        Dark
-                    </Label>
-                    <Label htmlFor="system" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary cursor-pointer">
-                        <RadioGroupItem value="system" id="system" className="sr-only" />
-                        <Laptop className="mb-3 h-6 w-6" />
-                        System
-                    </Label>
-                </RadioGroup>
+                <div className="space-y-2">
+                    <FormLabel>Theme</FormLabel>
+                    <div className="grid grid-cols-3 gap-2 rounded-lg border p-1">
+                        <Button variant={theme === 'light' ? 'secondary' : 'ghost'} onClick={() => setTheme('light')}><Sun className="mr-2 h-4 w-4"/>Light</Button>
+                        <Button variant={theme === 'dark' ? 'secondary' : 'ghost'} onClick={() => setTheme('dark')}><Moon className="mr-2 h-4 w-4"/>Dark</Button>
+                        <Button variant={theme === 'system' ? 'secondary' : 'ghost'} onClick={() => setTheme('system')}><Laptop className="mr-2 h-4 w-4"/>System</Button>
+                    </div>
+                </div>
             </CardContent>
           </Card>
         </TabsContent>
         
-        <TabsContent value="content">
+        <TabsContent value="notifications">
           <Card>
             <CardHeader>
-              <CardTitle>Content Filtering</CardTitle>
-              <CardDescription>Manage your content preferences.</CardDescription>
+              <CardTitle>Notifications</CardTitle>
+              <CardDescription>Manage how you receive notifications from Pollitago.</CardDescription>
             </CardHeader>
-            <CardContent>
-                <div className="flex flex-row items-center justify-between rounded-lg border p-4 shadow-sm">
+            <CardContent className="space-y-4">
+                <div className="flex flex-row items-center justify-between rounded-lg border p-4">
                     <div className="space-y-0.5">
-                    <Label className="flex items-center gap-2 text-base">
-                        {showNsfw ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
-                        Show NSFW Content
-                    </Label>
-                    <CardDescription>
-                        Enable to see content marked as Not Safe For Work across the app.
-                    </CardDescription>
+                        <FormLabel>Email Notifications</FormLabel>
+                        <FormDescription>
+                            Receive emails about analysis completion and critical alerts.
+                        </FormDescription>
                     </div>
                     <Switch
-                        checked={showNsfw}
-                        onCheckedChange={toggleNsfw}
-                        aria-label="Toggle NSFW content visibility"
+                        // checked={...}
+                        // onCheckedChange={...}
+                    />
+                </div>
+                 <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+                    <div className="space-y-0.5">
+                        <FormLabel>In-App Notifications</FormLabel>
+                        <FormDescription>
+                            Show notifications within the dashboard for new insights.
+                        </FormDescription>
+                    </div>
+                    <Switch
+                        // checked={...}
+                        // onCheckedChange={...}
                     />
                 </div>
             </CardContent>

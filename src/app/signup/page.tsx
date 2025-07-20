@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Logo, Tagline } from "@/components/logo";
+import { Logo } from "@/components/logo";
 import { useToast } from "@/hooks/use-toast";
 
 export default function SignUpPage() {
@@ -16,7 +16,7 @@ export default function SignUpPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { signUp, signInAnonymously, signInWithGoogle } = useAuth();
+  const { signUp, signInWithGoogle } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
 
@@ -54,18 +54,18 @@ export default function SignUpPage() {
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
           <Logo className="mx-auto" />
-          <Tagline className="mt-2" />
+           <p className="text-muted-foreground text-sm mt-2">IncDrops: Where Vision Meets AI-Powered Precision.</p>
         </div>
-        <Card className="shadow-2xl">
+        <Card className="shadow-2xl border-primary/20">
           <CardHeader>
-            <CardTitle>Create an Account</CardTitle>
-            <CardDescription>Get started with PollitAGo today.</CardDescription>
+            <CardTitle className="font-heading">Create an Enterprise Account</CardTitle>
+            <CardDescription>Join Pollitago to access unbiased strategic advice.</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSignUp} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <Label htmlFor="email">Work Email</Label>
+                <Input id="email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
@@ -78,11 +78,18 @@ export default function SignUpPage() {
               <Button className="w-full" type="submit" disabled={isLoading}>
                 {isLoading ? "Creating Account..." : "Sign Up"}
               </Button>
-              <Button variant="outline" className="w-full" onClick={signInAnonymously}>
-                Continue as Anonymous
-              </Button>
-              <Button variant="secondary" className="w-full" onClick={signInWithGoogle}>
-                Sign Up with Google
+               <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-card px-2 text-muted-foreground">
+                    Or continue with
+                    </span>
+                </div>
+              </div>
+              <Button variant="outline" className="w-full" onClick={signInWithGoogle}>
+                Sign Up with SSO
               </Button>
             </form>
           </CardContent>
@@ -92,10 +99,6 @@ export default function SignUpPage() {
           <Link href="/signin" className="underline hover:text-primary font-semibold">
             Sign In
           </Link>
-        </p>
-        <p className="text-center text-xs text-muted-foreground mt-2">
-          <Link href="/privacy-policy" className="underline hover:text-primary">Privacy Policy</Link> ·{" "}
-          <Link href="/terms" className="underline hover:text-primary">Terms of Service</Link>
         </p>
       </div>
     </div>

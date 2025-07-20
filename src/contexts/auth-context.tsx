@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -7,7 +6,7 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
-  signInAnonymously,
+  signInAnonymously as firebaseSignInAnonymously,
   updateProfile,
   User as FirebaseUser,
   UserCredential
@@ -46,7 +45,7 @@ const AuthContext = createContext<AuthContextType>({
   signUp: async () => { throw new Error("Firebase not initialized"); },
   signOut: async () => { throw new Error("Firebase not initialized"); },
   signInWithGoogle: async () => { throw new Error("Firebase not initialized"); },
-  signInAnonymously: async () => { throw new Error("Firebase not initialized"); },
+  signInAnonymously: async () => { throw new Error("Not implemented"); },
   updateUserProfile: async () => { throw new Error("Firebase not initialized"); },
   reloadProfile: async () => { throw new Error("Firebase not initialized"); },
 });
@@ -59,55 +58,50 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const reloadProfile = async () => {
     if (user) {
-      const userProfile = await getUserById(user.uid);
-      setProfile(userProfile);
+      try {
+        const userProfile = await getUserById(user.uid);
+        setProfile(userProfile);
+      } catch (error) {
+        console.error("Error reloading profile:", error);
+        setProfile(null);
+      }
     }
   };
 
   useEffect(() => {
-    if (!auth) {
-      setLoading(false);
-      return;
-    }
-
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setLoading(true);
       try {
-        setUser(user);
         if (user) {
+          setUser(user);
           let userProfile = await getUserById(user.uid);
           if (!userProfile) {
-            // Profile doesn't exist, so create it for new users (Google, Anon, or first-time email sign-in)
             let username = (user.email || `user${user.uid.slice(0, 6)}`).split('@')[0].replace(/[^a-zA-Z0-9_]/g, '').slice(0, 15);
-            // Ensure username is at least 3 characters long to comply with security rules
             if (username.length < 3) {
-              username = `${username}${user.uid.slice(0, 4)}`;
+                username = `${username}${user.uid.slice(0, 4)}`;
             }
-            username = username.slice(0, 20); // Final length check
-            
-            // Do NOT set pollitPoints or tipsReceived here. Firestore rules will block this.
-            // These fields should be handled server-side or initialized by cloud functions.
-            const newUserProfileData: Omit<AppUser, 'id' | 'pollitPoints' | 'tipsReceived'> & { pollitPoints?: number; tipsReceived?: number; } = {
+            username = username.slice(0, 20);
+
+            const newUserProfileData: Omit<AppUser, 'id'> = {
               displayName: user.displayName || username,
               username: username,
               avatar: user.photoURL || `https://avatar.iran.liara.run/public/?username=${username}`,
-              bio: '',
-              birthDate: new Date().toISOString(),
-              gender: 'prefer-not-to-say',
+              role: 'user', // Default role for new sign-ups
             };
             
             await setDoc(doc(db, "users", user.uid), newUserProfileData);
-            userProfile = { id: user.uid, ...newUserProfileData, pollitPoints: 0, tipsReceived: 0 };
+            userProfile = { id: user.uid, ...newUserProfileData };
           }
           setProfile(userProfile);
         } else {
+          setUser(null);
           setProfile(null);
         }
       } catch (error) {
         console.error("Error during authentication state change:", error);
-        // Ensure app doesn't hang in a broken state
+        setUser(null);
         setProfile(null);
       } finally {
-        // This is crucial to prevent the app from showing a blank screen
         setLoading(false);
       }
     });
@@ -118,12 +112,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
-    // onAuthStateChanged will handle profile creation/loading
   };
 
-  const signInAnonymouslyHandler = async () => {
-    await signInAnonymously(auth);
-    // onAuthStateChanged will handle profile creation/loading
+  const signInAnonymously = async () => {
+    // This functionality is removed for the enterprise version
+    throw new Error("Anonymous sign-in is not supported for this application.");
   };
 
   const updateUserProfile = async (displayName: string, photoURL?: string) => {
@@ -143,14 +136,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signUp: firebaseSignUp,
     signOut: firebaseSignOut,
     signInWithGoogle,
-    signInAnonymously: signInAnonymouslyHandler,
+    signInAnonymously,
     updateUserProfile,
     reloadProfile,
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

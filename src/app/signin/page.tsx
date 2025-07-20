@@ -15,7 +15,7 @@ export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn, signInAnonymously, signInWithGoogle } = useAuth();
+  const { signIn, signInWithGoogle } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
 
@@ -29,21 +29,6 @@ export default function SignInPage() {
       toast({
         variant: "destructive",
         title: "Sign In Failed",
-        description: error.message,
-      });
-      setIsLoading(false);
-    }
-  };
-
-  const handleAnonymous = async () => {
-    setIsLoading(true);
-    try {
-      await signInAnonymously();
-      router.push("/");
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Anonymous Sign-In Failed",
         description: error.message,
       });
       setIsLoading(false);
@@ -70,44 +55,46 @@ export default function SignInPage() {
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
           <Logo className="mx-auto" />
-          <Tagline className="mt-2" />
+          <p className="text-muted-foreground text-sm mt-2">IncDrops: Where Vision Meets AI-Powered Precision.</p>
         </div>
-        <Card className="shadow-2xl">
+        <Card className="shadow-2xl border-primary/20">
           <CardHeader>
-            <CardTitle>Welcome Back</CardTitle>
-            <CardDescription>Sign in to continue to PollitAGo</CardDescription>
+            <CardTitle className="font-heading">Welcome to Pollitago</CardTitle>
+            <CardDescription>Enter your credentials to access your strategic dashboard.</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSignIn} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <Input id="email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
               </div>
               <Button className="w-full" type="submit" disabled={isLoading}>
-                {isLoading ? "Signing In..." : "Sign In"}
+                {isLoading ? "Signing In..." : "Login"}
               </Button>
-              <Button variant="outline" className="w-full" onClick={handleAnonymous} disabled={isLoading}>
-                Continue as Guest
-              </Button>
-              <Button variant="ghost" className="w-full" onClick={handleGoogleSignIn} disabled={isLoading}>
-                Sign In with Google
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-card px-2 text-muted-foreground">
+                    Or continue with
+                    </span>
+                </div>
+              </div>
+              <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} disabled={isLoading}>
+                Sign In with SSO
               </Button>
             </form>
           </CardContent>
         </Card>
-        <p className="text-center text-sm text-muted-foreground">
-          Don't have an account?{" "}
-          <Link href="/signup" className="underline hover:text-primary font-semibold">
-            Sign Up
-          </Link>
-        </p>
-        <p className="text-center text-xs text-muted-foreground mt-2">
-          <Link href="/privacy-policy" className="underline hover:text-primary">Privacy Policy</Link> ·{" "}
-          <Link href="/terms" className="underline hover:text-primary">Terms of Service</Link>
+        <p className="text-center text-xs text-muted-foreground">
+          Need help? <Link href="/support" className="underline hover:text-primary">Contact Support</Link>
+          {" "}|{" "}
+          <Link href="/privacy" className="underline hover:text-primary">Privacy Policy</Link>
         </p>
       </div>
     </div>
