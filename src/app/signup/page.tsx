@@ -112,7 +112,7 @@ export default function SignUpPage() {
                 </div>
               </div>
               <Button variant="outline" className="w-full" onClick={handleGoogleSignUp} disabled={isLoading}>
-                Sign Up with SSO
+                Sign Up with Google
               </Button>
             </form>
           </CardContent>

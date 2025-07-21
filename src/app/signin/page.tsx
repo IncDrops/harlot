@@ -87,7 +87,7 @@ export default function SignInPage() {
                 </div>
               </div>
               <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} disabled={isLoading}>
-                Sign In with SSO
+                Sign In with Google
               </Button>
             </form>
              <p className="text-center text-sm text-muted-foreground mt-6">
