@@ -1,4 +1,4 @@
 import { config } from 'dotenv';
 config();
 
-import '@/ai/flows/monetize-affiliate-links.ts';
+import '@/ai/flows/generate-initial-analysis';
