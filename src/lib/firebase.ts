@@ -45,6 +45,8 @@ import {
 import { getFunctions } from 'firebase/functions';
 import type { Functions } from 'firebase/functions';
 import type { User, Analysis, Notification } from "./types";
+import { generateInitialAnalysis, type GenerateInitialAnalysisInput } from "@/ai/flows/generate-initial-analysis";
+
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -155,17 +157,33 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
 
 // ──────────── ANALYSES ────────────
 
-export const createAnalysis = async (userId: string, data: Omit<Analysis, 'id' | 'userId' | 'status' | 'createdAt'>): Promise<string> => {
+export const createAnalysis = async (userId: string, data: Omit<Analysis, 'id' | 'userId' | 'status' | 'createdAt' | 'completedAt'>): Promise<string> => {
     const analysesRef = collection(db, 'analyses');
-    const newAnalysisData = {
+    
+    // 1. Call the AI flow to get the analysis
+    const aiInput: GenerateInitialAnalysisInput = {
+      decisionQuestion: data.decisionQuestion,
+      context: `Decision Type: ${data.decisionType}, Data Sources: ${data.dataSources.join(', ')}`
+    }
+    const aiResponse = await generateInitialAnalysis(aiInput);
+
+    // 2. Combine form data and AI response
+    const newAnalysisData: Omit<Analysis, 'id' | 'createdAt'> = {
         ...data,
+        ...aiResponse,
         userId,
-        status: 'in_progress',
-        createdAt: serverTimestamp(),
+        status: 'completed', // Now completed immediately after generation
+        completedAt: new Date().toISOString(),
     };
-    const docRef = await addDoc(analysesRef, newAnalysisData);
+    
+    // 3. Save to Firestore
+    const docRef = await addDoc(analysesRef, {
+        ...newAnalysisData,
+        createdAt: serverTimestamp(),
+    });
     return docRef.id;
 };
+
 
 export const getAnalysisById = async (analysisId: string): Promise<Analysis | null> => {
     const analysisRef = doc(db, 'analyses', analysisId);
