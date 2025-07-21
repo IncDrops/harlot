@@ -1,8 +1,8 @@
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { RecentAnalyses } from "@/components/recent-analyses";
-import { PlusCircle, Database, Settings } from "lucide-react";
+import { PlusCircle, Database, Settings, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/auth-context";
 
@@ -48,20 +48,33 @@ export default function DashboardPage() {
                         <CardTitle>Data Health Summary</CardTitle>
                         <CardDescription>Status of your integrated sources.</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                       <div className="flex justify-between items-center">
-                           <span>CRM Data</span>
-                           <span className="text-green-500 font-semibold">Connected</span>
-                       </div>
-                       <div className="flex justify-between items-center mt-2">
-                           <span>ERP System</span>
-                           <span className="text-green-500 font-semibold">Connected</span>
-                       </div>
-                        <div className="flex justify-between items-center mt-2">
-                           <span>Financial Reports</span>
-                           <span className="text-yellow-500 font-semibold">Syncing...</span>
-                       </div>
+                    <CardContent className="space-y-1">
+                       <Link href="/data-sources" className="block p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
+                           <div className="flex justify-between items-center">
+                               <span>CRM Data</span>
+                               <span className="text-sm font-semibold text-green-500">Connected</span>
+                           </div>
+                       </Link>
+                       <Link href="/data-sources" className="block p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
+                           <div className="flex justify-between items-center mt-1">
+                               <span>ERP System</span>
+                               <span className="text-sm font-semibold text-green-500">Connected</span>
+                           </div>
+                        </Link>
+                        <Link href="/data-sources" className="block p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
+                            <div className="flex justify-between items-center mt-1">
+                               <span>Financial Reports</span>
+                               <span className="text-sm font-semibold text-yellow-500">Syncing...</span>
+                           </div>
+                        </Link>
                     </CardContent>
+                    <CardFooter>
+                         <Button asChild variant="ghost" size="sm" className="w-full">
+                            <Link href="/data-sources">
+                                Manage All Sources <ArrowRight className="w-4 h-4 ml-2" />
+                            </Link>
+                        </Button>
+                    </CardFooter>
                 </Card>
             </div>
         </div>
