@@ -157,7 +157,7 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
 
 // ──────────── ANALYSES ────────────
 
-export const createAnalysis = async (userId: string, data: Omit<Analysis, 'id' | 'userId' | 'status' | 'createdAt' | 'completedAt'>): Promise<string> => {
+export const createAnalysis = async (userId: string, data: Pick<Analysis, 'decisionQuestion' | 'decisionType' | 'dataSources'>): Promise<string> => {
     const analysesRef = collection(db, 'analyses');
     
     // 1. Call the AI flow to get the analysis

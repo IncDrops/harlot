@@ -35,12 +35,12 @@ export interface Analysis {
     dataSources: string[];
     status: 'completed' | 'in_progress' | 'archived';
     createdAt: string; // ISO String
-    completedAt: string; // ISO String - Changed from optional
-    primaryRecommendation: string; // Changed from optional
-    executiveSummary: string; // Changed from optional
-    keyFactors: { factor: string; impact: number; value: string }[]; // Changed from optional
-    risks: { risk: string; mitigation: string }[]; // Changed from optional
-    confidenceScore: number; // Changed from optional
+    completedAt: string; // ISO String
+    primaryRecommendation: string;
+    executiveSummary: string;
+    keyFactors: { factor: string; impact: number; value: string }[];
+    risks: { risk: string; mitigation: string }[];
+    confidenceScore: number;
 }
 
 

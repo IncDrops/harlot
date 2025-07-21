@@ -71,14 +71,6 @@ export default function AnalysisReportPage() {
 
     const isCompleted = analysis.status === 'completed';
 
-    // Use mock data for display if analysis is in progress, as fields won't exist yet
-    const displayData = {
-        primaryRecommendation: analysis.primaryRecommendation || "Analysis is still in progress...",
-        executiveSummary: analysis.executiveSummary || "The AI is currently processing your data sources. An executive summary will be generated upon completion. Check back shortly.",
-        confidenceScore: analysis.confidenceScore || 0,
-        risks: analysis.risks || [],
-    };
-
     return (
         <div className="container mx-auto py-8">
             <div className="max-w-5xl mx-auto space-y-8">
@@ -105,7 +97,7 @@ export default function AnalysisReportPage() {
                                 <CardTitle>Primary Recommendation</CardTitle>
                              </CardHeader>
                              <CardContent>
-                                <p className="text-xl font-semibold text-primary">{displayData.primaryRecommendation}</p>
+                                <p className="text-xl font-semibold text-primary">{analysis.primaryRecommendation}</p>
                              </CardContent>
                         </Card>
 
@@ -115,65 +107,65 @@ export default function AnalysisReportPage() {
                                 <CardTitle>Executive Summary</CardTitle>
                             </CardHeader>
                             <CardContent className="prose dark:prose-invert max-w-none">
-                                <p>{displayData.executiveSummary}</p>
+                                <p>{analysis.executiveSummary}</p>
                             </CardContent>
                         </Card>
                         
-                        {isCompleted && (
-                            <>
-                            {/* Data Visualization */}
-                            <Card>
-                                 <CardHeader>
-                                    <CardTitle>Key Metric Comparison</CardTitle>
-                                    <CardDescription>ROI (in millions) and Total Addressable Market (in millions)</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <ChartContainer config={chartConfig} className="w-full h-[250px]">
-                                        <BarChart accessibilityLayer data={chartData} layout="vertical" margin={{ left: 10 }}>
-                                            <CartesianGrid horizontal={false} />
-                                            <YAxis dataKey="factor" type="category" tickLine={false} tickMargin={10} axisLine={false} hide/>
-                                            <XAxis dataKey="value" type="number" hide />
-                                            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-                                            <Bar dataKey="value" radius={5}>
-                                                <LabelList
-                                                    position="right"
-                                                    offset={8}
-                                                    className="fill-foreground"
-                                                    fontSize={12}
-                                                />
-                                                 <LabelList
-                                                    dataKey="factor"
-                                                    position="insideLeft"
-                                                    offset={8}
-                                                    className="fill-background"
-                                                    fontSize={12}
-                                                />
-                                            </Bar>
-                                        </BarChart>
-                                    </ChartContainer>
-                                </CardContent>
-                            </Card>
+                        {/* Data Visualization */}
+                        <Card>
+                             <CardHeader>
+                                <CardTitle>Key Metric Comparison</CardTitle>
+                                <CardDescription>ROI (in millions) and Total Addressable Market (in millions)</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <ChartContainer config={chartConfig} className="w-full h-[250px]">
+                                    <BarChart accessibilityLayer data={chartData} layout="vertical" margin={{ left: 10 }}>
+                                        <CartesianGrid horizontal={false} />
+                                        <YAxis dataKey="factor" type="category" tickLine={false} tickMargin={10} axisLine={false} hide/>
+                                        <XAxis dataKey="value" type="number" hide />
+                                        <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+                                        <Bar dataKey="value" radius={5}>
+                                            <LabelList
+                                                position="right"
+                                                offset={8}
+                                                className="fill-foreground"
+                                                fontSize={12}
+                                            />
+                                             <LabelList
+                                                dataKey="factor"
+                                                position="insideLeft"
+                                                offset={8}
+                                                className="fill-background"
+                                                fontSize={12}
+                                            />
+                                        </Bar>
+                                    </BarChart>
+                                </ChartContainer>
+                            </CardContent>
+                        </Card>
 
-                            {/* Risk Analysis */}
-                            <Card>
-                                 <CardHeader>
-                                    <CardTitle>Risk Analysis & Mitigation</CardTitle>
-                                 </CardHeader>
-                                 <CardContent>
-                                     <ul className="space-y-4">
-                                        {displayData.risks.map((r, i) => (
+                        {/* Risk Analysis */}
+                        <Card>
+                             <CardHeader>
+                                <CardTitle>Risk Analysis & Mitigation</CardTitle>
+                             </CardHeader>
+                             <CardContent>
+                                 <ul className="space-y-4">
+                                    {analysis.risks && analysis.risks.length > 0 ? (
+                                        analysis.risks.map((r, i) => (
                                             <li key={i} className="p-3 bg-muted/50 rounded-lg">
                                                 <p className="font-semibold">{r.risk}</p>
                                                 <p className="text-sm text-muted-foreground">
                                                     <span className="text-primary font-medium">Mitigation:</span> {r.mitigation}
                                                 </p>
                                             </li>
-                                        ))}
-                                     </ul>
-                                 </CardContent>
-                            </Card>
-                            </>
-                        )}
+                                        ))
+                                    ) : (
+                                        <p className="text-sm text-muted-foreground">No significant risks were identified.</p>
+                                    )}
+                                 </ul>
+                             </CardContent>
+                        </Card>
                     </div>
 
                     {/* Sidebar */}
@@ -183,7 +175,7 @@ export default function AnalysisReportPage() {
                                 <CardTitle>Confidence Score</CardTitle>
                             </CardHeader>
                             <CardContent className="text-center">
-                                 <p className="text-6xl font-bold text-primary">{displayData.confidenceScore}%</p>
+                                 <p className="text-6xl font-bold text-primary">{analysis.confidenceScore}%</p>
                                  <p className="text-sm text-muted-foreground mt-2">Based on data integrity and model consensus</p>
                             </CardContent>
                         </Card>
