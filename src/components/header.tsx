@@ -72,9 +72,6 @@ export function Header() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
-                    <DropdownMenuItem onClick={() => router.push(profile ? `/profile/${profile.username}` : '#')}>
-                      Profile
-                    </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => router.push('/settings')}>
                       Settings
                     </DropdownMenuItem>

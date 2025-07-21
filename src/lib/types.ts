@@ -9,45 +9,6 @@ export interface User {
   tipsReceived?: number;
 }
 
-export interface PollOption {
-  id: number;
-  text: string;
-  votes: number;
-  imageUrl?: string | null;
-  affiliateLink?: string | null;
-  'data-ai-hint'?: string;
-}
-
-export interface Poll {
-  id: string;
-  question: string;
-  description?: string;
-  options: PollOption[];
-  type: 'standard' | '2nd_opinion';
-  creatorId: string;
-  createdAt: string; // ISO String
-  endsAt: string; // ISO String
-  pledged: boolean;
-  pledgeAmount?: number;
-  tipCount: number;
-  isNSFW: boolean;
-  isProcessed: boolean;
-  category?: string;
-  likes: number;
-  comments: number;
-  videoUrl?: string | null;
-}
-
-export interface Comment {
-    id: string;
-    pollId: string;
-    userId: string;
-    username: string;
-    avatar: string;
-    text: string;
-    createdAt: string; // ISO String
-}
-
 export interface Notification {
     id: string;
     type: 'analysis_complete' | 'data_anomaly' | 'insight_available' | 'system_update';

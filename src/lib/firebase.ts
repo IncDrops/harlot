@@ -1,4 +1,3 @@
-
 // Firebase Config
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import {
@@ -44,7 +43,7 @@ import {
 } from "firebase/firestore";
 import { getFunctions } from 'firebase/functions';
 import type { Functions } from 'firebase/functions';
-import type { Comment, Notification, Poll, User, Analysis } from "./types";
+import type { User, Analysis, Notification } from "./types";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
