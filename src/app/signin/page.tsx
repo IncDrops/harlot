@@ -90,6 +90,12 @@ export default function SignInPage() {
                 Sign In with SSO
               </Button>
             </form>
+             <p className="text-center text-sm text-muted-foreground mt-6">
+                Don't have an account?{" "}
+                <Link href="/signup" className="underline hover:text-primary font-semibold">
+                    Sign Up
+                </Link>
+            </p>
           </CardContent>
         </Card>
         <p className="text-center text-xs text-muted-foreground">
