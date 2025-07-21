@@ -53,7 +53,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDjoi3EJ7l1dcOF1JRPlzC6rQg2DDGyCH8",
   authDomain: "pollitgo.firebaseapp.com",
   projectId: "pollitgo",
-  storageBucket: "pollitgo.firebasestorage.app",
+  storageBucket: "pollitgo.appspot.com",
   messagingSenderId: "1078455480838",
   appId: "1:1078455480838:web:6fc2d68bd37853373c0987"
 };

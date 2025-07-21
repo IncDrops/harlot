@@ -3,32 +3,23 @@ rules_version = '2';
 
 service firebase.storage {
   match /b/{bucket}/o {
-    // Default deny all access
-    match /{allPaths=**} {
-      allow read, write: if false;
-    }
+    // Default Deny: No access to any file unless explicitly allowed below.
+    
+    // Avatar Rules
+    // Path: /avatars/{userId}/avatar.jpg
+    match /avatars/{userId}/avatar.jpg {
+      // Allow anyone to read user avatars (for displaying profiles, etc.)
+      allow read;
 
-    // --- User Avatars ---
-    // Avatars are stored at /avatars/{userId}/avatar.{jpg|png|gif}
-    // - Anyone can read avatars to display them in the UI.
-    // - Only the authenticated user can write to their own avatar path.
-    // - File size is limited to 2MB.
-    // - File type is restricted to images.
-    match /avatars/{userId}/{fileName} {
-      allow read: if true;
-      allow write: if request.auth != null
-                    && request.auth.uid == userId
-                    && fileName == 'avatar.jpg'
-                    && request.resource.size < 2 * 1024 * 1024
-                    && request.resource.contentType.matches('image/(jpeg|png|gif)');
+      // Allow a user to write (upload, update, delete) to their own avatar path if:
+      // 1. They are authenticated.
+      // 2. Their user ID matches the {userId} in the path.
+      // 3. The file is a common image type.
+      // 4. The file size is less than 2MB.
+      allow write: if request.auth != null && 
+                    request.auth.uid == userId &&
+                    request.resource.size < 2 * 1024 * 1024 &&
+                    request.resource.contentType.matches('image/(png|jpeg|gif)');
     }
-
-    // --- Analysis-related Files (Future-proofing) ---
-    // Example rule for if you add file uploads to analyses.
-    // This allows an authenticated user who is part of the analysis to read/write.
-    // match /analyses/{analysisId}/{fileName} {
-    //   allow read, write: if request.auth != null && exists(/databases/$(database)/documents/analyses/$(analysisId))
-    //                      && resource.data.userId == request.auth.uid;
-    // }
   }
 }

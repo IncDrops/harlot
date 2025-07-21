@@ -18,7 +18,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from '@/hooks/use-toast';
 import { useTheme } from "next-themes";
-import { Sun, Moon, Laptop, User as UserIcon, Palette, Bell } from "lucide-react";
+import { Sun, Moon, Laptop, User as UserIcon, Palette, Bell, Loader2 } from "lucide-react";
+import { updateUserProfileData, uploadFile } from '@/lib/firebase';
 
 const profileFormSchema = z.object({
   avatar: z.any().optional(),
@@ -77,12 +78,24 @@ export default function SettingsPage() {
     toast({ title: "Updating profile..." });
 
     try {
-        // In a real app, this would call Firebase to update the user profile
-        // and upload the avatar if changed.
-        console.log("Profile data to save:", data);
-        await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
+        let avatarUrl = profile.avatar;
         
-        // await reloadProfile(); // Would reload profile from backend
+        // If a new avatar file was selected, upload it
+        if (data.avatar instanceof File) {
+            const avatarFile = data.avatar;
+            const filePath = `avatars/${user.uid}/avatar.jpg`;
+            avatarUrl = await uploadFile(avatarFile, filePath);
+        }
+
+        const profileDataToUpdate = {
+            displayName: data.displayName,
+            username: data.username,
+            bio: data.bio,
+            avatar: avatarUrl,
+        };
+        
+        await updateUserProfileData(user.uid, profileDataToUpdate);
+        await reloadProfile(); // Reloads profile from backend to update UI everywhere
 
         toast({
             title: "Profile Updated!",
@@ -213,6 +226,7 @@ export default function SettingsPage() {
                 </CardContent>
                 <CardFooter>
                   <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     {isSubmitting ? 'Saving...' : 'Save Changes'}
                   </Button>
                 </CardFooter>
