@@ -32,7 +32,7 @@ export default function DashboardPage() {
                             </Link>
                         </Button>
                          <Button asChild variant="secondary" className="w-full justify-start">
-                            <Link href="#">
+                            <Link href="/data-sources">
                                 <Database className="mr-2 h-4 w-4" /> Manage Data Sources
                             </Link>
                         </Button>
