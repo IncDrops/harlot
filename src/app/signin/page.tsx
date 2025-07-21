@@ -9,12 +9,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Logo } from "@/components/logo";
+import { Logo, Tagline } from "@/components/logo";
 import { useToast } from "@/hooks/use-toast";
 
 export default function SignInPage() {
-  const [email, setEmail] = useState("pr3ttypl3az3@gmail.com");
-  const [password, setPassword] = useState("Password123!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { signIn, signInWithGoogle } = useAuth();
   const router = useRouter();
@@ -54,9 +54,9 @@ export default function SignInPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-6">
-        <div className="text-center">
+        <div className="text-center space-y-2">
           <Logo className="mx-auto" />
-          <p className="text-muted-foreground text-sm mt-2">Where Vision Meets AI-Powered Precision.</p>
+          <Tagline />
         </div>
         <Card className="shadow-2xl border-primary/20">
           <CardHeader>
@@ -71,7 +71,7 @@ export default function SignInPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <Input id="password" type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required />
               </div>
               <Button className="w-full" type="submit" disabled={isLoading}>
                 {isLoading ? "Signing In..." : "Login"}
