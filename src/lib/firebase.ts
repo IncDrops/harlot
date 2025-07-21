@@ -45,7 +45,8 @@ import {
 import { getFunctions } from 'firebase/functions';
 import type { Functions } from 'firebase/functions';
 import type { User, Analysis, Notification } from "./types";
-import { generateInitialAnalysis, type GenerateInitialAnalysisInput } from "@/ai/flows/generate-initial-analysis";
+import { generateInitialAnalysis } from "@/ai/flows/generate-initial-analysis";
+import type { GenerateInitialAnalysisInput } from "@/lib/ai-schemas";
 
 
 const firebaseConfig = {
