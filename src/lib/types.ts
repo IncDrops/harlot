@@ -1,3 +1,4 @@
+
 export interface User {
   id: string;
   displayName: string;
@@ -28,12 +29,20 @@ export interface Message {
 
 export interface Analysis {
     id: string;
+    userId: string;
     decisionQuestion: string;
+    decisionType: string;
+    dataSources: string[];
     status: 'completed' | 'in_progress' | 'archived';
-    completedAt: string; // ISO String
-    primaryRecommendation: string;
-    confidenceScore: number; // 0-100
+    createdAt: string; // ISO String
+    completedAt?: string; // ISO String
+    primaryRecommendation?: string;
+    executiveSummary?: string;
+    keyFactors?: { factor: string; impact: number; value: string }[];
+    risks?: { risk: string; mitigation: string }[];
+    confidenceScore?: number; // 0-100
 }
+
 
 export interface DataIntegration {
     id: string;

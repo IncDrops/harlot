@@ -1,3 +1,4 @@
+
 // Firebase Config
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import {
@@ -153,6 +154,34 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
 
 
 // ──────────── ANALYSES ────────────
+
+export const createAnalysis = async (userId: string, data: Omit<Analysis, 'id' | 'userId' | 'status' | 'createdAt'>): Promise<string> => {
+    const analysesRef = collection(db, 'analyses');
+    const newAnalysisData = {
+        ...data,
+        userId,
+        status: 'in_progress',
+        createdAt: serverTimestamp(),
+    };
+    const docRef = await addDoc(analysesRef, newAnalysisData);
+    return docRef.id;
+};
+
+export const getAnalysisById = async (analysisId: string): Promise<Analysis | null> => {
+    const analysisRef = doc(db, 'analyses', analysisId);
+    const analysisSnap = await getDoc(analysisRef);
+    if (analysisSnap.exists()) {
+        return fromFirestore<Analysis>(analysisSnap);
+    }
+    return null;
+};
+
+export const getRecentAnalysesForUser = async (userId: string, count: number = 5): Promise<Analysis[]> => {
+    const analysesRef = collection(db, 'analyses');
+    const q = query(analysesRef, where('userId', '==', userId), orderBy('createdAt', 'desc'), limit(count));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => fromFirestore<Analysis>(doc));
+};
 
 export const searchAnalyses = async (searchTerm: string): Promise<Analysis[]> => {
   if (searchTerm.trim().length < 3) return [];

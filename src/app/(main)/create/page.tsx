@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -13,6 +14,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, BrainCircuit, Database, SlidersHorizontal, Info } from 'lucide-react';
+import { useAuth } from '@/contexts/auth-context';
+import { createAnalysis } from '@/lib/firebase';
 
 const analysisFormSchema = z.object({
   decisionQuestion: z.string().min(10, "Please provide a clear question for the analysis."),
@@ -29,6 +32,7 @@ type AnalysisFormValues = z.infer<typeof analysisFormSchema>;
 
 export default function NewDecisionAnalysisPage() {
   const router = useRouter();
+  const { user } = useAuth();
   const { toast } = useToast();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,6 +49,11 @@ export default function NewDecisionAnalysisPage() {
   const prevStep = () => setStep(s => s - 1);
 
   async function onSubmit(data: AnalysisFormValues) {
+    if (!user) {
+        toast({ variant: "destructive", title: "Authentication Error", description: "You must be logged in to start an analysis." });
+        return;
+    }
+
     setIsSubmitting(true);
     toast({
       title: "Initiating Analysis...",
@@ -52,15 +61,15 @@ export default function NewDecisionAnalysisPage() {
     });
 
     try {
-      // API call to Pollitago's AI backend would go here
-      console.log("Analysis Data:", data);
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
-
+      const analysisId = await createAnalysis(user.uid, data);
+      
       toast({
         title: "Analysis Started!",
         description: "You will be notified upon completion. Estimated time: 5 minutes.",
       });
-      router.push('/');
+
+      // Navigate to the newly created analysis page
+      router.push(`/analysis/${analysisId}`);
     } catch (error) {
       console.error("Error starting analysis:", error);
       toast({

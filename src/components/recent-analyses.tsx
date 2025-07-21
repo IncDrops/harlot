@@ -1,41 +1,43 @@
 
+"use client";
+
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AnalysisCard } from "./analysis-card";
 import type { Analysis } from "@/lib/types";
 import Link from 'next/link';
 import { Button } from "./ui/button";
-import { ArrowRight } from "lucide-react";
-
-// Mock data for demonstration purposes
-const mockAnalyses: Analysis[] = [
-  {
-    id: "1",
-    decisionQuestion: "Should we invest in expanding to Market X or Market Y?",
-    status: "completed",
-    completedAt: "2024-07-28T10:00:00Z",
-    primaryRecommendation: "Proceed with Market Y based on projected growth.",
-    confidenceScore: 88,
-  },
-  {
-    id: "2",
-    decisionQuestion: "Optimal resource allocation for Q4 product launch?",
-    status: "completed",
-    completedAt: "2024-07-25T14:30:00Z",
-    primaryRecommendation: "Allocate 60% of budget to digital marketing.",
-    confidenceScore: 92,
-  },
-    {
-    id: "3",
-    decisionQuestion: "Evaluate risk assessment of new supplier chain.",
-    status: "in_progress",
-    completedAt: "2024-08-01T18:00:00Z",
-    primaryRecommendation: "Pending analysis...",
-    confidenceScore: 0,
-  },
-];
-
+import { ArrowRight, Info } from "lucide-react";
+import { useAuth } from "@/contexts/auth-context";
+import { getRecentAnalysesForUser } from "@/lib/firebase";
+import { Skeleton } from "./ui/skeleton";
 
 export function RecentAnalyses() {
+    const { user, loading: authLoading } = useAuth();
+    const [analyses, setAnalyses] = useState<Analysis[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (authLoading) return;
+        if (!user) {
+            setLoading(false);
+            return;
+        }
+
+        async function fetchAnalyses() {
+            try {
+                const recentAnalyses = await getRecentAnalysesForUser(user!.uid, 3);
+                setAnalyses(recentAnalyses);
+            } catch (error) {
+                console.error("Failed to fetch recent analyses", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchAnalyses();
+    }, [user, authLoading]);
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
@@ -51,9 +53,23 @@ export function RecentAnalyses() {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {mockAnalyses.map((analysis) => (
-            <AnalysisCard key={analysis.id} analysis={analysis} />
-          ))}
+          {loading ? (
+            <>
+                <Skeleton className="h-24 w-full" />
+                <Skeleton className="h-24 w-full" />
+                <Skeleton className="h-24 w-full" />
+            </>
+          ) : analyses.length > 0 ? (
+             analyses.map((analysis) => (
+                <AnalysisCard key={analysis.id} analysis={analysis} />
+             ))
+          ) : (
+            <div className="flex flex-col items-center justify-center h-40 text-center text-muted-foreground bg-muted/50 rounded-lg">
+                <Info className="w-8 h-8 mb-2" />
+                <p className="font-semibold">No Analyses Found</p>
+                <p className="text-sm">Start your first analysis to see it here.</p>
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>
