@@ -1,34 +1,5 @@
 
 {
-  "indexes": [
-    {
-      "collectionGroup": "polls",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "pledged",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isProcessed",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "endsAt",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "polls",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    }
-  ],
+  "indexes": [],
   "fieldOverrides": []
 }

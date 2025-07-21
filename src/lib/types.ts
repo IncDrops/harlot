@@ -5,8 +5,6 @@ export interface User {
   avatar: string;
   role: 'admin' | 'user';
   bio?: string;
-  pollitPoints?: number;
-  tipsReceived?: number;
 }
 
 export interface Notification {
