@@ -157,26 +157,27 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
 
 // ──────────── ANALYSES ────────────
 
-export const createAnalysis = async (userId: string, data: Pick<Analysis, 'decisionQuestion' | 'decisionType' | 'dataSources'>): Promise<string> => {
+type AnalysisCreationData = Pick<Analysis, 'decisionQuestion' | 'decisionType' | 'dataSources'> & { context?: string };
+
+export const createAnalysis = async (userId: string, data: AnalysisCreationData): Promise<string> => {
     const analysesRef = collection(db, 'analyses');
     
-    // 1. Call the AI flow to get the analysis
     const aiInput: GenerateInitialAnalysisInput = {
       decisionQuestion: data.decisionQuestion,
-      context: `Decision Type: ${data.decisionType}, Data Sources: ${data.dataSources.join(', ')}`
+      context: data.context || `Decision Type: ${data.decisionType}, Data Sources: ${data.dataSources.join(', ')}`
     }
     const aiResponse = await generateInitialAnalysis(aiInput);
 
-    // 2. Combine form data and AI response
     const newAnalysisData: Omit<Analysis, 'id' | 'createdAt'> = {
-        ...data,
-        ...aiResponse,
         userId,
-        status: 'completed', // Now completed immediately after generation
+        decisionQuestion: data.decisionQuestion,
+        decisionType: data.decisionType,
+        dataSources: data.dataSources,
+        status: 'completed',
         completedAt: new Date().toISOString(),
+        ...aiResponse,
     };
     
-    // 3. Save to Firestore
     const docRef = await addDoc(analysesRef, {
         ...newAnalysisData,
         createdAt: serverTimestamp(),

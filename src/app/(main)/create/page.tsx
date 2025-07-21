@@ -23,6 +23,7 @@ const analysisFormSchema = z.object({
   decisionQuestion: z.string().min(10, "Please provide a clear question for the analysis."),
   decisionType: z.string().min(1, "Please select a decision type."),
   dataSources: z.array(z.string()).min(1, "Please select at least one data source."),
+  context: z.string().optional(),
 });
 
 type AnalysisFormValues = z.infer<typeof analysisFormSchema>;
@@ -56,15 +57,16 @@ export default function NewDecisionAnalysisPage() {
     });
 
     try {
-      // The createAnalysis function now calls the AI and saves to Firestore
-      const analysisId = await createAnalysis(user.uid, data);
+      const fullContext = `Decision Type: ${data.decisionType}, Data Sources: ${data.dataSources.join(', ')}`;
+      const analysisData = { ...data, context: fullContext };
+      
+      const analysisId = await createAnalysis(user.uid, analysisData);
       
       toast({
         title: "Analysis Complete!",
         description: "Your new analysis is ready for review.",
       });
 
-      // Navigate to the newly created analysis page
       router.push(`/analysis/${analysisId}`);
     } catch (error) {
       console.error("Error starting analysis:", error);
