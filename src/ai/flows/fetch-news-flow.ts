@@ -36,8 +36,8 @@ const fetchNewsFlow = ai.defineFlow(
     const apiKey = process.env.MEDIASTACK_API_KEY;
     if (!apiKey) {
       console.error("Mediastack API key not found.");
-      // Return an empty array or a specific error message if the key is missing
-      return { articles: [{ title: "API Key not configured.", url: "#", source: "System"}] };
+      // Return an empty array if the key is missing to satisfy the schema
+      return { articles: [] };
     }
 
     const categories = input.category.toLowerCase().replace(/ /g, '_');
