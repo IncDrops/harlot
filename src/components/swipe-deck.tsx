@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { SwipeableAnalysisCard } from './swipeable-analysis-card';
 import { useAuth } from '@/contexts/auth-context';
 import type { Analysis } from '@/lib/types';
