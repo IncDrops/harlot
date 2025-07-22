@@ -113,7 +113,7 @@ export default function SearchPage() {
     }
   }, [user]);
 
-  const showInitialMessage = searchTerm.length < 3;
+  const showInitialMessage = searchTerm.length < 3 && !isSearching;
   const showNoResults = !isSearching && !isFetchingMore && results.length === 0 && searchTerm.length >= 3;
   const showResults = results.length > 0;
   
@@ -138,7 +138,13 @@ export default function SearchPage() {
             </CardDescription>
         </CardHeader>
         <CardContent>
-          { showResults ? (
+          {isSearching && !showResults ? (
+            <div className="space-y-4">
+              <Skeleton className="h-24 w-full" />
+              <Skeleton className="h-24 w-full" />
+              <Skeleton className="h-24 w-full" />
+            </div>
+          ) : showResults ? (
             <div className="space-y-4">
               {results.map((analysis, index) => {
                   if(results.length === index + 1) {
