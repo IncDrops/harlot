@@ -15,15 +15,15 @@ interface FeedItem {
 }
 
 const feedCategories: { title: string; icon: LucideIcon | 'code'; category: string; }[] = [
-    { title: "AI Trends", icon: Bot, category: "general" }, // Mediastack category
+    { title: "AI Trends", icon: Bot, category: "https://techcrunch.com/feed/" }, // RSS Feed
     { title: "Crypto Markets", icon: Bitcoin, category: "business" }, // Mediastack category
     { title: "Tech Stocks", icon: LineChart, category: "business" }, // Mediastack category
-    { title: "Startup News", icon: Lightbulb, category: "business" }, // Mediastack category
-    { title: "Developer Tools", icon: 'code', category: "technology" }, // Mediastack category
-    { title: "High-End Auto", icon: Car, category: "general" }, // Mediastack category
-    { title: "Luxury Watches", icon: Watch, category: "https://www.watchpro.com/feed/" }, // RSS Feed URL
-    { title: "Luxury Daily", icon: Newspaper, category: "https://www.luxurydaily.com/feed/" }, // RSS Feed URL
-    { title: "Productivity", icon: Laptop, category: "technology" } // Mediastack category
+    { title: "Startup News", icon: Lightbulb, category: "https://techcrunch.com/feed/" }, // RSS Feed
+    { title: "Developer Tools", icon: 'code', category: "https://techcrunch.com/feed/" }, // RSS Feed
+    { title: "High-End Auto", icon: Car, category: "https://www.luxurydaily.com/feed/" }, // RSS Feed
+    { title: "Luxury Watches", icon: Watch, category: "https://www.luxurydaily.com/feed/" }, // RSS Feed
+    { title: "Luxury Daily", icon: Newspaper, category: "https://www.luxurydaily.com/feed/" }, // RSS Feed
+    { title: "Productivity", icon: Laptop, category: "https://techcrunch.com/feed/" } // RSS Feed
 ];
 
 function FeedCard({ category, title, icon: Icon }: { category: string, title: string, icon: LucideIcon | 'code' }) {
