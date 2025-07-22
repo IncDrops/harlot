@@ -1,4 +1,5 @@
 
+
 export interface User {
   id: string;
   displayName: string;
@@ -50,4 +51,13 @@ export interface DataIntegration {
     type: 'CRM' | 'ERP' | 'Database' | 'API';
     status: 'connected' | 'disconnected' | 'error';
     lastSync: string | null; // ISO String or null if never synced
+}
+
+export interface Feedback {
+    id: string;
+    userId: string;
+    analysisId: string;
+    rating: 'helpful' | 'unhelpful';
+    text?: string;
+    createdAt: string; // ISO string
 }

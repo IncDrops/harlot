@@ -10,9 +10,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { ThumbsUp, ThumbsDown, Share2, FileDown, Archive, Loader2, Info, BrainCircuit } from "lucide-react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList } from "recharts";
-import { getAnalysisById } from "@/lib/firebase";
+import { addFeedbackToAnalysis, getAnalysisById } from "@/lib/firebase";
 import type { Analysis } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/auth-context";
+import { useToast } from "@/hooks/use-toast";
 
 const chartConfig = {
   value: {
@@ -27,9 +29,18 @@ const chartConfig = {
 export default function AnalysisReportPage() {
     const params = useParams();
     const analysisId = params.analysisId as string;
+    const { user } = useAuth();
+    const { toast } = useToast();
     
     const [analysis, setAnalysis] = useState<Analysis | null>(null);
     const [loading, setLoading] = useState(true);
+    
+    // Feedback state
+    const [feedbackRating, setFeedbackRating] = useState<'helpful' | 'unhelpful' | null>(null);
+    const [feedbackText, setFeedbackText] = useState("");
+    const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
+    const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+
 
     useEffect(() => {
         if (!analysisId) return;
@@ -60,6 +71,31 @@ export default function AnalysisReportPage() {
           fill: `hsl(var(--chart-${(index % 5) + 1}))`
         }))
     }, [analysis]);
+    
+    const handleFeedbackSubmit = async () => {
+        if (!user || !analysisId || !feedbackRating) {
+            toast({ variant: "destructive", title: "Error", description: "You must select a rating to submit feedback." });
+            return;
+        }
+
+        setIsSubmittingFeedback(true);
+        try {
+            await addFeedbackToAnalysis(analysisId, {
+                userId: user.uid,
+                analysisId: analysisId,
+                rating: feedbackRating,
+                text: feedbackText,
+            });
+            setFeedbackSubmitted(true);
+            toast({ title: "Feedback Submitted", description: "Thank you for helping improve Pollitago." });
+        } catch (error) {
+            console.error("Failed to submit feedback", error);
+            toast({ variant: "destructive", title: "Error", description: "Could not submit feedback. Please try again." });
+        } finally {
+            setIsSubmittingFeedback(false);
+        }
+    };
+
 
     if (loading) {
         return (
@@ -235,28 +271,61 @@ export default function AnalysisReportPage() {
                             </CardContent>
                         </Card>
 
-                         <Card>
+                        <Card>
                             <CardHeader>
                                 <CardTitle>Human Feedback & Refinement</CardTitle>
                                 <CardDescription>Your feedback improves Pollitago's accuracy.</CardDescription>
                             </CardHeader>
-                            <CardContent>
-                               <div className="space-y-4">
-                                  <div>
-                                     <p className="text-sm font-medium mb-2">Was this analysis helpful?</p>
-                                     <div className="flex gap-2">
-                                        <Button variant="outline" size="icon"><ThumbsUp/></Button>
-                                        <Button variant="outline" size="icon"><ThumbsDown/></Button>
-                                     </div>
-                                  </div>
-                                  <div>
-                                     <Textarea placeholder="Provide additional context or feedback..." />
-                                  </div>
-                               </div>
-                            </CardContent>
-                            <CardFooter>
-                                <Button className="w-full">Submit Feedback</Button>
-                            </CardFooter>
+                           {!feedbackSubmitted ? (
+                                <>
+                                <CardContent>
+                                    <div className="space-y-4">
+                                        <div>
+                                            <p className="text-sm font-medium mb-2">Was this analysis helpful?</p>
+                                            <div className="flex gap-2">
+                                                <Button 
+                                                    variant={feedbackRating === 'helpful' ? 'default' : 'outline'} 
+                                                    size="icon"
+                                                    onClick={() => setFeedbackRating('helpful')}
+                                                >
+                                                    <ThumbsUp/>
+                                                </Button>
+                                                <Button 
+                                                    variant={feedbackRating === 'unhelpful' ? 'destructive' : 'outline'} 
+                                                    size="icon"
+                                                    onClick={() => setFeedbackRating('unhelpful')}
+                                                >
+                                                    <ThumbsDown/>
+                                                </Button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <Textarea 
+                                                placeholder="Provide additional context or feedback..."
+                                                value={feedbackText}
+                                                onChange={(e) => setFeedbackText(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+                                </CardContent>
+                                <CardFooter>
+                                    <Button 
+                                        className="w-full" 
+                                        onClick={handleFeedbackSubmit} 
+                                        disabled={!feedbackRating || isSubmittingFeedback}
+                                    >
+                                        {isSubmittingFeedback && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                        Submit Feedback
+                                    </Button>
+                                </CardFooter>
+                                </>
+                           ) : (
+                                <CardContent>
+                                    <div className="text-center p-4 bg-muted/50 rounded-lg">
+                                        <p className="font-semibold text-primary">Thank you for your feedback!</p>
+                                    </div>
+                                </CardContent>
+                           )}
                         </Card>
                     </aside>
                 </div>
@@ -264,4 +333,3 @@ export default function AnalysisReportPage() {
         </div>
     );
 }
-

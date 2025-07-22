@@ -44,7 +44,7 @@ import {
 } from "firebase/firestore";
 import { getFunctions } from 'firebase/functions';
 import type { Functions } from 'firebase/functions';
-import type { User, Analysis, Notification } from "./types";
+import type { User, Analysis, Notification, Feedback } from "./types";
 import { generateInitialAnalysis } from "@/ai/flows/generate-initial-analysis";
 import type { GenerateInitialAnalysisInput } from "@/lib/ai-schemas";
 
@@ -298,6 +298,18 @@ export const searchAnalyses = async (
 export const updateAnalysisStatus = async (analysisId: string, status: Analysis['status']): Promise<void> => {
     const analysisRef = doc(db, 'analyses', analysisId);
     await updateDoc(analysisRef, { status });
+};
+
+
+// ──────────── FEEDBACK ────────────
+
+export const addFeedbackToAnalysis = async (analysisId: string, feedbackData: Omit<Feedback, 'id' | 'createdAt'>): Promise<void> => {
+    if (!analysisId) throw new Error("Analysis ID is required to add feedback.");
+    const feedbackRef = collection(db, 'analyses', analysisId, 'feedback');
+    await addDoc(feedbackRef, {
+        ...feedbackData,
+        createdAt: serverTimestamp(),
+    });
 };
 
 
