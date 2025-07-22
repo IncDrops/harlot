@@ -20,7 +20,7 @@ const feedCategories: { title: string; icon: LucideIcon | 'code'; category: stri
     { title: "Tech Stocks", icon: LineChart, category: "business" },
     { title: "Startup News", icon: Lightbulb, category: "https://techcrunch.com/feed/" },
     { title: "Developer Tools", icon: 'code', category: "https://techcrunch.com/feed/" },
-    { title: "Travel", icon: Globe, category: "travel" },
+    { title: "Travel", icon: Globe, category: "https://www.luxurydaily.com/feed/" },
     { title: "High-End Auto", icon: Car, category: "https://www.luxurydaily.com/feed/" },
     { title: "Luxury Watches", icon: Watch, category: "https://www.luxurydaily.com/feed/" },
     { title: "Luxury Daily", icon: Newspaper, category: "https://www.luxurydaily.com/feed/" },
