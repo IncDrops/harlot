@@ -2,10 +2,11 @@
 "use client";
 
 import { Header } from "@/components/header";
-import { SidebarProvider, Sidebar, SidebarInset, SidebarTrigger, SidebarHeader, SidebarContent, SidebarFooter } from "@/components/ui/sidebar";
+import { SidebarProvider, Sidebar, SidebarInset, SidebarTrigger, SidebarHeader, SidebarContent, SidebarFooter, SidebarClose } from "@/components/ui/sidebar";
 import { LiveFeed } from "@/components/live-feed";
 import { Logo } from "@/components/logo";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function MainLayout({
   children,
@@ -14,11 +15,13 @@ export default function MainLayout({
 }>) {
   return (
     <SidebarProvider>
-        <Sidebar>
-            <SidebarHeader>
-                <Link href="/" className="flex items-center gap-2">
-                    <Logo />
+        <Sidebar collapsible="icon">
+            <SidebarHeader className="flex items-center justify-between p-2">
+                <Link href="/" className="flex items-center gap-2 flex-1 min-w-0">
+                    <Logo className="group-data-[collapsible=icon]:hidden" />
                 </Link>
+                 <SidebarTrigger className="group-data-[collapsible=icon]:hidden" />
+                 <SidebarClose className="hidden group-data-[collapsible=icon]:flex" />
             </SidebarHeader>
             <SidebarContent>
                 <LiveFeed />
