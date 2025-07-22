@@ -1,7 +1,7 @@
 
 "use client";
 
-import { type LucideIcon, Bot, Bitcoin, LineChart, Lightbulb, Car, Watch, Laptop } from 'lucide-react';
+import { type LucideIcon, Bot, Bitcoin, LineChart, Lightbulb, Car, Watch, Laptop, Newspaper } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -22,6 +22,7 @@ const feedCategories: { title: string; icon: LucideIcon | 'code'; category: stri
     { title: "Developer Tools", icon: 'code', category: "technology" }, // Mediastack category
     { title: "High-End Auto", icon: Car, category: "general" }, // Mediastack category
     { title: "Luxury Watches", icon: Watch, category: "https://www.watchpro.com/feed/" }, // RSS Feed URL
+    { title: "Luxury Daily", icon: Newspaper, category: "https://www.luxurydaily.com/feed/" }, // RSS Feed URL
     { title: "Productivity", icon: Laptop, category: "technology" } // Mediastack category
 ];
 
