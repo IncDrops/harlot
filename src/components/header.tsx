@@ -48,17 +48,16 @@ export function Header() {
                 type="search"
                 placeholder="Search..."
                 className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-                onClick={() => router.push('/search')}
               />
             </div>
           </div>
           <nav className="flex items-center gap-2">
             {user ? (
               <>
-                <Button onClick={() => router.push('/create')}>
+                <Button>
                     <PlusCircle className="mr-2 h-4 w-4" /> New
                 </Button>
-                <Button variant="ghost" size="icon" className="rounded-full" onClick={() => router.push('/notifications')}>
+                <Button variant="ghost" size="icon" className="rounded-full">
                   <Bell className="h-5 w-5" />
                   <span className="sr-only">Toggle notifications</span>
                 </Button>
