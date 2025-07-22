@@ -23,6 +23,7 @@ const chartData = [
 const chartConfig = {
   value: {
     label: "Value",
+    color: "hsl(var(--primary))",
   },
 } satisfies ChartConfig;
 
@@ -116,7 +117,7 @@ export default function AnalysisReportPage() {
                              <CardHeader>
                                 <CardTitle>Key Metric Comparison</CardTitle>
                                 <CardDescription>ROI (in millions) and Total Addressable Market (in millions)</CardDescription>
-                            </CardHeader>
+                            </Header>
                             <CardContent>
                                 <ChartContainer config={chartConfig} className="w-full h-[250px]">
                                     <BarChart accessibilityLayer data={chartData} layout="vertical" margin={{ left: 10 }}>
