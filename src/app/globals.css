@@ -76,3 +76,22 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-infinite {
+  animation: marquee 30s linear infinite;
+}
+
+/* Optional: Pause on hover */
+.group:hover .animate-marquee-infinite.group-hover\:pause {
+  animation-play-state: paused;
+}
