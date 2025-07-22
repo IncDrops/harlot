@@ -114,6 +114,16 @@ export default function AnalysisReportPage() {
         }
     }
 
+    const handleShare = () => {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            toast({ title: "Link Copied!", description: "The report URL has been copied to your clipboard." });
+        }, (err) => {
+            console.error('Could not copy text: ', err);
+            toast({ variant: "destructive", title: "Error", description: "Could not copy the link." });
+        });
+    }
+
 
     if (loading) {
         return (
@@ -284,8 +294,8 @@ export default function AnalysisReportPage() {
                                 <CardTitle>Actions</CardTitle>
                             </CardHeader>
                             <CardContent className="flex flex-wrap gap-2">
-                               <Button variant="outline" size="sm" disabled={isArchived || isArchiving}><Share2 className="mr-2 h-4 w-4" /> Share</Button>
-                               <Button variant="outline" size="sm" disabled={isArchived || isArchiving}><FileDown className="mr-2 h-4 w-4" /> Export</Button>
+                               <Button variant="outline" size="sm" onClick={handleShare} disabled={isArchived}><Share2 className="mr-2 h-4 w-4" /> Share</Button>
+                               <Button variant="outline" size="sm" disabled={true}><FileDown className="mr-2 h-4 w-4" /> Export</Button>
                                <Button variant="outline" size="sm" onClick={handleArchive} disabled={isArchived || isArchiving}>
                                     {isArchiving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Archive className="mr-2 h-4 w-4" />}
                                     {isArchived ? 'Archived' : 'Archive'}
@@ -358,3 +368,5 @@ export default function AnalysisReportPage() {
         </div>
     );
 }
+
+    
