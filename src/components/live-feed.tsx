@@ -1,7 +1,7 @@
 
 "use client";
 
-import { type LucideIcon, Bot, Bitcoin, LineChart, Lightbulb, Car, Watch, Laptop, Newspaper } from 'lucide-react';
+import { type LucideIcon, Bot, Bitcoin, LineChart, Lightbulb, Car, Watch, Laptop, Newspaper, Globe } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -15,15 +15,16 @@ interface FeedItem {
 }
 
 const feedCategories: { title: string; icon: LucideIcon | 'code'; category: string; }[] = [
-    { title: "AI Trends", icon: Bot, category: "https://techcrunch.com/feed/" }, // RSS Feed
-    { title: "Crypto Markets", icon: Bitcoin, category: "business" }, // Mediastack category
-    { title: "Tech Stocks", icon: LineChart, category: "business" }, // Mediastack category
-    { title: "Startup News", icon: Lightbulb, category: "https://techcrunch.com/feed/" }, // RSS Feed
-    { title: "Developer Tools", icon: 'code', category: "https://techcrunch.com/feed/" }, // RSS Feed
-    { title: "High-End Auto", icon: Car, category: "https://www.luxurydaily.com/feed/" }, // RSS Feed
-    { title: "Luxury Watches", icon: Watch, category: "https://www.luxurydaily.com/feed/" }, // RSS Feed
-    { title: "Luxury Daily", icon: Newspaper, category: "https://www.luxurydaily.com/feed/" }, // RSS Feed
-    { title: "Productivity", icon: Laptop, category: "https://techcrunch.com/feed/" } // RSS Feed
+    { title: "AI Trends", icon: Bot, category: "https://techcrunch.com/feed/" },
+    { title: "Crypto Markets", icon: Bitcoin, category: "business" }, 
+    { title: "Tech Stocks", icon: LineChart, category: "business" },
+    { title: "Startup News", icon: Lightbulb, category: "https://techcrunch.com/feed/" },
+    { title: "Developer Tools", icon: 'code', category: "https://techcrunch.com/feed/" },
+    { title: "Travel", icon: Globe, category: "travel" },
+    { title: "High-End Auto", icon: Car, category: "https://www.luxurydaily.com/feed/" },
+    { title: "Luxury Watches", icon: Watch, category: "https://www.luxurydaily.com/feed/" },
+    { title: "Luxury Daily", icon: Newspaper, category: "https://www.luxurydaily.com/feed/" },
+    { title: "Productivity", icon: Laptop, category: "https://techcrunch.com/feed/" }
 ];
 
 function FeedCard({ category, title, icon: Icon }: { category: string, title: string, icon: LucideIcon | 'code' }) {
