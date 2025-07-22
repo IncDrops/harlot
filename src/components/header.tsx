@@ -3,7 +3,6 @@
 
 import Link from "next/link";
 import { Settings, LogOut, Bell, Search, PlusCircle } from "lucide-react";
-import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -42,25 +41,30 @@ export function Header() {
         
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
-             <div className="relative">
+             <div className="relative" onClick={() => router.push('/search')} >
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search..."
-                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px] cursor-pointer"
+                readOnly
               />
             </div>
           </div>
           <nav className="flex items-center gap-2">
             {user ? (
               <>
-                <Button>
-                    <PlusCircle className="mr-2 h-4 w-4" /> New
-                </Button>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <Bell className="h-5 w-5" />
-                  <span className="sr-only">Toggle notifications</span>
-                </Button>
+                <Link href="/create">
+                    <Button>
+                        <PlusCircle className="mr-2 h-4 w-4" /> New
+                    </Button>
+                </Link>
+                <Link href="/notifications">
+                    <Button variant="ghost" size="icon" className="rounded-full">
+                        <Bell className="h-5 w-5" />
+                        <span className="sr-only">Toggle notifications</span>
+                    </Button>
+                </Link>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="relative h-9 w-9 rounded-full">
