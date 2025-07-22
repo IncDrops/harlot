@@ -168,8 +168,7 @@ export const createAnalysis = async (userId: string, data: AnalysisCreationData)
       context: data.context || `Decision Type: ${data.decisionType}, Data Sources: ${data.dataSources.join(', ')}`
     }
     
-    // For demo purposes, we'll create an "in_progress" version first
-    // so it shows up in the swipe deck.
+    // Create an "in_progress" version first so it shows up in the UI immediately.
      const tempAnalysisData: Omit<Analysis, 'id'> = {
         userId,
         status: 'in_progress',
@@ -178,7 +177,7 @@ export const createAnalysis = async (userId: string, data: AnalysisCreationData)
         dataSources: data.dataSources,
         createdAt: new Date().toISOString(),
         completedAt: '',
-        primaryRecommendation: 'Analysis in progress...',
+        primaryRecommendation: 'Analysis is being generated...',
         executiveSummary: '',
         keyFactors: [],
         risks: [],
@@ -190,8 +189,7 @@ export const createAnalysis = async (userId: string, data: AnalysisCreationData)
         createdAt: serverTimestamp(),
     });
 
-    // Then, run the actual AI generation and update the doc.
-    // This simulates a real-world async process.
+    // Then, run the actual AI generation in the background and update the doc.
     generateInitialAnalysis(aiInput).then(aiResponse => {
         const finalAnalysisData: Partial<Analysis> = {
             status: 'completed',
@@ -201,6 +199,12 @@ export const createAnalysis = async (userId: string, data: AnalysisCreationData)
         updateDoc(docRef, {
             ...finalAnalysisData,
             completedAt: serverTimestamp(), // Use server timestamp for completion
+        });
+    }).catch(error => {
+        console.error("Error during AI generation, updating doc to 'failed'", error);
+        updateDoc(docRef, {
+            status: 'archived', // Or a new 'failed' status
+            primaryRecommendation: 'AI analysis failed to generate. Please try again.',
         });
     });
     

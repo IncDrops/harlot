@@ -63,11 +63,11 @@ export default function NewDecisionAnalysisPage() {
       const analysisId = await createAnalysis(user.uid, analysisData);
       
       toast({
-        title: "Analysis Complete!",
-        description: "Your new analysis is ready for review.",
+        title: "Analysis Generation Started!",
+        description: "Your new analysis will appear on your dashboard shortly.",
       });
 
-      router.push(`/analysis/${analysisId}`);
+      router.push(`/`);
     } catch (error) {
       console.error("Error starting analysis:", error);
       toast({
