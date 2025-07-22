@@ -15,14 +15,14 @@ interface FeedItem {
 }
 
 const feedCategories: { title: string; icon: LucideIcon | 'code'; category: string; }[] = [
-    { title: "AI Trends", icon: Bot, category: "general" }, // Mediastack might not have a specific AI category
-    { title: "Crypto Markets", icon: Bitcoin, category: "business" },
-    { title: "Tech Stocks", icon: LineChart, category: "business" },
-    { title: "Startup News", icon: Lightbulb, category: "business" },
-    { title: "Developer Tools", icon: 'code', category: "technology" },
-    { title: "High-End Auto", icon: Car, category: "general" },
-    { title: "Luxury Watches", icon: Watch, category: "general" },
-    { title: "Productivity", icon: Laptop, category: "technology" }
+    { title: "AI Trends", icon: Bot, category: "general" }, // Mediastack category
+    { title: "Crypto Markets", icon: Bitcoin, category: "business" }, // Mediastack category
+    { title: "Tech Stocks", icon: LineChart, category: "business" }, // Mediastack category
+    { title: "Startup News", icon: Lightbulb, category: "business" }, // Mediastack category
+    { title: "Developer Tools", icon: 'code', category: "technology" }, // Mediastack category
+    { title: "High-End Auto", icon: Car, category: "general" }, // Mediastack category
+    { title: "Luxury Watches", icon: Watch, category: "https://www.watchpro.com/feed/" }, // RSS Feed URL
+    { title: "Productivity", icon: Laptop, category: "technology" } // Mediastack category
 ];
 
 function FeedCard({ category, title, icon: Icon }: { category: string, title: string, icon: LucideIcon | 'code' }) {
@@ -33,6 +33,7 @@ function FeedCard({ category, title, icon: Icon }: { category: string, title: st
         async function loadData() {
             setLoading(true);
             try {
+                // The fetchNews flow now handles both categories and RSS URLs
                 const news = await fetchNews({ category });
                 if (news.articles.length > 0) {
                     setItem(news.articles[0]);
