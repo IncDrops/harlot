@@ -1,9 +1,10 @@
+
 "use client";
 
 import { useState, useCallback } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Search as SearchIcon } from "lucide-react";
+import { Search as SearchIcon, FileSearch } from "lucide-react";
 // import { searchAnalyses } from "@/lib/firebase"; // This will need to be created
 import type { Analysis } from "@/lib/types";
 import { useToast } from "@/hooks/use-toast";
@@ -39,7 +40,7 @@ export default function SearchPage() {
       // const analyses = await searchAnalyses(term);
       // setResults(analyses);
       // Mock results for now
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 500));
       setResults([]); 
     } catch (error) {
       console.error("Search failed:", error);
@@ -65,10 +66,10 @@ export default function SearchPage() {
   return (
     <div className="container mx-auto py-8">
       <div className="relative mb-8 max-w-2xl mx-auto">
-        <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+        <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
         <Input
           placeholder="Search analyses by name, type, or keyword..."
-          className="pl-10 text-lg h-12 rounded-lg"
+          className="pl-12 text-lg h-14 rounded-lg bg-secondary border-primary/20"
           value={searchTerm}
           onChange={handleSearchChange}
         />
@@ -78,12 +79,12 @@ export default function SearchPage() {
         <CardHeader>
           <CardTitle>Search Results</CardTitle>
            <CardDescription>
-                {isSearching ? "Searching for analyses..." : searchTerm ? `Showing results for "${searchTerm}"` : "Your past analyses will appear here."}
+                {isSearching ? "Searching for analyses..." : searchTerm.length >= 3 ? `Showing results for "${searchTerm}"` : "Enter a term to begin your search."}
             </CardDescription>
         </CardHeader>
         <CardContent>
           {isSearching ? (
-             <div className="flex items-center justify-center h-48 text-muted-foreground">
+             <div className="flex items-center justify-center h-60 text-muted-foreground">
                 <p>Searching...</p>
              </div>
           ) : results.length > 0 ? (
@@ -93,12 +94,17 @@ export default function SearchPage() {
               ))} */}
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center h-48 text-muted-foreground rounded-lg border-2 border-dashed">
-                <SearchIcon className="w-12 h-12 mb-4 text-muted-foreground/50"/>
-              <p>
+            <div className="flex flex-col items-center justify-center h-60 text-muted-foreground rounded-lg border-2 border-dashed border-muted">
+                <FileSearch className="w-12 h-12 mb-4 text-muted-foreground/50"/>
+              <p className="font-semibold">
                 {searchTerm.length >= 3
-                  ? "No results found."
-                  : "Start typing to find past analyses."}
+                  ? "No Results Found"
+                  : "Find Past Analyses"}
+              </p>
+              <p className="text-sm text-center">
+                 {searchTerm.length >= 3
+                  ? "Try a different search term to find what you're looking for."
+                  : "Start typing to search for specific decisions, topics, or keywords."}
               </p>
             </div>
           )}
