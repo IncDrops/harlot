@@ -191,24 +191,25 @@ export const createAnalysis = async (userId: string, data: AnalysisCreationData)
     });
 
     // Then, run the actual AI generation in the background and update the doc.
-    generateInitialAnalysis(aiInput).then(aiResponse => {
-        const finalAnalysisData: Partial<Analysis> = {
-            status: 'completed',
-            completedAt: new Date().toISOString(),
-            ...aiResponse,
-        };
-        updateDoc(docRef, {
-            ...finalAnalysisData,
-            completedAt: serverTimestamp(), // Use server timestamp for completion
-        });
-    }).catch(error => {
-        console.error("Error during AI generation, updating doc to 'failed'", error);
-        updateDoc(docRef, {
+    try {
+      const aiResponse = await generateInitialAnalysis(aiInput);
+      const finalAnalysisData: Partial<Analysis> = {
+          status: 'completed',
+          completedAt: new Date().toISOString(),
+          ...aiResponse,
+      };
+      await updateDoc(docRef, {
+          ...finalAnalysisData,
+          completedAt: serverTimestamp(), // Use server timestamp for completion
+      });
+    } catch (error) {
+       console.error("Error during AI generation, updating doc to 'archived'", error);
+       await updateDoc(docRef, {
             status: 'archived', // Archive on failure
             primaryRecommendation: 'AI analysis failed to generate. This may be due to a network error or content safety violation. Please try again with a different query.',
             executiveSummary: 'The analysis could not be completed.'
         });
-    });
+    }
     
     return docRef.id;
 };
@@ -244,56 +245,52 @@ export const getRecentAnalysesForUser = async (userId: string, count: number = 5
 };
 
 export const searchAnalyses = async (
-    userId: string, 
-    searchTerm: string, 
-    lastVisibleId?: string | null
-): Promise<{ analyses: Analysis[], lastVisibleId: string | null }> => {
-    if (searchTerm.trim().length < 3) return { analyses: [], lastVisibleId: null };
+    userId: string,
+    searchTerm: string,
+    pageSize: number = 10,
+    lastDoc?: QueryDocumentSnapshot<DocumentData>
+): Promise<{ analyses: Analysis[]; lastVisible: QueryDocumentSnapshot<DocumentData> | null }> => {
+    // Note: Firestore doesn't support native text search.
+    // This implementation performs a basic "startsWith" query on the decision question,
+    // which is limited. A real production app should use a dedicated search service
+    // like Algolia or Elasticsearch for robust search.
+
+    if (!userId || searchTerm.trim().length < 3) {
+        return { analyses: [], lastVisible: null };
+    }
 
     const analysesRef = collection(db, 'analyses');
+    const lowercasedTerm = searchTerm.toLowerCase();
+
     const queryConstraints: QueryConstraint[] = [
         where('userId', '==', userId),
+        // This query finds questions that start with the search term.
+        where('decisionQuestion', '>=', searchTerm),
+        where('decisionQuestion', '<=', searchTerm + '\uf8ff'),
+        orderBy('decisionQuestion', 'asc'),
         orderBy('createdAt', 'desc'),
-        limit(10)
+        limit(pageSize)
     ];
 
-    if (lastVisibleId) {
-        const lastVisibleSnap = await getDoc(doc(db, 'analyses', lastVisibleId));
-        if (lastVisibleSnap.exists()) {
-            queryConstraints.push(startAfter(lastVisibleSnap));
-        }
-    }
-    
-    // This is a simple case-insensitive search. For a more robust solution,
-    // a dedicated search service like Algolia or Elasticsearch is recommended.
-    // As Firestore doesn't support native text search, we filter client-side for now.
-    const fullQuery = query(collection(db, 'analyses'), where('userId', '==', userId), where('status', '!=', 'archived'));
-    const allDocsSnapshot = await getDocs(fullQuery);
-    const allAnalyses = allDocsSnapshot.docs.map(doc => fromFirestore<Analysis>(doc));
-    
-    const lowercasedTerm = searchTerm.toLowerCase();
-    
-    const filteredAnalyses = allAnalyses.filter(analysis => 
-      analysis.decisionQuestion.toLowerCase().includes(lowercasedTerm) ||
-      analysis.decisionType.toLowerCase().includes(lowercasedTerm) ||
-      (analysis.primaryRecommendation && analysis.primaryRecommendation.toLowerCase().includes(lowercasedTerm))
-    );
-
-    let paginatedResults: Analysis[] = [];
-    let newLastVisibleId: string | null = null;
-    
-    const startIndex = lastVisibleId ? filteredAnalyses.findIndex(a => a.id === lastVisibleId) + 1 : 0;
-    
-    if(startIndex > 0 || !lastVisibleId) {
-      paginatedResults = filteredAnalyses.slice(startIndex, startIndex + 10);
-      if(paginatedResults.length > 0 && paginatedResults.length < filteredAnalyses.length) {
-        newLastVisibleId = paginatedResults[paginatedResults.length - 1].id;
-      } else {
-        newLastVisibleId = null; // Reached the end
-      }
+    if (lastDoc) {
+        queryConstraints.push(startAfter(lastDoc));
     }
 
-    return { analyses: paginatedResults, lastVisibleId: newLastVisibleId };
+    const q = query(analysesRef, ...queryConstraints);
+    const querySnapshot = await getDocs(q);
+
+    const analyses = querySnapshot.docs
+        // Secondary filtering for more flexible matching (case-insensitive contains)
+        // This part runs client-side on the documents returned by Firestore.
+        .map(doc => fromFirestore<Analysis>(doc))
+        .filter(analysis =>
+            analysis.decisionQuestion.toLowerCase().includes(lowercasedTerm) ||
+            analysis.decisionType.toLowerCase().includes(lowercasedTerm)
+        );
+        
+    const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null;
+
+    return { analyses, lastVisible };
 };
 
 export const updateAnalysisStatus = async (analysisId: string, status: Analysis['status']): Promise<void> => {

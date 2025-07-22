@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import type { QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Search as SearchIcon, FileSearch, Loader2 } from "lucide-react";
@@ -33,7 +34,7 @@ export default function SearchPage() {
   const [isSearching, setIsSearching] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const lastDocId = useRef<string | null>(null);
+  const lastDocRef = useRef<QueryDocumentSnapshot<DocumentData> | null>(null);
 
   const { toast } = useToast();
   const { user } = useAuth();
@@ -41,11 +42,11 @@ export default function SearchPage() {
 
   const resetSearch = () => {
       setResults([]);
-      lastDocId.current = null;
+      lastDocRef.current = null;
       setHasMore(true);
   }
 
-  const performSearch = async (term: string, cursor?: string | null) => {
+  const performSearch = async (term: string, cursor?: QueryDocumentSnapshot<DocumentData> | null) => {
     if (!user || term.trim().length < 3) {
       resetSearch();
       return;
@@ -59,12 +60,15 @@ export default function SearchPage() {
     }
     
     try {
-      const { analyses, lastVisibleId } = await searchAnalyses(user.uid, term, cursor);
+      const { analyses, lastVisible } = await searchAnalyses(user.uid, term, 10, cursor ?? undefined);
       if(analyses.length === 0) {
         setHasMore(false);
       } else {
         setResults(prev => cursor ? [...prev, ...analyses] : analyses);
-        lastDocId.current = lastVisibleId;
+        lastDocRef.current = lastVisible;
+        if (!lastVisible) {
+          setHasMore(false);
+        }
       }
     } catch (error) {
       console.error("Search failed:", error);
@@ -79,7 +83,7 @@ export default function SearchPage() {
     }
   };
 
-  const debouncedSearch = useCallback(debounce(performSearch, 500), [user]);
+  const debouncedSearch = useCallback(debounce((term: string) => performSearch(term), 500), [user]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -98,7 +102,7 @@ export default function SearchPage() {
 
       observer.current = new IntersectionObserver(entries => {
           if(entries[0].isIntersecting && hasMore && searchTerm.trim().length >= 3) {
-              performSearch(searchTerm, lastDocId.current);
+              performSearch(searchTerm, lastDocRef.current);
           }
       });
       if(node) observer.current.observe(node);
@@ -127,14 +131,14 @@ export default function SearchPage() {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        {isSearching && <Loader2 className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground animate-spin" />}
+        {isSearching && !isFetchingMore && <Loader2 className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground animate-spin" />}
       </div>
 
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
           <CardTitle>Search Results</CardTitle>
            <CardDescription>
-                {isSearching ? "Searching..." : showNoResults ? `No results found for "${searchTerm}"` : `Enter at least 3 characters to begin search.`}
+                {isSearching && !isFetchingMore ? "Searching..." : showNoResults ? `No results found for "${searchTerm}"` : showInitialMessage ? `Enter at least 3 characters to begin search.` : `Showing results for "${searchTerm}"`}
             </CardDescription>
         </CardHeader>
         <CardContent>
