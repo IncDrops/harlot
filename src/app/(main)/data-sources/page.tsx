@@ -10,6 +10,7 @@ import type { DataIntegration } from "@/lib/types";
 import { formatDistanceToNowStrict } from 'date-fns';
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { ConnectGaDialog } from "@/components/data-sources/connect-ga-dialog";
 
 // Mock data for demonstration
 const mockIntegrations: DataIntegration[] = [
@@ -52,6 +53,7 @@ const statusDetails = {
 export default function DataSourcesPage() {
     const [integrations, setIntegrations] = useState<DataIntegration[]>([]);
     const [loading, setLoading] = useState(true);
+    const [isGaDialogOpen, setIsGaDialogOpen] = useState(false);
     const { toast } = useToast();
 
     useEffect(() => {
@@ -62,8 +64,13 @@ export default function DataSourcesPage() {
         }, 1000);
     }, []);
 
-    const handleButtonClick = (status: DataIntegration['status']) => {
-        const message = status === 'disconnected' 
+    const handleButtonClick = (integration: DataIntegration) => {
+        if (integration.id === '4' && integration.status === 'disconnected') {
+            setIsGaDialogOpen(true);
+            return;
+        }
+
+        const message = integration.status === 'disconnected' 
             ? "Connection flow is not yet implemented."
             : "Management interface is not yet implemented.";
         
@@ -75,6 +82,7 @@ export default function DataSourcesPage() {
 
     return (
         <div className="container mx-auto py-8">
+             <ConnectGaDialog open={isGaDialogOpen} onOpenChange={setIsGaDialogOpen} />
             <header className="mb-8 flex justify-between items-center">
                 <div>
                     <h1 className="text-3xl font-bold font-heading">Manage Data Sources</h1>
@@ -131,11 +139,11 @@ export default function DataSourcesPage() {
                                 </CardContent>
                                 <CardFooter>
                                     {integration.status === "disconnected" ? (
-                                        <Button className="w-full" onClick={() => handleButtonClick(integration.status)}>
+                                        <Button className="w-full" onClick={() => handleButtonClick(integration)}>
                                             <Plug className="mr-2 h-4 w-4" /> Connect
                                         </Button>
                                     ) : (
-                                        <Button variant="secondary" className="w-full" onClick={() => handleButtonClick(integration.status)}>
+                                        <Button variant="secondary" className="w-full" onClick={() => handleButtonClick(integration)}>
                                             <Settings className="mr-2 h-4 w-4" /> Manage
                                         </Button>
                                     )}
