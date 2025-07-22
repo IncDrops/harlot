@@ -40,9 +40,9 @@ export default function MainLayout({
                 </main>
             </div>
         </div>
-        <footer className="w-full overflow-x-hidden">
-    <StockTicker />
-</footer>
+        <footer className="w-full">
+            <StockTicker />
+        </footer>
       </div>
     </SidebarProvider>
   );

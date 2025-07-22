@@ -47,7 +47,7 @@ export function StockTicker() {
 
   if (loading) {
     return (
-      <div className="w-full h-12 bg-muted/50 rounded-lg animate-pulse" />
+      <div className="w-full h-14 bg-muted/50" />
     );
   }
 
@@ -56,12 +56,12 @@ export function StockTicker() {
   }
 
   return (
-    <div className="relative w-full h-14 flex items-center overflow-hidden bg-background border-t border-border group">
-      <div className="animate-marquee-infinite group-hover:pause flex min-w-full">
-        {quotes.map((quote, index) => (
-          <TickerItem key={`${quote.symbol}-${index}`} quote={quote} />
-        ))}
-      </div>
+    <div className="relative w-full h-14 flex items-center bg-background border-t border-border group overflow-hidden">
+        <div className="animate-marquee-infinite group-hover:pause flex items-center">
+            {quotes.map((quote, index) => (
+            <TickerItem key={`${quote.symbol}-${index}`} quote={quote} />
+            ))}
+        </div>
     </div>
   );
 }
