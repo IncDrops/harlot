@@ -117,7 +117,7 @@ export default function AnalysisReportPage() {
                              <CardHeader>
                                 <CardTitle>Key Metric Comparison</CardTitle>
                                 <CardDescription>ROI (in millions) and Total Addressable Market (in millions)</CardDescription>
-                            </Header>
+                            </CardHeader>
                             <CardContent>
                                 <ChartContainer config={chartConfig} className="w-full h-[250px]">
                                     <BarChart accessibilityLayer data={chartData} layout="vertical" margin={{ left: 10 }}>
@@ -220,4 +220,3 @@ export default function AnalysisReportPage() {
             </div>
         </div>
     );
-}
