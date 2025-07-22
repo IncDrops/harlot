@@ -1,49 +1,89 @@
 
 "use client";
 
-import { type LucideIcon, Newspaper, Bitcoin, LineChart, Lightbulb, Bot, Car, Watch, Laptop } from 'lucide-react';
+import { type LucideIcon, Bot, Bitcoin, LineChart, Lightbulb, Car, Watch, Laptop } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { fetchNews } from '@/ai/flows/fetch-news-flow';
+import { Skeleton } from './ui/skeleton';
 
-const feedCategories: { title: string; icon: LucideIcon | 'code'; content: string; url: string; }[] = [
-    { title: "AI Trends", icon: Bot, content: "New foundation model 'Atlas-7' announced by OmniCorp.", url: "#" },
-    { title: "Crypto Markets", icon: Bitcoin, content: "BTC breaks $70,000 resistance level.", url: "#" },
-    { title: "Tech Stocks", icon: LineChart, content: "NVDA up 3.5% after AI chip keynote.", url: "#" },
-    { title: "Startup News", icon: Lightbulb, content: "Gen-AI video startup 'Vivid' raises $50M Series A.", url: "#" },
-    { title: "Developer Tools", icon: 'code', content: "Next.js 15 released with major performance boosts.", url: "#" },
-    { title: "High-End Auto", icon: Car, content: "Ferrari unveils their first fully-electric supercar concept.", url: "#" },
-    { title: "Luxury Watches", icon: Watch, content: "Patek Philippe drops new limited edition Calatrava.", url: "#" },
-    { title: "Productivity", icon: Laptop, content: "New M4-powered Macbook Pro reviewed as 'blazing fast'.", url: "#" }
+interface FeedItem {
+    title: string;
+    url: string;
+    source: string;
+}
+
+const feedCategories: { title: string; icon: LucideIcon | 'code'; category: string; }[] = [
+    { title: "AI Trends", icon: Bot, category: "general" }, // Mediastack might not have a specific AI category
+    { title: "Crypto Markets", icon: Bitcoin, category: "business" },
+    { title: "Tech Stocks", icon: LineChart, category: "business" },
+    { title: "Startup News", icon: Lightbulb, category: "business" },
+    { title: "Developer Tools", icon: 'code', category: "technology" },
+    { title: "High-End Auto", icon: Car, category: "general" },
+    { title: "Luxury Watches", icon: Watch, category: "general" },
+    { title: "Productivity", icon: Laptop, category: "technology" }
 ];
+
+function FeedCard({ category, title, icon: Icon }: { category: string, title: string, icon: LucideIcon | 'code' }) {
+    const [item, setItem] = useState<FeedItem | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadData() {
+            setLoading(true);
+            try {
+                const news = await fetchNews({ category });
+                if (news.articles.length > 0) {
+                    setItem(news.articles[0]);
+                } else {
+                    setItem({ title: "No recent news found for this category.", url: "#", source: "System" });
+                }
+            } catch (error) {
+                console.error(`Failed to fetch news for ${category}`, error);
+                setItem({ title: "Could not load news.", url: "#", source: "Error" });
+            } finally {
+                setLoading(false);
+            }
+        }
+        loadData();
+    }, [category]);
+
+    return (
+        <Link href={item?.url || "#"} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity">
+            <Card className="bg-background/50 border-primary/10">
+                <CardHeader className="p-3">
+                    <CardTitle className="text-sm font-medium flex items-center gap-2">
+                        {Icon === 'code' ? (
+                            <span className="w-4 h-4 text-primary text-lg leading-none">{'</>'}</span>
+                        ) : (
+                            <Icon className="w-4 h-4 text-primary" />
+                        )}
+                        {title}
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="p-3 pt-0 text-xs text-muted-foreground h-12">
+                     {loading ? (
+                        <div className="space-y-2">
+                           <Skeleton className="h-3 w-5/6" />
+                           <Skeleton className="h-3 w-4/6" />
+                        </div>
+                     ) : (
+                        <p className="line-clamp-2">{item?.title}</p>
+                     )}
+                </CardContent>
+            </Card>
+        </Link>
+    );
+}
 
 
 export function LiveFeed() {
-
     return (
         <div className="space-y-4 p-2">
-            {feedCategories.map((item, index) => {
-                const Icon = item.icon;
-                
-                return (
-                    <Link key={index} href={item.url} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity">
-                        <Card className="bg-background/50 border-primary/10">
-                            <CardHeader className="p-3">
-                                <CardTitle className="text-sm font-medium flex items-center gap-2">
-                                    {Icon === 'code' ? (
-                                        <span className="w-4 h-4 text-primary text-lg leading-none">{'</>'}</span>
-                                    ) : (
-                                        <Icon className="w-4 h-4 text-primary" />
-                                    )}
-                                    {item.title}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-3 pt-0 text-xs text-muted-foreground">
-                                {item.content}
-                            </CardContent>
-                        </Card>
-                    </Link>
-                )
-            })}
+            {feedCategories.map((cat) => (
+                <FeedCard key={cat.title} category={cat.category} title={cat.title} icon={cat.icon} />
+            ))}
         </div>
     );
 }
