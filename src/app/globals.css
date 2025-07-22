@@ -4,56 +4,69 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%; /* #0A0A0B - Deep Charcoal/Near Black */
-    --foreground: 210 40% 98%; /* #FAFAFA - Near White */
-    --card: 240 4.8% 9.5%; /* #18181B - Very Dark Gray */
-    --card-foreground: 210 40% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 262 84% 60%; /* #6D28D9 - Deep Purple */
-    --primary-foreground: 210 40% 98%;
-    --secondary: 240 3.7% 15.9%; /* #27272A - Dark Gray */
-    --secondary-foreground: 210 40% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%; /* #A1A1AA - Soft Gray */
-    --accent: 160 84% 40%; /* #10B981 - Vibrant Teal/Green */
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 160 84% 40%;
-    --radius: 0.5rem;
-    --chart-1: 262 84% 60%;
-    --chart-2: 160 84% 40%;
-    --chart-3: 48 96% 50%;
-    --chart-4: 210 40% 98%;
-    --chart-5: 240 5% 64.9%;
-  }
+    --background: 224 71.4% 4.1%; /* #0A0E18 - Deep Blue/Charcoal */
+    --foreground: 210 20% 98%; /* #F9FAFB - Soft White */
+    
+    /* Glassmorphism card */
+    --card: 224 71.4% 4.1%; /* Same as background for blur effect */
+    --card-foreground: 210 20% 98%;
+    
+    --popover: 225 73.5% 4.9%;
+    --popover-foreground: 210 20% 98%;
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 210 40% 98%;
-    --card: 240 4.8% 9.5%;
-    --card-foreground: 210 40% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 262 84% 60%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 160 84% 40%;
-    --accent-foreground: 210 40% 98%;
+    --primary: 164 72% 58%; /* #33e0a1 - Electric Teal */
+    --primary-foreground: 224 71.4% 4.1%;
+    
+    --secondary: 215 27.9% 16.9%; /* Darker gray-blue */
+    --secondary-foreground: 210 20% 98%;
+    
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.2 32.6% 50%; /* Lighter gray-blue */
+
+    --accent: 217.2 32.6% 17.5%; /* A slightly lighter dark blue for hover states */
+    --accent-foreground: 210 20% 98%;
+
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 160 84% 40%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 164 72% 58%;
+    
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 225 73.5% 4.9%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 164 72% 58%;
+    --primary-foreground: 224 71.4% 4.1%;
+    
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.2 32.6% 50%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 164 72% 58%;
   }
 }
-
+ 
 @layer base {
   * {
     @apply border-border;

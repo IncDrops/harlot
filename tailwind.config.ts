@@ -83,6 +83,15 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backdropBlur: {
+        'xl': '20px',
+      },
+      backgroundColor: {
+        'glass': 'rgba(255, 255, 255, 0.05)',
+      },
+      borderColor: {
+        'glass': 'rgba(255, 255, 255, 0.1)',
+      }
     },
   },
   plugins: [require('tailwindcss-animate')],

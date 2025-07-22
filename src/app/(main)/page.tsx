@@ -11,7 +11,7 @@ export default function DashboardPage() {
     
   return (
     <div className="container mx-auto py-8">
-       <section className="mb-8">
+       <section className="mb-8 text-center">
             <h1 className="text-3xl font-bold font-heading">Welcome Back</h1>
             <p className="text-muted-foreground">Here's a snapshot of your strategic landscape.</p>
        </section>
@@ -49,19 +49,19 @@ export default function DashboardPage() {
                         <CardDescription>Status of your integrated sources.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-1">
-                       <Link href="/data-sources" className="block p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
+                       <Link href="/data-sources" className="block p-2 -m-2 rounded-lg hover:bg-accent transition-colors">
                            <div className="flex justify-between items-center">
                                <span>CRM Data</span>
                                <span className="text-sm font-semibold text-green-500">Connected</span>
                            </div>
                        </Link>
-                       <Link href="/data-sources" className="block p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
+                       <Link href="/data-sources" className="block p-2 -m-2 rounded-lg hover:bg-accent transition-colors">
                            <div className="flex justify-between items-center mt-1">
                                <span>ERP System</span>
                                <span className="text-sm font-semibold text-green-500">Connected</span>
                            </div>
                         </Link>
-                        <Link href="/data-sources" className="block p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
+                        <Link href="/data-sources" className="block p-2 -m-2 rounded-lg hover:bg-accent transition-colors">
                             <div className="flex justify-between items-center mt-1">
                                <span>Financial Reports</span>
                                <span className="text-sm font-semibold text-yellow-500">Syncing...</span>
