@@ -4,7 +4,10 @@ import { SwipeDeck } from "@/components/swipe-deck";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar as CalendarIcon, CheckSquare } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 
 export default function DashboardPage() {
@@ -21,8 +24,8 @@ export default function DashboardPage() {
             </Button>
        </section>
 
-        <div className="grid grid-cols-1 gap-6">
-            <div className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-6">
                 <Card>
                     <CardHeader>
                         <CardTitle>Pending Decisions</CardTitle>
@@ -44,6 +47,51 @@ export default function DashboardPage() {
                     </CardContent>
                 </Card>
             </div>
+            <aside className="lg:col-span-1 space-y-6">
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                            <CalendarIcon className="w-5 h-5" />
+                            Calendar
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex justify-center">
+                        <Calendar
+                            mode="single"
+                            className="p-0"
+                         />
+                    </CardContent>
+                </Card>
+                 <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                           <CheckSquare className="w-5 h-5" />
+                            To-Do List
+                        </CardTitle>
+                        <CardDescription>Your tasks for today.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <div className="flex items-center space-x-2">
+                            <Checkbox id="task1" defaultChecked />
+                            <Label htmlFor="task1" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 peer-data-[state=checked]:line-through">
+                                Finalize Q3 budget review
+                            </Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                             <Checkbox id="task2" />
+                             <Label htmlFor="task2" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 peer-data-[state=checked]:line-through">
+                                Prepare for 'Project Titan' kickoff
+                            </Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                             <Checkbox id="task3" />
+                             <Label htmlFor="task3" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 peer-data-[state=checked]:line-through">
+                                Follow up with marketing team on new campaign
+                            </Label>
+                        </div>
+                    </CardContent>
+                </Card>
+            </aside>
         </div>
     </div>
   );
