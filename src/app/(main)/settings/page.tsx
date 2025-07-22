@@ -278,7 +278,7 @@ export default function SettingsPage() {
                         <FormLabel>In-App Notifications</FormLabel>
                         <FormDescription>
                             Show notifications within the dashboard for new insights.
-                        </FormDescription>
+                        </Description>
                     </div>
                     <Switch
                         aria-readonly
