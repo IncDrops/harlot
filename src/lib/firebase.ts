@@ -203,12 +203,30 @@ export const getRecentAnalysesForUser = async (userId: string, count: number = 5
     return querySnapshot.docs.map(doc => fromFirestore<Analysis>(doc));
 };
 
-export const searchAnalyses = async (searchTerm: string): Promise<Analysis[]> => {
+export const searchAnalyses = async (userId: string, searchTerm: string): Promise<Analysis[]> => {
   if (searchTerm.trim().length < 3) return [];
-  // This is a mock search function. In a real app, this would query Firestore
-  // with a where clause, or ideally, a dedicated search service like Algolia.
-  console.log("Searching for:", searchTerm);
-  return [];
+  const analysesRef = collection(db, 'analyses');
+  
+  // This is a simple case-insensitive search. For a more robust solution,
+  // a dedicated search service like Algolia or Elasticsearch is recommended.
+  const q = query(
+      analysesRef,
+      where('userId', '==', userId),
+      orderBy('decisionQuestion')
+  );
+  
+  const querySnapshot = await getDocs(q);
+  const allAnalyses = querySnapshot.docs.map(doc => fromFirestore<Analysis>(doc));
+  
+  const lowercasedTerm = searchTerm.toLowerCase();
+  
+  const filteredAnalyses = allAnalyses.filter(analysis => 
+      analysis.decisionQuestion.toLowerCase().includes(lowercasedTerm) ||
+      analysis.decisionType.toLowerCase().includes(lowercasedTerm) ||
+      analysis.primaryRecommendation.toLowerCase().includes(lowercasedTerm)
+  );
+
+  return filteredAnalyses;
 };
 
 

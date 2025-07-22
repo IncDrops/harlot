@@ -21,6 +21,7 @@ export function RecentAnalyses() {
         if (authLoading) return;
         if (!user) {
             setLoading(false);
+            setAnalyses([]);
             return;
         }
 
@@ -67,7 +68,7 @@ export function RecentAnalyses() {
             <div className="flex flex-col items-center justify-center h-40 text-center text-muted-foreground bg-muted/50 rounded-lg">
                 <Info className="w-8 h-8 mb-2" />
                 <p className="font-semibold">No Analyses Found</p>
-                <p className="text-sm">Start your first analysis to see it here.</p>
+                <p className="text-sm">{user ? "Start your first analysis to see it here." : "Sign in to view your analyses."}</p>
             </div>
           )}
         </div>
