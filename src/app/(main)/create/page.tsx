@@ -57,7 +57,7 @@ export default function NewDecisionAnalysisPage() {
     try {
       // The context now combines the decision type and any extra user context.
       const fullContext = `Decision Type: ${data.decisionType}. Additional Context: ${data.context || 'None provided.'}`;
-      const analysisData = { ...data, context: fullContext, dataSources: [] }; // dataSources is now an empty array
+      const analysisData = { ...data, context: fullContext };
       
       const analysisId = await createAnalysis(user.uid, analysisData);
       
@@ -83,7 +83,7 @@ export default function NewDecisionAnalysisPage() {
     <div className="container mx-auto py-8">
       <Card className="max-w-3xl mx-auto">
         <CardHeader>
-          <CardTitle className="font-heading text-2xl">New Decision Analysis</CardTitle>
+          <CardTitle className="font-heading text-2xl">Create New Analysis</CardTitle>
           <CardDescription>Guide the AI by defining your strategic objective and parameters.</CardDescription>
         </CardHeader>
         <Form {...form}>
@@ -148,7 +148,7 @@ export default function NewDecisionAnalysisPage() {
                     <div className="p-4 bg-muted/50 rounded-lg border flex items-center gap-3">
                       <Info className="w-5 h-5 text-primary" />
                       <p className="text-sm text-muted-foreground">
-                        Pollitago currently generates insights based on its internal knowledge base. Live data source integration (e.g., Google Analytics, CRM) is coming soon.
+                        Pollitago currently generates insights based on its internal knowledge base. Live data source integration can be configured on the <a href="/data-sources" className="underline font-semibold hover:text-primary">Data Sources</a> page.
                       </p>
                     </div>
                  </section>

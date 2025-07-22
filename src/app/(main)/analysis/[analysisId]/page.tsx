@@ -7,11 +7,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { ThumbsUp, ThumbsDown, Share2, FileDown, Archive, Loader2, Info } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Share2, FileDown, Archive, Loader2, Info, BrainCircuit } from "lucide-react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList } from "recharts";
 import { getAnalysisById } from "@/lib/firebase";
 import type { Analysis } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 const chartConfig = {
   value: {
@@ -74,6 +75,38 @@ export default function AnalysisReportPage() {
     }
 
     const isCompleted = analysis.status === 'completed';
+    const isInProgress = analysis.status === 'in_progress';
+
+    const getBadgeVariant = () => {
+        switch(analysis.status) {
+            case 'completed': return "bg-green-500/20 text-green-700 dark:text-green-400 border-green-500/30";
+            case 'in_progress': return "bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 border-yellow-500/30";
+            case 'archived': return "bg-gray-500/20 text-gray-700 dark:text-gray-400 border-gray-500/30";
+            default: return "secondary";
+        }
+    }
+
+    if (isInProgress) {
+        return (
+            <div className="container mx-auto py-8">
+                <div className="max-w-3xl mx-auto">
+                    <Card className="text-center p-8">
+                        <CardHeader>
+                            <BrainCircuit className="h-12 w-12 mx-auto text-primary animate-pulse" />
+                            <CardTitle className="mt-4">Analysis in Progress</CardTitle>
+                            <CardDescription>
+                                Pollitago is analyzing your request: "{analysis.decisionQuestion}"
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-muted-foreground">This may take a moment. The report will appear here once it's complete. You can safely leave this page and come back later.</p>
+                            <Loader2 className="h-6 w-6 animate-spin mx-auto mt-6" />
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="container mx-auto py-8">
@@ -85,7 +118,7 @@ export default function AnalysisReportPage() {
                              <p className="text-primary font-semibold mb-1">Analysis Report</p>
                              <h1 className="text-3xl font-bold font-heading">{analysis.decisionQuestion}</h1>
                         </div>
-                        <Badge variant={isCompleted ? "secondary" : "default"} className={isCompleted ? "bg-green-500/20 text-green-700 dark:text-green-400 border-green-500/30" : "bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 border-yellow-500/30"}>
+                        <Badge variant={"secondary"} className={cn(getBadgeVariant())}>
                             {analysis.status.charAt(0).toUpperCase() + analysis.status.slice(1)}
                         </Badge>
                     </div>

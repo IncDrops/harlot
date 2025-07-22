@@ -49,5 +49,5 @@ export interface DataIntegration {
     name: string;
     type: 'CRM' | 'ERP' | 'Database' | 'API';
     status: 'connected' | 'disconnected' | 'error';
-    lastSync: string; // ISO String
+    lastSync: string | null; // ISO String or null if never synced
 }

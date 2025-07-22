@@ -158,14 +158,14 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
 
 // ──────────── ANALYSES ────────────
 
-type AnalysisCreationData = Pick<Analysis, 'decisionQuestion' | 'decisionType' | 'dataSources'> & { context?: string };
+type AnalysisCreationData = Pick<Analysis, 'decisionQuestion' | 'decisionType' > & { context?: string, dataSources?: string[] };
 
 export const createAnalysis = async (userId: string, data: AnalysisCreationData): Promise<string> => {
     const analysesRef = collection(db, 'analyses');
     
     const aiInput: GenerateInitialAnalysisInput = {
       decisionQuestion: data.decisionQuestion,
-      context: data.context || `Decision Type: ${data.decisionType}, Data Sources: ${data.dataSources.join(', ')}`
+      context: data.context || `Decision Type: ${data.decisionType}`
     }
     
     // Create an "in_progress" version first so it shows up in the UI immediately.
@@ -174,7 +174,7 @@ export const createAnalysis = async (userId: string, data: AnalysisCreationData)
         status: 'in_progress',
         decisionQuestion: data.decisionQuestion,
         decisionType: data.decisionType,
-        dataSources: data.dataSources,
+        dataSources: data.dataSources || [],
         createdAt: new Date().toISOString(),
         completedAt: '',
         primaryRecommendation: 'Analysis is being generated...',
@@ -203,8 +203,9 @@ export const createAnalysis = async (userId: string, data: AnalysisCreationData)
     }).catch(error => {
         console.error("Error during AI generation, updating doc to 'failed'", error);
         updateDoc(docRef, {
-            status: 'archived', // Or a new 'failed' status
-            primaryRecommendation: 'AI analysis failed to generate. Please try again.',
+            status: 'archived', // Archive on failure
+            primaryRecommendation: 'AI analysis failed to generate. This may be due to a network error or content safety violation. Please try again with a different query.',
+            executiveSummary: 'The analysis could not be completed.'
         });
     });
     
@@ -231,6 +232,9 @@ export const getRecentAnalysesForUser = async (userId: string, count: number = 5
 
     if (status) {
         constraints.push(where('status', '==', status));
+    } else {
+        // Exclude archived analyses by default from general "recent" queries
+        constraints.push(where('status', '!=', 'archived'));
     }
 
     const q = query(analysesRef, ...constraints);
@@ -262,7 +266,7 @@ export const searchAnalyses = async (
     // This is a simple case-insensitive search. For a more robust solution,
     // a dedicated search service like Algolia or Elasticsearch is recommended.
     // As Firestore doesn't support native text search, we filter client-side for now.
-    const fullQuery = query(collection(db, 'analyses'), where('userId', '==', userId));
+    const fullQuery = query(collection(db, 'analyses'), where('userId', '==', userId), where('status', '!=', 'archived'));
     const allDocsSnapshot = await getDocs(fullQuery);
     const allAnalyses = allDocsSnapshot.docs.map(doc => fromFirestore<Analysis>(doc));
     
