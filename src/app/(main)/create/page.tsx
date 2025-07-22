@@ -13,16 +13,14 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, BrainCircuit, Database, SlidersHorizontal, Info, Loader2 } from 'lucide-react';
+import { BrainCircuit, Database, SlidersHorizontal, Info, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/auth-context';
 import { createAnalysis } from '@/lib/firebase';
-import { Checkbox } from '@/components/ui/checkbox';
 
 
 const analysisFormSchema = z.object({
   decisionQuestion: z.string().min(10, "Please provide a clear question for the analysis."),
   decisionType: z.string().min(1, "Please select a decision type."),
-  dataSources: z.array(z.string()).min(1, "Please select at least one data source."),
   context: z.string().optional(),
 });
 
@@ -39,7 +37,7 @@ export default function NewDecisionAnalysisPage() {
     defaultValues: {
       decisionQuestion: "",
       decisionType: "",
-      dataSources: [],
+      context: "",
     },
   });
 
@@ -57,8 +55,9 @@ export default function NewDecisionAnalysisPage() {
     });
 
     try {
-      const fullContext = `Decision Type: ${data.decisionType}, Data Sources: ${data.dataSources.join(', ')}`;
-      const analysisData = { ...data, context: fullContext };
+      // The context now combines the decision type and any extra user context.
+      const fullContext = `Decision Type: ${data.decisionType}. Additional Context: ${data.context || 'None provided.'}`;
+      const analysisData = { ...data, context: fullContext, dataSources: [] }; // dataSources is now an empty array
       
       const analysisId = await createAnalysis(user.uid, analysisData);
       
@@ -101,6 +100,7 @@ export default function NewDecisionAnalysisPage() {
                         <FormControl>
                           <Textarea placeholder="e.g., Should we invest in expanding to Market X or Market Y?" {...field} />
                         </FormControl>
+                        <FormDescription>This is the primary question the AI will analyze.</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -122,6 +122,21 @@ export default function NewDecisionAnalysisPage() {
                             <SelectItem value="risk-assessment">Risk Assessment</SelectItem>
                           </SelectContent>
                         </Select>
+                        <FormDescription>Categorizing the decision helps the AI provide a more focused analysis.</FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                   <FormField
+                    control={form.control}
+                    name="context"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Additional Context (Optional)</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Provide any relevant background information, KPIs, constraints, or stakeholders..." {...field} />
+                        </FormControl>
+                         <FormDescription>The more context you provide, the more accurate the analysis will be.</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -129,58 +144,13 @@ export default function NewDecisionAnalysisPage() {
                 </section>
 
                  <section>
-                    <h3 className="text-lg font-semibold flex items-center mb-4"><Database className="w-5 h-5 mr-2 text-primary" /> Select Data Sources</h3>
-                    <FormField
-                        control={form.control}
-                        name="dataSources"
-                        render={() => (
-                            <FormItem>
-                                <div className="mb-4">
-                                    <FormLabel className="text-base">Integrated Sources</FormLabel>
-                                    <FormDescription>Select the datasets for the AI to analyze.</FormDescription>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                  {['CRM Data', 'ERP System', 'Financial Reports', 'Market Research DB'].map((item) => (
-                                      <FormField
-                                      key={item}
-                                      control={form.control}
-                                      name="dataSources"
-                                      render={({ field }) => {
-                                          return (
-                                          <FormItem
-                                              key={item}
-                                              className="flex flex-row items-start space-x-3 space-y-0 p-3 border rounded-md"
-                                          >
-                                              <FormControl>
-                                              <Checkbox
-                                                  checked={field.value?.includes(item)}
-                                                  onCheckedChange={(checked) => {
-                                                      return checked
-                                                      ? field.onChange([...(field.value || []), item])
-                                                      : field.onChange(
-                                                          field.value?.filter(
-                                                          (value) => value !== item
-                                                          )
-                                                      )
-                                                  }}
-                                              />
-                                              </FormControl>
-                                              <div className="space-y-1 leading-none">
-                                                  <FormLabel>{item}</FormLabel>
-                                                  <FormDescription className="flex items-center text-xs">
-                                                     <Info className="w-3 h-3 mr-1" /> Last sync: 2 hours ago
-                                                  </FormDescription>
-                                              </div>
-                                          </FormItem>
-                                          )
-                                      }}
-                                      />
-                                  ))}
-                                </div>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <h3 className="text-lg font-semibold flex items-center mb-4"><Database className="w-5 h-5 mr-2 text-primary" /> Data Sources</h3>
+                    <div className="p-4 bg-muted/50 rounded-lg border flex items-center gap-3">
+                      <Info className="w-5 h-5 text-primary" />
+                      <p className="text-sm text-muted-foreground">
+                        Pollitago currently generates insights based on its internal knowledge base. Live data source integration (e.g., Google Analytics, CRM) is coming soon.
+                      </p>
+                    </div>
                  </section>
             </CardContent>
             <CardFooter className="flex justify-end">

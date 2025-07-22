@@ -3,15 +3,23 @@ import { RecentAnalyses } from "@/components/recent-analyses";
 import { StockTicker } from "@/components/stock-ticker";
 import { SwipeDeck } from "@/components/swipe-deck";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 
 export default function DashboardPage() {
     
   return (
     <div className="space-y-8">
-       <section>
-            <h1 className="text-3xl font-bold font-heading">Dashboard</h1>
-            <p className="text-muted-foreground">Your command center for strategic decisions.</p>
+       <section className="p-8 rounded-lg bg-gradient-to-r from-primary/10 to-background border border-primary/20 text-center">
+            <h1 className="text-4xl font-bold font-heading mb-2">Transform Indecision into Action</h1>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">Welcome to your command center. Start by defining a strategic question below to receive an unbiased, data-driven analysis from Pollitago.</p>
+            <Button asChild size="lg">
+              <Link href="/create">
+                Start New Analysis <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </Button>
        </section>
 
        <StockTicker />
