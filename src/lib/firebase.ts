@@ -167,22 +167,43 @@ export const createAnalysis = async (userId: string, data: AnalysisCreationData)
       decisionQuestion: data.decisionQuestion,
       context: data.context || `Decision Type: ${data.decisionType}, Data Sources: ${data.dataSources.join(', ')}`
     }
-    const aiResponse = await generateInitialAnalysis(aiInput);
-
-    const newAnalysisData: Omit<Analysis, 'id' | 'createdAt'> = {
+    
+    // For demo purposes, we'll create an "in_progress" version first
+    // so it shows up in the swipe deck.
+     const tempAnalysisData: Omit<Analysis, 'id'> = {
         userId,
+        status: 'in_progress',
         decisionQuestion: data.decisionQuestion,
         decisionType: data.decisionType,
         dataSources: data.dataSources,
-        status: 'completed',
-        completedAt: new Date().toISOString(),
-        ...aiResponse,
+        createdAt: new Date().toISOString(),
+        completedAt: '',
+        primaryRecommendation: 'Analysis in progress...',
+        executiveSummary: '',
+        keyFactors: [],
+        risks: [],
+        confidenceScore: 0,
     };
     
     const docRef = await addDoc(analysesRef, {
-        ...newAnalysisData,
+        ...tempAnalysisData,
         createdAt: serverTimestamp(),
     });
+
+    // Then, run the actual AI generation and update the doc.
+    // This simulates a real-world async process.
+    generateInitialAnalysis(aiInput).then(aiResponse => {
+        const finalAnalysisData: Partial<Analysis> = {
+            status: 'completed',
+            completedAt: new Date().toISOString(),
+            ...aiResponse,
+        };
+        updateDoc(docRef, {
+            ...finalAnalysisData,
+            completedAt: serverTimestamp(), // Use server timestamp for completion
+        });
+    });
+    
     return docRef.id;
 };
 
@@ -196,9 +217,19 @@ export const getAnalysisById = async (analysisId: string): Promise<Analysis | nu
     return null;
 };
 
-export const getRecentAnalysesForUser = async (userId: string, count: number = 5): Promise<Analysis[]> => {
+export const getRecentAnalysesForUser = async (userId: string, count: number = 5, status?: Analysis['status']): Promise<Analysis[]> => {
     const analysesRef = collection(db, 'analyses');
-    const q = query(analysesRef, where('userId', '==', userId), orderBy('createdAt', 'desc'), limit(count));
+    const constraints = [
+        where('userId', '==', userId),
+        orderBy('createdAt', 'desc'),
+        limit(count)
+    ];
+
+    if (status) {
+        constraints.push(where('status', '==', status));
+    }
+
+    const q = query(analysesRef, ...constraints);
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => fromFirestore<Analysis>(doc));
 };
@@ -236,7 +267,7 @@ export const searchAnalyses = async (
     const filteredAnalyses = allAnalyses.filter(analysis => 
       analysis.decisionQuestion.toLowerCase().includes(lowercasedTerm) ||
       analysis.decisionType.toLowerCase().includes(lowercasedTerm) ||
-      analysis.primaryRecommendation.toLowerCase().includes(lowercasedTerm)
+      (analysis.primaryRecommendation && analysis.primaryRecommendation.toLowerCase().includes(lowercasedTerm))
     );
 
     let paginatedResults: Analysis[] = [];
@@ -246,12 +277,19 @@ export const searchAnalyses = async (
     
     if(startIndex > 0 || !lastVisibleId) {
       paginatedResults = filteredAnalyses.slice(startIndex, startIndex + 10);
-      if(paginatedResults.length > 0) {
+      if(paginatedResults.length > 0 && paginatedResults.length < filteredAnalyses.length) {
         newLastVisibleId = paginatedResults[paginatedResults.length - 1].id;
+      } else {
+        newLastVisibleId = null; // Reached the end
       }
     }
 
     return { analyses: paginatedResults, lastVisibleId: newLastVisibleId };
+};
+
+export const updateAnalysisStatus = async (analysisId: string, status: Analysis['status']): Promise<void> => {
+    const analysisRef = doc(db, 'analyses', analysisId);
+    await updateDoc(analysisRef, { status });
 };
 
 

@@ -5,6 +5,7 @@ import { RecentAnalyses } from "@/components/recent-analyses";
 import { PlusCircle, Database, Settings, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/auth-context";
+import { SwipeDeck } from "@/components/swipe-deck";
 
 
 export default function DashboardPage() {
@@ -18,7 +19,15 @@ export default function DashboardPage() {
 
         <div className="grid gap-6 lg:grid-cols-3">
             <div className="lg:col-span-2">
-                <RecentAnalyses />
+                 <Card>
+                    <CardHeader>
+                        <CardTitle>Pending Decisions</CardTitle>
+                        <CardDescription>Swipe to triage your latest analyses.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <SwipeDeck />
+                    </CardContent>
+                </Card>
             </div>
             <div className="space-y-6">
                 <Card>
@@ -43,6 +52,7 @@ export default function DashboardPage() {
                         </Button>
                     </CardContent>
                 </Card>
+                <RecentAnalyses />
                  <Card>
                     <CardHeader>
                         <CardTitle>Data Health Summary</CardTitle>
