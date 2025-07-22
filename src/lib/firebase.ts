@@ -50,12 +50,12 @@ import type { GenerateInitialAnalysisInput } from "@/lib/ai-schemas";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDjoi3EJ7l1dcOF1JRPlzC6rQg2DDGyCH8",
-  authDomain: "pollitgo.firebaseapp.com",
-  projectId: "pollitgo",
-  storageBucket: "pollitgo.appspot.com",
-  messagingSenderId: "1078455480838",
-  appId: "1:1078455480838:web:6fc2d68bd37853373c0987"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 let app: FirebaseApp;
