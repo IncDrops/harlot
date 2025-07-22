@@ -1,3 +1,4 @@
+
 export default function PrivacyPolicy() {
     return (
       <div className="p-8 max-w-3xl mx-auto">
@@ -12,7 +13,7 @@ export default function PrivacyPolicy() {
           We use analytics tools to better understand user behavior, but this data is anonymized where possible.
         </p>
         <p className="mb-2">
-          You may request the deletion of your account and associated data at any time by emailing us at <a href="mailto:support@pollitago.com" className="text-blue-600 underline">support@pollitago.com</a>.
+          You may request the deletion of your account and associated data at any time by emailing us at <a href="mailto:support@pollitago.com" className="text-primary hover:underline">support@pollitago.com</a>.
         </p>
       </div>
     );

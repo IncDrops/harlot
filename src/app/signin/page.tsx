@@ -99,7 +99,7 @@ export default function SignInPage() {
           </CardContent>
         </Card>
         <p className="text-center text-xs text-muted-foreground">
-          Need help? <Link href="#" className="underline hover:text-primary">Contact Support</Link>
+           <Link href="/terms" className="underline hover:text-primary">Terms of Service</Link>
           {" "}|{" "}
           <Link href="/privacy-policy" className="underline hover:text-primary">Privacy Policy</Link>
         </p>
