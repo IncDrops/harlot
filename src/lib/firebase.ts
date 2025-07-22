@@ -203,30 +203,55 @@ export const getRecentAnalysesForUser = async (userId: string, count: number = 5
     return querySnapshot.docs.map(doc => fromFirestore<Analysis>(doc));
 };
 
-export const searchAnalyses = async (userId: string, searchTerm: string): Promise<Analysis[]> => {
-  if (searchTerm.trim().length < 3) return [];
-  const analysesRef = collection(db, 'analyses');
-  
-  // This is a simple case-insensitive search. For a more robust solution,
-  // a dedicated search service like Algolia or Elasticsearch is recommended.
-  const q = query(
-      analysesRef,
-      where('userId', '==', userId),
-      orderBy('decisionQuestion')
-  );
-  
-  const querySnapshot = await getDocs(q);
-  const allAnalyses = querySnapshot.docs.map(doc => fromFirestore<Analysis>(doc));
-  
-  const lowercasedTerm = searchTerm.toLowerCase();
-  
-  const filteredAnalyses = allAnalyses.filter(analysis => 
+export const searchAnalyses = async (
+    userId: string, 
+    searchTerm: string, 
+    lastVisibleId?: string | null
+): Promise<{ analyses: Analysis[], lastVisibleId: string | null }> => {
+    if (searchTerm.trim().length < 3) return { analyses: [], lastVisibleId: null };
+
+    const analysesRef = collection(db, 'analyses');
+    const queryConstraints: QueryConstraint[] = [
+        where('userId', '==', userId),
+        orderBy('createdAt', 'desc'),
+        limit(10)
+    ];
+
+    if (lastVisibleId) {
+        const lastVisibleSnap = await getDoc(doc(db, 'analyses', lastVisibleId));
+        if (lastVisibleSnap.exists()) {
+            queryConstraints.push(startAfter(lastVisibleSnap));
+        }
+    }
+    
+    // This is a simple case-insensitive search. For a more robust solution,
+    // a dedicated search service like Algolia or Elasticsearch is recommended.
+    // As Firestore doesn't support native text search, we filter client-side for now.
+    const fullQuery = query(collection(db, 'analyses'), where('userId', '==', userId));
+    const allDocsSnapshot = await getDocs(fullQuery);
+    const allAnalyses = allDocsSnapshot.docs.map(doc => fromFirestore<Analysis>(doc));
+    
+    const lowercasedTerm = searchTerm.toLowerCase();
+    
+    const filteredAnalyses = allAnalyses.filter(analysis => 
       analysis.decisionQuestion.toLowerCase().includes(lowercasedTerm) ||
       analysis.decisionType.toLowerCase().includes(lowercasedTerm) ||
       analysis.primaryRecommendation.toLowerCase().includes(lowercasedTerm)
-  );
+    );
 
-  return filteredAnalyses;
+    let paginatedResults: Analysis[] = [];
+    let newLastVisibleId: string | null = null;
+    
+    const startIndex = lastVisibleId ? filteredAnalyses.findIndex(a => a.id === lastVisibleId) + 1 : 0;
+    
+    if(startIndex > 0 || !lastVisibleId) {
+      paginatedResults = filteredAnalyses.slice(startIndex, startIndex + 10);
+      if(paginatedResults.length > 0) {
+        newLastVisibleId = paginatedResults[paginatedResults.length - 1].id;
+      }
+    }
+
+    return { analyses: paginatedResults, lastVisibleId: newLastVisibleId };
 };
 
 
