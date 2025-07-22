@@ -15,7 +15,8 @@ export default function MainLayout({
 }>) {
   return (
     <SidebarProvider>
-        <Sidebar collapsible="icon">
+      <div className="flex">
+        <Sidebar collapsible="icon" className="h-screen sticky top-0">
             <SidebarHeader className="flex items-center justify-between p-2">
                 <Link href="/" className="flex items-center gap-2 flex-1 min-w-0">
                     <Logo className="group-data-[collapsible=icon]:hidden" />
@@ -30,12 +31,13 @@ export default function MainLayout({
                 {/* Footer content can go here */}
             </SidebarFooter>
         </Sidebar>
-        <SidebarInset>
+        <div className="flex-1 flex flex-col">
              <Header />
-             <main className="flex-1 p-6">
+             <main className="flex-1 p-6 overflow-y-auto">
                 {children}
             </main>
-        </SidebarInset>
+        </div>
+      </div>
     </SidebarProvider>
   );
 }

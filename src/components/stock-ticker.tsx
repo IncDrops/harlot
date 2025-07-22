@@ -57,11 +57,11 @@ export function StockTicker() {
 
   return (
     <div className="relative w-full h-12 flex items-center overflow-hidden bg-background border-y border-border group">
-      <div className="animate-marquee-infinite group-hover:pause flex">
-        {quotes.map((quote, index) => (
-          <TickerItem key={`${quote.symbol}-${index}`} quote={quote} />
-        ))}
-      </div>
+        <div className="animate-marquee-infinite group-hover:pause flex">
+            {quotes.map((quote, index) => (
+            <TickerItem key={`${quote.symbol}-${index}`} quote={quote} />
+            ))}
+        </div>
        <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
     </div>
   );
