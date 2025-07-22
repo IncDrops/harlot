@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Calendar as CalendarIcon, CheckSquare } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { TodoList } from "@/components/todo-list";
 
 
 export default function DashboardPage() {
@@ -70,25 +69,8 @@ export default function DashboardPage() {
                         </CardTitle>
                         <CardDescription>Your tasks for today.</CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-4">
-                        <div className="flex items-center space-x-2">
-                            <Checkbox id="task1" defaultChecked />
-                            <Label htmlFor="task1" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 peer-data-[state=checked]:line-through">
-                                Finalize Q3 budget review
-                            </Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                             <Checkbox id="task2" />
-                             <Label htmlFor="task2" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 peer-data-[state=checked]:line-through">
-                                Prepare for 'Project Titan' kickoff
-                            </Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                             <Checkbox id="task3" />
-                             <Label htmlFor="task3" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 peer-data-[state=checked]:line-through">
-                                Follow up with marketing team on new campaign
-                            </Label>
-                        </div>
+                    <CardContent>
+                        <TodoList />
                     </CardContent>
                 </Card>
             </aside>

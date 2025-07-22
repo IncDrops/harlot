@@ -7,6 +7,14 @@ export interface User {
   avatar: string;
   role: 'admin' | 'user';
   bio?: string;
+  todos?: Todo[];
+}
+
+export interface Todo {
+    id: string;
+    text: string;
+    completed: boolean;
+    createdAt: string; // ISO String
 }
 
 export interface Notification {

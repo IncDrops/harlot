@@ -1,4 +1,5 @@
 
+
 // Firebase Config
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import {
@@ -44,7 +45,7 @@ import {
 } from "firebase/firestore";
 import { getFunctions } from 'firebase/functions';
 import type { Functions } from 'firebase/functions';
-import type { User, Analysis, Notification, Feedback } from "./types";
+import type { User, Analysis, Notification, Feedback, Todo } from "./types";
 import { generateInitialAnalysis } from "@/ai/flows/generate-initial-analysis";
 import type { GenerateInitialAnalysisInput } from "@/lib/ai-schemas";
 
@@ -310,6 +311,36 @@ export const addFeedbackToAnalysis = async (analysisId: string, feedbackData: Om
         ...feedbackData,
         createdAt: serverTimestamp(),
     });
+};
+
+
+// ──────────── TODOS ────────────
+
+export const getUserTodos = async (userId: string): Promise<Todo[]> => {
+    const todosRef = collection(db, `users/${userId}/todos`);
+    const q = query(todosRef, orderBy('createdAt', 'asc'));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => fromFirestore<Todo>(doc));
+};
+
+export const addTodo = async (userId: string, text: string): Promise<string> => {
+    const todosRef = collection(db, `users/${userId}/todos`);
+    const newTodoRef = await addDoc(todosRef, {
+        text,
+        completed: false,
+        createdAt: serverTimestamp(),
+    });
+    return newTodoRef.id;
+};
+
+export const updateTodoStatus = async (userId: string, todoId: string, completed: boolean): Promise<void> => {
+    const todoRef = doc(db, `users/${userId}/todos`, todoId);
+    await updateDoc(todoRef, { completed });
+};
+
+export const deleteTodo = async (userId: string, todoId: string): Promise<void> => {
+    const todoRef = doc(db, `users/${userId}/todos`, todoId);
+    await deleteDoc(todoRef);
 };
 
 
