@@ -10,10 +10,8 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const db = admin.firestore();
 
-// This file is now clean and ready for new, enterprise-focused cloud functions.
-// All previous code related to Stripe and PollitPoints has been removed.
-
-// Example of a future function structure:
+// This file is ready for new, enterprise-focused cloud functions.
+// Example of a function structure:
 // exports.someNewEnterpriseFunction = onCall(async (request) => {
 //   // ... logic for your new feature
 //   return { success: true };
