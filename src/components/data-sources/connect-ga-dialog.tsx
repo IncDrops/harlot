@@ -44,6 +44,10 @@ export function ConnectGaDialog({ open, onOpenChange }: ConnectGaDialogProps) {
 
         const oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
         
+        // Encode the origin URL for safe transport in the state parameter
+        const origin = window.location.origin;
+        const state = JSON.stringify({ userId: user.uid, origin });
+
         const params = {
             client_id: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID,
             redirect_uri: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URI,
@@ -51,7 +55,7 @@ export function ConnectGaDialog({ open, onOpenChange }: ConnectGaDialogProps) {
             scope: 'https://www.googleapis.com/auth/analytics.readonly',
             access_type: 'offline', // Important to get a refresh token
             prompt: 'consent', // Force consent screen to ensure refresh token is sent
-            state: user.uid // Pass the user's UID to identify them in the callback
+            state: state
         };
 
         const url = `${oauth2Endpoint}?${new URLSearchParams(params)}`;

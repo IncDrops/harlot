@@ -27,11 +27,23 @@ exports.googleAuthCallback = onRequest({ cors: true }, async (req, res) => {
       return res.status(400).send('Authorization code is missing.');
     }
     if (!state) {
-        return res.status(400).send('State parameter (UID) is missing.');
+        return res.status(400).send('State parameter is missing.');
     }
     
-    // The 'state' parameter should contain the Firebase UID of the user who initiated the flow
-    const userId = state;
+    // The 'state' parameter now contains a JSON string with the userId and original origin
+    let parsedState;
+    try {
+        parsedState = JSON.parse(state);
+    } catch (e) {
+        return res.status(400).send('Invalid state parameter format.');
+    }
+
+    const { userId, origin } = parsedState;
+
+    if (!userId || !origin) {
+        return res.status(400).send('State is missing required properties (userId, origin).');
+    }
+
 
     // Exchange the authorization code for tokens
     const { tokens } = await oAuth2Client.getToken(code);
@@ -58,9 +70,20 @@ exports.googleAuthCallback = onRequest({ cors: true }, async (req, res) => {
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     }, { merge: true });
 
-    // Redirect user back to the data sources page in the web app
-    const appUrl = functions.config().app?.url || 'http://localhost:9003';
-    res.redirect(`${appUrl}/data-sources?status=success`);
+    // Redirect user back to the data sources page on the original domain
+    // Whitelist allowed domains for security
+    const allowedOrigins = [
+        'http://localhost:9003',
+        'https://pollitago.com',
+        functions.config().app?.url // From firebase functions:config:set app.url="..."
+    ].filter(Boolean); // filter out null/undefined values
+
+    if (allowedOrigins.includes(origin)) {
+        res.redirect(`${origin}/data-sources?status=success`);
+    } else {
+        console.error(`Unauthorized redirect origin: ${origin}`);
+        res.status(400).send('Invalid origin specified.');
+    }
 
   } catch (error) {
     console.error('Error in Google OAuth callback:', error);
