@@ -56,8 +56,8 @@ export function StockTicker() {
   }
 
   return (
-    <div className="relative w-full h-14 flex items-center bg-background border-t border-border group overflow-hidden">
-        <div className="animate-marquee-infinite group-hover:pause flex items-center">
+    <div className="relative w-full h-14 bg-background border-t border-border group overflow-hidden">
+        <div className="absolute top-0 left-0 h-full flex items-center animate-marquee-infinite group-hover:pause">
             {quotes.map((quote, index) => (
             <TickerItem key={`${quote.symbol}-${index}`} quote={quote} />
             ))}
