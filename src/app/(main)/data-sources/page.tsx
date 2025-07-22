@@ -12,6 +12,8 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { ConnectGaDialog } from "@/components/data-sources/connect-ga-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
 
 const statusDetails = {
     connected: { icon: CheckCircle, color: "text-green-500", label: "Connected" },
@@ -67,9 +69,18 @@ export default function DataSourcesPage() {
                     <h1 className="text-3xl font-bold font-heading">Manage Data Sources</h1>
                     <p className="text-muted-foreground">Connect and manage the data Pollitago uses for analysis.</p>
                 </div>
-                <Button onClick={() => toast({ title: "Feature Coming Soon", description: "The ability to add new source types is not yet available."})}>
-                    <PlusCircle className="mr-2 h-4 w-4" /> Add New Source
-                </Button>
+                 <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button onClick={() => {}} disabled>
+                                <PlusCircle className="mr-2 h-4 w-4" /> Add New Source
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Only Google Analytics is supported currently.</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </header>
 
             {loading ? (

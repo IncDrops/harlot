@@ -63,10 +63,10 @@ export default function NewDecisionAnalysisPage() {
       
       toast({
         title: "Analysis Generation Started!",
-        description: "Your new analysis will appear on your dashboard shortly.",
+        description: "Redirecting you to the report page.",
       });
 
-      router.push(`/`);
+      router.push(`/analysis/${analysisId}`);
     } catch (error) {
       console.error("Error starting analysis:", error);
       toast({
