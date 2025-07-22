@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ThumbsUp, ThumbsDown, Share2, FileDown, Archive, Loader2, Info, BrainCircuit } from "lucide-react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList } from "recharts";
-import { addFeedbackToAnalysis, getAnalysisById } from "@/lib/firebase";
+import { addFeedbackToAnalysis, getAnalysisById, updateAnalysisStatus } from "@/lib/firebase";
 import type { Analysis } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/auth-context";
@@ -40,6 +40,9 @@ export default function AnalysisReportPage() {
     const [feedbackText, setFeedbackText] = useState("");
     const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
     const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+
+    // Action state
+    const [isArchiving, setIsArchiving] = useState(false);
 
 
     useEffect(() => {
@@ -95,6 +98,21 @@ export default function AnalysisReportPage() {
             setIsSubmittingFeedback(false);
         }
     };
+    
+    const handleArchive = async () => {
+        if (!analysis) return;
+        setIsArchiving(true);
+        try {
+            await updateAnalysisStatus(analysis.id, 'archived');
+            setAnalysis({ ...analysis, status: 'archived' });
+            toast({ title: "Analysis Archived", description: "This analysis has been moved to your archive." });
+        } catch (error) {
+            console.error("Failed to archive analysis", error);
+            toast({ variant: "destructive", title: "Error", description: "Could not archive the analysis." });
+        } finally {
+            setIsArchiving(false);
+        }
+    }
 
 
     if (loading) {
@@ -112,6 +130,7 @@ export default function AnalysisReportPage() {
 
     const isCompleted = analysis.status === 'completed';
     const isInProgress = analysis.status === 'in_progress';
+    const isArchived = analysis.status === 'archived';
 
     const getBadgeVariant = () => {
         switch(analysis.status) {
@@ -265,9 +284,12 @@ export default function AnalysisReportPage() {
                                 <CardTitle>Actions</CardTitle>
                             </CardHeader>
                             <CardContent className="flex flex-wrap gap-2">
-                               <Button variant="outline" size="sm"><Share2 className="mr-2 h-4 w-4" /> Share</Button>
-                               <Button variant="outline" size="sm"><FileDown className="mr-2 h-4 w-4" /> Export</Button>
-                               <Button variant="outline" size="sm"><Archive className="mr-2 h-4 w-4" /> Archive</Button>
+                               <Button variant="outline" size="sm" disabled={isArchived || isArchiving}><Share2 className="mr-2 h-4 w-4" /> Share</Button>
+                               <Button variant="outline" size="sm" disabled={isArchived || isArchiving}><FileDown className="mr-2 h-4 w-4" /> Export</Button>
+                               <Button variant="outline" size="sm" onClick={handleArchive} disabled={isArchived || isArchiving}>
+                                    {isArchiving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Archive className="mr-2 h-4 w-4" />}
+                                    {isArchived ? 'Archived' : 'Archive'}
+                               </Button>
                             </CardContent>
                         </Card>
 
@@ -287,6 +309,7 @@ export default function AnalysisReportPage() {
                                                     variant={feedbackRating === 'helpful' ? 'default' : 'outline'} 
                                                     size="icon"
                                                     onClick={() => setFeedbackRating('helpful')}
+                                                    disabled={isArchived}
                                                 >
                                                     <ThumbsUp/>
                                                 </Button>
@@ -294,6 +317,7 @@ export default function AnalysisReportPage() {
                                                     variant={feedbackRating === 'unhelpful' ? 'destructive' : 'outline'} 
                                                     size="icon"
                                                     onClick={() => setFeedbackRating('unhelpful')}
+                                                    disabled={isArchived}
                                                 >
                                                     <ThumbsDown/>
                                                 </Button>
@@ -304,6 +328,7 @@ export default function AnalysisReportPage() {
                                                 placeholder="Provide additional context or feedback..."
                                                 value={feedbackText}
                                                 onChange={(e) => setFeedbackText(e.target.value)}
+                                                disabled={isArchived}
                                             />
                                         </div>
                                     </div>
@@ -312,7 +337,7 @@ export default function AnalysisReportPage() {
                                     <Button 
                                         className="w-full" 
                                         onClick={handleFeedbackSubmit} 
-                                        disabled={!feedbackRating || isSubmittingFeedback}
+                                        disabled={!feedbackRating || isSubmittingFeedback || isArchived}
                                     >
                                         {isSubmittingFeedback && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                         Submit Feedback
