@@ -1,5 +1,6 @@
 
 import { RecentAnalyses } from "@/components/recent-analyses";
+import { StockTicker } from "@/components/stock-ticker";
 import { SwipeDeck } from "@/components/swipe-deck";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -12,6 +13,8 @@ export default function DashboardPage() {
             <h1 className="text-3xl font-bold font-heading">Dashboard</h1>
             <p className="text-muted-foreground">Your command center for strategic decisions.</p>
        </section>
+
+       <StockTicker />
 
         <div className="grid gap-6 lg:grid-cols-3">
             <div className="lg:col-span-2 space-y-6">
