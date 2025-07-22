@@ -24,8 +24,8 @@ export default function DashboardPage() {
 
        <StockTicker />
 
-        <div className="grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 gap-6">
+            <div className="space-y-6">
                 <Card>
                     <CardHeader>
                         <CardTitle>Pending Decisions</CardTitle>
@@ -36,9 +36,6 @@ export default function DashboardPage() {
                     </CardContent>
                 </Card>
                  <RecentAnalyses />
-            </div>
-
-            <div className="lg:col-span-1">
                  <Card>
                     <CardHeader>
                         <CardTitle>Team Insights</CardTitle>
