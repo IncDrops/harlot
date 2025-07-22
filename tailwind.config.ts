@@ -87,7 +87,7 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "marquee-infinite": "marquee-infinite 60s linear infinite",
+        "marquee-infinite": "marquee-infinite 30s linear infinite",
       },
       backdropBlur: {
         'xl': '20px',

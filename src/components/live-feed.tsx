@@ -25,16 +25,16 @@ interface StockQuote {
 }
 
 const feedCategories: { title: string; icon: LucideIcon | 'code'; category?: string; type?: 'news' | 'stock' }[] = [
-    { title: "AI Trends", icon: Bot, category: "https://techcrunch.com/feed/", type: 'news' },
-    { title: "Crypto Markets", icon: Bitcoin, category: "https://techcrunch.com/feed/", type: 'news' }, 
+    { title: "AI Trends", icon: Bot, category: "https://www.technologyreview.com/feed/tag/artificial-intelligence/", type: 'news' },
+    { title: "Crypto Markets", icon: Bitcoin, category: "https://www.coindesk.com/arc/outboundfeeds/rss/", type: 'news' }, 
     { title: "Tech Stocks", icon: LineChart, type: 'stock' },
     { title: "Startup News", icon: Lightbulb, category: "https://techcrunch.com/feed/", type: 'news' },
-    { title: "Developer Tools", icon: 'code', category: "https://techcrunch.com/feed/", type: 'news' },
-    { title: "Travel", icon: Globe, category: "https://www.luxurydaily.com/feed/", type: 'news' },
-    { title: "High-End Auto", icon: Car, category: "https://www.luxurydaily.com/feed/", type: 'news' },
-    { title: "Luxury Watches", icon: Watch, category: "https://www.luxurydaily.com/feed/", type: 'news' },
+    { title: "Developer Tools", icon: 'code', category: "https://blog.pragmaticengineer.com/rss/", type: 'news' },
+    { title: "Travel", icon: Globe, category: "https://skift.com/feed/", type: 'news' },
+    { title: "High-End Auto", icon: Car, category: "https://www.motortrend.com/feed/", type: 'news' },
+    { title: "Luxury Watches", icon: Watch, category: "https://www.hodinkee.com/articles.rss", type: 'news' },
     { title: "Luxury Daily", icon: Newspaper, category: "https://www.luxurydaily.com/feed/", type: 'news' },
-    { title: "Productivity", icon: Laptop, category: "https://techcrunch.com/feed/", type: 'news' }
+    { title: "Productivity", icon: Laptop, category: "https://lifehacker.com/rss", type: 'news' }
 ];
 
 function StockFeedCard({ title, icon: Icon }: { title: string, icon: LucideIcon | 'code' }) {
