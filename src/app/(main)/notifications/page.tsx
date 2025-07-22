@@ -109,9 +109,10 @@ export default function NotificationsPage() {
                     );
                 })
             ) : (
-                <div className="flex flex-col items-center justify-center h-64 text-muted-foreground border-t">
-                    <Bell className="h-12 w-12 mb-4" />
-                    <p className="text-lg">You have no new notifications.</p>
+                <div className="flex flex-col items-center justify-center h-64 text-muted-foreground rounded-lg border-2 border-dashed border-muted">
+                    <Bell className="w-12 h-12 mb-4 text-muted-foreground/50"/>
+                    <p className="font-semibold">No New Notifications</p>
+                    <p className="text-sm text-center">You're all caught up. We'll let you know when there's something new.</p>
                 </div>
             )}
           </div>
