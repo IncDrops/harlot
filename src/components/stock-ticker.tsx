@@ -47,7 +47,7 @@ export function StockTicker() {
 
   if (loading) {
     return (
-      <div className="w-full h-10 bg-muted/50 rounded-lg animate-pulse" />
+      <div className="w-full h-12 bg-muted/50 rounded-lg animate-pulse" />
     );
   }
 
@@ -62,7 +62,7 @@ export function StockTicker() {
             <TickerItem key={`${quote.symbol}-${index}`} quote={quote} />
             ))}
         </div>
-       <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
     </div>
   );
 }
+
