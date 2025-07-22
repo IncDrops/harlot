@@ -57,7 +57,7 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
         return {
           id: doc.id,
           ...data,
-          createdAt: (data.createdAt as Timestamp)?.toDate() || new Date(),
+          createdAt: (data.createdAt as Timestamp)?.toDate()?.toISOString() || new Date().toISOString(),
         } as Message;
       });
       setMessages(msgs);
