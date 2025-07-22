@@ -127,7 +127,7 @@ export default function SettingsPage() {
        <div className="container mx-auto py-8 text-center">
         <p className="text-destructive">Could not load profile. Please try refreshing the page.</p>
       </div>
-    )
+    );
   }
 
   return (
@@ -278,7 +278,7 @@ export default function SettingsPage() {
                         <FormLabel>In-App Notifications</FormLabel>
                         <FormDescription>
                             Show notifications within the dashboard for new insights.
-                        </Description>
+                        </FormDescription>
                     </div>
                     <Switch
                         aria-readonly
