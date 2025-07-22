@@ -1,28 +1,41 @@
 
-import { Button } from "@/components/ui/button";
+import { RecentAnalyses } from "@/components/recent-analyses";
+import { SwipeDeck } from "@/components/swipe-deck";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { PlusCircle, Database, Settings, ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 
 export default function DashboardPage() {
     
   return (
     <div className="space-y-8">
-       <section className="mb-8">
+       <section>
             <h1 className="text-3xl font-bold font-heading">Dashboard</h1>
-            <p className="text-muted-foreground">Welcome to your new live data dashboard.</p>
+            <p className="text-muted-foreground">Your command center for strategic decisions.</p>
        </section>
 
         <div className="grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-3">
-                 <Card>
+            <div className="lg:col-span-2 space-y-6">
+                <Card>
                     <CardHeader>
-                        <CardTitle>Getting Started</CardTitle>
-                        <CardDescription>This is your main dashboard area. We will build out your custom data visualizations here.</CardDescription>
+                        <CardTitle>Pending Decisions</CardTitle>
+                        <CardDescription>Review and action newly generated analyses.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <p>The left sidebar contains your live data feeds. We will make these customizable and interactive next.</p>
+                       <SwipeDeck />
+                    </CardContent>
+                </Card>
+                 <RecentAnalyses />
+            </div>
+
+            <div className="lg:col-span-1">
+                 <Card>
+                    <CardHeader>
+                        <CardTitle>Team Insights</CardTitle>
+                        <CardDescription>Activity from your organization.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        {/* Placeholder for future team activity feed */}
+                        <p className="text-sm text-muted-foreground">Team activity feed coming soon.</p>
                     </CardContent>
                 </Card>
             </div>

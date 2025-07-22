@@ -219,7 +219,7 @@ export const getAnalysisById = async (analysisId: string): Promise<Analysis | nu
 
 export const getRecentAnalysesForUser = async (userId: string, count: number = 5, status?: Analysis['status']): Promise<Analysis[]> => {
     const analysesRef = collection(db, 'analyses');
-    const constraints = [
+    const constraints: QueryConstraint[] = [
         where('userId', '==', userId),
         orderBy('createdAt', 'desc'),
         limit(count)
