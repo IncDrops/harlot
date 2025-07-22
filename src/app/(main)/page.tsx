@@ -1,6 +1,5 @@
 
 import { RecentAnalyses } from "@/components/recent-analyses";
-import { StockTicker } from "@/components/stock-ticker";
 import { SwipeDeck } from "@/components/swipe-deck";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,8 +20,6 @@ export default function DashboardPage() {
               </Link>
             </Button>
        </section>
-
-       <StockTicker />
 
         <div className="grid grid-cols-1 gap-6">
             <div className="space-y-6">
