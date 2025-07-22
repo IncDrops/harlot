@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { SidebarProvider, Sidebar, SidebarInset, SidebarTrigger, SidebarHeader, SidebarContent, SidebarFooter } from "@/components/ui/sidebar";
 import { LiveFeed } from "@/components/live-feed";
 import { Logo } from "@/components/logo";
+import Link from "next/link";
 
 export default function MainLayout({
   children,
@@ -15,9 +16,9 @@ export default function MainLayout({
     <SidebarProvider>
         <Sidebar>
             <SidebarHeader>
-                <div className="flex items-center gap-2">
+                <Link href="/" className="flex items-center gap-2">
                     <Logo />
-                </div>
+                </Link>
             </SidebarHeader>
             <SidebarContent>
                 <LiveFeed />
