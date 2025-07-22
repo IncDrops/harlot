@@ -26,7 +26,7 @@ interface StockQuote {
 
 const feedCategories: { title: string; icon: LucideIcon | 'code'; category?: string; type?: 'news' | 'stock' }[] = [
     { title: "AI Trends", icon: Bot, category: "https://techcrunch.com/feed/", type: 'news' },
-    { title: "Crypto Markets", icon: Bitcoin, category: "business", type: 'news' }, 
+    { title: "Crypto Markets", icon: Bitcoin, category: "https://techcrunch.com/feed/", type: 'news' }, 
     { title: "Tech Stocks", icon: LineChart, type: 'stock' },
     { title: "Startup News", icon: Lightbulb, category: "https://techcrunch.com/feed/", type: 'news' },
     { title: "Developer Tools", icon: 'code', category: "https://techcrunch.com/feed/", type: 'news' },
@@ -111,7 +111,7 @@ function FeedCard({ category, title, icon: Icon }: { category: string, title: st
         async function loadData() {
             setLoading(true);
             try {
-                // The fetchNews flow now handles both categories and RSS URLs
+                // The fetchNews flow now handles RSS URLs
                 const news = await fetchNews({ category });
                 if (news.articles.length > 0) {
                     setItem(news.articles[0]);

@@ -1,9 +1,9 @@
 
 'use server';
 /**
- * @fileOverview A flow to fetch live news articles from the Mediastack API or an RSS feed.
+ * @fileOverview A flow to fetch live news articles from an RSS feed.
  *
- * - fetchNews - A function that takes a category or RSS URL and returns a list of news articles.
+ * - fetchNews - A function that takes an RSS URL and returns a list of news articles.
  */
 
 import { ai } from '@/ai/genkit';
@@ -17,7 +17,7 @@ const NewsArticleSchema = z.object({
 });
 
 const FetchNewsInputSchema = z.object({
-  category: z.string().describe('The category of news to fetch, or a full RSS feed URL.'),
+  category: z.string().describe('The a full RSS feed URL.'),
 });
 export type FetchNewsInput = z.infer<typeof FetchNewsInputSchema>;
 
@@ -26,38 +26,6 @@ const FetchNewsOutputSchema = z.object({
 });
 export type FetchNewsOutput = z.infer<typeof FetchNewsOutputSchema>;
 
-
-async function fetchFromMediastack(category: string): Promise<FetchNewsOutput> {
-    const apiKey = process.env.MEDIASTACK_API_KEY;
-    if (!apiKey) {
-      console.error("Mediastack API key not found.");
-      return { articles: [] };
-    }
-
-    const categories = category.toLowerCase().replace(/ /g, '_');
-    const url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=${categories}&limit=1&languages=en`;
-
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        console.error(`Mediastack API error: ${response.statusText}`);
-        return { articles: [] };
-      }
-      const data = await response.json();
-      
-      const articles = data.data?.map((article: any) => ({
-        title: article.title,
-        url: article.url,
-        source: article.source,
-      })) || [];
-
-      return { articles };
-
-    } catch (error) {
-      console.error("Failed to fetch news from Mediastack", error);
-      return { articles: [] };
-    }
-}
 
 async function fetchFromRss(feedUrl: string): Promise<FetchNewsOutput> {
     try {
@@ -97,12 +65,8 @@ const fetchNewsFlow = ai.defineFlow(
     outputSchema: FetchNewsOutputSchema,
   },
   async (input) => {
-    // Check if the category is an RSS feed URL
-    if (input.category.startsWith('http')) {
-        return fetchFromRss(input.category);
-    }
-    // Otherwise, fetch from Mediastack
-    return fetchFromMediastack(input.category);
+    // The category must be a valid RSS feed URL.
+    return fetchFromRss(input.category);
   }
 );
 
