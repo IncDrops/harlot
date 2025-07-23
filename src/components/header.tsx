@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Settings, LogOut, Bell, Search, PlusCircle } from "lucide-react";
+import { Settings, LogOut, Bell, Search, PlusCircle, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -76,7 +76,12 @@ export function Header() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
                      <DropdownMenuItem onClick={() => router.push('/settings')}>
+                      <Settings className="mr-2 h-4 w-4" />
                       Settings
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/pricing')}>
+                      <CreditCard className="mr-2 h-4 w-4" />
+                      Pricing
                     </DropdownMenuItem>
                     <DropdownMenuItem disabled>
                       Support
