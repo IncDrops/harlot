@@ -11,8 +11,8 @@ const stockSymbols = ["AAPL", "GOOGL", "MSFT", "AMZN", "META", "TSLA", "NVDA", "
 export function StockTicker() {
     const { stocks, loading } = usePolygonWS(stockSymbols);
 
-    const renderStock = (stock: StockQuote) => (
-        <div key={stock.symbol} className="flex items-center gap-2 text-sm mx-4 flex-shrink-0">
+    const renderStock = (stock: StockQuote, index: number) => (
+        <div key={`${stock.symbol}-${index}`} className="flex items-center gap-2 text-sm mx-4 flex-shrink-0">
             <span className="font-semibold text-muted-foreground">{stock.symbol}</span>
             <span>${stock.price.toFixed(2)}</span>
             <span className={cn("flex items-center text-xs", stock.change >= 0 ? 'text-green-500' : 'text-red-500')}>
@@ -44,7 +44,7 @@ export function StockTicker() {
     return (
         <div className="relative h-10 flex items-center overflow-hidden bg-background group">
             <div className="flex animate-marquee-infinite group-hover:pause">
-                {extendedStocks.map((stock, index) => renderStock(stock))}
+                {extendedStocks.map((stock, index) => renderStock(stock, index))}
             </div>
             <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-background to-transparent" />
             <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-background to-transparent" />
