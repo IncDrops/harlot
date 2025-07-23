@@ -31,7 +31,7 @@ export function CrmTaskList() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (!user) {
+        if (!user || profile?.role !== 'admin') {
             setLoading(false);
             return;
         }
@@ -39,12 +39,12 @@ export function CrmTaskList() {
         async function checkConnection() {
             setLoading(true);
             const integrations = await getUserIntegrations(user.uid);
-            const hubspot = integrations.find(i => i.id === 'hubspot');
+            const hubspot = integrations.find(i => i.id === 'hubspot' && i.status === 'connected');
             setIsConnected(!!hubspot);
             setLoading(false);
         }
         checkConnection();
-    }, [user]);
+    }, [user, profile]);
     
     const canAccessFeature = profile?.role === 'admin';
 
@@ -53,7 +53,7 @@ export function CrmTaskList() {
     }
 
     if (loading) {
-        return <div className="h-24 w-full bg-muted/50 rounded-lg animate-pulse" />;
+        return <div className="h-40 w-full bg-muted/50 rounded-lg animate-pulse flex items-center justify-center text-muted-foreground">Loading CRM status...</div>;
     }
 
     if (!isConnected) {
