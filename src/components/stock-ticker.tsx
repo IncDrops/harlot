@@ -1,8 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
-import { fetchStockQuotes } from "@/ai/flows/fetch-stock-quotes-flow";
+import { usePolygonWS } from "@/hooks/use-polygon-ws";
 import type { StockQuote } from "@/lib/ai-schemas";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,28 +9,7 @@ import { cn } from "@/lib/utils";
 const stockSymbols = ["AAPL", "GOOGL", "MSFT", "AMZN", "META", "TSLA", "NVDA", "JPM", "V", "JNJ"];
 
 export function StockTicker() {
-    const [stocks, setStocks] = useState<StockQuote[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const getQuotes = async () => {
-            try {
-                const quotes = await fetchStockQuotes({ symbols: stockSymbols });
-                setStocks(quotes.quotes);
-            } catch (error) {
-                console.error("Failed to fetch stock quotes:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        
-        getQuotes();
-
-        // Refresh every 30 seconds (2 calls per minute), well within the 5/min limit
-        const intervalId = setInterval(getQuotes, 30000); 
-
-        return () => clearInterval(intervalId);
-    }, []);
+    const { stocks, loading } = usePolygonWS(stockSymbols);
 
     const renderStock = (stock: StockQuote) => (
         <div key={stock.symbol} className="flex items-center gap-2 text-sm mx-4 flex-shrink-0">
@@ -47,7 +25,15 @@ export function StockTicker() {
     if (loading) {
         return (
             <div className="h-10 flex items-center bg-background border-t">
-                <p className="text-sm text-muted-foreground px-4">Loading market data...</p>
+                <p className="text-sm text-muted-foreground px-4">Connecting to market data feed...</p>
+            </div>
+        )
+    }
+
+    if (!stocks.length) {
+        return (
+             <div className="h-10 flex items-center bg-background border-t">
+                <p className="text-sm text-muted-foreground px-4">Market data feed is temporarily unavailable.</p>
             </div>
         )
     }

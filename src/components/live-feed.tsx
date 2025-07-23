@@ -6,9 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { fetchNews } from '@/ai/flows/fetch-news-flow';
-import { fetchStockQuotes } from '@/ai/flows/fetch-stock-quotes-flow';
 import { Skeleton } from './ui/skeleton';
-import { cn } from '@/lib/utils';
+import { usePolygonWS } from '@/hooks/use-polygon-ws';
 
 
 interface FeedItem {
@@ -30,7 +29,54 @@ const feedCategories: { title: string; icon: LucideIcon | 'code'; category?: str
     { title: "Productivity", icon: Laptop, category: "https://lifehacker.com/rss", type: 'news' }
 ];
 
-function FeedCard({ category, title, icon: Icon, type }: { category: string, title: string, icon: LucideIcon | 'code', type: 'news' | 'stocks' }) {
+function StockFeedCard({ symbols, title, icon: Icon }: { symbols: string[], title: string, icon: LucideIcon | 'code' }) {
+    const { stocks, loading } = usePolygonWS(symbols);
+
+    const getStockDisplay = () => {
+        if (loading) return "Loading stock data...";
+        if (!stocks.length) return "Could not fetch stock data.";
+
+        const firstStock = stocks[0];
+        const change = firstStock.change > 0 ? `+${firstStock.change.toFixed(2)}` : firstStock.change.toFixed(2);
+        const changePercent = `(${(firstStock.changesPercentage).toFixed(2)}%)`;
+        return `${firstStock.symbol} is at ${firstStock.price.toFixed(2)} ${change} ${changePercent}`;
+    }
+    
+    const getStockUrl = () => {
+        if (!stocks.length) return "#";
+        return `https://www.google.com/finance/quote/${stocks[0].symbol}:NASDAQ`;
+    }
+
+    return (
+         <Link href={getStockUrl()} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity">
+            <Card className="bg-background/50 border-primary/10">
+                <CardHeader className="p-3">
+                    <CardTitle className="text-sm font-medium flex items-center gap-2">
+                        {Icon === 'code' ? (
+                            <span className="w-4 h-4 text-primary text-lg leading-none">{'</>'}</span>
+                        ) : (
+                            <Icon className="w-4 h-4 text-primary" />
+                        )}
+                        {title}
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="p-3 pt-0 text-xs text-muted-foreground h-12">
+                     {loading ? (
+                        <div className="space-y-2">
+                           <Skeleton className="h-3 w-5/6" />
+                           <Skeleton className="h-3 w-4/6" />
+                        </div>
+                     ) : (
+                        <p className="line-clamp-2">{getStockDisplay()}</p>
+                     )}
+                </CardContent>
+            </Card>
+        </Link>
+    )
+}
+
+
+function NewsFeedCard({ category, title, icon: Icon }: { category: string, title: string, icon: LucideIcon | 'code' }) {
     const [item, setItem] = useState<FeedItem | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -38,27 +84,11 @@ function FeedCard({ category, title, icon: Icon, type }: { category: string, tit
         async function loadData() {
             setLoading(true);
             try {
-                if (type === 'news') {
-                    const news = await fetchNews({ category });
-                    if (news.articles.length > 0) {
-                        setItem(news.articles[0]);
-                    } else {
-                        setItem({ title: "No recent news found for this category.", url: "#", source: "System" });
-                    }
-                } else if (type === 'stocks') {
-                     const stock = await fetchStockQuotes({ symbols: category.split(',') });
-                     if (stock.quotes.length > 0) {
-                        const firstStock = stock.quotes[0];
-                        const change = firstStock.change > 0 ? `+${firstStock.change.toFixed(2)}` : firstStock.change.toFixed(2);
-                        const changePercent = `(${(firstStock.changesPercentage).toFixed(2)}%)`;
-                        setItem({
-                            title: `${firstStock.name} is at ${firstStock.price} ${change} ${changePercent}`,
-                            url: `https://www.google.com/finance/quote/${firstStock.symbol}:NASDAQ`,
-                            source: "Polygon.io"
-                        });
-                     } else {
-                        setItem({ title: "Could not fetch stock data.", url: "#", source: "System" });
-                     }
+                const news = await fetchNews({ category });
+                if (news.articles.length > 0) {
+                    setItem(news.articles[0]);
+                } else {
+                    setItem({ title: "No recent news found for this category.", url: "#", source: "System" });
                 }
             } catch (error) {
                 console.error(`Failed to fetch feed for ${category}`, error);
@@ -70,13 +100,7 @@ function FeedCard({ category, title, icon: Icon, type }: { category: string, tit
         
         loadData();
 
-        // If it's a stock card, set it to refresh periodically
-        if (type === 'stocks') {
-            const intervalId = setInterval(loadData, 30000); // Refresh every 30 seconds
-            return () => clearInterval(intervalId);
-        }
-
-    }, [category, type]);
+    }, [category]);
 
     return (
         <Link href={item?.url || "#"} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity">
@@ -111,7 +135,13 @@ export function LiveFeed() {
     return (
         <div className="space-y-4 p-2">
             {feedCategories.map((cat) => {
-                return <FeedCard key={cat.title} category={cat.category || ''} title={cat.title} icon={cat.icon} type={cat.type || 'news'} />
+                if(cat.type === 'stocks' && cat.category) {
+                     return <StockFeedCard key={cat.title} symbols={cat.category.split(',')} title={cat.title} icon={cat.icon} />
+                }
+                if (cat.type === 'news' && cat.category) {
+                     return <NewsFeedCard key={cat.title} category={cat.category || ''} title={cat.title} icon={cat.icon} />
+                }
+                return null;
             })}
         </div>
     );
