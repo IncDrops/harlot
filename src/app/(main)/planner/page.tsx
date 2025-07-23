@@ -42,7 +42,7 @@ export default function PlannerPage() {
                         <CrmTaskList />
                     </CardContent>
                 </Card>
-            </aside>
+            </div>
         </div>
     </div>
   );
