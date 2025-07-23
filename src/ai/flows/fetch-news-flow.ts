@@ -37,15 +37,30 @@ async function fetchFromRss(feedUrl: string): Promise<FetchNewsOutput> {
         const xmlText = await response.text();
         const result: any = xml2js(xmlText, { compact: true, trim: true });
 
-        const channel = result.rss.channel;
-        const feedTitle = channel.title._text;
-        const item = Array.isArray(channel.item) ? channel.item[0] : channel.item;
+        // Handle different RSS/Atom feed structures
+        const channel = result.rss?.channel || result.feed;
+        if (!channel) {
+            console.error("Could not find channel or feed in RSS from " + feedUrl);
+            return { articles: [] };
+        }
 
-        if (!item) return { articles: [] };
+        // Find the title of the feed itself to use as the source
+        const feedTitle = channel.title?._text || channel.title?._cdata || new URL(feedUrl).hostname;
+        
+        const items = Array.isArray(channel.item) ? channel.item : Array.isArray(channel.entry) ? channel.entry : [channel.item || channel.entry];
+        
+        if (!items || items.length === 0 || !items[0]) return { articles: [] };
+        
+        // We only care about the most recent item for the live feed display.
+        const item = items[0];
+
+        // Handle variations in item structure (_cdata vs _text, link href)
+        const title = item.title?._cdata || item.title?._text || 'Untitled';
+        const url = item.link?._text || item.link?._attributes?.href || feedUrl;
 
         const article = {
-            title: item.title._cdata || item.title._text,
-            url: item.link._text,
+            title,
+            url,
             source: feedTitle,
         };
 
