@@ -30,3 +30,14 @@ export const GenerateInitialAnalysisOutputSchema = z.object({
   confidenceScore: z.number().min(0).max(100).describe('The AI model\'s confidence in its analysis, from 0 to 100.'),
 });
 export type GenerateInitialAnalysisOutput = z.infer<typeof GenerateInitialAnalysisOutputSchema>;
+
+
+// Schema for an individual stock quote
+export const StockQuoteSchema = z.object({
+    symbol: z.string(),
+    name: z.string(),
+    price: z.number(),
+    change: z.number(),
+    changesPercentage: z.number(),
+});
+export type StockQuote = z.infer<typeof StockQuoteSchema>;

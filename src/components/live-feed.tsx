@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { fetchNews } from '@/ai/flows/fetch-news-flow';
+import { fetchStockQuotes } from '@/ai/flows/fetch-stock-quotes-flow';
 import { Skeleton } from './ui/skeleton';
 import { cn } from '@/lib/utils';
 
@@ -16,8 +17,9 @@ interface FeedItem {
     source: string;
 }
 
-const feedCategories: { title: string; icon: LucideIcon | 'code'; category?: string; type?: 'news' }[] = [
+const feedCategories: { title: string; icon: LucideIcon | 'code'; category?: string; type?: 'news' | 'stocks' }[] = [
     { title: "AI Trends", icon: Bot, category: "https://www.technologyreview.com/feed/tag/artificial-intelligence/", type: 'news' },
+    { title: "Tech Stocks", icon: LineChart, category: "AAPL,GOOGL,MSFT,AMZN,META", type: 'stocks' },
     { title: "Crypto Markets", icon: Bitcoin, category: "https://www.coindesk.com/arc/outboundfeeds/rss/", type: 'news' }, 
     { title: "Startup News", icon: Lightbulb, category: "https://techcrunch.com/feed/", type: 'news' },
     { title: "Developer Tools", icon: 'code', category: "https://blog.pragmaticengineer.com/rss/", type: 'news' },
@@ -28,7 +30,7 @@ const feedCategories: { title: string; icon: LucideIcon | 'code'; category?: str
     { title: "Productivity", icon: Laptop, category: "https://lifehacker.com/rss", type: 'news' }
 ];
 
-function FeedCard({ category, title, icon: Icon }: { category: string, title: string, icon: LucideIcon | 'code' }) {
+function FeedCard({ category, title, icon: Icon, type }: { category: string, title: string, icon: LucideIcon | 'code', type: 'news' | 'stocks' }) {
     const [item, setItem] = useState<FeedItem | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -36,22 +38,37 @@ function FeedCard({ category, title, icon: Icon }: { category: string, title: st
         async function loadData() {
             setLoading(true);
             try {
-                // The fetchNews flow now handles RSS URLs
-                const news = await fetchNews({ category });
-                if (news.articles.length > 0) {
-                    setItem(news.articles[0]);
-                } else {
-                    setItem({ title: "No recent news found for this category.", url: "#", source: "System" });
+                if (type === 'news') {
+                    const news = await fetchNews({ category });
+                    if (news.articles.length > 0) {
+                        setItem(news.articles[0]);
+                    } else {
+                        setItem({ title: "No recent news found for this category.", url: "#", source: "System" });
+                    }
+                } else if (type === 'stocks') {
+                     const stock = await fetchStockQuotes({ symbols: category.split(',') });
+                     if (stock.quotes.length > 0) {
+                        const firstStock = stock.quotes[0];
+                        const change = firstStock.change > 0 ? `+${firstStock.change.toFixed(2)}` : firstStock.change.toFixed(2);
+                        const changePercent = `(${(firstStock.changesPercentage).toFixed(2)}%)`;
+                        setItem({
+                            title: `${firstStock.name} is at ${firstStock.price} ${change} ${changePercent}`,
+                            url: `https://www.google.com/finance/quote/${firstStock.symbol}:NASDAQ`,
+                            source: "FMP"
+                        });
+                     } else {
+                        setItem({ title: "Could not fetch stock data.", url: "#", source: "System" });
+                     }
                 }
             } catch (error) {
-                console.error(`Failed to fetch news for ${category}`, error);
-                setItem({ title: "Could not load news.", url: "#", source: "Error" });
+                console.error(`Failed to fetch feed for ${category}`, error);
+                setItem({ title: "Could not load feed.", url: "#", source: "Error" });
             } finally {
                 setLoading(false);
             }
         }
         loadData();
-    }, [category]);
+    }, [category, type]);
 
     return (
         <Link href={item?.url || "#"} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity">
@@ -86,7 +103,7 @@ export function LiveFeed() {
     return (
         <div className="space-y-4 p-2">
             {feedCategories.map((cat) => {
-                return <FeedCard key={cat.title} category={cat.category || ''} title={cat.title} icon={cat.icon} />
+                return <FeedCard key={cat.title} category={cat.category || ''} title={cat.title} icon={cat.icon} type={cat.type || 'news'} />
             })}
         </div>
     );

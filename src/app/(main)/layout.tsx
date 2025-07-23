@@ -8,6 +8,7 @@ import { Logo } from "@/components/logo";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LayoutDashboard, CheckSquare, MessageSquare, Settings, BarChart2 } from "lucide-react";
+import { StockTicker } from "@/components/stock-ticker";
 
 export default function MainLayout({
   children,
@@ -81,6 +82,9 @@ export default function MainLayout({
                 <main className="flex-1 overflow-y-auto p-6">
                     {children}
                 </main>
+                <footer className="border-t">
+                    <StockTicker />
+                </footer>
             </div>
         </div>
       </div>
