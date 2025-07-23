@@ -3,10 +3,10 @@
 import Image from "next/image";
 
 const logos = [
-    { src: "/arcol-logo.svg", alt: "Arcol Logo" },
-    { src: "/drifting-in-space-logo.svg", alt: "Drifting in Space Logo" },
-    { src: "/paloma-logo.svg", alt: "Paloma Logo" },
-    { src: "/resend-logo.svg", alt: "Resend Logo" },
+    { src: "https://placehold.co/120x40.png", alt: "Company Logo Placeholder", hint: "company logo" },
+    { src: "https://placehold.co/120x40.png", alt: "Company Logo Placeholder", hint: "company logo" },
+    { src: "https://placehold.co/120x40.png", alt: "Company Logo Placeholder", hint: "company logo" },
+    { src: "https://placehold.co/120x40.png", alt: "Company Logo Placeholder", hint: "company logo" },
 ];
 
 export function LogoCloud() {
@@ -25,9 +25,10 @@ export function LogoCloud() {
               <Image
                 src={logo.src}
                 alt={logo.alt}
+                data-ai-hint={logo.hint}
                 width={120}
                 height={40}
-                className="opacity-60 transition-opacity duration-300 hover:opacity-100 dark:invert"
+                className="opacity-60 transition-opacity duration-300 hover:opacity-100 dark:brightness-0 dark:invert"
                 style={{ objectFit: 'contain' }}
               />
             </div>
@@ -37,9 +38,10 @@ export function LogoCloud() {
               <Image
                 src={logo.src}
                 alt={logo.alt}
+                data-ai-hint={logo.hint}
                 width={120}
                 height={40}
-                className="opacity-60 transition-opacity duration-300 hover:opacity-100 dark:invert"
+                className="opacity-60 transition-opacity duration-300 hover:opacity-100 dark:brightness-0 dark:invert"
                 style={{ objectFit: 'contain' }}
               />
             </div>
