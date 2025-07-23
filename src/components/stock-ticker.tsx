@@ -27,8 +27,8 @@ export function StockTicker() {
         
         getQuotes();
 
-        // Refresh every 6 minutes to stay under the 250 calls/day limit
-        const intervalId = setInterval(getQuotes, 360000); 
+        // Refresh every 30 seconds (2 calls per minute), well within the 5/min limit
+        const intervalId = setInterval(getQuotes, 30000); 
 
         return () => clearInterval(intervalId);
     }, []);

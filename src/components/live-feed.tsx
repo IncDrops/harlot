@@ -67,7 +67,15 @@ function FeedCard({ category, title, icon: Icon, type }: { category: string, tit
                 setLoading(false);
             }
         }
+        
         loadData();
+
+        // If it's a stock card, set it to refresh periodically
+        if (type === 'stocks') {
+            const intervalId = setInterval(loadData, 30000); // Refresh every 30 seconds
+            return () => clearInterval(intervalId);
+        }
+
     }, [category, type]);
 
     return (
