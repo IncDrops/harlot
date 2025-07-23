@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Settings, LogOut, Bell, Search, PlusCircle, CreditCard } from "lucide-react";
+import { Settings, LogOut, Bell, Search, PlusCircle, CreditCard, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -83,8 +83,9 @@ export function Header() {
                       <CreditCard className="mr-2 h-4 w-4" />
                       Pricing
                     </DropdownMenuItem>
-                    <DropdownMenuItem disabled>
-                      Support
+                    <DropdownMenuItem onClick={() => router.push('/contact')}>
+                      <Mail className="mr-2 h-4 w-4" />
+                      Contact Us
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
