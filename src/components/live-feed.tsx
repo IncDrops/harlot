@@ -31,7 +31,7 @@ const feedCategories: { title: string; icon: LucideIcon | 'code'; category?: str
     { title: "Startup News", icon: Lightbulb, category: "https://techcrunch.com/feed/", type: 'news' },
     { title: "Developer Tools", icon: 'code', category: "https://blog.pragmaticengineer.com/rss/", type: 'news' },
     { title: "Travel", icon: Globe, category: "https://skift.com/feed/", type: 'news' },
-    { title: "High-End Auto", icon: Car, category: "https://www.motortrend.com/feed/", type: 'news' },
+    { title: "Automotive News", icon: Car, category: "https://feeds.feedblitz.com/autonews/breakingnews", type: 'news' },
     { title: "Luxury Watches", icon: Watch, category: "https://www.hodinkee.com/articles.rss", type: 'news' },
     { title: "Luxury Daily", icon: Newspaper, category: "https://www.luxurydaily.com/feed/", type: 'news' },
     { title: "Productivity", icon: Laptop, category: "https://lifehacker.com/rss", type: 'news' }
