@@ -11,6 +11,8 @@ export function Logo({ className }: { className?: string }) {
             height={40} 
             className="dark:invert"
             data-ai-hint="logo"
+            priority
+            style={{ width: 'auto', height: 'auto' }}
         />
     </div>
   );
