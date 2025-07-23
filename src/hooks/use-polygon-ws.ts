@@ -99,13 +99,11 @@ export function usePolygonWS(symbols: string[]) {
                         const stockToUpdate = prevStocks.find(s => s.symbol === msg.sym);
                         if (!stockToUpdate) return prevStocks;
                         
-                        const oldPrice = stockToUpdate.price;
-                        const newChange = stockToUpdate.change + (msg.p - oldPrice);
-                        const newChangePercent = stockToUpdate.changesPercentage + (((msg.p - oldPrice) / oldPrice) * 100);
-
+                        // Polygon snapshot provides the daily change, so we don't need to calculate it.
+                        // We will just update the price. The change will remain the same for the day unless we re-fetch the snapshot.
                         return prevStocks.map(s =>
                             s.symbol === msg.sym
-                                ? { ...s, price: msg.p, change: newChange, changesPercentage: newChangePercent }
+                                ? { ...s, price: msg.p }
                                 : s
                         );
                     });
