@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plug, CheckCircle, AlertTriangle, Link2Off, RefreshCw, Server, Settings, PlusCircle, Database, GitBranch } from "lucide-react";
+import { Plug, CheckCircle, AlertTriangle, Link2Off, RefreshCw, Server, Settings, PlusCircle, Database, GitBranch, Zap } from "lucide-react";
 import type { DataIntegration } from "@/lib/types";
 import { formatDistanceToNowStrict } from 'date-fns';
 import { cn } from "@/lib/utils";
@@ -13,6 +13,8 @@ import { useToast } from "@/hooks/use-toast";
 import { ConnectGaDialog } from "@/components/data-sources/connect-ga-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useAuth } from "@/contexts/auth-context";
+import Link from "next/link";
 
 
 const statusDetails = {
@@ -21,7 +23,26 @@ const statusDetails = {
     error: { icon: AlertTriangle, color: "text-yellow-500", label: "Error" },
 }
 
+function UpgradePrompt() {
+    return (
+        <Card className="bg-secondary/20 border-secondary/30 text-center">
+            <CardHeader>
+                <CardTitle className="flex items-center justify-center gap-2"><Zap className="text-secondary" /> Unlock Premium Data Sources</CardTitle>
+                <CardDescription>Upgrade your plan to connect to live analytics platforms like Google Analytics and custom data sources.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <Button asChild variant="secondary">
+                    <Link href="/pricing">
+                        View Pricing Plans
+                    </Link>
+                </Button>
+            </CardContent>
+        </Card>
+    )
+}
+
 export default function DataSourcesPage() {
+    const { user, profile } = useAuth();
     const [integrations, setIntegrations] = useState<DataIntegration[]>([]);
     const [loading, setLoading] = useState(true);
     const [isGaDialogOpen, setIsGaDialogOpen] = useState(false);
@@ -61,6 +82,8 @@ export default function DataSourcesPage() {
         });
     }
 
+    const canAccessFeature = profile?.role === 'admin';
+
     return (
         <div className="container mx-auto py-8">
              <ConnectGaDialog open={isGaDialogOpen} onOpenChange={setIsGaDialogOpen} />
@@ -72,7 +95,7 @@ export default function DataSourcesPage() {
                  <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button onClick={() => {}} disabled>
+                            <Button onClick={() => {}} disabled={!canAccessFeature}>
                                 <PlusCircle className="mr-2 h-4 w-4" /> Add New Source
                             </Button>
                         </TooltipTrigger>
@@ -91,6 +114,8 @@ export default function DataSourcesPage() {
                         <CardFooter><div className="h-10 bg-muted rounded w-full"></div></CardFooter>
                     </Card>
                 </div>
+            ) : !canAccessFeature ? (
+                <UpgradePrompt />
             ) : integrations.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {integrations.map((integration) => {

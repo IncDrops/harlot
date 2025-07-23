@@ -31,7 +31,7 @@ function MessagesContent() {
   }
 
   return (
-    <div className="container mx-auto py-8 h-[calc(100vh-144px)]">
+    <div className="container mx-auto py-8 h-[calc(100vh-200px)]">
       <div className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-6 h-full">
         <Card>
           <CardHeader>
