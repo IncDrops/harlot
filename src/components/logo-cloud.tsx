@@ -7,8 +7,6 @@ const logos = [
     { src: "/drifting-in-space-logo.svg", alt: "Drifting in Space Logo" },
     { src: "/paloma-logo.svg", alt: "Paloma Logo" },
     { src: "/resend-logo.svg", alt: "Resend Logo" },
-    { src: "/arcol-logo.svg", alt: "Arcol Logo Dupe" },
-    { src: "/drifting-in-space-logo.svg", alt: "Drifting in Space Logo Dupe" },
 ];
 
 export function LogoCloud() {
