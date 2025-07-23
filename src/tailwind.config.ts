@@ -12,9 +12,9 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1600px",
       },
     },
     extend: {
@@ -68,10 +68,6 @@ export default {
         lg: `var(--radius)`,
         md: `calc(var(--radius) - 2px)`,
         sm: "calc(var(--radius) - 4px)",
-        '2xl': `var(--radius)`,
-      },
-      boxShadow: {
-        'lg': '0 8px 32px rgba(0, 0, 0, 0.07)',
       },
       keyframes: {
         "accordion-down": {
@@ -92,15 +88,6 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "marquee-infinite": "marquee-infinite 30s linear infinite",
       },
-      backdropBlur: {
-        'xl': '20px',
-      },
-      backgroundColor: {
-        'glass': 'rgba(255, 255, 255, 0.6)',
-      },
-      borderColor: {
-        'glass': 'rgba(255, 255, 255, 0.8)',
-      }
     },
   },
   plugins: [require('tailwindcss-animate')],
