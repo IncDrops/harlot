@@ -6,6 +6,7 @@ const { onCall, onRequest } = require('firebase-functions/v2/https');
 const { defineString } = require('firebase-functions/params');
 const admin = require('firebase-admin');
 const { OAuth2Client } = require('google-auth-library');
+const axios = require('axios');
 
 // Initialize Firebase Admin
 admin.initializeApp();
@@ -79,7 +80,7 @@ exports.googleAuthCallback = onRequest({ cors: true }, async (req, res) => {
     ].filter(Boolean); // filter out null/undefined values
 
     if (allowedOrigins.includes(origin)) {
-        res.redirect(`${origin}/data-sources?status=success`);
+        res.redirect(`${origin}/data-sources?status=success&source=google`);
     } else {
         console.error(`Unauthorized redirect origin: ${origin}`);
         res.status(400).send('Invalid origin specified.');
@@ -92,9 +93,71 @@ exports.googleAuthCallback = onRequest({ cors: true }, async (req, res) => {
 });
 
 
-// This file is ready for new, enterprise-focused cloud functions.
-// Example of a function structure:
-// exports.someNewEnterpriseFunction = onCall(async (request) => {
-//   // ... logic for your new feature
-//   return { success: true };
-// });
+// This function handles the OAuth2 callback from HubSpot
+exports.hubspotAuthCallback = onRequest({ cors: true }, async (req, res) => {
+    const { code, state } = req.query;
+
+    if (!code) {
+      return res.status(400).send('Authorization code is missing from HubSpot callback.');
+    }
+    if (!state) {
+        return res.status(400).send('State parameter is missing.');
+    }
+    
+    let parsedState;
+    try {
+        parsedState = JSON.parse(state);
+    } catch (e) {
+        return res.status(400).send('Invalid state parameter format.');
+    }
+
+    const { userId, origin } = parsedState;
+
+    if (!userId || !origin) {
+        return res.status(400).send('State is missing required properties (userId, origin).');
+    }
+
+    const tokenUrl = 'https://api.hubapi.com/oauth/v1/token';
+    const params = new URLSearchParams();
+    params.append('grant_type', 'authorization_code');
+    params.append('client_id', process.env.HUBSPOT_CLIENT_ID);
+    params.append('client_secret', process.env.HUBSPOT_CLIENT_SECRET);
+    params.append('redirect_uri', process.env.HUBSPOT_REDIRECT_URI);
+    params.append('code', code);
+
+    try {
+        const response = await axios.post(tokenUrl, params, {
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        });
+
+        const { access_token, refresh_token, expires_in } = response.data;
+        const expiryDate = Date.now() + (expires_in * 1000);
+
+        const integrationRef = db.collection('users').doc(userId).collection('integrations').doc('hubspot');
+        await integrationRef.set({
+            provider: 'hubspot',
+            accessToken: access_token,
+            refreshToken: refresh_token,
+            expiryDate,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        }, { merge: true });
+
+        // Redirect back to the app
+        const allowedOrigins = [
+            'http://localhost:9003',
+            'https://pollitago.com',
+             functions.config().app?.url
+        ].filter(Boolean);
+
+        if (allowedOrigins.includes(origin)) {
+            res.redirect(`${origin}/data-sources?status=success&source=hubspot`);
+        } else {
+            console.error(`Unauthorized redirect origin: ${origin}`);
+            res.status(400).send('Invalid origin specified.');
+        }
+
+    } catch (error) {
+        console.error('Error exchanging HubSpot code for token:', error.response ? error.response.data : error.message);
+        res.status(500).send('HubSpot authentication failed.');
+    }
+});

@@ -37,7 +37,7 @@ export interface Message {
 }
 
 export interface Analysis {
-    id: string;
+    id:string;
     userId: string;
     decisionQuestion: string;
     decisionType: string;
@@ -59,6 +59,10 @@ export interface DataIntegration {
     type: 'CRM' | 'ERP' | 'Database' | 'API';
     status: 'connected' | 'disconnected' | 'error';
     lastSync: string | null; // ISO String or null if never synced
+    // Optional fields for token storage, not always directly used in frontend
+    accessToken?: string;
+    refreshToken?: string;
+    expiryDate?: number;
 }
 
 export interface Feedback {

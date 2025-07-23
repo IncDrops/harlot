@@ -11,10 +11,12 @@ import { formatDistanceToNowStrict } from 'date-fns';
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { ConnectGaDialog } from "@/components/data-sources/connect-ga-dialog";
+import { ConnectHubspotDialog } from "@/components/data-sources/connect-hubspot-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useAuth } from "@/contexts/auth-context";
 import Link from "next/link";
+import { getUserIntegrations } from "@/lib/firebase";
 
 
 const statusDetails = {
@@ -28,7 +30,7 @@ function UpgradePrompt() {
         <Card className="bg-secondary/20 border-secondary/30 text-center">
             <CardHeader>
                 <CardTitle className="flex items-center justify-center gap-2"><Zap className="text-secondary" /> Unlock Premium Data Sources</CardTitle>
-                <CardDescription>Upgrade your plan to connect to live analytics platforms like Google Analytics and custom data sources.</CardDescription>
+                <CardDescription>Upgrade your plan to connect to live analytics platforms like Google Analytics and CRMs like HubSpot.</CardDescription>
             </CardHeader>
             <CardContent>
                 <Button asChild variant="secondary">
@@ -46,40 +48,52 @@ export default function DataSourcesPage() {
     const [integrations, setIntegrations] = useState<DataIntegration[]>([]);
     const [loading, setLoading] = useState(true);
     const [isGaDialogOpen, setIsGaDialogOpen] = useState(false);
+    const [isHubspotDialogOpen, setIsHubspotDialogOpen] = useState(false);
     const { toast } = useToast();
 
-    // This now simulates fetching the connection status from your backend
     useEffect(() => {
-        setLoading(true);
-        // In a real app, you would fetch this from Firestore or your backend
-        // For now, we'll just set up the Google Analytics option as 'disconnected'
-        const configuredIntegrations: DataIntegration[] = [
-            {
-                id: "google_analytics",
-                name: "Google Analytics API",
-                type: "API",
-                status: "disconnected", // This status would be updated based on your backend check
-                lastSync: null,
-            }
-        ];
-        
-        // You could add more potential integrations here as "disconnected"
-        // to show the user what's possible
-        
-        setIntegrations(configuredIntegrations);
-        setLoading(false);
-    }, []);
-
-    const handleButtonClick = (integration: DataIntegration) => {
-        if (integration.id === 'google_analytics' && integration.status === 'disconnected') {
-            setIsGaDialogOpen(true);
+        if (!user || !profile || profile.role !== 'admin') {
+            setLoading(false);
             return;
         }
-        
-        toast({
-            title: "Feature Coming Soon",
-            description: "This integration is not yet available."
-        });
+
+        async function fetchIntegrations() {
+            setLoading(true);
+            const userIntegrations = await getUserIntegrations(user.uid);
+            
+            const allPossibleIntegrations: DataIntegration[] = [
+                { id: "google_analytics", name: "Google Analytics", type: "API", status: "disconnected", lastSync: null },
+                { id: "hubspot", name: "HubSpot", type: "CRM", status: "disconnected", lastSync: null }
+            ];
+
+            const updatedIntegrations = allPossibleIntegrations.map(possible => {
+                const existing = userIntegrations.find(i => i.id === possible.id);
+                return existing ? { ...possible, ...existing, status: 'connected' } : possible;
+            });
+            
+            setIntegrations(updatedIntegrations);
+            setLoading(false);
+        }
+
+        fetchIntegrations();
+    }, [user, profile]);
+
+    const handleButtonClick = (integration: DataIntegration) => {
+        if (integration.status !== 'disconnected') {
+            toast({ title: "Already Connected", description: "Management for this integration is coming soon."});
+            return;
+        }
+
+        switch (integration.id) {
+            case 'google_analytics':
+                setIsGaDialogOpen(true);
+                break;
+            case 'hubspot':
+                setIsHubspotDialogOpen(true);
+                break;
+            default:
+                toast({ title: "Feature Coming Soon", description: "This integration is not yet available." });
+        }
     }
 
     const canAccessFeature = profile?.role === 'admin';
@@ -87,6 +101,7 @@ export default function DataSourcesPage() {
     return (
         <div className="container mx-auto py-8">
              <ConnectGaDialog open={isGaDialogOpen} onOpenChange={setIsGaDialogOpen} />
+             <ConnectHubspotDialog open={isHubspotDialogOpen} onOpenChange={setIsHubspotDialogOpen} />
             <header className="mb-8 flex justify-between items-center">
                 <div>
                     <h1 className="text-3xl font-bold font-heading">Manage Data Sources</h1>
@@ -100,7 +115,7 @@ export default function DataSourcesPage() {
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent>
-                            <p>Only Google Analytics is supported currently.</p>
+                            <p>More data sources coming soon.</p>
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
@@ -108,11 +123,13 @@ export default function DataSourcesPage() {
 
             {loading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <Card className="animate-pulse">
-                        <CardHeader><div className="h-6 bg-muted rounded w-3/4"></div><div className="h-4 bg-muted rounded w-1/2"></div></CardHeader>
-                        <CardContent><div className="h-4 bg-muted rounded w-1/3 mb-2"></div></CardContent>
-                        <CardFooter><div className="h-10 bg-muted rounded w-full"></div></CardFooter>
-                    </Card>
+                    {[...Array(2)].map((_, i) => (
+                        <Card key={i} className="animate-pulse">
+                            <CardHeader><div className="h-6 bg-muted rounded w-3/4"></div><div className="h-4 bg-muted rounded w-1/2"></div></CardHeader>
+                            <CardContent><div className="h-4 bg-muted rounded w-1/3 mb-2"></div></CardContent>
+                            <CardFooter><div className="h-10 bg-muted rounded w-full"></div></CardFooter>
+                        </Card>
+                    ))}
                 </div>
             ) : !canAccessFeature ? (
                 <UpgradePrompt />

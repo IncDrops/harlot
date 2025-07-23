@@ -1,12 +1,15 @@
 
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/auth-context';
 import { Button } from '@/components/ui/button';
 import { Info, Briefcase } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
+import { getUserIntegrations } from '@/lib/firebase';
+import type { DataIntegration } from '@/lib/types';
+import { useRouter } from 'next/navigation';
 
 function UpgradePrompt() {
     return (
@@ -21,25 +24,36 @@ function UpgradePrompt() {
     )
 }
 
-
 export function CrmTaskList() {
-    const { profile } = useAuth();
-    const { toast } = useToast();
-    
-    // The connection status is now determined by whether the API key is present
-    const isConnected = !!process.env.NEXT_PUBLIC_HUBSPOT_API_KEY;
+    const { user, profile } = useAuth();
+    const router = useRouter();
+    const [isConnected, setIsConnected] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-    const handleConnect = () => {
-        toast({
-            title: "Configuration Needed",
-            description: "Please add your HubSpot API key to the .env file to connect."
-        });
-    }
+    useEffect(() => {
+        if (!user) {
+            setLoading(false);
+            return;
+        }
+
+        async function checkConnection() {
+            setLoading(true);
+            const integrations = await getUserIntegrations(user.uid);
+            const hubspot = integrations.find(i => i.id === 'hubspot');
+            setIsConnected(!!hubspot);
+            setLoading(false);
+        }
+        checkConnection();
+    }, [user]);
     
     const canAccessFeature = profile?.role === 'admin';
 
     if (!canAccessFeature) {
         return <UpgradePrompt />;
+    }
+
+    if (loading) {
+        return <div className="h-24 w-full bg-muted/50 rounded-lg animate-pulse" />;
     }
 
     if (!isConnected) {
@@ -48,9 +62,9 @@ export function CrmTaskList() {
                 <Info className="w-10 h-10 mx-auto mb-3 text-primary" />
                 <h3 className="font-semibold mb-2">Connect to HubSpot</h3>
                 <p className="text-sm text-muted-foreground mb-4">Bring your CRM tasks into Pollitago to streamline your strategic planning.</p>
-                <Button onClick={handleConnect}>Connect HubSpot</Button>
+                <Button onClick={() => router.push('/data-sources')}>Connect HubSpot</Button>
                  <p className="text-xs text-muted-foreground mt-2">
-                    Note: Add your API key to the .env file to enable this feature.
+                    You will be redirected to the Data Sources page.
                 </p>
             </div>
         )

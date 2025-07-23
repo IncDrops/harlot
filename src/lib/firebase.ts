@@ -44,7 +44,7 @@ import {
 } from "firebase/firestore";
 import { getFunctions } from 'firebase/functions';
 import type { Functions } from 'firebase/functions';
-import type { User, Analysis, Notification, Feedback, Todo } from "./types";
+import type { User, Analysis, Notification, Feedback, Todo, DataIntegration } from "./types";
 import { generateInitialAnalysis } from "@/ai/flows/generate-initial-analysis";
 import type { GenerateInitialAnalysisInput } from "@/lib/ai-schemas";
 
@@ -337,6 +337,22 @@ export const updateTodoStatus = async (userId: string, todoId: string, completed
 export const deleteTodo = async (userId: string, todoId: string): Promise<void> => {
     const todoRef = doc(db, `users/${userId}/todos`, todoId);
     await deleteDoc(todoRef);
+};
+
+// ──────────── INTEGRATIONS ────────────
+export const getUserIntegrations = async (userId: string): Promise<DataIntegration[]> => {
+    if (!userId) return [];
+    try {
+        const integrationsRef = collection(db, 'users', userId, 'integrations');
+        const querySnapshot = await getDocs(integrationsRef);
+        if (querySnapshot.empty) {
+            return [];
+        }
+        return querySnapshot.docs.map(doc => fromFirestore<DataIntegration>(doc));
+    } catch (error) {
+        console.error("Error fetching user integrations:", error);
+        return [];
+    }
 };
 
 
