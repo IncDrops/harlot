@@ -2,12 +2,13 @@
 "use client";
 
 import { Header } from "@/components/header";
-import { SidebarProvider, Sidebar, SidebarInset, SidebarTrigger, SidebarHeader, SidebarContent, SidebarFooter, SidebarClose } from "@/components/ui/sidebar";
+import { SidebarProvider, Sidebar, SidebarInset, SidebarTrigger, SidebarHeader, SidebarContent, SidebarFooter, SidebarClose, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
 import { LiveFeed } from "@/components/live-feed";
 import { Logo } from "@/components/logo";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { StockTicker } from "@/components/stock-ticker";
+import { LayoutDashboard, CheckSquare } from "lucide-react";
 
 export default function MainLayout({
   children,
@@ -27,6 +28,25 @@ export default function MainLayout({
                     <SidebarClose className="hidden group-data-[collapsible=icon]:flex" />
                 </SidebarHeader>
                 <SidebarContent>
+                    <SidebarMenu>
+                      <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                          <Link href="/">
+                            <LayoutDashboard />
+                            <span>Dashboard</span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                       <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                          <Link href="/planner">
+                            <CheckSquare />
+                            <span>Planner</span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    </SidebarMenu>
+                    <hr className="my-4 border-border" />
                     <LiveFeed />
                 </SidebarContent>
                 <SidebarFooter>
