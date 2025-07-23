@@ -243,7 +243,7 @@ export default function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="space-y-2">
-                    <FormLabel>Theme</FormLabel>
+                    <p className="text-sm font-medium">Theme</p>
                     <div className="grid grid-cols-3 gap-2 rounded-lg border p-1">
                         <Button variant={theme === 'light' ? 'secondary' : 'ghost'} onClick={() => setTheme('light')}><Sun className="mr-2 h-4 w-4"/>Light</Button>
                         <Button variant={theme === 'dark' ? 'secondary' : 'ghost'} onClick={() => setTheme('dark')}><Moon className="mr-2 h-4 w-4"/>Dark</Button>

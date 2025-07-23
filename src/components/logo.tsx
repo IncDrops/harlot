@@ -1,16 +1,24 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <h1 className={cn("font-heading text-2xl font-bold text-primary truncate", className)}>
-      Pollitago
-    </h1>
+    <div className={cn("flex items-center gap-2", className)}>
+        <Image 
+            src="/logo.png" 
+            alt="Pollitago Logo" 
+            width={150} 
+            height={40} 
+            className="dark:invert"
+            data-ai-hint="logo"
+        />
+    </div>
   );
 }
 
 export function Tagline({ className }: { className?: string }) {
   return (
-    <p className={cn("font-body text-xs uppercase tracking-wider text-primary/80", className)}>
+    <p className={cn("font-body text-sm text-primary/90", className)}>
       AI-Powered Second Opinions
     </p>
   );
