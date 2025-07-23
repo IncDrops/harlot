@@ -35,14 +35,24 @@ export function StockTicker() {
       try {
         const { quotes } = await fetchStockQuotes();
         // We duplicate the quotes to ensure a seamless loop for the marquee effect
-        setQuotes([...quotes, ...quotes]); 
+        if(quotes.length > 0) {
+            setQuotes([...quotes, ...quotes]);
+        }
       } catch (error) {
         console.error("Failed to fetch stock quotes", error);
       } finally {
         setLoading(false);
       }
     }
+
+    // Fetch immediately on mount
     loadData();
+
+    // Then fetch every 30 seconds
+    const intervalId = setInterval(loadData, 30000);
+
+    // Clean up interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   if (loading) {
