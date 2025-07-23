@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https://',
         hostname: 'i.pravatar.cc',
         port: '',
         pathname: '/**',
@@ -36,6 +36,10 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  env: {
+    HUBSPOT_API_KEY: process.env.HUBSPOT_API_KEY,
+    HUBSPOT_URL: process.env.HUBSPOT_URL,
+  }
 };
 
 export default nextConfig;

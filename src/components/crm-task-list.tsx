@@ -25,16 +25,17 @@ function UpgradePrompt() {
 export function CrmTaskList() {
     const { profile } = useAuth();
     const { toast } = useToast();
-    const [isConnected, setIsConnected] = useState(false); // This would come from backend state
+    
+    // The connection status is now determined by whether the API key is present
+    const isConnected = !!process.env.NEXT_PUBLIC_HUBSPOT_API_KEY;
 
     const handleConnect = () => {
         toast({
-            title: "Feature Coming Soon",
-            description: "The full HubSpot integration is currently in development."
+            title: "Configuration Needed",
+            description: "Please add your HubSpot API key to the .env file to connect."
         });
     }
     
-    // Admins are considered Pro/Enterprise for this check
     const canAccessFeature = profile?.role === 'admin';
 
     if (!canAccessFeature) {
@@ -48,17 +49,19 @@ export function CrmTaskList() {
                 <h3 className="font-semibold mb-2">Connect to HubSpot</h3>
                 <p className="text-sm text-muted-foreground mb-4">Bring your CRM tasks into Pollitago to streamline your strategic planning.</p>
                 <Button onClick={handleConnect}>Connect HubSpot</Button>
+                 <p className="text-xs text-muted-foreground mt-2">
+                    Note: Add your API key to the .env file to enable this feature.
+                </p>
             </div>
         )
     }
 
     return (
         <div className="space-y-4">
-           {/* This is where the list of synced tasks would go. */}
-           <div className="text-center text-muted-foreground py-8">
-                <p>No tasks found in HubSpot.</p>
+           <div className="text-center text-muted-foreground py-8 bg-green-500/10 rounded-lg">
+                <p className="font-semibold text-green-700">HubSpot Connected</p>
+                <p className="text-sm">Synced tasks will appear here.</p>
            </div>
         </div>
     );
 }
-
