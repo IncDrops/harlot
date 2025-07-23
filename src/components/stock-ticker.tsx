@@ -2,7 +2,7 @@
 "use client";
 
 import { usePolygonWS } from "@/hooks/use-polygon-ws";
-import type { StockQuote } from "@/lib/ai-schemas";
+import type { StockQuote } from "@/lib/types";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ export function StockTicker() {
         </div>
     );
     
-    if (loading) {
+    if (loading && stocks.length === 0) {
         return (
             <div className="h-10 flex items-center bg-background border-t">
                 <p className="text-sm text-muted-foreground px-4">Connecting to market data feed...</p>
@@ -30,7 +30,7 @@ export function StockTicker() {
         )
     }
 
-    if (!stocks.length) {
+    if (!loading && !stocks.length) {
         return (
              <div className="h-10 flex items-center bg-background border-t">
                 <p className="text-sm text-muted-foreground px-4">Market data feed is temporarily unavailable.</p>
@@ -39,7 +39,7 @@ export function StockTicker() {
     }
 
     // Duplicate the stocks array to create a seamless loop
-    const extendedStocks = [...stocks, ...stocks];
+    const extendedStocks = stocks.length > 0 ? [...stocks, ...stocks] : [];
 
     return (
         <div className="relative h-10 flex items-center overflow-hidden bg-background group">

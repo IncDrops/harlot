@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import { fetchNews } from '@/ai/flows/fetch-news-flow';
 import { Skeleton } from './ui/skeleton';
 import { usePolygonWS } from '@/hooks/use-polygon-ws';
+import { cn } from '@/lib/utils';
+import { ArrowUp, ArrowDown } from 'lucide-react';
 
 
 interface FeedItem {
@@ -33,13 +35,22 @@ function StockFeedCard({ symbols, title, icon: Icon }: { symbols: string[], titl
     const { stocks, loading } = usePolygonWS(symbols);
 
     const getStockDisplay = () => {
-        if (loading) return "Loading stock data...";
-        if (!stocks.length) return "Could not fetch stock data.";
+        if (!stocks.length) return null;
 
         const firstStock = stocks[0];
         const change = firstStock.change > 0 ? `+${firstStock.change.toFixed(2)}` : firstStock.change.toFixed(2);
         const changePercent = `(${(firstStock.changesPercentage).toFixed(2)}%)`;
-        return `${firstStock.symbol} is at ${firstStock.price.toFixed(2)} ${change} ${changePercent}`;
+        
+        return (
+            <div className="flex items-center gap-1.5 text-xs">
+                <span className="font-bold text-foreground">{firstStock.symbol}</span>
+                <span className={cn("flex items-center", firstStock.change >= 0 ? 'text-green-500' : 'text-red-500')}>
+                    {firstStock.change >= 0 ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />}
+                    {firstStock.price.toFixed(2)}
+                </span>
+                <span className="text-muted-foreground">{change} {changePercent}</span>
+            </div>
+        )
     }
     
     const getStockUrl = () => {
@@ -61,13 +72,15 @@ function StockFeedCard({ symbols, title, icon: Icon }: { symbols: string[], titl
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="p-3 pt-0 text-xs text-muted-foreground h-12">
-                     {loading ? (
+                     {loading && !stocks.length ? (
                         <div className="space-y-2">
                            <Skeleton className="h-3 w-5/6" />
                            <Skeleton className="h-3 w-4/6" />
                         </div>
+                     ) : stocks.length > 0 ? (
+                        getStockDisplay()
                      ) : (
-                        <p className="line-clamp-2">{getStockDisplay()}</p>
+                        <p className="line-clamp-2">Could not load stock data.</p>
                      )}
                 </CardContent>
             </Card>

@@ -73,3 +73,12 @@ export interface Feedback {
     text?: string;
     createdAt: string; // ISO string
 }
+
+// Schema for an individual stock quote
+export interface StockQuote {
+    symbol: string;
+    name: string;
+    price: number;
+    change: number;
+    changesPercentage: number;
+}
