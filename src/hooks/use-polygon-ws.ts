@@ -65,7 +65,8 @@ export function usePolygonWS(symbols: string[]) {
             const response = await fetch(`https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers?tickers=${symbolsString}&apiKey=${API_KEY}`);
             if (!response.ok) {
                 console.error(`Failed to fetch initial stock data from Polygon API. Status: ${response.status}. This may be due to an invalid API key or insufficient permissions.`);
-                throw new Error('Failed to fetch initial stock data');
+                // Do not throw, just exit gracefully
+                return;
             }
             const data = await response.json();
             
@@ -83,14 +84,18 @@ export function usePolygonWS(symbols: string[]) {
                 setStocks(initialStocks);
             }
         } catch (error) {
-            console.error(error);
+            console.error("Error fetching initial stock data:", error);
         } finally {
             if (isMounted) setLoading(false);
         }
     }
 
     fetchInitialData().then(() => {
-        if (!isMounted || !API_KEY) return;
+        if (!isMounted || !API_KEY || stocks.length === 0) {
+            // If initial fetch failed, don't attempt websocket connection
+            setLoading(false);
+            return;
+        };
 
         // Setup WebSocket for real-time updates
         ws.current = new WebSocket(WS_URL);
@@ -147,6 +152,7 @@ export function usePolygonWS(symbols: string[]) {
         ws.current.close();
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [symbols.join(',')]);
 
   return { stocks, loading };

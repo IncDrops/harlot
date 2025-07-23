@@ -22,7 +22,7 @@ export function StockTicker() {
         </div>
     );
     
-    if (loading && stocks.length === 0) {
+    if (loading) {
         return (
             <div className="h-10 flex items-center bg-background border-t">
                 <p className="text-sm text-muted-foreground px-4">Connecting to market data feed...</p>
@@ -30,7 +30,7 @@ export function StockTicker() {
         )
     }
 
-    if (!loading && !stocks.length) {
+    if (!loading && stocks.length === 0) {
         return (
              <div className="h-10 flex items-center bg-background border-t">
                 <p className="text-sm text-muted-foreground px-4">Market data feed is temporarily unavailable.</p>
