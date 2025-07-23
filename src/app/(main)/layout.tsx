@@ -8,7 +8,7 @@ import { Logo } from "@/components/logo";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { StockTicker } from "@/components/stock-ticker";
-import { LayoutDashboard, CheckSquare, MessageSquare, Settings } from "lucide-react";
+import { LayoutDashboard, CheckSquare, MessageSquare, Settings, BarChart2 } from "lucide-react";
 
 export default function MainLayout({
   children,
@@ -34,6 +34,14 @@ export default function MainLayout({
                           <Link href="/">
                             <LayoutDashboard />
                             <span>Dashboard</span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                       <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                          <Link href="/analytics">
+                            <BarChart2 />
+                            <span>Analytics</span>
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
