@@ -30,7 +30,7 @@ export function usePolygonWS(symbols: string[]) {
 
   useEffect(() => {
     if (!API_KEY) {
-      console.error("Polygon API key is not set.");
+      console.error("Polygon API key is not set. Ticker will not be displayed.");
       setLoading(false);
       return;
     }
