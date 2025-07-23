@@ -1,4 +1,7 @@
 
+"use client";
+
+import { useEffect, useState } from "react";
 import { RecentAnalyses } from "@/components/recent-analyses";
 import { SwipeDeck } from "@/components/swipe-deck";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,9 +10,15 @@ import Link from "next/link";
 import { ArrowRight, Calendar as CalendarIcon, CheckSquare } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { TodoList } from "@/components/todo-list";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
 export default function DashboardPage() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
     
   return (
     <div className="space-y-8">
@@ -55,10 +64,14 @@ export default function DashboardPage() {
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="flex justify-center">
-                        <Calendar
-                            mode="single"
-                            className="p-0"
-                         />
+                        {isClient ? (
+                            <Calendar
+                                mode="single"
+                                className="p-0"
+                             />
+                        ) : (
+                            <Skeleton className="w-[280px] h-[330px]" />
+                        )}
                     </CardContent>
                 </Card>
                  <Card>
