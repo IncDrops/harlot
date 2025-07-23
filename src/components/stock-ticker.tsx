@@ -6,7 +6,7 @@ import type { StockQuote } from "@/lib/ai-schemas";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const stockSymbols = ["AAPL", "GOOGL", "MSFT", "AMZN", "META", "TSLA", "NVDA", "JPM", "V", "JNJ"];
+const stockSymbols = ["NVDA", "MSFT", "AAPL", "AMZN", "GOOG", "META"];
 
 export function StockTicker() {
     const { stocks, loading } = usePolygonWS(stockSymbols);

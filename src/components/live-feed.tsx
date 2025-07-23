@@ -18,7 +18,7 @@ interface FeedItem {
 
 const feedCategories: { title: string; icon: LucideIcon | 'code'; category?: string; type?: 'news' | 'stocks' }[] = [
     { title: "AI Trends", icon: Bot, category: "https://www.technologyreview.com/feed/tag/artificial-intelligence/", type: 'news' },
-    { title: "Tech Stocks", icon: LineChart, category: "AAPL,GOOGL,MSFT,AMZN,META", type: 'stocks' },
+    { title: "Tech Stocks", icon: LineChart, category: "NVDA,MSFT,AAPL,AMZN,GOOG,META", type: 'stocks' },
     { title: "Crypto Markets", icon: Bitcoin, category: "https://www.coindesk.com/arc/outboundfeeds/rss/", type: 'news' }, 
     { title: "Startup News", icon: Lightbulb, category: "https://techcrunch.com/feed/", type: 'news' },
     { title: "Developer Tools", icon: 'code', category: "https://blog.pragmaticengineer.com/rss/", type: 'news' },
