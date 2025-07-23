@@ -49,8 +49,7 @@ export function SwipeDeck() {
     // Delay the database update to match the animation
     setTimeout(() => {
         if (direction === 'right') {
-            // In a real app, this might mean "approve" or "mark as important"
-            // For now, we'll just complete it.
+            // Swiping right completes the analysis
             updateAnalysisStatus(analysisId, 'completed').then(() => {
                 toast({ title: "Analysis Approved", description: "It has been moved to your completed list." });
             });
@@ -60,7 +59,7 @@ export function SwipeDeck() {
                 toast({ title: "Analysis Archived", description: "You can find it in your archive later." });
             });
         }
-    }, 700); // 700ms delay as requested
+    }, 700); // 700ms delay
   };
 
   if (loading) {

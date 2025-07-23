@@ -27,8 +27,8 @@ export function RecentAnalyses() {
 
         async function fetchAnalyses() {
             try {
-                // Fetch in-progress analyses to act as "pending"
-                const recentAnalyses = await getRecentAnalysesForUser(user!.uid, 5, 'in_progress');
+                // Fetch completed analyses for the "recent" list
+                const recentAnalyses = await getRecentAnalysesForUser(user!.uid, 5, 'completed');
                 setAnalyses(recentAnalyses);
             } catch (error) {
                 console.error("Failed to fetch recent analyses", error);
@@ -44,7 +44,7 @@ export function RecentAnalyses() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-            <CardTitle>Recent Activity</CardTitle>
+            <CardTitle>Recent Analyses</CardTitle>
             <CardDescription>Review the latest insights generated.</CardDescription>
         </div>
         <Button asChild variant="ghost" size="sm">
@@ -67,8 +67,8 @@ export function RecentAnalyses() {
           ) : (
             <div className="flex flex-col items-center justify-center h-40 text-center text-muted-foreground bg-muted/50 rounded-lg">
                 <Info className="w-8 h-8 mb-2" />
-                <p className="font-semibold">No Recent Activity</p>
-                <p className="text-sm">{user ? "Start an analysis to see it here." : "Sign in to view your activity."}</p>
+                <p className="font-semibold">No Recent Analyses</p>
+                <p className="text-sm">{user ? "Start and approve an analysis to see it here." : "Sign in to view your activity."}</p>
             </div>
           )}
         </div>
