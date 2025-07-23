@@ -51,7 +51,7 @@ export function SwipeableAnalysisCard({ analysis, onSwipe, isTopCard }: Swipeabl
           zIndex: isTopCard ? 10 : 1,
       }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      exit={{ x: dragDirection === 'right' ? 300 : -300, opacity: 0, scale: 0.5, transition: { duration: 0.3 } }}
+      exit={{ x: dragDirection === 'right' ? 300 : -300, opacity: 0, scale: 0.5, transition: { duration: 0.8 } }}
     >
         <div className="relative">
             <motion.div 

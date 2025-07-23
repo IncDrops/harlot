@@ -46,18 +46,21 @@ export function SwipeDeck() {
     // Remove the card from the local state immediately for a fluid UX
     setAnalyses((prev) => prev.filter((a) => a.id !== analysisId));
 
-    if (direction === 'right') {
-        // In a real app, this might mean "approve" or "mark as important"
-        // For now, we'll just complete it.
-        updateAnalysisStatus(analysisId, 'completed').then(() => {
-            toast({ title: "Analysis Approved", description: "It has been moved to your completed list." });
-        });
-    } else {
-        // Swiping left archives the analysis
-        updateAnalysisStatus(analysisId, 'archived').then(() => {
-            toast({ title: "Analysis Archived", description: "You can find it in your archive later." });
-        });
-    }
+    // Delay the database update to match the animation
+    setTimeout(() => {
+        if (direction === 'right') {
+            // In a real app, this might mean "approve" or "mark as important"
+            // For now, we'll just complete it.
+            updateAnalysisStatus(analysisId, 'completed').then(() => {
+                toast({ title: "Analysis Approved", description: "It has been moved to your completed list." });
+            });
+        } else {
+            // Swiping left archives the analysis
+            updateAnalysisStatus(analysisId, 'archived').then(() => {
+                toast({ title: "Analysis Archived", description: "You can find it in your archive later." });
+            });
+        }
+    }, 700); // 700ms delay as requested
   };
 
   if (loading) {
