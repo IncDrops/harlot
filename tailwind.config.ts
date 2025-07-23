@@ -1,4 +1,3 @@
-
 import type {Config} from 'tailwindcss';
 
 const { fontFamily } = require("tailwindcss/defaultTheme")
@@ -69,6 +68,10 @@ export default {
         lg: `var(--radius)`,
         md: `calc(var(--radius) - 2px)`,
         sm: "calc(var(--radius) - 4px)",
+        '2xl': `var(--radius)`,
+      },
+      boxShadow: {
+        'lg': '0 8px 32px rgba(0, 0, 0, 0.07)',
       },
       keyframes: {
         "accordion-down": {
@@ -93,13 +96,12 @@ export default {
         'xl': '20px',
       },
       backgroundColor: {
-        'glass': 'rgba(255, 255, 255, 0.05)',
+        'glass': 'rgba(255, 255, 255, 0.6)',
       },
       borderColor: {
-        'glass': 'rgba(255, 255, 255, 0.1)',
+        'glass': 'rgba(255, 255, 255, 0.8)',
       }
     },
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
-

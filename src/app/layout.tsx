@@ -3,24 +3,25 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from '@/contexts/auth-context';
 import { ThemeProvider } from '@/contexts/theme-provider';
-import { Inter, Poppins } from 'next/font/google';
+import { League_Spartan, Cormorant_Garamond } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import Script from 'next/script';
 
-const fontSans = Inter({ 
+const fontSans = Cormorant_Garamond({ 
   subsets: ['latin'], 
+  weight: ['400', '500', '600', '700'],
   variable: '--font-sans' 
 });
 
-const fontHeading = Poppins({
+const fontHeading = League_Spartan({
   subsets: ['latin'],
   weight: ['600', '700'],
   variable: '--font-heading',
 });
 
 export const metadata: Metadata = {
-  title: 'Pollitago: The Unbiased Strategic Advisor',
-  description: 'Transforms complex data into clear, confident, and explainable strategic recommendations.',
+  title: 'Pollitago: AI-Powered Second Opinions',
+  description: 'Pollitago delivers AI-driven second opinions to help you make smarter, data-backed decisions with confidence.',
   icons: {
     icon: '/favicon.png',
   },
@@ -62,7 +63,7 @@ export default function RootLayout({
         )}
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

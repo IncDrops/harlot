@@ -11,7 +11,7 @@ export function Logo({ className }: { className?: string }) {
 export function Tagline({ className }: { className?: string }) {
   return (
     <p className={cn("font-body text-xs uppercase tracking-wider text-primary/80", className)}>
-      Your Unbiased Strategic Advisor
+      AI-Powered Second Opinions
     </p>
   );
 }
