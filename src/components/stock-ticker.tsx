@@ -2,7 +2,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchStockQuotes, type StockQuote } from "@/ai/flows/fetch-stock-quotes-flow";
+import { fetchStockQuotes } from "@/ai/flows/fetch-stock-quotes-flow";
+import type { StockQuote } from "@/lib/ai-schemas";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 

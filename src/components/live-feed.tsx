@@ -54,7 +54,7 @@ function FeedCard({ category, title, icon: Icon, type }: { category: string, tit
                         setItem({
                             title: `${firstStock.name} is at ${firstStock.price} ${change} ${changePercent}`,
                             url: `https://www.google.com/finance/quote/${firstStock.symbol}:NASDAQ`,
-                            source: "FMP"
+                            source: "Polygon.io"
                         });
                      } else {
                         setItem({ title: "Could not fetch stock data.", url: "#", source: "System" });
