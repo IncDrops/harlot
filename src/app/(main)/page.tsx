@@ -12,28 +12,28 @@ import { LogoCloud } from "@/components/logo-cloud";
 
 const testimonials = [
     {
-        quote: "Pollitago is where we host all of our backend services along with our databases. It's been an integral part of our infrastructure since the very beginning.",
+        quote: "Pollitago's AI analysis was critical for our market entry strategy. It surfaced insights we had completely missed, giving us the confidence to make a bold move that paid off.",
         name: "Paul O'Carroll",
         title: "Founder & CEO at Arcol",
         avatarUrl: "https://i.pravatar.cc/150?u=paulocarroll",
         companyLogoUrl: "/arcol-logo.svg"
     },
     {
-        quote: "Even though we already have an internal Kubernetes cluster and infrastructure-as-code setup, we decided to go with Pollitago so that we weren't spending time writing YAML files when we could be working on the product.",
+        quote: "We use Pollitago to constantly sanity-check our strategic roadmap against real-time market signals. It's like having an unbiased, data-driven consultant on call 24/7.",
         name: "Paul Butler",
         title: "Founder, Drifting in Space",
         avatarUrl: "https://i.pravatar.cc/150?u=paulbutler",
         companyLogoUrl: "/drifting-in-space-logo.svg"
     },
     {
-        quote: "The flexibility and ability for automation with Pollitago helps us move fast and continuously deploy to production with confidence.",
+        quote: "The risk assessment scenarios from Pollitago are incredibly detailed. It helps our leadership team anticipate challenges and develop mitigation strategies proactively, which is invaluable.",
         name: "Saurabh Bhatia",
         title: "Engineering Manager at Paloma Group",
         avatarUrl: "https://i.pravatar.cc/150?u=saurabhbhatia",
         companyLogoUrl: "/paloma-logo.svg"
     },
     {
-        quote: "Pollitago is a game changer for us. We're currently serving more than 80,000 developers with a small team... every minute spent on infrastructure is a minute we're not building the best email product in the world.",
+        quote: "Pollitago is a game changer for our product launches. We can simulate market reception and competitive responses, allowing us to refine our strategy before committing major resources.",
         name: "Zeno Rocha",
         title: "CEO at Resend",
         avatarUrl: "https://i.pravatar.cc/150?u=zenorocha",
