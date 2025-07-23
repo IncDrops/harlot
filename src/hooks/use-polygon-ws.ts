@@ -91,11 +91,17 @@ export function usePolygonWS(symbols: string[]) {
     }
 
     fetchInitialData().then(() => {
-        if (!isMounted || !API_KEY || stocks.length === 0) {
-            // If initial fetch failed, don't attempt websocket connection
+        if (!isMounted || !API_KEY) {
             setLoading(false);
             return;
         };
+        
+        // Don't connect if the initial fetch failed to populate stocks (e.g. invalid key)
+        if (openPriceMap.size === 0) {
+            console.log("WebSocket connection aborted due to failed initial data fetch.");
+            setLoading(false);
+            return;
+        }
 
         // Setup WebSocket for real-time updates
         ws.current = new WebSocket(WS_URL);
