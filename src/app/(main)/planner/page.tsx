@@ -3,7 +3,8 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TodoList } from "@/components/todo-list";
-import { CheckSquare } from "lucide-react";
+import { CrmTaskList } from "@/components/crm-task-list";
+import { CheckSquare, Briefcase } from "lucide-react";
 
 export default function PlannerPage() {
   return (
@@ -13,23 +14,34 @@ export default function PlannerPage() {
             <p className="text-muted-foreground max-w-2xl">Organize product launches, allocate resources, and track progress with AI-driven suggestions.</p>
        </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div className="space-y-6">
                  <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                            <CheckSquare className="w-5 h-5" />
-                            To-Do List
+                            Internal To-Do List
                         </CardTitle>
-                        <CardDescription>Your tasks and strategic initiatives.</CardDescription>
+                        <CardDescription>Your personal tasks and strategic initiatives for Pollitago.</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <TodoList />
                     </CardContent>
                 </Card>
             </div>
-            <aside className="lg:col-span-1 space-y-6">
-                {/* Future planner components like a calendar or notes can go here */}
+            <div className="space-y-6">
+                 <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                           <Briefcase className="w-5 h-5" />
+                            CRM Tasks
+                        </CardTitle>
+                        <CardDescription>Tasks synced from your connected HubSpot account.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <CrmTaskList />
+                    </CardContent>
+                </Card>
             </aside>
         </div>
     </div>
