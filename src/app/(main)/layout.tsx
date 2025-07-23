@@ -7,7 +7,6 @@ import { LiveFeed } from "@/components/live-feed";
 import { Logo } from "@/components/logo";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { StockTicker } from "@/components/stock-ticker";
 import { LayoutDashboard, CheckSquare, MessageSquare, Settings, BarChart2 } from "lucide-react";
 
 export default function MainLayout({
@@ -84,9 +83,6 @@ export default function MainLayout({
                 </main>
             </div>
         </div>
-        <footer className="w-full">
-            <StockTicker />
-        </footer>
       </div>
     </SidebarProvider>
   );
