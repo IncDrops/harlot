@@ -7,18 +7,12 @@ import { SwipeDeck } from "@/components/swipe-deck";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Calendar as CalendarIcon, CheckSquare } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import { ArrowRight, CheckSquare, Zap } from "lucide-react";
 import { TodoList } from "@/components/todo-list";
 import { Skeleton } from "@/components/ui/skeleton";
 
 
 export default function DashboardPage() {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
     
   return (
     <div className="space-y-8">
@@ -44,36 +38,21 @@ export default function DashboardPage() {
                     </CardContent>
                 </Card>
                  <RecentAnalyses />
-                 <Card>
+                 <Card className="bg-secondary/20 border-secondary/30">
                     <CardHeader>
-                        <CardTitle>Team Insights</CardTitle>
-                        <CardDescription>Activity from your organization.</CardDescription>
+                        <CardTitle className="flex items-center gap-2"><Zap className="text-secondary" /> Unlock Your Full Potential</CardTitle>
+                        <CardDescription>Upgrade your plan to access advanced features like CRM integration, live analytics, and custom data sources.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        {/* Placeholder for future team activity feed */}
-                        <p className="text-sm text-muted-foreground">Team activity feed coming soon.</p>
+                        <Button asChild variant="secondary">
+                            <Link href="/pricing">
+                                Upgrade to Pro
+                            </Link>
+                        </Button>
                     </CardContent>
                 </Card>
             </div>
             <aside className="lg:col-span-1 space-y-6">
-                <Card>
-                    <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <CalendarIcon className="w-5 h-5" />
-                            Calendar
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex justify-center">
-                        {isClient ? (
-                            <Calendar
-                                mode="single"
-                                className="p-0"
-                             />
-                        ) : (
-                            <Skeleton className="w-[280px] h-[330px]" />
-                        )}
-                    </CardContent>
-                </Card>
                  <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
