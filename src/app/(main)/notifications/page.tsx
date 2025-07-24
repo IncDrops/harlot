@@ -27,10 +27,13 @@ export default function NotificationsPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (!authLoading && !user) {
-          router.push('/signin');
-        } else if (user) {
+        if (authLoading) {
             setLoading(true);
+            return;
+        }
+        if (!user) {
+          router.push('/signin');
+        } else {
             // In a real app, this would be a fetch call to your backend.
             // For now, we simulate an empty state.
             setTimeout(() => {
