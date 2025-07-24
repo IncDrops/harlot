@@ -163,33 +163,33 @@ exports.hubspotAuthCallback = onRequest({ cors: true }, async (req, res) => {
 });
 
 
-// This function runs every minute to fetch stock data from Polygon.io and store it in Firestore.
-exports.updateStockTicker = onSchedule('every 1 minutes', async (event) => {
-    const POLYGON_API_KEY = process.env.POLYGON_API_KEY;
-    if (!POLYGON_API_KEY) {
-        console.error("Polygon API key is not set in function environment variables. Skipping execution.");
+// This function runs every 10 minutes to fetch stock data from Financial Modeling Prep and store it in Firestore.
+exports.updateStockTicker = onSchedule('every 10 minutes', async (event) => {
+    const FMP_API_KEY = process.env.FINANCIAL_MODELING_PREP_API_KEY;
+    if (!FMP_API_KEY) {
+        console.error("Financial Modeling Prep API key is not set. Skipping execution.");
         return;
     }
 
     const symbols = ["NVDA", "MSFT", "AAPL", "AMZN", "GOOG", "META"];
     const symbolsString = symbols.join(',');
-    const url = `https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers?tickers=${symbolsString}&apiKey=${POLYGON_API_KEY}`;
+    const url = `https://financialmodelingprep.com/api/v3/quote/${symbolsString}?apikey=${FMP_API_KEY}`;
 
     try {
         const response = await axios.get(url);
         
-        if (response.status !== 200 || !response.data || !response.data.tickers) {
-            console.error('Failed to fetch stock data from Polygon. Status:', response.status);
+        if (response.status !== 200 || !response.data) {
+            console.error('Failed to fetch stock data from FMP. Status:', response.status);
             return;
         }
 
-        const tickers = response.data.tickers;
-        const stockQuotes = tickers.map(ticker => ({
-            symbol: ticker.ticker,
-            name: ticker.ticker, // Polygon snapshot doesn't provide the full name
-            price: ticker.lastTrade.p,
-            change: ticker.todaysChange,
-            changesPercentage: ticker.todaysChangePerc,
+        const quotes = response.data;
+        const stockQuotes = quotes.map((quote) => ({
+            symbol: quote.symbol,
+            name: quote.name,
+            price: quote.price,
+            change: quote.change,
+            changesPercentage: quote.changesPercentage,
         }));
         
         const tickerDocRef = db.collection('app-data').doc('ticker');
