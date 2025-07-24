@@ -4,50 +4,47 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Users:
-    // - Anyone can create their own user document (on signup).
-    // - Users can only read/update their own document.
+    // Users can only read/write their own profile.
+    // Any authenticated user can list other users' basic info for messaging.
     match /users/{userId} {
-      allow read, update: if request.auth != null && request.auth.uid == userId;
-      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == userId;
 
-      // Todos Subcollection:
-      // - Users can create, read, update, and delete their own todos.
+      // Todos subcollection: Only the user can manage their own todos.
       match /todos/{todoId} {
-        allow read, write: if request.auth != null && request.auth.uid == userId;
+        allow read, write, delete: if request.auth.uid == userId;
       }
-
-      // Integrations Subcollection:
-      // - Users can read their own integration status.
-      // - Cloud Functions handle the writing.
+      
+      // Integrations subcollection: Only the user can manage their own integrations.
       match /integrations/{integrationId} {
-        allow read: if request.auth != null && request.auth.uid == userId;
-        allow write: if false; // Only backend can write
+         allow read, write, delete: if request.auth.uid == userId;
       }
     }
 
-    // Analyses:
-    // - Users can only read/update analyses they own.
-    // - Users can create new analyses.
+    // Analyses: Users can manage their own analysis documents.
+    // They can read any analysis they have a direct link to (for sharing).
     match /analyses/{analysisId} {
-      allow create: if request.auth != null;
-      allow read, update: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow read: if request.auth != null;
+      allow create: if request.auth.uid == request.resource.data.userId;
+      allow update, delete: if request.auth.uid == resource.data.userId;
 
-      // Feedback Subcollection:
-      // - Authenticated users can create feedback on any analysis.
-      // - Reading feedback is not allowed from the client.
+      // Feedback subcollection: Any authenticated user can add feedback.
       match /feedback/{feedbackId} {
         allow create: if request.auth != null;
-        allow read, update, delete: if false;
+        allow read: if request.auth.uid == resource.data.userId; // Only creator can read their feedback
       }
     }
-
-    // Messages:
-    // - Users can read messages where they are a participant.
-    // - Users can only create messages where they are the sender.
+    
+    // Messages: Users can only read/write messages in conversations they are part of.
     match /messages/{messageId} {
-      allow read: if request.auth != null && request.auth.uid in resource.data.participants;
-      allow create: if request.auth != null && request.auth.uid == request.resource.data.senderId;
+        allow read, create: if request.auth.uid in resource.data.participants;
+    }
+
+    // App-wide data, like the stock ticker.
+    // Anyone can read, but no one can write from the client.
+    match /app-data/{docId} {
+        allow read: if true;
+        allow write: if false; // Should only be written by a backend process/function
     }
   }
 }
