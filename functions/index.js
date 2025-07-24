@@ -173,10 +173,14 @@ exports.updateStockTicker = onSchedule('every 10 minutes', async (event) => {
 
     const symbols = ["NVDA", "MSFT", "AAPL", "AMZN", "GOOG", "META"];
     const symbolsString = symbols.join(',');
-    const url = `https://financialmodelingprep.com/api/v3/quote/${symbolsString}?apikey=${FMP_API_KEY}`;
+    const url = `https://financialmodelingprep.com/api/v3/quote/${symbolsString}`;
 
     try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+            params: {
+                apikey: FMP_API_KEY
+            }
+        });
         
         if (response.status !== 200 || !response.data) {
             console.error('Failed to fetch stock data from FMP. Status:', response.status);
