@@ -130,7 +130,7 @@ export function TodoList() {
                             />
                             <Label 
                                 htmlFor={`task-${todo.id}`} 
-                                className="flex-1 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 data-[state=checked]:line-through"
+                                className="flex-1 text-sm font-medium leading-none data-[state=checked]:line-through"
                             >
                                 {todo.text}
                             </Label>
