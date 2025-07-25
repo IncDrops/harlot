@@ -4,43 +4,37 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
-    
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --primary: 220 91% 60%;
-    --primary-foreground: 210 20% 98%;
-    
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 224 71.4% 4.1%;
-    
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 224 71.4% 4.1%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    --primary: 266 78% 55%; /* Amethyst/Violet */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 195 89% 55%; /* Cool Blue/Teal */
+    --accent-foreground: 240 10% 3.9%;
+
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 220 91% 60%;
-    
-    --radius: 0.75rem;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 266 78% 55%;
 
-    --chart-1: hsl(220, 91%, 60%);
-    --chart-2: hsl(160, 84%, 39%);
-    --chart-3: hsl(40, 91%, 56%);
-    --chart-4: hsl(280, 84%, 59%);
-    --chart-5: hsl(340, 89%, 60%);
+    --radius: 0.75rem;
   }
- 
+
   .dark {
     --background: 228 6% 10%; /* Rich Black */
     --foreground: 215 16% 85%; /* Light Gray */
@@ -51,7 +45,7 @@
     --popover: 228 6% 10%;
     --popover-foreground: 215 16% 85%;
 
-    --primary: 216 88% 68%; /* Brighter blue for dark mode */
+    --primary: 266 78% 65%; /* Brighter purple for dark mode */
     --primary-foreground: 228 6% 10%;
     
     --secondary: 228 6% 18%; /* Darker gray for secondary elements */
@@ -60,26 +54,20 @@
     --muted: 228 6% 18%;
     --muted-foreground: 228 6% 50%; /* Softer gray for muted text */
 
-    --accent: 228 6% 22%; /* Hover state */
-    --accent-foreground: 0 0% 100%;
+    --accent: 195 89% 65%; /* Brighter teal for dark mode */
+    --accent-foreground: 228 6% 10%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 228 6% 18%;
     --input: 228 6% 18%;
-    --ring: 216 88% 68%;
+    --ring: 266 78% 65%;
     
     --radius: 0.75rem;
-
-    --chart-1: hsl(216, 88%, 68%);
-    --chart-2: hsl(160, 84%, 39%);
-    --chart-3: hsl(40, 91%, 56%);
-    --chart-4: hsl(280, 84%, 59%);
-    --chart-5: hsl(340, 89%, 60%);
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
@@ -91,33 +79,52 @@
 }
 
 @layer utilities {
+  .glassmorphic {
+    @apply bg-gray-400 bg-opacity-10 backdrop-blur-lg border border-gray-400 border-opacity-20 shadow-lg;
+  }
+  
   .card-initial {
     opacity: 0;
     transform: scale(0.9) translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .card-visible {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
-}
 
-/* Marquee Animation */
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
+  .metallic-gradient {
+    background-image: linear-gradient(145deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-  100% {
-    transform: translateX(-50%);
+
+  /* For the glowing border on buttons/cards */
+  .glow-border {
+    position: relative;
+    overflow: hidden;
   }
-}
-
-.animate-marquee-infinite {
-  animation: marquee 30s linear infinite;
-}
-
-/* Optional: Pause on hover */
-.group:hover .animate-marquee-infinite.group-hover\:pause {
-  animation-play-state: paused;
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    padding: 2px; /* Border width */
+    background: linear-gradient(145deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    z-index: -1;
+    opacity: 0.5;
+    transition: opacity 300ms ease-in-out;
+  }
+  .glow-border:hover::before {
+    opacity: 1;
+  }
 }

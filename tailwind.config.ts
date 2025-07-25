@@ -12,15 +12,15 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1600px",
       },
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
         heading: ["var(--font-heading)", ...fontFamily.sans],
+        body: ["var(--font-body)", ...fontFamily.sans],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -56,22 +56,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))',
-        },
       },
       borderRadius: {
         lg: `var(--radius)`,
         md: `calc(var(--radius) - 2px)`,
         sm: "calc(var(--radius) - 4px)",
-        '2xl': `var(--radius)`,
+        '2xl': `calc(var(--radius) * 2)`, // Rounded 2xl
       },
       boxShadow: {
-        'lg': '0 8px 32px rgba(0, 0, 0, 0.07)',
+        'lg': '0 10px 30px rgba(0, 0, 0, 0.2)', // Soft deep shadow
       },
       keyframes: {
         "accordion-down": {
@@ -82,25 +75,14 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "marquee-infinite": {
-            "0%": { transform: 'translateX(0%)' },
-            "100%": { transform: 'translateX(-50%)' },
-        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "marquee-infinite": "marquee-infinite 30s linear infinite",
       },
       backdropBlur: {
-        'xl': '20px',
+        'lg': '16px',
       },
-      backgroundColor: {
-        'glass': 'rgba(255, 255, 255, 0.6)',
-      },
-      borderColor: {
-        'glass': 'rgba(255, 255, 255, 0.8)',
-      }
     },
   },
   plugins: [require('tailwindcss-animate')],

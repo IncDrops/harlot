@@ -1,29 +1,28 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
-import { AuthProvider } from '@/contexts/auth-context';
 import { ThemeProvider } from '@/contexts/theme-provider';
-import { League_Spartan, Cormorant_Garamond } from 'next/font/google';
+import { Poppins, Lato } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import Script from 'next/script';
 
-const fontSans = Cormorant_Garamond({ 
+const fontHeading = Poppins({ 
   subsets: ['latin'], 
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-sans' 
+  weight: ['600', '700'],
+  variable: '--font-heading' 
 });
 
-const fontHeading = League_Spartan({
+const fontBody = Lato({
   subsets: ['latin'],
-  weight: ['600', '700'],
-  variable: '--font-heading',
+  weight: ['400', '700'],
+  variable: '--font-body',
 });
 
 export const metadata: Metadata = {
-  title: 'Pollitago: AI-Powered Second Opinions',
-  description: 'Pollitago delivers AI-driven second opinions to help you make smarter, data-backed decisions with confidence.',
+  title: 'Pollitago.ai: Your Official AI Second Opinion & Decision App',
+  description: 'Get clarity and confidence on any decision, big or small, with objective AI insights. No sign-up. Just answers.',
   icons: {
-    icon: '/favicon.png',
+    icon: '/logo.png', // Assuming logo.png is your favicon
   },
 };
 
@@ -32,45 +31,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-          fontHeading.variable
+          "min-h-screen bg-background font-body antialiased",
+          fontHeading.variable,
+          fontBody.variable
         )}>
-        {gaMeasurementId && (
-          <>
-            <Script
-              strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
-            />
-            <Script
-              id="google-analytics"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${gaMeasurementId}');
-                `,
-              }}
-            />
-          </>
-        )}
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            {children}
-            <Toaster />
-          </AuthProvider>
+          {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
