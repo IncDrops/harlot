@@ -389,7 +389,7 @@ export default function HomePage() {
                               <h3 className="text-lg font-semibold mb-4">When do you want your decision?</h3>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                   <Button onClick={() => setDelivery('instant')} variant={delivery === 'instant' ? "secondary" : "outline"} className="py-6 text-base">Instant</Button>
-                                  <Button onClick={() => setDelivery('scheduled')} variant={delivery === 'scheduled' ? "secondary" : "outline"} className="py-6 text-base" disabled>Schedule Delivery</Button>
+                                  <Button onClick={() => setDelivery('scheduled')} variant={delivery === 'scheduled' ? "secondary" : "outline"} className="py-6 text-base">Schedule Delivery</Button>
                               </div>
                           </div>
 
@@ -503,5 +503,7 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
 
     
