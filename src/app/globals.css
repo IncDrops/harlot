@@ -128,4 +128,66 @@
   .glow-border:hover::before {
     opacity: 1;
   }
+  
+  /* Background Grid and Lines */
+  .background-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+  }
+
+  @keyframes animate-lines {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  .background-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    margin: auto;
+    width: 90vw;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .background-lines::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 100vh;
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      hsl(var(--primary) / 0.6),
+      transparent
+    );
+    left: 20%;
+    opacity: 0.2;
+    animation: animate-lines 8s linear infinite;
+  }
+
+  .background-lines::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 100vh;
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      hsl(var(--accent) / 0.6),
+      transparent
+    );
+    right: 20%;
+    opacity: 0.2;
+    animation: animate-lines 10s linear infinite;
+    animation-delay: -3s;
+  }
 }

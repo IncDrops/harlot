@@ -44,6 +44,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <div className="fixed inset-0 z-[-1] background-grid" />
+          <div className="background-lines" />
           {children}
           <Toaster />
         </ThemeProvider>

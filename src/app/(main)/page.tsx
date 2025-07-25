@@ -296,7 +296,7 @@ export default function HomePage() {
     if (isLoading || !hasMore) return;
 
     setIsLoading(true);
-    const newItems = await fetchItems(items.length, 4); // Load 4 items at a time
+    const newItems = await fetchItems(items.length, 9); // Load 9 more for complex grid
     if (newItems.length === 0) {
       setHasMore(false);
     } else {
@@ -527,11 +527,28 @@ export default function HomePage() {
               </p>
             </header>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {items.map(item => (
-                <ExampleCard key={item.id} item={item} />
-              ))}
-            </div>
+            {items.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                {/* First item is full width */}
+                <div className="md:col-span-12">
+                   <ExampleCard item={items[0]} />
+                </div>
+                
+                {/* Next two items are offset */}
+                {items[1] && (
+                  <div className="md:col-span-8 md:col-start-3">
+                    <ExampleCard item={items[1]} />
+                  </div>
+                )}
+                
+                {/* A standard 2-column grid for the rest */}
+                {items.slice(2).map(item => (
+                  <div key={item.id} className="md:col-span-6">
+                    <ExampleCard item={item} />
+                  </div>
+                ))}
+              </div>
+            )}
             
             <div ref={sentinelRef} className="h-10 w-full mt-16 flex justify-center items-center">
               {isLoading && (
@@ -552,5 +569,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-    
