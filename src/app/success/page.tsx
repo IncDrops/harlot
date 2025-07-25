@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle, Loader2, ServerCrash } from 'lucide-react';
 import Link from 'next/link';
@@ -14,7 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 
 type Status = 'loading' | 'verifying' | 'generating' | 'success' | 'error';
 
-export default function SuccessPage() {
+function SuccessPageContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const [status, setStatus] = useState<Status>('loading');
@@ -141,4 +141,13 @@ export default function SuccessPage() {
       )}
     </div>
   );
+}
+
+
+export default function SuccessPage() {
+    return (
+        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><Loader2 className="h-16 w-16 animate-spin text-primary" /></div>}>
+            <SuccessPageContent />
+        </Suspense>
+    )
 }
