@@ -235,9 +235,9 @@ export default function HomePage() {
 
   // IMPORTANT: Replace these placeholder Price IDs with your actual IDs from your Stripe dashboard.
   const priceIds = {
-    7: 'price_REPLACE_WITH_7_DOLLAR_ID', // Clarity - $7
-    19: 'price_REPLACE_WITH_19_DOLLAR_ID', // Insight - $19
-    39: 'price_REPLACE_WITH_39_DOLLAR_ID'  // Wisdom - $39
+    7: 'price_REPLACE_WITH_7_DOLLAR_ID', // Clarity
+    19: 'price_REPLACE_WITH_19_DOLLAR_ID', // Insight
+    39: 'price_REPLACE_WITH_39_DOLLAR_ID'  // Wisdom
   };
   
   useEffect(() => {
@@ -266,14 +266,29 @@ export default function HomePage() {
     }
 
     setIsPurchasing(true);
-    try {
-      const createStripeCheckoutSession = httpsCallable(functions, 'createStripeCheckoutSession');
-      const { data }: any = await createStripeCheckoutSession({
+
+    let purchaseData: any = {
         priceId: priceIds[price as keyof typeof priceIds],
         query,
         tone,
         variants,
-      });
+    };
+    
+    if (delivery === 'scheduled') {
+        const now = new Date();
+        const deliveryTime = new Date(now);
+        deliveryTime.setDate(now.getDate() + days);
+        deliveryTime.setHours(now.getHours() + hours);
+        deliveryTime.setMinutes(now.getMinutes() + minutes);
+        
+        // Pass the future timestamp (in milliseconds) to the backend
+        purchaseData.scheduledTimestamp = deliveryTime.getTime();
+    }
+
+
+    try {
+      const createStripeCheckoutSession = httpsCallable(functions, 'createStripeCheckoutSession');
+      const { data }: any = await createStripeCheckoutSession(purchaseData);
 
       if (data.url) {
         window.location.href = data.url;

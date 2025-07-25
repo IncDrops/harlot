@@ -11,7 +11,7 @@ admin.initializeApp();
 
 // Stripe Checkout Function
 exports.createStripeCheckoutSession = onCall(async (data, context) => {
-    const { priceId, query, tone, variants } = data;
+    const { priceId, query, tone, variants, scheduledTimestamp } = data;
 
     if (!priceId) {
         throw new functions.https.HttpsError('invalid-argument', 'The function must be called with a "priceId".');
@@ -21,6 +21,18 @@ exports.createStripeCheckoutSession = onCall(async (data, context) => {
     }
 
     try {
+        const metadata = {
+            query,
+            tone,
+            variants,
+        };
+
+        // If a scheduled timestamp is provided, add it to the metadata.
+        if (scheduledTimestamp) {
+            metadata.scheduledTimestamp = scheduledTimestamp;
+        }
+
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
@@ -32,11 +44,7 @@ exports.createStripeCheckoutSession = onCall(async (data, context) => {
             mode: 'payment',
             success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
-            metadata: {
-                query,
-                tone,
-                variants,
-            }
+            metadata: metadata
         });
 
         return { url: session.url };
