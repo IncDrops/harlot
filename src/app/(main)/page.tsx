@@ -227,11 +227,11 @@ export default function HomePage() {
   const [delivery, setDelivery] = useState<'instant' | 'scheduled'>('instant');
   const [isPurchasing, setIsPurchasing] = useState(false);
   
+  // IMPORTANT: Replace these placeholder Price IDs with your actual IDs from your Stripe dashboard.
   const priceIds = {
-    // IMPORTANT: Replace with your actual Stripe Price IDs
-    7: 'prod_Sk5zwzpv7vs4GY', // Clarity
-    19: 'prod_Sk6TAt7nFKR5eP', // Insight
-    39: 'prod_Sk6UPmEKV63t3V' // Wisdom
+    7: 'price_REPLACE_WITH_7_DOLLAR_ID', // Clarity - $7
+    19: 'price_REPLACE_WITH_19_DOLLAR_ID', // Insight - $19
+    39: 'price_REPLACE_WITH_39_DOLLAR_ID'  // Wisdom - $39
   };
   
   useEffect(() => {
@@ -389,18 +389,8 @@ export default function HomePage() {
                               <h3 className="text-lg font-semibold mb-4">When do you want your decision?</h3>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                   <Button onClick={() => setDelivery('instant')} variant={delivery === 'instant' ? "secondary" : "outline"} className="py-6 text-base">Instant</Button>
-                                  <Button onClick={() => setDelivery('scheduled')} variant={delivery === 'scheduled' ? "secondary" : "outline"} className="py-6 text-base">Schedule Delivery</Button>
+                                  <Button onClick={() => setDelivery('scheduled')} variant={delivery === 'scheduled' ? "secondary" : "outline"} className="py-6 text-base" disabled>Schedule Delivery</Button>
                               </div>
-                              {delivery === 'scheduled' && (variants > 1) && (
-                                  <div className="mt-4 p-4 rounded-lg bg-background/30 border border-border">
-                                      <p className="text-sm font-semibold mb-2">Set Delivery Time (Min: 5m, Max: 31d)</p>
-                                      <div className="flex gap-2 items-center">
-                                          <Input type="number" min="0" max="31" placeholder="Days" className="bg-background/50" />
-                                          <Input type="number" min="0" max="23" placeholder="Hours" className="bg-background/50" />
-                                          <Input type="number" min="0" max="59" placeholder="Mins" className="bg-background/50" />
-                                      </div>
-                                  </div>
-                              )}
                           </div>
 
                           <div className="pt-8 border-t border-border/20 flex flex-col items-center">
@@ -513,3 +503,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
