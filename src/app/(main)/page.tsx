@@ -4,7 +4,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from "next/legacy/image";
 import Link from 'next/link';
-import { Loader2, Brain } from 'lucide-react';
+import { Loader2, Brain, Calendar as CalendarIcon, Clock } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -14,6 +14,8 @@ import { Input } from '@/components/ui/input';
 import { functions } from '@/lib/firebase';
 import { httpsCallable } from 'firebase/functions';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
+import { Label } from '@/components/ui/label';
 
 
 const exampleData = [
@@ -167,10 +169,9 @@ const exampleData = [
 async function fetchItems(start: number, count: number): Promise<any[]> {
   return new Promise(resolve => {
     setTimeout(() => {
-      // In a real app, this would be an API call. Here, we slice our static data.
       const items = exampleData.slice(start, start + count);
       resolve(items);
-    }, 800); // Simulate network delay
+    }, 800); 
   });
 }
 
@@ -227,6 +228,11 @@ export default function HomePage() {
   const [delivery, setDelivery] = useState<'instant' | 'scheduled'>('instant');
   const [isPurchasing, setIsPurchasing] = useState(false);
   
+  // Scheduled delivery state
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+
   // IMPORTANT: Replace these placeholder Price IDs with your actual IDs from your Stripe dashboard.
   const priceIds = {
     7: 'price_REPLACE_WITH_7_DOLLAR_ID', // Clarity - $7
@@ -350,7 +356,7 @@ export default function HomePage() {
               <div className="p-8 md:p-12">
                   <div className="max-w-3xl mx-auto">
                       <h2 className="text-4xl md:text-5xl font-bold font-heading text-center mb-4">Your Path to Clarity.</h2>
-                      <p className="text-lg text-muted-foreground text-center mb-12">Input your dilemma, choose your perspective, and receive instant AI-powered guidance.</p>
+                      <p className="text-lg text-muted-foreground text-center mb-12">Input your dilemma, choose your perspective, and receive AI-powered guidance.</p>
                       
                       <div className="space-y-8">
                           <div>
@@ -391,6 +397,49 @@ export default function HomePage() {
                                   <Button onClick={() => setDelivery('instant')} variant={delivery === 'instant' ? "secondary" : "outline"} className="py-6 text-base">Instant</Button>
                                   <Button onClick={() => setDelivery('scheduled')} variant={delivery === 'scheduled' ? "secondary" : "outline"} className="py-6 text-base">Schedule Delivery</Button>
                               </div>
+                              {delivery === 'scheduled' && (
+                                <div className="mt-6 p-4 border rounded-lg bg-background/30">
+                                    <h4 className="font-semibold mb-4 text-center">Set Delivery Time</h4>
+                                    <div className="grid grid-cols-3 gap-4">
+                                        <div>
+                                            <Label htmlFor="days" className="text-xs text-muted-foreground">Days</Label>
+                                            <Input 
+                                                id="days" 
+                                                type="number" 
+                                                min="0"
+                                                max="31"
+                                                value={days}
+                                                onChange={(e) => setDays(Math.max(0, Math.min(31, parseInt(e.target.value) || 0)))}
+                                                className="text-center"
+                                            />
+                                        </div>
+                                         <div>
+                                            <Label htmlFor="hours" className="text-xs text-muted-foreground">Hours</Label>
+                                            <Input 
+                                                id="hours" 
+                                                type="number" 
+                                                min="0"
+                                                max="23"
+                                                value={hours}
+                                                onChange={(e) => setHours(Math.max(0, Math.min(23, parseInt(e.target.value) || 0)))}
+                                                className="text-center"
+                                            />
+                                        </div>
+                                         <div>
+                                            <Label htmlFor="minutes" className="text-xs text-muted-foreground">Minutes</Label>
+                                            <Input 
+                                                id="minutes" 
+                                                type="number" 
+                                                min="0"
+                                                max="59"
+                                                value={minutes}
+                                                onChange={(e) => setMinutes(Math.max(0, Math.min(59, parseInt(e.target.value) || 0)))}
+                                                className="text-center"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                              )}
                           </div>
 
                           <div className="pt-8 border-t border-border/20 flex flex-col items-center">
@@ -503,7 +552,5 @@ export default function HomePage() {
     </div>
   );
 }
-
-    
 
     
