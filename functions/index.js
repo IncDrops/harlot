@@ -234,8 +234,8 @@ exports.createStripeCheckoutSession = onCall(async (data, context) => {
                 },
             ],
             mode: 'payment',
-            success_url: `${process.env.APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.APP_URL}/`,
+            success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
             metadata: {
                 query,
                 tone,
@@ -248,5 +248,29 @@ exports.createStripeCheckoutSession = onCall(async (data, context) => {
     } catch (error) {
         console.error("Stripe Checkout Session creation failed:", error);
         throw new functions.https.HttpsError('internal', 'Could not create a Stripe checkout session.');
+    }
+});
+
+// Securely retrieves a Stripe session after a successful payment.
+exports.getStripeSession = onCall(async (data, context) => {
+    const { sessionId } = data;
+
+    if (!sessionId) {
+        throw new functions.https.HttpsError('invalid-argument', 'The function must be called with a "sessionId".');
+    }
+
+    try {
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+        
+        // We only want to expose the necessary, non-sensitive data to the client.
+        return {
+            status: session.status,
+            customer_email: session.customer_details ? session.customer_details.email : null,
+            metadata: session.metadata
+        };
+
+    } catch (error) {
+        console.error("Failed to retrieve Stripe session:", error);
+        throw new functions.https.HttpsError('internal', 'Could not retrieve payment session details.');
     }
 });

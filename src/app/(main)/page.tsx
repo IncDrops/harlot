@@ -229,9 +229,9 @@ export default function HomePage() {
   
   const priceIds = {
     // IMPORTANT: Replace with your actual Stripe Price IDs
-    7: 'price_1PXXXXXXXXXXXXXX', // Clarity
-    19: 'price_1PXXXXXXXXXXXXXX', // Insight
-    39: 'price_1PXXXXXXXXXXXXXX' // Wisdom
+    7: 'prod_Sk5zwzpv7vs4GY', // Clarity
+    19: 'prod_Sk6TAt7nFKR5eP', // Insight
+    39: 'prod_Sk6UPmEKV63t3V' // Wisdom
   };
   
   useEffect(() => {
@@ -346,110 +346,108 @@ export default function HomePage() {
 
         {/* The Decision Tool Section */}
         <section id="decision-tool" className="py-20 md:py-32">
-            <div className="container mx-auto px-4">
-              <AnimatedCard>
-                  <div className="p-8 md:p-12">
-                      <div className="max-w-3xl mx-auto">
-                          <h2 className="text-4xl md:text-5xl font-bold font-heading text-center mb-4">Your Path to Clarity.</h2>
-                          <p className="text-lg text-muted-foreground text-center mb-12">Input your dilemma, choose your perspective, and receive instant AI-powered guidance.</p>
-                          
-                          <div className="space-y-8">
+          <AnimatedCard>
+              <div className="p-8 md:p-12">
+                  <div className="max-w-3xl mx-auto">
+                      <h2 className="text-4xl md:text-5xl font-bold font-heading text-center mb-4">Your Path to Clarity.</h2>
+                      <p className="text-lg text-muted-foreground text-center mb-12">Input your dilemma, choose your perspective, and receive instant AI-powered guidance.</p>
+                      
+                      <div className="space-y-8">
+                          <div>
+                              <label className="text-lg font-semibold mb-2 block">Describe your situation...</label>
+                              <Textarea 
+                                  placeholder="e.g., 'Should I take this job offer?', 'How do I tell my friend bad news?', 'What's the best strategy for my small business?'"
+                                  rows={5}
+                                  className="bg-background/50 text-base"
+                                  value={query}
+                                  onChange={(e) => setQuery(e.target.value)}
+                              />
+                              <p className="text-xs text-muted-foreground mt-2 text-right">Approx. characters for selected plan: {charLimits[variants]}</p>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                               <div>
-                                  <label className="text-lg font-semibold mb-2 block">Describe your situation...</label>
-                                  <Textarea 
-                                      placeholder="e.g., 'Should I take this job offer?', 'How do I tell my friend bad news?', 'What's the best strategy for my small business?'"
-                                      rows={5}
-                                      className="bg-background/50 text-base"
-                                      value={query}
-                                      onChange={(e) => setQuery(e.target.value)}
-                                  />
-                                  <p className="text-xs text-muted-foreground mt-2 text-right">Approx. characters for selected plan: {charLimits[variants]}</p>
-                              </div>
-
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                  <div>
-                                      <h3 className="text-lg font-semibold mb-4">Choose Your AI's Tone:</h3>
-                                      <div className="flex flex-col space-y-2">
-                                          <Button onClick={() => setTone('Firm')} variant={tone === 'Firm' ? "secondary" : "outline"} className="justify-start py-6 text-base">Firm</Button>
-                                          <Button onClick={() => setTone('Friendly')} variant={tone === 'Friendly' ? "secondary" : "outline"} className="justify-start py-6 text-base">Friendly</Button>
-                                          <Button onClick={() => setTone('Professional')} variant={tone === 'Professional' ? "secondary" : "outline"} className="justify-start py-6 text-base">Professional</Button>
-                                      </div>
-                                  </div>
-
-                                  <div>
-                                      <h3 className="text-lg font-semibold mb-4">How many opinions?</h3>
-                                      <div className="flex flex-col space-y-2">
-                                          <Button onClick={() => setVariants(1)} variant={variants === 1 ? "secondary" : "outline"} className="justify-start py-6 text-base">1 Firm Decision</Button>
-                                          <Button onClick={() => setVariants(2)} variant={variants === 2 ? "secondary" : "outline"} className="justify-start py-6 text-base">2 Firm Decisions</Button>
-                                          <Button onClick={() => setVariants(3)} variant={variants === 3 ? "secondary" : "outline"} className="justify-start py-6 text-base">3 Firm Decisions</Button>
-                                      </div>
+                                  <h3 className="text-lg font-semibold mb-4">Choose Your AI's Tone:</h3>
+                                  <div className="flex flex-col space-y-2">
+                                      <Button onClick={() => setTone('Firm')} variant={tone === 'Firm' ? "secondary" : "outline"} className="justify-start py-6 text-base">Firm</Button>
+                                      <Button onClick={() => setTone('Friendly')} variant={tone === 'Friendly' ? "secondary" : "outline"} className="justify-start py-6 text-base">Friendly</Button>
+                                      <Button onClick={() => setTone('Professional')} variant={tone === 'Professional' ? "secondary" : "outline"} className="justify-start py-6 text-base">Professional</Button>
                                   </div>
                               </div>
 
                               <div>
-                                  <h3 className="text-lg font-semibold mb-4">When do you want your decision?</h3>
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                      <Button onClick={() => setDelivery('instant')} variant={delivery === 'instant' ? "secondary" : "outline"} className="py-6 text-base">Instant</Button>
-                                      <Button onClick={() => setDelivery('scheduled')} variant={delivery === 'scheduled' ? "secondary" : "outline"} className="py-6 text-base">Schedule Delivery</Button>
+                                  <h3 className="text-lg font-semibold mb-4">How many opinions?</h3>
+                                  <div className="flex flex-col space-y-2">
+                                      <Button onClick={() => setVariants(1)} variant={variants === 1 ? "secondary" : "outline"} className="justify-start py-6 text-base">1 Firm Decision</Button>
+                                      <Button onClick={() => setVariants(2)} variant={variants === 2 ? "secondary" : "outline"} className="justify-start py-6 text-base">2 Firm Decisions</Button>
+                                      <Button onClick={() => setVariants(3)} variant={variants === 3 ? "secondary" : "outline"} className="justify-start py-6 text-base">3 Firm Decisions</Button>
                                   </div>
-                                  {delivery === 'scheduled' && (variants > 1) && (
-                                      <div className="mt-4 p-4 rounded-lg bg-background/30 border border-border">
-                                          <p className="text-sm font-semibold mb-2">Set Delivery Time (Min: 5m, Max: 31d)</p>
-                                          <div className="flex gap-2 items-center">
-                                              <Input type="number" min="0" max="31" placeholder="Days" className="bg-background/50" />
-                                              <Input type="number" min="0" max="23" placeholder="Hours" className="bg-background/50" />
-                                              <Input type="number" min="0" max="59" placeholder="Mins" className="bg-background/50" />
-                                          </div>
-                                      </div>
-                                  )}
                               </div>
+                          </div>
 
-                              <div className="pt-8 border-t border-border/20 flex flex-col items-center">
-                                  <div className="text-center mb-6">
-                                      <p className="text-muted-foreground">Total Price</p>
-                                      <p className="text-5xl font-bold font-heading metallic-gradient">${price.toFixed(2)}</p>
-                                  </div>
-                                  <Button 
-                                      size="lg" 
-                                      className="w-full max-w-xs glow-border bg-primary hover:bg-primary/90 text-primary-foreground text-xl px-8 py-7 rounded-2xl shadow-lg shadow-primary/30"
-                                      onClick={handlePurchase}
-                                      disabled={isPurchasing}
-                                  >
-                                      {isPurchasing ? <Loader2 className="h-6 w-6 animate-spin" /> : 'Get My Opinion'}
-                                  </Button>
-                                  <p className="text-xs text-muted-foreground mt-4">You will be redirected to our secure payment processor.</p>
+                          <div>
+                              <h3 className="text-lg font-semibold mb-4">When do you want your decision?</h3>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  <Button onClick={() => setDelivery('instant')} variant={delivery === 'instant' ? "secondary" : "outline"} className="py-6 text-base">Instant</Button>
+                                  <Button onClick={() => setDelivery('scheduled')} variant={delivery === 'scheduled' ? "secondary" : "outline"} className="py-6 text-base">Schedule Delivery</Button>
                               </div>
+                              {delivery === 'scheduled' && (variants > 1) && (
+                                  <div className="mt-4 p-4 rounded-lg bg-background/30 border border-border">
+                                      <p className="text-sm font-semibold mb-2">Set Delivery Time (Min: 5m, Max: 31d)</p>
+                                      <div className="flex gap-2 items-center">
+                                          <Input type="number" min="0" max="31" placeholder="Days" className="bg-background/50" />
+                                          <Input type="number" min="0" max="23" placeholder="Hours" className="bg-background/50" />
+                                          <Input type="number" min="0" max="59" placeholder="Mins" className="bg-background/50" />
+                                      </div>
+                                  </div>
+                              )}
+                          </div>
+
+                          <div className="pt-8 border-t border-border/20 flex flex-col items-center">
+                              <div className="text-center mb-6">
+                                  <p className="text-muted-foreground">Total Price</p>
+                                  <p className="text-5xl font-bold font-heading metallic-gradient">${price.toFixed(2)}</p>
+                              </div>
+                              <Button 
+                                  size="lg" 
+                                  className="w-full max-w-xs glow-border bg-primary hover:bg-primary/90 text-primary-foreground text-xl px-8 py-7 rounded-2xl shadow-lg shadow-primary/30"
+                                  onClick={handlePurchase}
+                                  disabled={isPurchasing}
+                              >
+                                  {isPurchasing ? <Loader2 className="h-6 w-6 animate-spin" /> : 'Get My Opinion'}
+                              </Button>
+                              <p className="text-xs text-muted-foreground mt-4">You will be redirected to our secure payment processor.</p>
                           </div>
                       </div>
                   </div>
-              </AnimatedCard>
-            </div>
+              </div>
+          </AnimatedCard>
         </section>
 
         
         {/* Why Pollitago Section */}
         <section id="indecision-costs" className="py-20 md:py-32">
-            <div className="container mx-auto px-4">
-                <AnimatedCard className="overflow-hidden">
-                    <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
-                        <Image
-                            src="/indecision-background.jpg"
-                            alt="Abstract image representing confusion"
-                            layout="fill"
-                            objectFit="cover"
-                            className="opacity-20"
-                            data-ai-hint="abstract maze"
-                        />
-                        <div className="relative z-10 max-w-3xl">
-                            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">The Hidden Costs of Indecision.</h2>
-                            <div className="text-lg text-foreground/80 space-y-4">
-                            <p>Indecision isn't just frustrating; it carries significant financial losses and profound psychological downsides each year. From missed opportunities and stagnant growth in business to the anxiety, stress, and missed personal milestones in daily life, the weight of unresolved choices can be immense.</p>
-                            <p>Pollitago cuts through the noise, offering clear, actionable insights to help you move forward with confidence.</p>
-                            </div>
-                        </div>
-                    </div>
-                </AnimatedCard>
-            </div>
+          <div className="container mx-auto px-4">
+              <AnimatedCard className="overflow-hidden">
+                  <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
+                      <Image
+                          src="/indecision-background.jpg"
+                          alt="Abstract image representing confusion"
+                          layout="fill"
+                          objectFit="cover"
+                          className="opacity-20"
+                          data-ai-hint="abstract maze"
+                      />
+                      <div className="relative z-10 max-w-3xl">
+                          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">The Hidden Costs of Indecision.</h2>
+                          <div className="text-lg text-foreground/80 space-y-4">
+                          <p>Indecision isn't just frustrating; it carries significant financial losses and profound psychological downsides each year. From missed opportunities and stagnant growth in business to the anxiety, stress, and missed personal milestones in daily life, the weight of unresolved choices can be immense.</p>
+                          <p>Pollitago cuts through the noise, offering clear, actionable insights to help you move forward with confidence.</p>
+                          </div>
+                      </div>
+                  </div>
+              </AnimatedCard>
+          </div>
         </section>
         
         {/* Real-World Use Cases Section */}
