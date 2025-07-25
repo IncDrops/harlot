@@ -278,7 +278,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative h-[80vh] flex items-center justify-center text-center overflow-hidden">
             <Image
-                src="https://placehold.co/1920x1080.png"
+                src="/hero-background.png"
                 alt="AI neural network"
                 layout="fill"
                 objectFit="cover"
@@ -375,7 +375,7 @@ export default function HomePage() {
             <AnimatedCard className="overflow-hidden">
               <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
                   <Image
-                      src="https://placehold.co/1920x1080.png"
+                      src="/indecision-background.png"
                       alt="Abstract image representing confusion"
                       layout="fill"
                       objectFit="cover"
@@ -395,7 +395,7 @@ export default function HomePage() {
             <AnimatedCard className="overflow-hidden">
               <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
                   <Image
-                      src="https://placehold.co/1920x1080.png"
+                      src="/use-cases-background.png"
                       alt="Diverse people using Pollitago"
                       layout="fill"
                       objectFit="cover"
