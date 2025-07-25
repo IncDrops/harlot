@@ -3,7 +3,7 @@
 
 import { useEffect, useState, Suspense, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { CheckCircle, Loader2, ServerCrash, Clock, Sparkles } from 'lucide-react';
+import { CheckCircle, Loader2, ServerCrash, Clock, Sparkles, Download } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { functions } from '@/lib/firebase';
@@ -73,7 +73,7 @@ function SuccessPageContent() {
             variants: parseInt(variants, 10),
         };
 
-        if (scheduledTimestamp) {
+        if (scheduledTimestamp && new Date(parseInt(scheduledTimestamp, 10)) > new Date()) {
             setScheduledTime(new Date(parseInt(scheduledTimestamp, 10)).toISOString());
             setDecisionRequest(requestPayload);
             setStatus('scheduled');
@@ -95,6 +95,34 @@ function SuccessPageContent() {
 
     verifyAndProcess();
   }, [sessionId]);
+
+  const handleDownload = () => {
+    if (!decision) return;
+
+    let content = `Pollitago.ai Decision\n======================\n\n`;
+    content += `Original Query: ${decisionRequest?.query}\n\n`;
+
+    decision.responses.forEach((res, index) => {
+      if (res.title) {
+        content += `${res.title}\n----------------------\n`;
+      }
+      // Strip HTML tags for the plain text file
+      const plainText = res.text.replace(/<[^>]*>/g, '');
+      content += `${plainText}\n\n`;
+    });
+
+    content += "Disclaimer: Pollitago provides AI-powered insights. You are solely responsible for your ultimate decisions and actions based on this information.";
+
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Pollitago_Decision.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
   
   const StatusDisplay = () => {
     switch(status) {
@@ -183,9 +211,15 @@ function SuccessPageContent() {
                     </CardFooter>
                  </Card>
             ))}
-             <Button asChild className="mt-8 glow-border">
-                <Link href="/">Ask Another Question</Link>
-            </Button>
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                <Button asChild className="glow-border w-full sm:w-auto">
+                    <Link href="/">Ask Another Question</Link>
+                </Button>
+                <Button variant="outline" onClick={handleDownload} className="w-full sm:w-auto">
+                    <Download className="mr-2 h-4 w-4" />
+                    Download Decision
+                </Button>
+             </div>
         </div>
       )}
     </div>
