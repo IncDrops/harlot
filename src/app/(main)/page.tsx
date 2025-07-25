@@ -145,7 +145,7 @@ const exampleData = [
     response: [
        {
         title: "Option 1 (Firm Decision)",
-        text: "Given the significant career opportunity for your partner, the firm decision is to **undertake a comprehensive, joint cost-benefit analysis of the relocation.** This must include a detailed assessment of your own career prospects in the new city, potential networking strategies, and the overall financial and emotional impact on both of you. Do not proceed without this thorough evaluation."
+        text: "Given the significant career opportunity for your partner, the firm decision is to **undertake a comprehensive, joint cost-benefit-analysis of the relocation.** This must include a detailed assessment of your own career prospects in the new city, potential networking strategies, and the overall financial and emotional impact on both of you. Do not proceed without this thorough evaluation."
       },
       {
         title: "Option 2 (Firm Decision)",
@@ -370,48 +370,55 @@ export default function HomePage() {
           </div>
         </section>
         
-        {/* Scroll-to-launch Big Cards */}
-        <div className="container mx-auto px-4 space-y-20">
-            <AnimatedCard className="overflow-hidden">
-              <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
-                  <Image
-                      src="/indecision-background.jpg"
-                      alt="Abstract image representing confusion"
-                      layout="fill"
-                      objectFit="cover"
-                      className="opacity-20"
-                      data-ai-hint="abstract maze"
-                  />
-                  <div className="relative z-10 max-w-3xl">
-                      <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">The Hidden Costs of Indecision.</h2>
-                      <div className="text-lg text-foreground/80 space-y-4">
-                        <p>Indecision isn't just frustrating; it carries significant financial losses and profound psychological downsides each year. From missed opportunities and stagnant growth in business to the anxiety, stress, and missed personal milestones in daily life, the weight of unresolved choices can be immense.</p>
-                        <p>Pollitago cuts through the noise, offering clear, actionable insights to help you move forward with confidence.</p>
-                      </div>
-                  </div>
-              </div>
-            </AnimatedCard>
-            
-            <AnimatedCard className="overflow-hidden">
-              <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
-                  <Image
-                      src="/use-cases-background.jpg"
-                      alt="Diverse people using Pollitago"
-                      layout="fill"
-                      objectFit="cover"
-                      className="opacity-20"
-                      data-ai-hint="diverse people technology"
-                  />
-                  <div className="relative z-10 max-w-3xl">
-                    <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">Decisions for Literally Anyone.</h2>
-                    <div className="text-lg text-foreground/80 space-y-4">
-                      <p>Pollitago is designed for literally anyone with a smartphone and a decision they need help with. Whether it's a minor daily choice like 'What to have for lunch?' or a major life dilemma, our AI provides objective clarity.</p>
-                      <p>From personal choices to professional strategies, Pollitago brings an unbiased perspective to empower your next step.</p>
+        {/* Why Pollitago Section */}
+        <section id="indecision-costs" className="py-20 md:py-32">
+            <div className="container mx-auto px-4">
+                <AnimatedCard className="overflow-hidden">
+                    <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
+                        <Image
+                            src="/indecision-background.jpg"
+                            alt="Abstract image representing confusion"
+                            layout="fill"
+                            objectFit="cover"
+                            className="opacity-20"
+                            data-ai-hint="abstract maze"
+                        />
+                        <div className="relative z-10 max-w-3xl">
+                            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">The Hidden Costs of Indecision.</h2>
+                            <div className="text-lg text-foreground/80 space-y-4">
+                            <p>Indecision isn't just frustrating; it carries significant financial losses and profound psychological downsides each year. From missed opportunities and stagnant growth in business to the anxiety, stress, and missed personal milestones in daily life, the weight of unresolved choices can be immense.</p>
+                            <p>Pollitago cuts through the noise, offering clear, actionable insights to help you move forward with confidence.</p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-              </div>
-            </AnimatedCard>
-        </div>
+                </AnimatedCard>
+            </div>
+        </section>
+        
+        {/* Real-World Use Cases Section */}
+        <section id="use-cases" className="py-20 md:py-32">
+            <div className="container mx-auto px-4">
+                <AnimatedCard className="overflow-hidden">
+                <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
+                    <Image
+                        src="/use-cases-background.jpg"
+                        alt="Diverse people using Pollitago"
+                        layout="fill"
+                        objectFit="cover"
+                        className="opacity-20"
+                        data-ai-hint="diverse people technology"
+                    />
+                    <div className="relative z-10 max-w-3xl">
+                        <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">Decisions for Literally Anyone.</h2>
+                        <div className="text-lg text-foreground/80 space-y-4">
+                        <p>Pollitago is designed for literally anyone with a smartphone and a decision they need help with. Whether it's a minor daily choice like 'What to have for lunch?' or a major life dilemma, our AI provides objective clarity.</p>
+                        <p>From personal choices to professional strategies, Pollitago brings an unbiased perspective to empower your next step.</p>
+                        </div>
+                    </div>
+                </div>
+                </AnimatedCard>
+            </div>
+        </section>
 
 
         {/* Infinite Scroll Examples */}
