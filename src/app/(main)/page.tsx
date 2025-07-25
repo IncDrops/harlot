@@ -302,71 +302,77 @@ export default function HomePage() {
         </section>
 
         {/* The Decision Tool Section */}
-        <section id="decision-tool" className="py-20 md:py-32 container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold font-heading text-center mb-4">Your Path to Clarity.</h2>
-            <p className="text-lg text-muted-foreground text-center mb-12">Input your dilemma, choose your perspective, and receive instant AI-powered guidance.</p>
-            
-            <div className="space-y-8 p-8 rounded-2xl glassmorphic">
-                <div>
-                  <label className="text-lg font-semibold mb-2 block">Describe your situation...</label>
-                  <Textarea 
-                    placeholder="e.g., 'Should I take this job offer?', 'How do I tell my friend bad news?', 'What's the best strategy for my small business?'"
-                    rows={5}
-                    className="bg-background/50 text-base"
-                  />
-                  <p className="text-xs text-muted-foreground mt-2 text-right">Approx. characters for selected plan: {charLimits[variants]}</p>
-                </div>
+        <section id="decision-tool" className="py-20 md:py-32">
+          <div className="container mx-auto px-4">
+            <AnimatedCard>
+              <div className="p-8 md:p-12">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-4xl md:text-5xl font-bold font-heading text-center mb-4">Your Path to Clarity.</h2>
+                  <p className="text-lg text-muted-foreground text-center mb-12">Input your dilemma, choose your perspective, and receive instant AI-powered guidance.</p>
+                  
+                  <div className="space-y-8">
+                      <div>
+                        <label className="text-lg font-semibold mb-2 block">Describe your situation...</label>
+                        <Textarea 
+                          placeholder="e.g., 'Should I take this job offer?', 'How do I tell my friend bad news?', 'What's the best strategy for my small business?'"
+                          rows={5}
+                          className="bg-background/50 text-base"
+                        />
+                        <p className="text-xs text-muted-foreground mt-2 text-right">Approx. characters for selected plan: {charLimits[variants]}</p>
+                      </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">Choose Your AI's Tone:</h3>
-                    <div className="flex flex-col space-y-2">
-                        <Button variant="outline" className="justify-start py-6 text-base focus:bg-primary/20 focus:text-foreground">Firm</Button>
-                        <Button variant="outline" className="justify-start py-6 text-base focus:bg-primary/20 focus:text-foreground">Friendly</Button>
-                        <Button variant="outline" className="justify-start py-6 text-base focus:bg-primary/20 focus:text-foreground">Professional</Button>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">How many opinions?</h3>
-                    <div className="flex flex-col space-y-2">
-                        <Button onClick={() => setVariants(1)} variant={variants === 1 ? "secondary" : "outline"} className="justify-start py-6 text-base">1 Firm Decision</Button>
-                        <Button onClick={() => setVariants(2)} variant={variants === 2 ? "secondary" : "outline"} className="justify-start py-6 text-base">2 Firm Decisions</Button>
-                        <Button onClick={() => setVariants(3)} variant={variants === 3 ? "secondary" : "outline"} className="justify-start py-6 text-base">3 Firm Decisions</Button>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                    <h3 className="text-lg font-semibold mb-4">When do you want your decision?</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <Button onClick={() => setDelivery('instant')} variant={delivery === 'instant' ? "secondary" : "outline"} className="py-6 text-base">Instant</Button>
-                        <Button onClick={() => setDelivery('scheduled')} variant={delivery === 'scheduled' ? "secondary" : "outline"} className="py-6 text-base">Schedule Delivery</Button>
-                    </div>
-                    {delivery === 'scheduled' && (variants > 1) && (
-                        <div className="mt-4 p-4 rounded-lg bg-background/30 border border-border">
-                          <p className="text-sm font-semibold mb-2">Set Delivery Time (Min: 5m, Max: 31d)</p>
-                          <div className="flex gap-2 items-center">
-                            <Input type="number" min="0" max="31" placeholder="Days" className="bg-background/50" />
-                            <Input type="number" min="0" max="23" placeholder="Hours" className="bg-background/50" />
-                            <Input type="number" min="0" max="59" placeholder="Mins" className="bg-background/50" />
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                          <h3 className="text-lg font-semibold mb-4">Choose Your AI's Tone:</h3>
+                          <div className="flex flex-col space-y-2">
+                              <Button variant="outline" className="justify-start py-6 text-base focus:bg-primary/20 focus:text-foreground">Firm</Button>
+                              <Button variant="outline" className="justify-start py-6 text-base focus:bg-primary/20 focus:text-foreground">Friendly</Button>
+                              <Button variant="outline" className="justify-start py-6 text-base focus:bg-primary/20 focus:text-foreground">Professional</Button>
                           </div>
                         </div>
-                    )}
-                </div>
 
-                <div className="pt-8 border-t border-border/20 flex flex-col items-center">
-                  <div className="text-center mb-6">
-                    <p className="text-muted-foreground">Total Price</p>
-                    <p className="text-5xl font-bold font-heading metallic-gradient">${price.toFixed(2)}</p>
+                        <div>
+                          <h3 className="text-lg font-semibold mb-4">How many opinions?</h3>
+                          <div className="flex flex-col space-y-2">
+                              <Button onClick={() => setVariants(1)} variant={variants === 1 ? "secondary" : "outline"} className="justify-start py-6 text-base">1 Firm Decision</Button>
+                              <Button onClick={() => setVariants(2)} variant={variants === 2 ? "secondary" : "outline"} className="justify-start py-6 text-base">2 Firm Decisions</Button>
+                              <Button onClick={() => setVariants(3)} variant={variants === 3 ? "secondary" : "outline"} className="justify-start py-6 text-base">3 Firm Decisions</Button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                          <h3 className="text-lg font-semibold mb-4">When do you want your decision?</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <Button onClick={() => setDelivery('instant')} variant={delivery === 'instant' ? "secondary" : "outline"} className="py-6 text-base">Instant</Button>
+                              <Button onClick={() => setDelivery('scheduled')} variant={delivery === 'scheduled' ? "secondary" : "outline"} className="py-6 text-base">Schedule Delivery</Button>
+                          </div>
+                          {delivery === 'scheduled' && (variants > 1) && (
+                              <div className="mt-4 p-4 rounded-lg bg-background/30 border border-border">
+                                <p className="text-sm font-semibold mb-2">Set Delivery Time (Min: 5m, Max: 31d)</p>
+                                <div className="flex gap-2 items-center">
+                                  <Input type="number" min="0" max="31" placeholder="Days" className="bg-background/50" />
+                                  <Input type="number" min="0" max="23" placeholder="Hours" className="bg-background/50" />
+                                  <Input type="number" min="0" max="59" placeholder="Mins" className="bg-background/50" />
+                                </div>
+                              </div>
+                          )}
+                      </div>
+
+                      <div className="pt-8 border-t border-border/20 flex flex-col items-center">
+                        <div className="text-center mb-6">
+                          <p className="text-muted-foreground">Total Price</p>
+                          <p className="text-5xl font-bold font-heading metallic-gradient">${price.toFixed(2)}</p>
+                        </div>
+                        <Button size="lg" className="w-full max-w-xs glow-border bg-primary hover:bg-primary/90 text-primary-foreground text-xl px-8 py-7 rounded-2xl shadow-lg shadow-primary/30">
+                          Get My Opinion
+                        </Button>
+                         <p className="text-xs text-muted-foreground mt-4">You will be redirected to our secure payment processor.</p>
+                      </div>
                   </div>
-                  <Button size="lg" className="w-full max-w-xs glow-border bg-primary hover:bg-primary/90 text-primary-foreground text-xl px-8 py-7 rounded-2xl shadow-lg shadow-primary/30">
-                    Get My Opinion
-                  </Button>
-                   <p className="text-xs text-muted-foreground mt-4">You will be redirected to our secure payment processor.</p>
                 </div>
-            </div>
+              </div>
+            </AnimatedCard>
           </div>
         </section>
         
@@ -458,3 +464,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
