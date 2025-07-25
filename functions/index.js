@@ -7,6 +7,8 @@ const { defineString } = require('firebase-functions/params');
 const admin = require('firebase-admin');
 const { OAuth2Client } = require('google-auth-library');
 const axios = require('axios');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 
 // Initialize Firebase Admin
 admin.initializeApp();
@@ -207,5 +209,44 @@ exports.updateStockTicker = onSchedule('every 10 minutes', async (event) => {
 
     } catch (error) {
         console.error("Error updating stock ticker data:", error.response ? error.response.data : error.message);
+    }
+});
+
+
+// Stripe Checkout Function
+exports.createStripeCheckoutSession = onCall(async (data, context) => {
+    const { priceId, query, tone, variants } = data;
+
+    if (!priceId) {
+        throw new functions.https.HttpsError('invalid-argument', 'The function must be called with a "priceId".');
+    }
+    if (!query) {
+        throw new functions.https.HttpsError('invalid-argument', 'The function must be called with a "query".');
+    }
+
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [
+                {
+                    price: priceId,
+                    quantity: 1,
+                },
+            ],
+            mode: 'payment',
+            success_url: `${process.env.APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${process.env.APP_URL}/`,
+            metadata: {
+                query,
+                tone,
+                variants,
+            }
+        });
+
+        return { url: session.url };
+
+    } catch (error) {
+        console.error("Stripe Checkout Session creation failed:", error);
+        throw new functions.https.HttpsError('internal', 'Could not create a Stripe checkout session.');
     }
 });
