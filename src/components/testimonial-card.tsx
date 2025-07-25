@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { Card, CardContent } from "./ui/card";
 import { cn } from "@/lib/utils";
 

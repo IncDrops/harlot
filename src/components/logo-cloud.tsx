@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const logos = [
     { src: "https://placehold.co/120x40.png", alt: "Company Logo Placeholder", hint: "company logo" },
