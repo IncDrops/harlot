@@ -1,15 +1,15 @@
 
 "use client";
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { CheckCircle, Loader2, ServerCrash, Clock } from 'lucide-react';
+import { CheckCircle, Loader2, ServerCrash, Clock, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { functions, createScheduledAnalysis } from '@/lib/firebase';
+import { functions } from '@/lib/firebase';
 import { httpsCallable } from 'firebase/functions';
 import { generateDecision } from '@/ai/flows/generate-decision-flow';
-import type { GenerateDecisionOutput } from '@/ai/flows/generate-decision-flow';
+import type { GenerateDecisionInput, GenerateDecisionOutput } from '@/ai/flows/generate-decision-flow';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { format } from 'date-fns';
 
@@ -22,6 +22,27 @@ function SuccessPageContent() {
   const [error, setError] = useState<string | null>(null);
   const [decision, setDecision] = useState<GenerateDecisionOutput | null>(null);
   const [scheduledTime, setScheduledTime] = useState<string | null>(null);
+  const [decisionRequest, setDecisionRequest] = useState<GenerateDecisionInput | null>(null);
+
+  const handleRunAnalysis = useCallback(async () => {
+    if (!decisionRequest) {
+        setError("Decision parameters are missing. Cannot run analysis.");
+        setStatus('error');
+        return;
+    }
+    
+    setStatus('generating');
+    try {
+        const decisionResponse = await generateDecision(decisionRequest);
+        setDecision(decisionResponse);
+        setStatus('success');
+    } catch (err: any) {
+        console.error("Error generating scheduled decision:", err);
+        setError(err.message || "An unknown error occurred while generating your analysis.");
+        setStatus('error');
+    }
+  }, [decisionRequest]);
+
 
   useEffect(() => {
     if (!sessionId) {
@@ -45,28 +66,22 @@ function SuccessPageContent() {
         if (!query || !tone || !variants) {
           throw new Error('Could not retrieve decision parameters from payment session.');
         }
+        
+        const requestPayload: GenerateDecisionInput = {
+            query,
+            tone,
+            variants: parseInt(variants, 10),
+        };
 
-        // If a scheduled timestamp exists, create a scheduled analysis record in Firestore
         if (scheduledTimestamp) {
             setScheduledTime(new Date(parseInt(scheduledTimestamp, 10)).toISOString());
-            await createScheduledAnalysis({
-                query,
-                tone,
-                variants: parseInt(variants, 10),
-                scheduledAt: new Date(parseInt(scheduledTimestamp, 10)).toISOString(),
-                // You might want to pass the user ID if they are logged in
-                // userId: user?.uid || null 
-            });
+            setDecisionRequest(requestPayload);
             setStatus('scheduled');
         } else {
-            // Otherwise, generate the decision immediately
+            setDecisionRequest(requestPayload);
+            // For instant delivery, we can call the generation immediately.
             setStatus('generating');
-            const decisionResponse = await generateDecision({
-              query,
-              tone,
-              variants: parseInt(variants, 10),
-            });
-
+            const decisionResponse = await generateDecision(requestPayload);
             setDecision(decisionResponse);
             setStatus('success');
         }
@@ -107,11 +122,14 @@ function SuccessPageContent() {
                   <h1 className="text-4xl font-bold font-heading metallic-gradient">Your Opinion is Scheduled!</h1>
                   {scheduledTime && (
                     <p className="text-muted-foreground mt-2 max-w-md">
-                        Your AI-powered second opinion will be delivered on <br/> <span className="font-bold text-foreground">{format(new Date(scheduledTime), "PPP 'at' p")}</span>.
+                        Your AI-powered second opinion was scheduled for <br/> <span className="font-bold text-foreground">{format(new Date(scheduledTime), "PPP 'at' p")}</span>.
                     </p>
                   )}
-                   <Button asChild className="mt-8 glow-border">
-                        <Link href="/">Ask Another Question</Link>
+                  <p className="text-muted-foreground mt-2 max-w-md">You can run it now or come back to this page later.</p>
+
+                   <Button onClick={handleRunAnalysis} size="lg" className="mt-8 glow-border text-lg">
+                        <Sparkles className="mr-2 h-5 w-5" />
+                        Run My Analysis Now
                     </Button>
                 </>
             )
