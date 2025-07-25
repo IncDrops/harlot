@@ -42,7 +42,7 @@ export interface Analysis {
     decisionQuestion: string;
     decisionType: string;
     dataSources: string[];
-    status: 'completed' | 'in_progress' | 'archived';
+    status: 'completed' | 'in_progress' | 'archived' | 'scheduled';
     createdAt: string; // ISO String
     completedAt: string; // ISO String
     primaryRecommendation: string;

@@ -3,16 +3,17 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { CheckCircle, Loader2, ServerCrash } from 'lucide-react';
+import { CheckCircle, Loader2, ServerCrash, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { functions } from '@/lib/firebase';
+import { functions, createScheduledAnalysis } from '@/lib/firebase';
 import { httpsCallable } from 'firebase/functions';
 import { generateDecision } from '@/ai/flows/generate-decision-flow';
 import type { GenerateDecisionOutput } from '@/ai/flows/generate-decision-flow';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { format } from 'date-fns';
 
-type Status = 'loading' | 'verifying' | 'generating' | 'success' | 'error';
+type Status = 'loading' | 'verifying' | 'generating' | 'success' | 'scheduled' | 'error';
 
 function SuccessPageContent() {
   const searchParams = useSearchParams();
@@ -20,6 +21,7 @@ function SuccessPageContent() {
   const [status, setStatus] = useState<Status>('loading');
   const [error, setError] = useState<string | null>(null);
   const [decision, setDecision] = useState<GenerateDecisionOutput | null>(null);
+  const [scheduledTime, setScheduledTime] = useState<string | null>(null);
 
   useEffect(() => {
     if (!sessionId) {
@@ -28,10 +30,9 @@ function SuccessPageContent() {
       return;
     }
 
-    async function verifyAndGenerate() {
+    async function verifyAndProcess() {
       setStatus('verifying');
       try {
-        // 1. Verify session with the backend
         const getStripeSession = httpsCallable(functions, 'getStripeSession');
         const { data }: any = await getStripeSession({ sessionId });
 
@@ -39,21 +40,36 @@ function SuccessPageContent() {
           throw new Error('Payment was not completed successfully.');
         }
 
-        // 2. Generate decision using the verified metadata
-        setStatus('generating');
-        const { query, tone, variants } = data.metadata;
+        const { query, tone, variants, scheduledTimestamp } = data.metadata;
+
         if (!query || !tone || !variants) {
           throw new Error('Could not retrieve decision parameters from payment session.');
         }
 
-        const decisionResponse = await generateDecision({
-          query,
-          tone,
-          variants: parseInt(variants, 10),
-        });
+        // If a scheduled timestamp exists, create a scheduled analysis record in Firestore
+        if (scheduledTimestamp) {
+            setScheduledTime(new Date(parseInt(scheduledTimestamp, 10)).toISOString());
+            await createScheduledAnalysis({
+                query,
+                tone,
+                variants: parseInt(variants, 10),
+                scheduledAt: new Date(parseInt(scheduledTimestamp, 10)).toISOString(),
+                // You might want to pass the user ID if they are logged in
+                // userId: user?.uid || null 
+            });
+            setStatus('scheduled');
+        } else {
+            // Otherwise, generate the decision immediately
+            setStatus('generating');
+            const decisionResponse = await generateDecision({
+              query,
+              tone,
+              variants: parseInt(variants, 10),
+            });
 
-        setDecision(decisionResponse);
-        setStatus('success');
+            setDecision(decisionResponse);
+            setStatus('success');
+        }
 
       } catch (err: any) {
         console.error("Error during success page processing:", err);
@@ -62,7 +78,7 @@ function SuccessPageContent() {
       }
     }
 
-    verifyAndGenerate();
+    verifyAndProcess();
   }, [sessionId]);
   
   const StatusDisplay = () => {
@@ -84,6 +100,21 @@ function SuccessPageContent() {
                   <p className="text-muted-foreground mt-2">The AI is analyzing your request. Your decision will appear shortly.</p>
                 </>
             );
+        case 'scheduled':
+            return (
+                 <>
+                  <Clock className="h-16 w-16 text-primary mb-6" />
+                  <h1 className="text-4xl font-bold font-heading metallic-gradient">Your Opinion is Scheduled!</h1>
+                  {scheduledTime && (
+                    <p className="text-muted-foreground mt-2 max-w-md">
+                        Your AI-powered second opinion will be delivered on <br/> <span className="font-bold text-foreground">{format(new Date(scheduledTime), "PPP 'at' p")}</span>.
+                    </p>
+                  )}
+                   <Button asChild className="mt-8 glow-border">
+                        <Link href="/">Ask Another Question</Link>
+                    </Button>
+                </>
+            )
         case 'error':
              return (
                  <>

@@ -297,6 +297,39 @@ export const updateAnalysisStatus = async (analysisId: string, status: Analysis[
     await updateDoc(analysisRef, { status });
 };
 
+// This is a new function to create a placeholder for a scheduled analysis
+export const createScheduledAnalysis = async (
+    { query, tone, variants, scheduledAt, userId }: 
+    { query: string, tone: string, variants: number, scheduledAt: string, userId?: string | null }
+): Promise<string> => {
+    const analysesRef = collection(db, 'analyses');
+    
+    // We don't have a real user ID for anonymous purchases, so we'll use a placeholder
+    const docOwnerId = userId || 'anonymous_user';
+
+    const scheduledData: Partial<Analysis> = {
+        userId: docOwnerId,
+        status: 'scheduled',
+        decisionQuestion: query,
+        decisionType: `Scheduled - ${tone} - ${variants} variants`,
+        createdAt: new Date().toISOString(),
+        completedAt: scheduledAt, // We can reuse this field for the scheduled time
+        primaryRecommendation: `This analysis is scheduled to run at ${new Date(scheduledAt).toLocaleString()}.`,
+        executiveSummary: '',
+        keyFactors: [],
+        risks: [],
+        confidenceScore: 0,
+    };
+
+    const docRef = await addDoc(analysesRef, {
+        ...scheduledData,
+        createdAt: serverTimestamp(),
+        completedAt: Timestamp.fromDate(new Date(scheduledAt)),
+    });
+
+    return docRef.id;
+};
+
 
 // ──────────── FEEDBACK ────────────
 
