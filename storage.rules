@@ -1,25 +1,14 @@
-
 rules_version = '2';
 
 service firebase.storage {
   match /b/{bucket}/o {
-    // Default Deny: No access to any file unless explicitly allowed below.
-    
-    // Avatar Rules
-    // Path: /avatars/{userId}/avatar.jpg
-    match /avatars/{userId}/avatar.jpg {
-      // Allow anyone to read user avatars (for displaying profiles, etc.)
+    // Allow public read access to all files by default.
+    // This allows images stored in Firebase Storage to be displayed on your site.
+    match /{allPaths=**} {
       allow read;
-
-      // Allow a user to write (upload, update, delete) to their own avatar path if:
-      // 1. They are authenticated.
-      // 2. Their user ID matches the {userId} in the path.
-      // 3. The file is a common image type.
-      // 4. The file size is less than 2MB.
-      allow write: if request.auth != null && 
-                    request.auth.uid == userId &&
-                    request.resource.size < 2 * 1024 * 1024 &&
-                    request.resource.contentType.matches('image/(png|jpeg|gif)');
+      // Disallow all writes from the client-side for security.
+      // Upload files through the Firebase Console instead.
+      allow write: if false;
     }
   }
 }
