@@ -1,3 +1,4 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   title: 'Pollitago.ai: Your Official AI Second Opinion & Decision App',
   description: 'Get clarity and confidence on any decision, big or small, with objective AI insights. No sign-up. Just answers.',
   icons: {
-    icon: '/logo.png', // Assuming logo.png is your favicon
+    icon: '/favicon.jpg', // Use the user's uploaded favicon
   },
 };
 
