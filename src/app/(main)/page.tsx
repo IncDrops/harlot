@@ -278,7 +278,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative h-[80vh] flex items-center justify-center text-center overflow-hidden">
             <Image
-                src="/hero-background.png"
+                src="/hero-background.jpg"
                 alt="AI neural network"
                 layout="fill"
                 objectFit="cover"
@@ -375,7 +375,7 @@ export default function HomePage() {
             <AnimatedCard className="overflow-hidden">
               <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
                   <Image
-                      src="/indecision-background.png"
+                      src="/indecision-background.jpg"
                       alt="Abstract image representing confusion"
                       layout="fill"
                       objectFit="cover"
@@ -395,7 +395,7 @@ export default function HomePage() {
             <AnimatedCard className="overflow-hidden">
               <div className="relative p-8 md:p-12 min-h-[50vh] flex items-center">
                   <Image
-                      src="/use-cases-background.png"
+                      src="/use-cases-background.jpg"
                       alt="Diverse people using Pollitago"
                       layout="fill"
                       objectFit="cover"
