@@ -233,7 +233,17 @@ export default function HomePage() {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
-  // IMPORTANT: Replace these placeholder Price IDs with your actual IDs from your Stripe dashboard.
+  // ================================================================================================
+  // IMPORTANT: ACTION REQUIRED TO ENABLE PAYMENTS
+  // ================================================================================================
+  // To connect to Stripe, you need to replace the placeholder Price IDs below with your own.
+  // 1. Go to your Stripe Dashboard: https://dashboard.stripe.com/products
+  // 2. Create three products (e.g., "Clarity", "Insight", "Wisdom") with the prices $7, $19, and $39.
+  // 3. For each product, click on it to view its details.
+  // 4. Under the "Pricing" section, you will find the "API ID" for the price. It looks like `price_...`
+  // 5. Copy the Price ID for each product and paste it below, replacing the placeholder strings.
+  // 6. Also, ensure you have set your `STRIPE_SECRET_KEY` in your backend environment variables.
+  // ================================================================================================
   const priceIds = {
     7: 'price_REPLACE_WITH_7_DOLLAR_ID', // Clarity
     19: 'price_REPLACE_WITH_19_DOLLAR_ID', // Insight
