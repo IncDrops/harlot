@@ -15,8 +15,8 @@ const admin = require('firebase-admin');
 //    - Go to your Stripe Dashboard -> Developers -> API keys to find this value.
 //
 // 2. NEXT_PUBLIC_APP_URL:
-//    - This is the public URL of your deployed application.
-//    - Example: https://your-project-id.web.app
+//    - This is the public URL of your deployed application (your custom domain).
+//    - For your site, this should be: https://pollitago.com
 //
 // Without these variables, Stripe will not be able to process payments, and the function will fail.
 // =================================================================================================
