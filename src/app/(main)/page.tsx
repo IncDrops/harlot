@@ -237,17 +237,19 @@ export default function HomePage() {
   // IMPORTANT: ACTION REQUIRED TO ENABLE PAYMENTS
   // ================================================================================================
   // To connect to Stripe, you need to replace the placeholder Price IDs below with your own.
+  // A 'Price ID' starts with 'price_...' and is different from a 'Product ID' which starts with 'prod_'.
+  //
   // 1. Go to your Stripe Dashboard: https://dashboard.stripe.com/products
-  // 2. Create three products (e.g., "Clarity", "Insight", "Wisdom") with the prices $7, $19, and $39.
-  // 3. For each product, click on it to view its details.
-  // 4. Under the "Pricing" section, you will find the "API ID" for the price. It looks like `price_...`
-  // 5. Copy the Price ID for each product and paste it below, replacing the placeholder strings.
+  // 2. Click on the product you created (e.g., "Clarity").
+  // 3. On the product detail page, under the "Pricing" section, you will find the **API ID** for the price.
+  // 4. This ID starts with `price_`. Click to copy it.
+  // 5. Paste the Price ID below, replacing the corresponding placeholder string. Repeat for all products.
   // 6. Also, ensure you have set your `STRIPE_SECRET_KEY` in your backend environment variables.
   // ================================================================================================
   const priceIds = {
-    7: 'price_REPLACE_WITH_7_DOLLAR_ID', // Clarity
-    19: 'price_REPLACE_WITH_19_DOLLAR_ID', // Insight
-    39: 'price_REPLACE_WITH_39_DOLLAR_ID'  // Wisdom
+    7: 'price_1PQMiyRvpVqBQRi2241fLNKC',  // Clarity - Replace with your $7 Price ID
+    19: 'price_1PQMkCRvpVqBQRi2aG0gWjKE', // Insight - Replace with your $19 Price ID
+    39: 'price_1PQMkLRvpVqBQRi2xMBSnFqH'  // Wisdom - Replace with your $39 Price ID
   };
   
   useEffect(() => {
