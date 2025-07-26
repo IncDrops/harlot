@@ -8,22 +8,22 @@ const admin = require('firebase-admin');
 // IMPORTANT: PRODUCTION ENVIRONMENT VARIABLES
 // =================================================================================================
 // For this function to work in your deployed application, you MUST set the following
-// environment variables in your Google Cloud Functions environment:
+// environment variables. With the new setup, you can do this in one of two ways:
+//
+// 1. (Recommended) In the `functions/.env` file in this directory.
+// 2. In the Google Cloud Console for your functions.
 //
 // 1. STRIPE_SECRET_KEY:
 //    - This is your Stripe "Secret key". It starts with 'sk_live_...'.
-//    - Go to your Stripe Dashboard -> Developers -> API keys to find this value.
 //
 // 2. NEXT_PUBLIC_APP_URL:
-//    - This is the public URL of your deployed application (your custom domain).
-//    - For your site, this should be: https://pollitago.com
+//    - This is the public URL of your deployed application (e.g., https://pollitago.com).
 //
-// Without these variables, Stripe will not be able to process payments, and the function will fail.
 // =================================================================================================
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// Initialize Firebase Admin. V2 functions handle this automatically when deployed,
-// but it's kept here for local emulation and clarity.
+// V2 Functions do not require admin.initializeApp() to be called.
+// It is initialized automatically by the environment.
 if (admin.apps.length === 0) {
     admin.initializeApp();
 }
