@@ -13,8 +13,7 @@ import { useIntersectionObserver } from '@/hooks/use-intersection-observer';
 import { Input } from '@/components/ui/input';
 import { functions } from '@/lib/firebase';
 import { httpsCallable } from 'firebase/functions';
-import { useToast } from '@/hooks/use-toast';
-import { cn } from '@/lib/utils';
+import { useToast }mport { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
 
 
@@ -360,6 +359,7 @@ export default function HomePage() {
                 objectFit="cover"
                 className="opacity-20"
                 data-ai-hint="abstract neural network"
+                priority
             />
             <div className="relative z-10 px-4">
                 <h1 className="text-5xl md:text-7xl font-bold font-heading mb-4 metallic-gradient">
