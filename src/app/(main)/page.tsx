@@ -247,9 +247,9 @@ export default function HomePage() {
   // 6. Also, ensure you have set your `STRIPE_SECRET_KEY` in your backend environment variables.
   // ================================================================================================
   const priceIds = {
-    7: 'price_1PQMiyRvpVqBQRi2241fLNKC',  // Clarity - Replace with your $7 Price ID
-    19: 'price_1PQMkCRvpVqBQRi2aG0gWjKE', // Insight - Replace with your $19 Price ID
-    39: 'price_1PQMkLRvpVqBQRi2xMBSnFqH'  // Wisdom - Replace with your $39 Price ID
+    7: 'price_1RobnEHK4G9ZDA0FY8cWAigX',  // Clarity - Replace with your $7 Price ID
+    19: 'price_1RocGLHK4G9ZDA0FOBSGz5FO', // Insight - Replace with your $19 Price ID
+    39: 'price_1RocHvHK4G9ZDA0F529NJPa4'  // Wisdom - Replace with your $39 Price ID
   };
   
   useEffect(() => {
