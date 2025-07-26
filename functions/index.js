@@ -3,6 +3,23 @@ require('dotenv').config();
 const functions = require('firebase-functions');
 const { onCall } = require('firebase-functions/v2/https');
 const admin = require('firebase-admin');
+
+// =================================================================================================
+// IMPORTANT: PRODUCTION ENVIRONMENT VARIABLES
+// =================================================================================================
+// For this function to work in your deployed application, you MUST set the following
+// environment variables in your Google Cloud Functions environment:
+//
+// 1. STRIPE_SECRET_KEY:
+//    - This is your Stripe "Secret key". It starts with 'sk_live_...'.
+//    - Go to your Stripe Dashboard -> Developers -> API keys to find this value.
+//
+// 2. NEXT_PUBLIC_APP_URL:
+//    - This is the public URL of your deployed application.
+//    - Example: https://your-project-id.web.app
+//
+// Without these variables, Stripe will not be able to process payments, and the function will fail.
+// =================================================================================================
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
