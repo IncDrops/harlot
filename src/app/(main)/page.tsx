@@ -13,7 +13,8 @@ import { useIntersectionObserver } from '@/hooks/use-intersection-observer';
 import { Input } from '@/components/ui/input';
 import { functions } from '@/lib/firebase';
 import { httpsCallable } from 'firebase/functions';
-import { useToast }mport { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
 
 
@@ -596,3 +597,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
