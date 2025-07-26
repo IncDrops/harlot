@@ -22,9 +22,12 @@ const admin = require('firebase-admin');
 // =================================================================================================
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+// Initialize Firebase Admin. V2 functions handle this automatically when deployed,
+// but it's kept here for local emulation and clarity.
+if (admin.apps.length === 0) {
+    admin.initializeApp();
+}
 
-// Initialize Firebase Admin
-admin.initializeApp();
 
 // Stripe Checkout Function
 exports.createStripeCheckoutSession = onCall(async (data, context) => {
