@@ -1,13 +1,8 @@
 
 {
   "firestore": {
-    "database": "pollitgo",
-    "location": "nam5",
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
-  },
-  "storage": {
-    "rules": "storage.rules"
   },
   "functions": [
     {
@@ -25,5 +20,19 @@
         "npm --prefix \"$RESOURCE_DIR\" install"
       ]
     }
-  ]
+  ],
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "apphosting": {
+    "backends": [
+      {
+        "id": "pollitago-app",
+        "region": "us-central1",
+        "runConfig": {
+          "maxInstances": 1
+        }
+      }
+    ]
+  }
 }
