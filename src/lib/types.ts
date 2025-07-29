@@ -45,6 +45,7 @@ export interface Analysis {
     status: 'completed' | 'in_progress' | 'archived' | 'scheduled';
     createdAt: string; // ISO String
     completedAt: string; // ISO String
+    scheduledTimestamp?: number; // Added this missing field
     primaryRecommendation: string;
     executiveSummary: string;
     keyFactors: { factor: string; impact: number; value: string }[];
