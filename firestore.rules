@@ -1,41 +1,13 @@
 rules_version = '2';
 
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    // Users: Can read their own profile, can update their own profile.
-    // Public cannot read user lists, but can read individual profiles if they have the ID (e.g., for avatars).
-    match /users/{userId} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == userId;
-    }
-    
-    // Analyses: Users can create analyses. They can read/update/delete analyses they own.
-    match /analyses/{analysisId} {
-      allow create: if request.auth != null;
-      allow read, update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
-      
-      // Feedback subcollection
-      match /feedback/{feedbackId} {
-        allow create: if request.auth != null;
-        allow read: if request.auth != null; // Or more restrictive if needed
-      }
-    }
-    
-    // Messages: Users can only read/write messages where they are a participant.
-    match /messages/{messageId} {
-        allow read, create: if request.auth != null && request.auth.uid in resource.data.participants;
-    }
-    
-    // User-specific subcollections like todos or integrations
-    match /users/{userId}/{collection}/{document=**} {
-        allow read, write, delete: if request.auth != null && request.auth.uid == userId;
-    }
-    
-    // App-data: Read-only for authenticated users (e.g., for stock ticker)
-    match /app-data/{docId} {
-      allow read: if request.auth != null;
-      allow write: if false; // Only admin/backend should write here
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      // Allow read and write access for any authenticated user.
+      // This is a safe default for many applications.
+      // You can tighten these rules later, for example, to only allow
+      // a user to write to their own specific folder.
+      allow read, write: if request.auth != null;
     }
   }
 }
