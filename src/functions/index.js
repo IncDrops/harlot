@@ -6,7 +6,7 @@ const admin = require('firebase-admin');
 const { getFirestore, FieldValue } = require('firebase-admin/firestore');
 const { defineString } = require('firebase-functions/params');
 
-// Define secret parameters
+// Define secret parameters to be used by the functions
 const stripeSecretKey = defineString('STRIPE_SECRET_KEY');
 const stripeWebhookSecret = defineString('STRIPE_WEBHOOK_SECRET');
 
@@ -23,17 +23,16 @@ const getStripe = () => {
 }
 
 // Stripe Checkout Function (Client-callable)
-exports.createStripeCheckoutSession = onCall({ secrets: ["STRIPE_SECRET_KEY"] }, async (data, context) => {
+// This function is explicitly made public and given access to the Stripe secret key.
+exports.createStripeCheckoutSession = onCall({ secrets: ["STRIPE_SECRET_KEY"], invoker: 'public' }, async (data, context) => {
     const { priceId, query, tone, variants, scheduledTimestamp } = data;
 
     if (!priceId || !query) {
         throw new functions.https.HttpsError('invalid-argument', 'Missing required parameters.');
     }
     
-    // Lazily initialize stripe
     const stripe = getStripe();
 
-    // Create a temporary analysis document so we have an ID to pass to Stripe
     const analysisRef = db.collection('analyses').doc();
 
     const tempAnalysisData = {
@@ -54,7 +53,7 @@ exports.createStripeCheckoutSession = onCall({ secrets: ["STRIPE_SECRET_KEY"] },
         const metadata = {
             query,
             tone,
-            variants: variants.toString(), // Metadata values must be strings
+            variants: variants.toString(),
             analysisId: analysisRef.id,
         };
 
@@ -66,8 +65,8 @@ exports.createStripeCheckoutSession = onCall({ secrets: ["STRIPE_SECRET_KEY"] },
             payment_method_types: ['card'],
             line_items: [{ price: priceId, quantity: 1 }],
             mode: 'payment',
-            success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?analysis_id=${analysisRef.id}`,
-            cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
+            success_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://pollitago.com'}/success?analysis_id=${analysisRef.id}`,
+            cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://pollitago.com'}/`,
             metadata: metadata,
         });
 
@@ -75,15 +74,15 @@ exports.createStripeCheckoutSession = onCall({ secrets: ["STRIPE_SECRET_KEY"] },
 
     } catch (error) {
         console.error("Stripe Checkout Session creation failed:", error);
-        await analysisRef.delete(); // Clean up the temp doc on failure
+        await analysisRef.delete();
         throw new functions.https.HttpsError('internal', 'Could not create a Stripe checkout session.');
     }
 });
 
 
 // Stripe Webhook Handler (Called by Stripe servers)
+// This function is given access to both the Stripe secret and the webhook secret.
 exports.stripeWebhook = onRequest({ secrets: ["STRIPE_WEBHOOK_SECRET", "STRIPE_SECRET_KEY", "GENKIT_API_KEY", "GOOGLE_API_KEY"] }, async (req, res) => {
-    // Lazily initialize stripe
     const stripe = getStripe();
     const secret = stripeWebhookSecret.value();
 
@@ -104,7 +103,7 @@ exports.stripeWebhook = onRequest({ secrets: ["STRIPE_WEBHOOK_SECRET", "STRIPE_S
 
         if (!analysisId) {
             console.error("Webhook received but no analysisId found in metadata.");
-            res.status(200).send('Success (no analysisId)'); // Acknowledge to prevent retries
+            res.status(200).send('Success (no analysisId)');
             return;
         }
         
@@ -112,8 +111,6 @@ exports.stripeWebhook = onRequest({ secrets: ["STRIPE_WEBHOOK_SECRET", "STRIPE_S
         const analysisRef = db.collection('analyses').doc(analysisId);
 
         try {
-             // In a real app, you would now trigger the Genkit flow.
-            // For now, we will just update the Firestore document with "generated" data
             const { generateDecision } = require('./genkit-shim');
 
             const aiResponse = await generateDecision({
@@ -132,9 +129,8 @@ exports.stripeWebhook = onRequest({ secrets: ["STRIPE_WEBHOOK_SECRET", "STRIPE_S
             console.log(`✅ Analysis ${analysisId} has been updated with AI results via webhook.`);
         } catch (aiError) {
              console.error(`AI Generation failed for analysisId ${analysisId}:`, aiError);
-             // Update the doc to show an error state to the user
              await analysisRef.update({
-                 status: 'archived', // or 'failed'
+                 status: 'failed',
                  responses: [{ title: "Generation Error", text: "There was an error generating the AI response. Please try again later." }],
                  completedAt: FieldValue.serverTimestamp(),
              });
@@ -145,39 +141,35 @@ exports.stripeWebhook = onRequest({ secrets: ["STRIPE_WEBHOOK_SECRET", "STRIPE_S
 });
 
 // Genkit Shim for Cloud Functions
-// This allows us to call the Genkit flow from our vanilla JS Cloud Function.
 const genkitShim = `
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.generateDecision = void 0;
-require('isomorphic-fetch');
-const genkit_1 = require('genkit');
-const googleai_1 = require('@genkit-ai/googleai');
-const zod_1 = require('zod');
+const genkit = require('genkit');
+const googleai = require('@genkit-ai/googleai');
+const zod = require('zod');
 
-// Configure Genkit
-(0, genkit_1.genkit)({
+genkit.genkit({
     plugins: [
-        (0, googleai_1.googleAI)({ apiKey: process.env.GOOGLE_API_KEY || process.env.GENKIT_API_KEY }),
+        googleai.googleAI({ apiKey: process.env.GOOGLE_API_KEY || process.env.GENKIT_API_KEY }),
     ],
     logLevel: 'debug',
     enableTracingAndMetrics: true,
 });
 
-// Copied from src/ai/flows/generate-decision-flow.ts
-const DecisionResponseSchema = zod_1.z.object({
-  title: zod_1.z.string().describe("A distinct title for this specific option, like 'Option 1 (Firm Decision)' or an empty string if only one response is generated."),
-  text: zod_1.z.string().describe("The full text of the AI's decision or opinion. Should be written in the requested tone and adhere to the character limits for the tier."),
+const DecisionResponseSchema = zod.z.object({
+  title: zod.z.string().describe("A distinct title for this specific option, like 'Option 1 (Firm Decision)' or an empty string if only one response is generated."),
+  text: zod.z.string().describe("The full text of the AI's decision or opinion. Should be written in the requested tone and adhere to the character limits for the tier."),
 });
-const GenerateDecisionInputSchema = zod_1.z.object({
-  query: zod_1.z.string().describe("The user's dilemma or question."),
-  tone: zod_1.z.enum(['Firm', 'Friendly', 'Professional']).describe('The desired tone for the AI response.'),
-  variants: zod_1.z.number().min(1).max(3).describe('The number of distinct decisions to generate (1, 2, or 3).'),
+const GenerateDecisionInputSchema = zod.z.object({
+  query: zod.z.string().describe("The user's dilemma or question."),
+  tone: zod.z.enum(['Firm', 'Friendly', 'Professional']).describe('The desired tone for the AI response.'),
+  variants: zod.z.number().min(1).max(3).describe('The number of distinct decisions to generate (1, 2, or 3).'),
 });
-const GenerateDecisionOutputSchema = zod_1.z.object({
-  responses: zod_1.z.array(DecisionResponseSchema).describe('An array containing the generated decisions, one for each variant requested.'),
+const GenerateDecisionOutputSchema = zod.z.object({
+  responses: zod.z.array(DecisionResponseSchema).describe('An array containing the generated decisions, one for each variant requested.'),
 });
-const generateDecisionPrompt = (0, genkit_1.definePrompt)({
+const generateDecisionPrompt = genkit.definePrompt({
   name: 'generateDecisionPrompt',
   inputSchema: GenerateDecisionInputSchema,
   outputSchema: GenerateDecisionOutputSchema,
@@ -195,32 +187,31 @@ const generateDecisionPrompt = (0, genkit_1.definePrompt)({
   4.  If generating more than one variant, give each a unique title (e.g., "Option 1 (Firm Decision)", "Option 2 (Firm Decision)"). If generating only one, the title should be an empty string.
   5.  Ensure the response is formatted correctly into the required JSON structure. Bold key phrases in your response text using markdown (e.g., **this is bold**).
   \`,
-  model: (0, googleai_1.geminiPro)(),
 });
-const generateDecisionFlow = (0, genkit_1.defineFlow)(
+const generateDecisionFlow = genkit.defineFlow(
   {
     name: 'generateDecisionFlow',
     inputSchema: GenerateDecisionInputSchema,
     outputSchema: GenerateDecisionOutputSchema,
   },
   async (input) => {
-    const llmResponse = await (0, genkit_1.generate)({
-        prompt: await (0, genkit_1.renderPrompt)({ prompt: generateDecisionPrompt, input }),
-        model: (0, googleai_1.geminiPro)(),
+    const { output } = await genkit.generate({
+        prompt: await genkit.renderPrompt({ prompt: generateDecisionPrompt, input }),
+        model: googleai.geminiPro(),
         output: { schema: GenerateDecisionOutputSchema }
     });
-    return llmResponse.output();
+    return output;
   }
 );
 async function generateDecision(input) {
-  return generateDecisionFlow(input);
+  const flowOutput = await generateDecisionFlow(input);
+  return flowOutput;
 }
 exports.generateDecision = generateDecision;
 `;
 
 const fs = require('fs');
 const path = require('path');
-const genkitShimPath = path.join(require('os').tmpdir(), 'genkit-shim.js');
+const os = require('os');
+const genkitShimPath = path.join(os.tmpdir(), 'genkit-shim.js');
 fs.writeFileSync(genkitShimPath, genkitShim);
-
-    
