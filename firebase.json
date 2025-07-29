@@ -1,8 +1,12 @@
-
 {
   "firestore": {
+    "database": "pollitgo",
+    "location": "nam5",
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
   },
   "functions": [
     {
@@ -19,20 +23,28 @@
       "predeploy": [
         "npm --prefix \"$RESOURCE_DIR\" install"
       ]
+    },
+    {
+      "source": "second-opinion",
+      "codebase": "second-opinion",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
     }
   ],
-  "storage": {
-    "rules": "storage.rules"
-  },
   "apphosting": {
-    "backends": [
-      {
-        "id": "pollitago-app",
-        "region": "us-central1",
-        "runConfig": {
-          "maxInstances": 1
-        }
-      }
+    "backendId": "the-second-opinion-app",
+    "rootDir": "/",
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log",
+      "functions"
     ]
   }
 }
