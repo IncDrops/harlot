@@ -49,14 +49,27 @@ import { generateInitialAnalysis } from "@/ai/flows/generate-initial-analysis";
 import type { GenerateInitialAnalysisInput } from "@/lib/ai-schemas";
 
 
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
-};
+let firebaseConfig;
+
+// On the server, Firebase App Hosting provides the config as a single JSON string.
+// On the client, we use the individual .env variables.
+if (process.env.FIREBASE_WEBAPP_CONFIG) {
+  try {
+    firebaseConfig = JSON.parse(process.env.FIREBASE_WEBAPP_CONFIG);
+  } catch (e) {
+    console.error("Failed to parse FIREBASE_WEBAPP_CONFIG", e);
+  }
+} else {
+  firebaseConfig = {
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
+  };
+}
+
 
 let app: FirebaseApp;
 let auth: Auth;
