@@ -1,13 +1,27 @@
 rules_version = '2';
 
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /{allPaths=**} {
-      // Allow read and write access for any authenticated user.
-      // This is a safe default for many applications.
-      // You can tighten these rules later, for example, to only allow
-      // a user to write to their own specific folder.
-      allow read, write: if request.auth != null;
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Allow anyone to read analysis results. This is required for the success page.
+    // The analysisId is only known to the user who made the purchase.
+    // Writes are denied from the client, they only happen server-side via webhooks.
+    match /analyses/{analysisId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Allow anyone to read from the app-data collection. This is needed for the
+    // live data feeds on the homepage (e.g., stock ticker).
+    // Writes should be managed by a server process, not clients.
+    match /app-data/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Deny all access to any other collections by default.
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
