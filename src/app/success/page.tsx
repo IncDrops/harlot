@@ -1,15 +1,13 @@
 
 "use client";
 
-import { useEffect, useState, Suspense, useCallback } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { CheckCircle, Loader2, ServerCrash, Clock, Sparkles, Download } from 'lucide-react';
+import { CheckCircle, Loader2, ServerCrash, Download } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { getAnalysisById } from '@/lib/firebase';
 import type { Analysis } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { format } from 'date-fns';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
@@ -25,11 +23,12 @@ function SuccessPageContent() {
 
   useEffect(() => {
     if (!analysisId) {
-      setError("No analysis ID found in the URL.");
+      setError("No analysis ID found in the URL. Please check your email or account for the result.");
       setStatus('error');
       return;
     }
     
+    // We start in the 'generating' state, waiting for the webhook to update Firestore.
     setStatus('generating');
 
     const unsub = onSnapshot(doc(db, "analyses", analysisId), (doc) => {
@@ -37,13 +36,19 @@ function SuccessPageContent() {
             const data = doc.data() as Analysis;
             setAnalysis({ ...data, id: doc.id });
             
+            // The webhook will change the status to 'completed'. We just listen for it.
             if(data.status === 'completed') {
                 setStatus('success');
-                unsub(); // Stop listening once we have the completed data
+                unsub(); // Stop listening once we have the completed data.
+            } else if (data.status === 'archived') {
+                setError("This analysis could not be completed. Please try again.");
+                setStatus('error');
+                unsub();
             }
         } else {
-            setError("Could not find the analysis data. It may have been deleted.");
-            setStatus('error');
+            // This might happen if the webhook is delayed. We'll wait a bit.
+            // A more robust solution might have a timeout.
+            console.warn("Analysis document not found yet, still listening...");
         }
     }, (err) => {
         console.error("Error listening to analysis document:", err);
@@ -51,7 +56,8 @@ function SuccessPageContent() {
         setStatus('error');
     });
 
-    return () => unsub(); // Cleanup listener on component unmount
+    // Clean up listener on component unmount
+    return () => unsub(); 
   }, [analysisId]);
 
   const handleDownload = () => {
@@ -122,7 +128,7 @@ function SuccessPageContent() {
       </div>
 
       {status === 'success' && analysis && (
-        <div className="w-full max-w-4xl space-y-8">
+        <div className="w-full max-w-4xl space-y-8 animate-in fade-in-50 duration-500">
             <Card className="glassmorphic rounded-2xl shadow-lg text-left">
                 <CardHeader>
                     <CardTitle className="text-xl font-semibold font-heading text-primary">Recommendation</CardTitle>

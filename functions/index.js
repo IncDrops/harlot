@@ -4,12 +4,8 @@ const functions = require('firebase-functions');
 const { onCall, onRequest } = require('firebase-functions/v2/https');
 const admin = require('firebase-admin');
 
-// =================================================================================================
-// IMPORTANT: PRODUCTION ENVIRONMENT VARIABLES
-// =================================================================================================
+// Initialize Stripe with the secret key
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-// =================================================================================================
 
 if (admin.apps.length === 0) {
     admin.initializeApp();
@@ -34,7 +30,6 @@ exports.createStripeCheckoutSession = onCall(async (data, context) => {
         tone: tone,
         variants: variants,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        // We can't put a userId here because the user isn't logged in
     };
 
     if (scheduledTimestamp) {
@@ -60,7 +55,7 @@ exports.createStripeCheckoutSession = onCall(async (data, context) => {
             line_items: [{ price: priceId, quantity: 1 }],
             mode: 'payment',
             // Pass the analysisId in the success URL so the success page can find it.
-            success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?analysis_id=${analysisRef.id}&session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?analysis_id=${analysisRef.id}`,
             cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
             metadata: metadata,
         });
@@ -74,35 +69,23 @@ exports.createStripeCheckoutSession = onCall(async (data, context) => {
     }
 });
 
-// Securely retrieves a Stripe session after a successful payment for the success page.
-exports.getStripeSession = onCall(async (data, context) => {
-    const { sessionId } = data;
-
-    if (!sessionId) {
-        throw new functions.https.HttpsError('invalid-argument', 'The function must be called with a "sessionId".');
-    }
-
-    try {
-        const session = await stripe.checkout.sessions.retrieve(sessionId);
-        
-        return {
-            status: session.status,
-            customer_email: session.customer_details ? session.customer_details.email : null,
-        };
-
-    } catch (error) {
-        console.error("Failed to retrieve Stripe session:", error);
-        throw new functions.https.HttpsError('internal', 'Could not retrieve payment session details.');
-    }
-});
-
 
 // Stripe Webhook Handler (Called by Stripe servers)
+// This function is now responsible for triggering the AI generation.
 exports.stripeWebhook = onRequest({ secrets: ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"] }, async (req, res) => {
+    // The webhook secret is loaded securely by Firebase Functions.
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+        console.error("Stripe webhook secret is not configured.");
+        res.status(400).send("Webhook secret not configured.");
+        return;
+    }
+
     const sig = req.headers['stripe-signature'];
 
     let event;
     try {
+        // Use the securely loaded secret to construct the event.
         event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
     } catch (err) {
         console.error(`❌ Webhook signature verification failed.`, err.message);
@@ -113,7 +96,7 @@ exports.stripeWebhook = onRequest({ secrets: ["STRIPE_SECRET_KEY", "STRIPE_WEBHO
     // Handle the checkout.session.completed event
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
-        const { analysisId, query, tone, variants, scheduledTimestamp } = session.metadata;
+        const { analysisId, query, tone, variants } = session.metadata;
 
         if (!analysisId) {
             console.error("Webhook received but no analysisId found in metadata.");
@@ -129,11 +112,11 @@ exports.stripeWebhook = onRequest({ secrets: ["STRIPE_SECRET_KEY", "STRIPE_WEBHO
         // For now, we will just update the Firestore document with "generated" data
         // to prove the webhook works.
         const mockAiResponse = {
-            primaryRecommendation: "This is a firm recommendation based on your query.",
-            executiveSummary: "This is the executive summary of the decision.",
-            keyFactors: [{ factor: "Key Factor 1", impact: 5, value: "High importance" }],
-            risks: [{ risk: "Potential Risk 1", mitigation: "Mitigation strategy here." }],
-            confidenceScore: 95,
+            primaryRecommendation: `This is a firm recommendation for your query about '${query}' with a ${tone} tone.`,
+            executiveSummary: "This is the executive summary of the decision. The webhook and AI generation process were successful.",
+            keyFactors: [{ factor: "Key Factor 1 (from Webhook)", impact: 5, value: "High importance" }],
+            risks: [{ risk: "Potential Risk 1 (from Webhook)", mitigation: "Mitigation strategy here." }],
+            confidenceScore: 98,
         };
 
         const finalAnalysisData = {
@@ -142,8 +125,9 @@ exports.stripeWebhook = onRequest({ secrets: ["STRIPE_SECRET_KEY", "STRIPE_WEBHO
             ...mockAiResponse
         };
 
+        // Update the document from 'scheduled' to 'completed' with the AI results.
         await analysisRef.update(finalAnalysisData);
-        console.log(`✅ Analysis ${analysisId} has been updated with AI results.`);
+        console.log(`✅ Analysis ${analysisId} has been updated with AI results via webhook.`);
     }
 
     res.status(200).send('Success');
