@@ -1,99 +1,110 @@
 
 require('dotenv').config();
-const functions = require('firebase-functions');
+const functions = require('firebase-functions/v2');
 const { onCall, onRequest } = require('firebase-functions/v2/https');
 const admin = require('firebase-admin');
+const { getFirestore, FieldValue } = require('firebase-admin/firestore');
+const { defineString } = require('firebase-functions/params');
+const cors = require('cors')({ origin: true });
 
-// Initialize Stripe with the secret key
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// Define secret parameters to be used by the functions
+const stripeSecretKey = defineString('STRIPE_SECRET_KEY');
+const stripeWebhookSecret = defineString('STRIPE_WEBHOOK_SECRET');
 
+// Initialize Firebase Admin SDK
 if (admin.apps.length === 0) {
     admin.initializeApp();
 }
-const db = admin.firestore();
+const db = getFirestore();
 
+// Helper function to initialize Stripe within a function call
+const getStripe = () => {
+    const stripe = require('stripe');
+    return stripe(stripeSecretKey.value());
+}
 
 // Stripe Checkout Function (Client-callable)
-exports.createStripeCheckoutSession = onCall(async (data, context) => {
-    const { priceId, query, tone, variants, scheduledTimestamp } = data;
+// This is now an onRequest function to handle CORS manually.
+exports.createStripeCheckoutSession = onRequest({ secrets: ["STRIPE_SECRET_KEY"] }, (req, res) => {
+    // Manually handle CORS
+    cors(req, res, async () => {
+        // onCall functions expect the body to be in a `data` property.
+        const { priceId, query, tone, variants, scheduledTimestamp } = req.body.data;
 
-    if (!priceId || !query) {
-        throw new functions.https.HttpsError('invalid-argument', 'Missing required parameters.');
-    }
+        if (!priceId || !query) {
+            console.error("Missing required parameters.");
+            res.status(400).send({ error: { message: 'Missing required parameters.' }});
+            return;
+        }
+        
+        const stripe = getStripe();
+        const analysisRef = db.collection('analyses').doc();
 
-    // Create a temporary analysis document so we have an ID to pass to Stripe
-    const analysisRef = db.collection('analyses').doc();
-
-    const tempAnalysisData = {
-        status: 'scheduled', // Start as scheduled, webhook will update it
-        decisionQuestion: query,
-        tone: tone,
-        variants: variants,
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    };
-
-    if (scheduledTimestamp) {
-        tempAnalysisData.scheduledTimestamp = admin.firestore.Timestamp.fromMillis(scheduledTimestamp);
-    }
-    
-    await analysisRef.set(tempAnalysisData);
-
-    try {
-        const metadata = {
-            query,
-            tone,
-            variants,
-            analysisId: analysisRef.id, // Pass our new analysis ID to the webhook
+        const tempAnalysisData = {
+            status: 'scheduled',
+            decisionQuestion: query,
+            tone: tone,
+            variants: variants,
+            createdAt: FieldValue.serverTimestamp(),
         };
 
         if (scheduledTimestamp) {
-            metadata.scheduledTimestamp = scheduledTimestamp;
+            tempAnalysisData.scheduledTimestamp = admin.firestore.Timestamp.fromMillis(scheduledTimestamp);
         }
+        
+        await analysisRef.set(tempAnalysisData);
 
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items: [{ price: priceId, quantity: 1 }],
-            mode: 'payment',
-            // Pass the analysisId in the success URL so the success page can find it.
-            success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?analysis_id=${analysisRef.id}`,
-            cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
-            metadata: metadata,
-        });
+        try {
+            const metadata = {
+                query,
+                tone,
+                variants: variants.toString(),
+                analysisId: analysisRef.id,
+            };
 
-        return { url: session.url };
+            if (scheduledTimestamp) {
+                metadata.scheduledTimestamp = scheduledTimestamp.toString();
+            }
 
-    } catch (error) {
-        console.error("Stripe Checkout Session creation failed:", error);
-        await analysisRef.delete(); // Clean up the temp doc on failure
-        throw new functions.https.HttpsError('internal', 'Could not create a Stripe checkout session.');
-    }
+            const session = await stripe.checkout.sessions.create({
+                payment_method_types: ['card'],
+                line_items: [{ price: priceId, quantity: 1 }],
+                mode: 'payment',
+                success_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://pollitago.com'}/success?analysis_id=${analysisRef.id}`,
+                cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://pollitago.com'}/`,
+                metadata: metadata,
+            });
+
+            // onRequest functions send back a JSON payload.
+            // The client SDK will automatically unwrap the 'data' property.
+            res.status(200).send({ data: { url: session.url } });
+
+        } catch (error) {
+            console.error("Stripe Checkout Session creation failed:", error);
+            await analysisRef.delete();
+            res.status(500).send({ error: { message: 'Could not create a Stripe checkout session.' }});
+        }
+    });
 });
 
 
 // Stripe Webhook Handler (Called by Stripe servers)
-// This function is now responsible for triggering the AI generation.
-exports.stripeWebhook = onRequest({ secrets: ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"] }, async (req, res) => {
-    // The webhook secret is loaded securely by Firebase Functions.
-    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-    if (!webhookSecret) {
-        console.error("Stripe webhook secret is not configured.");
-        res.status(400).send("Webhook secret not configured.");
-        return;
-    }
+// This function is given access to both the Stripe secret and the webhook secret.
+exports.stripeWebhook = onRequest({ secrets: ["STRIPE_WEBHOOK_SECRET", "STRIPE_SECRET_KEY", "GENKIT_API_KEY", "GOOGLE_API_KEY"] }, async (req, res) => {
+    const stripe = getStripe();
+    const secret = stripeWebhookSecret.value();
 
     const sig = req.headers['stripe-signature'];
-
     let event;
+
     try {
-        // Use the securely loaded secret to construct the event.
-        event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
+        event = stripe.webhooks.constructEvent(req.rawBody, sig, secret);
     } catch (err) {
         console.error(`❌ Webhook signature verification failed.`, err.message);
         res.status(400).send(`Webhook Error: ${err.message}`);
         return;
     }
 
-    // Handle the checkout.session.completed event
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
         const { analysisId, query, tone, variants } = session.metadata;
@@ -105,30 +116,110 @@ exports.stripeWebhook = onRequest({ secrets: ["STRIPE_SECRET_KEY", "STRIPE_WEBHO
         }
         
         console.log(`Webhook received for analysisId: ${analysisId}. Starting generation...`);
-        
         const analysisRef = db.collection('analyses').doc(analysisId);
-        
-        // In a real app, you would now trigger the Genkit flow.
-        // For now, we will just update the Firestore document with "generated" data
-        // to prove the webhook works.
-        const mockAiResponse = {
-            primaryRecommendation: `This is a firm recommendation for your query about '${query}' with a ${tone} tone.`,
-            executiveSummary: "This is the executive summary of the decision. The webhook and AI generation process were successful.",
-            keyFactors: [{ factor: "Key Factor 1 (from Webhook)", impact: 5, value: "High importance" }],
-            risks: [{ risk: "Potential Risk 1 (from Webhook)", mitigation: "Mitigation strategy here." }],
-            confidenceScore: 98,
-        };
 
-        const finalAnalysisData = {
-            status: 'completed',
-            completedAt: admin.firestore.FieldValue.serverTimestamp(),
-            ...mockAiResponse
-        };
+        try {
+            const { generateDecision } = require('./genkit-shim');
 
-        // Update the document from 'scheduled' to 'completed' with the AI results.
-        await analysisRef.update(finalAnalysisData);
-        console.log(`✅ Analysis ${analysisId} has been updated with AI results via webhook.`);
+            const aiResponse = await generateDecision({
+                query,
+                tone,
+                variants: parseInt(variants, 10) || 1
+            });
+
+            const finalAnalysisData = {
+                status: 'completed',
+                completedAt: FieldValue.serverTimestamp(),
+                responses: aiResponse.responses,
+            };
+
+            await analysisRef.update(finalAnalysisData);
+            console.log(`✅ Analysis ${analysisId} has been updated with AI results via webhook.`);
+        } catch (aiError) {
+             console.error(`AI Generation failed for analysisId ${analysisId}:`, aiError);
+             await analysisRef.update({
+                 status: 'failed',
+                 responses: [{ title: "Generation Error", text: "There was an error generating the AI response. Please try again later." }],
+                 completedAt: FieldValue.serverTimestamp(),
+             });
+        }
     }
 
     res.status(200).send('Success');
 });
+
+// Genkit Shim for Cloud Functions
+const genkitShim = `
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+exports.generateDecision = void 0;
+const genkit = require('genkit');
+const googleai = require('@genkit-ai/googleai');
+const zod = require('zod');
+
+genkit.genkit({
+    plugins: [
+        googleai.googleAI({ apiKey: process.env.GOOGLE_API_KEY || process.env.GENKIT_API_KEY }),
+    ],
+    logLevel: 'debug',
+    enableTracingAndMetrics: true,
+});
+
+const DecisionResponseSchema = zod.z.object({
+  title: zod.z.string().describe("A distinct title for this specific option, like 'Option 1 (Firm Decision)' or an empty string if only one response is generated."),
+  text: zod.z.string().describe("The full text of the AI's decision or opinion. Should be written in the requested tone and adhere to the character limits for the tier."),
+});
+const GenerateDecisionInputSchema = zod.z.object({
+  query: zod.z.string().describe("The user's dilemma or question."),
+  tone: zod.z.enum(['Firm', 'Friendly', 'Professional']).describe('The desired tone for the AI response.'),
+  variants: zod.z.number().min(1).max(3).describe('The number of distinct decisions to generate (1, 2, or 3).'),
+});
+const GenerateDecisionOutputSchema = zod.z.object({
+  responses: zod.z.array(DecisionResponseSchema).describe('An array containing the generated decisions, one for each variant requested.'),
+});
+const generateDecisionPrompt = genkit.definePrompt({
+  name: 'generateDecisionPrompt',
+  inputSchema: GenerateDecisionInputSchema,
+  outputSchema: GenerateDecisionOutputSchema,
+  prompt: \`You are Pollitago.ai, the world's most objective and clear-thinking AI decision-making entity. Your purpose is to provide firm, actionable second opinions based on the user's query. You must strictly adhere to the user's requested tone and generate the exact number of distinct variants (decisions) they ask for.
+
+  User's Dilemma: {{{query}}}
+
+  Requested Tone: {{{tone}}}
+  Number of Decisions to Generate: {{{variants}}}
+
+  Your task:
+  1.  Carefully analyze the user's dilemma.
+  2.  Generate exactly {{{variants}}} distinct, well-reasoned, and firm decisions. Each decision should offer a unique perspective or a different valid course of action, even if they lead to a similar conclusion.
+  3.  Write each decision in a {{{tone}}} tone.
+  4.  If generating more than one variant, give each a unique title (e.g., "Option 1 (Firm Decision)", "Option 2 (Firm Decision)"). If generating only one, the title should be an empty string.
+  5.  Ensure the response is formatted correctly into the required JSON structure. Bold key phrases in your response text using markdown (e.g., **this is bold**).
+  \`,
+});
+const generateDecisionFlow = genkit.defineFlow(
+  {
+    name: 'generateDecisionFlow',
+    inputSchema: GenerateDecisionInputSchema,
+    outputSchema: GenerateDecisionOutputSchema,
+  },
+  async (input) => {
+    const { output } = await genkit.generate({
+        prompt: await genkit.renderPrompt({ prompt: generateDecisionPrompt, input }),
+        model: googleai.geminiPro(),
+        output: { schema: GenerateDecisionOutputSchema }
+    });
+    return output;
+  }
+);
+async function generateDecision(input) {
+  const flowOutput = await generateDecisionFlow(input);
+  return flowOutput;
+}
+exports.generateDecision = generateDecision;
+`;
+
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
+const genkitShimPath = path.join(os.tmpdir(), 'genkit-shim.js');
+fs.writeFileSync(genkitShimPath, genkitShim);
