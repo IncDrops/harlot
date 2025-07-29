@@ -2,24 +2,16 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    
-    // Allow anyone to read analysis results. This is required for the success page.
-    // The analysisId is only known to the user who made the purchase.
-    // Writes are denied from the client, they only happen server-side via webhooks.
+  
+    // Analyses can be read by anyone who has the specific document ID.
+    // This is required for the success page to function after a payment.
+    // Writes are denied from the client; only backend functions can create/update.
     match /analyses/{analysisId} {
       allow read: if true;
       allow write: if false;
     }
 
-    // Allow anyone to read from the app-data collection. This is needed for the
-    // live data feeds on the homepage (e.g., stock ticker).
-    // Writes should be managed by a server process, not clients.
-    match /app-data/{docId} {
-      allow read: if true;
-      allow write: if false;
-    }
-
-    // Deny all access to any other collections by default.
+    // Deny all other reads/writes by default for security.
     match /{document=**} {
       allow read, write: if false;
     }
