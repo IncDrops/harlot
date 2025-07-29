@@ -38,14 +38,16 @@ export interface Message {
 
 export interface Analysis {
     id:string;
-    userId: string;
+    userId?: string; // Optional since user isn't logged in
     decisionQuestion: string;
-    decisionType: string;
-    dataSources: string[];
+    decisionType?: string;
+    tone?: string;
+    variants?: number;
+    dataSources?: string[];
     status: 'completed' | 'in_progress' | 'archived' | 'scheduled';
     createdAt: string; // ISO String
-    completedAt: string; // ISO String
-    scheduledTimestamp?: number; // Added this missing field
+    completedAt?: string; // ISO String
+    scheduledTimestamp?: number;
     primaryRecommendation: string;
     executiveSummary: string;
     keyFactors: { factor: string; impact: number; value: string }[];

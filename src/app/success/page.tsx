@@ -6,110 +6,64 @@ import { useSearchParams } from 'next/navigation';
 import { CheckCircle, Loader2, ServerCrash, Clock, Sparkles, Download } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { functions } from '@/lib/firebase';
-import { httpsCallable } from 'firebase/functions';
-import { generateDecision } from '@/ai/flows/generate-decision-flow';
-import type { GenerateDecisionInput, GenerateDecisionOutput } from '@/ai/flows/generate-decision-flow';
+import { getAnalysisById } from '@/lib/firebase';
+import type { Analysis } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { format } from 'date-fns';
+import { onSnapshot, doc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
-type Status = 'loading' | 'verifying' | 'generating' | 'success' | 'scheduled' | 'error';
+
+type Status = 'loading' | 'generating' | 'success' | 'error';
 
 function SuccessPageContent() {
   const searchParams = useSearchParams();
-  const sessionId = searchParams.get('session_id');
+  const analysisId = searchParams.get('analysis_id');
   const [status, setStatus] = useState<Status>('loading');
   const [error, setError] = useState<string | null>(null);
-  const [decision, setDecision] = useState<GenerateDecisionOutput | null>(null);
-  const [scheduledTime, setScheduledTime] = useState<string | null>(null);
-  const [decisionRequest, setDecisionRequest] = useState<GenerateDecisionInput | null>(null);
-
-  const handleRunAnalysis = useCallback(async () => {
-    if (!decisionRequest) {
-        setError("Decision parameters are missing. Cannot run analysis.");
-        setStatus('error');
-        return;
-    }
-    
-    setStatus('generating');
-    try {
-        const decisionResponse = await generateDecision(decisionRequest);
-        setDecision(decisionResponse);
-        setStatus('success');
-    } catch (err: any) {
-        console.error("Error generating scheduled decision:", err);
-        setError(err.message || "An unknown error occurred while generating your analysis.");
-        setStatus('error');
-    }
-  }, [decisionRequest]);
-
+  const [analysis, setAnalysis] = useState<Analysis | null>(null);
 
   useEffect(() => {
-    if (!sessionId) {
-      setError("No session ID found. Your payment may not have been processed correctly.");
+    if (!analysisId) {
+      setError("No analysis ID found in the URL.");
       setStatus('error');
       return;
     }
+    
+    setStatus('generating');
 
-    async function verifyAndProcess() {
-      setStatus('verifying');
-      try {
-        const getStripeSession = httpsCallable(functions, 'getStripeSession');
-        const { data }: any = await getStripeSession({ sessionId });
-
-        if (data.status !== 'complete') {
-          throw new Error('Payment was not completed successfully.');
-        }
-
-        const { query, tone, variants, scheduledTimestamp } = data.metadata;
-
-        if (!query || !tone || !variants) {
-          throw new Error('Could not retrieve decision parameters from payment session.');
-        }
-        
-        const requestPayload: GenerateDecisionInput = {
-            query,
-            tone,
-            variants: parseInt(variants, 10),
-        };
-
-        if (scheduledTimestamp && new Date(parseInt(scheduledTimestamp, 10)) > new Date()) {
-            setScheduledTime(new Date(parseInt(scheduledTimestamp, 10)).toISOString());
-            setDecisionRequest(requestPayload);
-            setStatus('scheduled');
+    const unsub = onSnapshot(doc(db, "analyses", analysisId), (doc) => {
+        if (doc.exists()) {
+            const data = doc.data() as Analysis;
+            setAnalysis({ ...data, id: doc.id });
+            
+            if(data.status === 'completed') {
+                setStatus('success');
+                unsub(); // Stop listening once we have the completed data
+            }
         } else {
-            setDecisionRequest(requestPayload);
-            // For instant delivery, we can call the generation immediately.
-            setStatus('generating');
-            const decisionResponse = await generateDecision(requestPayload);
-            setDecision(decisionResponse);
-            setStatus('success');
+            setError("Could not find the analysis data. It may have been deleted.");
+            setStatus('error');
         }
-
-      } catch (err: any) {
-        console.error("Error during success page processing:", err);
-        setError(err.message || "An unknown error occurred during processing.");
+    }, (err) => {
+        console.error("Error listening to analysis document:", err);
+        setError("An error occurred while fetching your results.");
         setStatus('error');
-      }
-    }
+    });
 
-    verifyAndProcess();
-  }, [sessionId]);
+    return () => unsub(); // Cleanup listener on component unmount
+  }, [analysisId]);
 
   const handleDownload = () => {
-    if (!decision) return;
+    if (!analysis) return;
 
     let content = `Pollitago.ai Decision\n======================\n\n`;
-    content += `Original Query: ${decisionRequest?.query}\n\n`;
+    content += `Original Query: ${analysis.decisionQuestion}\n\n`;
 
-    decision.responses.forEach((res, index) => {
-      if (res.title) {
-        content += `${res.title}\n----------------------\n`;
-      }
-      // Strip HTML tags for the plain text file
-      const plainText = res.text.replace(/<[^>]*>/g, '');
-      content += `${plainText}\n\n`;
-    });
+    content += `${analysis.primaryRecommendation}\n\n`;
+    content += `Executive Summary:\n${analysis.executiveSummary}\n\n`;
+    
+    content += `Confidence: ${analysis.confidenceScore}%\n\n`;
 
     content += "Disclaimer: Pollitago provides AI-powered insights. You are solely responsible for your ultimate decisions and actions based on this information.";
 
@@ -127,40 +81,14 @@ function SuccessPageContent() {
   const StatusDisplay = () => {
     switch(status) {
         case 'loading':
-        case 'verifying':
-            return (
-                <>
-                  <Loader2 className="h-16 w-16 animate-spin text-primary mb-6" />
-                  <h1 className="text-3xl font-bold font-heading">Verifying Your Payment...</h1>
-                  <p className="text-muted-foreground mt-2">Please wait while we confirm your transaction. This won't take long.</p>
-                </>
-            );
         case 'generating':
              return (
                 <>
                   <Loader2 className="h-16 w-16 animate-spin text-primary mb-6" />
-                  <h1 className="text-3xl font-bold font-heading">Generating Your Opinion...</h1>
-                  <p className="text-muted-foreground mt-2">The AI is analyzing your request. Your decision will appear shortly.</p>
+                  <h1 className="text-3xl font-bold font-heading">Payment Successful! Generating Your Opinion...</h1>
+                  <p className="text-muted-foreground mt-2">Please keep this page open. Your results will appear here automatically.</p>
                 </>
             );
-        case 'scheduled':
-            return (
-                 <>
-                  <Clock className="h-16 w-16 text-primary mb-6" />
-                  <h1 className="text-4xl font-bold font-heading metallic-gradient">Your Opinion is Scheduled!</h1>
-                  {scheduledTime && (
-                    <p className="text-muted-foreground mt-2 max-w-md">
-                        Your AI-powered second opinion was scheduled for <br/> <span className="font-bold text-foreground">{format(new Date(scheduledTime), "PPP 'at' p")}</span>.
-                    </p>
-                  )}
-                  <p className="text-muted-foreground mt-2 max-w-md">You can run it now or come back to this page later.</p>
-
-                   <Button onClick={handleRunAnalysis} size="lg" className="mt-8 glow-border text-lg">
-                        <Sparkles className="mr-2 h-5 w-5" />
-                        Run My Analysis Now
-                    </Button>
-                </>
-            )
         case 'error':
              return (
                  <>
@@ -193,24 +121,23 @@ function SuccessPageContent() {
         <StatusDisplay />
       </div>
 
-      {status === 'success' && decision && (
+      {status === 'success' && analysis && (
         <div className="w-full max-w-4xl space-y-8">
-            {decision.responses.map((res, index) => (
-                 <Card key={index} className="glassmorphic rounded-2xl shadow-lg text-left">
-                    <CardHeader>
-                        {res.title && <CardTitle className="text-xl font-semibold font-heading text-primary">{res.title}</CardTitle>}
-                    </CardHeader>
-                    <CardContent>
-                        <p 
-                            className="text-foreground/90 whitespace-pre-wrap"
-                            dangerouslySetInnerHTML={{ __html: res.text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }}
-                        />
-                    </CardContent>
-                    <CardFooter>
-                        <p className="text-xs text-muted-foreground">Pollitago provides AI-powered insights. You are solely responsible for your ultimate decisions.</p>
-                    </CardFooter>
-                 </Card>
-            ))}
+            <Card className="glassmorphic rounded-2xl shadow-lg text-left">
+                <CardHeader>
+                    <CardTitle className="text-xl font-semibold font-heading text-primary">Recommendation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p 
+                        className="text-foreground/90 whitespace-pre-wrap"
+                        dangerouslySetInnerHTML={{ __html: analysis.primaryRecommendation.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }}
+                    />
+                </CardContent>
+                <CardFooter>
+                    <p className="text-xs text-muted-foreground">Confidence Score: {analysis.confidenceScore}%</p>
+                </CardFooter>
+            </Card>
+
              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
                 <Button asChild className="glow-border w-full sm:w-auto">
                     <Link href="/">Ask Another Question</Link>
@@ -234,5 +161,3 @@ export default function SuccessPage() {
         </Suspense>
     )
 }
-
-    
