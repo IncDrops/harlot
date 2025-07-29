@@ -38,21 +38,15 @@ export interface Message {
 
 export interface Analysis {
     id:string;
-    userId?: string; // Optional since user isn't logged in
+    userId?: string; 
     decisionQuestion: string;
-    decisionType?: string;
-    tone?: string;
-    variants?: number;
-    dataSources?: string[];
-    status: 'completed' | 'in_progress' | 'archived' | 'scheduled';
+    tone: 'Firm' | 'Friendly' | 'Professional';
+    variants: number;
+    status: 'completed' | 'in_progress' | 'archived' | 'scheduled' | 'failed';
     createdAt: string; // ISO String
     completedAt?: string; // ISO String
     scheduledTimestamp?: number;
-    primaryRecommendation: string;
-    executiveSummary: string;
-    keyFactors: { factor: string; impact: number; value: string }[];
-    risks: { risk: string; mitigation: string }[];
-    confidenceScore: number;
+    responses?: { title: string; text: string }[];
 }
 
 

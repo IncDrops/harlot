@@ -23,12 +23,11 @@ function SuccessPageContent() {
 
   useEffect(() => {
     if (!analysisId) {
-      setError("No analysis ID found in the URL. Please check your email or account for the result.");
+      setError("No analysis ID found in the URL. Please check the link and try again.");
       setStatus('error');
       return;
     }
     
-    // We start in the 'generating' state, waiting for the webhook to update Firestore.
     setStatus('generating');
 
     const unsub = onSnapshot(doc(db, "analyses", analysisId), (doc) => {
@@ -36,18 +35,15 @@ function SuccessPageContent() {
             const data = doc.data() as Analysis;
             setAnalysis({ ...data, id: doc.id });
             
-            // The webhook will change the status to 'completed'. We just listen for it.
             if(data.status === 'completed') {
                 setStatus('success');
-                unsub(); // Stop listening once we have the completed data.
-            } else if (data.status === 'archived') {
-                setError("This analysis could not be completed. Please try again.");
+                unsub(); 
+            } else if (data.status === 'archived' || data.status === 'failed') {
+                setError("This analysis could not be completed. This may be due to a content safety filter or system error. Please try a different query.");
                 setStatus('error');
                 unsub();
             }
         } else {
-            // This might happen if the webhook is delayed. We'll wait a bit.
-            // A more robust solution might have a timeout.
             console.warn("Analysis document not found yet, still listening...");
         }
     }, (err) => {
@@ -56,20 +52,21 @@ function SuccessPageContent() {
         setStatus('error');
     });
 
-    // Clean up listener on component unmount
     return () => unsub(); 
   }, [analysisId]);
 
   const handleDownload = () => {
-    if (!analysis) return;
+    if (!analysis || !analysis.responses) return;
 
     let content = `Pollitago.ai Decision\n======================\n\n`;
     content += `Original Query: ${analysis.decisionQuestion}\n\n`;
-
-    content += `${analysis.primaryRecommendation}\n\n`;
-    content += `Executive Summary:\n${analysis.executiveSummary}\n\n`;
     
-    content += `Confidence: ${analysis.confidenceScore}%\n\n`;
+    analysis.responses.forEach(response => {
+        if(response.title) {
+            content += `--- ${response.title} ---\n`;
+        }
+        content += `${response.text.replace(/<strong class="text-foreground">/g, '').replace(/<\/strong>/g, '')}\n\n`;
+    });
 
     content += "Disclaimer: Pollitago provides AI-powered insights. You are solely responsible for your ultimate decisions and actions based on this information.";
 
@@ -77,7 +74,7 @@ function SuccessPageContent() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'Pollitago_Decision.txt';
+    a.download = `Pollitago_Decision_${analysis.id}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -127,22 +124,23 @@ function SuccessPageContent() {
         <StatusDisplay />
       </div>
 
-      {status === 'success' && analysis && (
+      {status === 'success' && analysis && analysis.responses && (
         <div className="w-full max-w-4xl space-y-8 animate-in fade-in-50 duration-500">
-            <Card className="glassmorphic rounded-2xl shadow-lg text-left">
-                <CardHeader>
-                    <CardTitle className="text-xl font-semibold font-heading text-primary">Recommendation</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p 
-                        className="text-foreground/90 whitespace-pre-wrap"
-                        dangerouslySetInnerHTML={{ __html: analysis.primaryRecommendation.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }}
-                    />
-                </CardContent>
-                <CardFooter>
-                    <p className="text-xs text-muted-foreground">Confidence Score: {analysis.confidenceScore}%</p>
-                </CardFooter>
-            </Card>
+            {analysis.responses.map((response, index) => (
+                 <Card key={index} className="glassmorphic rounded-2xl shadow-lg text-left">
+                    {response.title && (
+                        <CardHeader>
+                            <CardTitle className="text-xl font-semibold font-heading text-primary">{response.title}</CardTitle>
+                        </CardHeader>
+                    )}
+                    <CardContent>
+                        <p 
+                            className="text-foreground/90 whitespace-pre-wrap"
+                            dangerouslySetInnerHTML={{ __html: response.text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }}
+                        />
+                    </CardContent>
+                </Card>
+            ))}
 
              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
                 <Button asChild className="glow-border w-full sm:w-auto">
